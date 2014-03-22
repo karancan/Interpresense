@@ -3,7 +3,7 @@
             Link 1
         </div>
         <div class="two columns">
-            Link 2
+            <i class="fa fa-camera-retro"></i>Link 2
         </div>
         <div class="twelve columns">
         …
