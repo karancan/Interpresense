@@ -111,10 +111,6 @@ define('HASH_GENERATION_RANDOM_STRING', '*(@srg()$@)gr0g3srS8zg$@$');
 // Internal service definitions
 //============================================================================================
 
-//Use value of `service_id` in the table `org_services`
-define('SERVICE_ID_ACCESS', '3');
-define('SERVICE_ID_COUNSELLING', '4');
-
 //============================================================================================
 // Internal sub-service definitions
 //============================================================================================
@@ -124,14 +120,11 @@ define('SERVICE_ID_COUNSELLING', '4');
 //============================================================================================
 
 //Use the two definitions below to define the outbound SMTP server and SMTP server port
-define('SMTP_SERVER', 'smtp-out.uottawa.ca');
+define('SMTP_SERVER', '');
 define('SMTP_SERVER_PORT', 25);
 
 //Use this to define the email domain that students email addresses use
-define('EMAIL_ORG_STUDENT_DOMAIN', '@uottawa.ca');
-
-//Use this to define the email domain that faculty/staff email addresses use
-define('EMAIL_ORG_STAFF_DOMAIN', '@uottawa.ca');
+define('EMAIL_ORG_ADMIN_DOMAIN', '@uottawa.ca');
 
 //Use the definitions below to define the aliases for the different departments
 define('EMAIL_ALIAS_NO_REPLY', 'no-reply');
