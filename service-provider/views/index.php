@@ -1,1 +1,1 @@
-<h1> This is the main view for admin. This page might need some work… </h1>
+<h1> This is the main view for service-provider. This page might need some work… </h1>

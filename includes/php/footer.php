@@ -1,1 +1,5 @@
-<h1> You found the footer! Style me! </h1>
+<footer id="footer" role='contentinfo'>
+
+</footer>
+
+</div>
