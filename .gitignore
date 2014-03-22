@@ -1,2 +1,13 @@
 # Ignore any changes to config.php
 includes/php/config.php
+
+# Ignore OS-generated files
+
+# Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Mac
+.DS_Store
+.Trashes
