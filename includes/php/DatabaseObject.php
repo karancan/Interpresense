@@ -54,6 +54,7 @@ abstract class DatabaseObject {
      * @param string $table The table to insert into
      * @param array $data The data to insert
      * @param array $types The types of the data
+     * @return int The ID of the last inserted row
      */
     protected function insert($table, array $data, array $types) {
 
@@ -71,7 +72,7 @@ abstract class DatabaseObject {
         
         $fields = array_keys($data);
         
-        $sql = "INSERT INTO `$table` (" . implode(",", $fields) . ") VALUES (";
+        $sql = "INSERT INTO `$table` (`" . implode("`,`", $fields) . "`) VALUES (";
         foreach($fields as $f) {
             $sql .= ":$f,";
         }
@@ -80,21 +81,23 @@ abstract class DatabaseObject {
         // Prepare the statement
         $q = $this->db->prepare($sql);
         
-        $i = 0;
         foreach($types as $field => $type) {
-            $q->bindValue(":{$field}", $data[$i++], $type);
+            $q->bindValue(":{$field}", $data[$field], $type);
         }
         
         // Execute the statement
         $q->execute();
+        
+        return $this->db->lastInsertId();
     }
 
     /**
      * Build and execute SQL update.
-     * @param string $table The name of the table,
+     * @param string $table The name of the table
      * @param array $data The new data
      * @param array $types The types of the data
      * @param string $condition The WHERE clause. WARNING: Unescaped.
+     * @return int The number of rows updated
      */
     protected function update($table, array $data, array $types, $condition = null) {
 
@@ -133,12 +136,15 @@ abstract class DatabaseObject {
         
         // Execute the statement
         $q->execute();
+        
+        return $q->rowCount();
     }
 
     /**
      * Build and execute SQL delete.
      * @param string $table The table name
      * @param string $condition The WHERE clause. Warning: Unescaped
+     * @return int The number of rows deleted
      */
     protected function delete($table, $condition) {
 
@@ -151,7 +157,7 @@ abstract class DatabaseObject {
         }
 
         $sql = "DELETE FROM `$table` WHERE $condition;";
-        $this->db->exec($sql);
+        return $this->db->exec($sql);
     }
 
     /**
