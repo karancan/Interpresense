@@ -22,7 +22,8 @@ header('Content-Type: text/html; charset=utf-8');
     <link rel="stylesheet" media="screen" type="text/css" href="../includes/css/skeleton.css">
     <link rel="stylesheet" href="../includes/css/font-awesome.min.css">
 
-    <script src="../includes/js/jQuery.js"></script>
+    <script src="../includes/js/jquery.min.js"></script>
+    <script src="../includes/js/jquery.datatables.min.js"></script>
 
     <meta name='application-name' content='Interpreter Manager'>
     <meta name='msapplication-tooltip' content='Interpreter Manager'>
