@@ -23,7 +23,6 @@ define('DB_HOSTNAME', '');
 define('DB_USERNAME', '');
 define('DB_PASSWORD', '');
 define('DB_NAME', '');
-define('DB_PORT', 3306);
 
 //============================================================================================
 // File system definitions

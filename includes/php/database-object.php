@@ -19,7 +19,7 @@ abstract class DatabaseObject {
      */
     public function __construct() {
         try {
-            $this->db = new PDO('mysql:host=' . Config::getHostName() . ';dbname=' . Config::getDatabase() . ';charset=utf8', Config::getUserName(), Config::getPassword());
+            $this->db = new PDO('mysql:host=' . DB_HOSTNAME . ';dbname=' . DB_NAME . ';charset=utf8', DB_USERNAME, DB_PASSWORD);
 
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
@@ -212,48 +212,6 @@ abstract class DatabaseObject {
             }
         } catch (PDOException $e) {
             echo $e->getMessage() . " <br> [ THROWN BY QUERY ] => $sql";
-        }
-    }
-
-    /**
-     * JSON encode function since our.
-     * @param mixed $data Any data that needs to be turned into JSON.
-     * @return string JSON encoded data
-     */
-    public function json_encode($data) {
-        switch ($type = gettype($data)) {
-            case 'NULL' :
-                return 'null';
-            case 'boolean' :
-                return ($data ? 'true' : 'false');
-            case 'integer' :
-            case 'double' :
-            case 'float' :
-                return $data;
-            case 'string' :
-                $search = array('"', "\n", "\r");
-                $replace = array('\"', "", "");
-                return '"' . str_replace($search, $replace, $data) . '"';
-            case 'object' :
-                $data = get_object_vars($data);
-            case 'array' :
-                $output_index_count = 0;
-                $output_indexed = array();
-                $output_associative = array();
-                foreach ($data as $key => $value) {
-                    $output_indexed[] = $this->json_encode($value);
-                    $output_associative[] = $this->json_encode($key) . ':' . $this->json_encode($value);
-                    if ($output_index_count !== NULL && $output_index_count++ !== $key) {
-                        $output_index_count = NULL;
-                    }
-                }
-                if ($output_index_count !== NULL) {
-                    return '[' . implode(',', $output_indexed) . ']';
-                } else {
-                    return '{' . implode(',', $output_associative) . '}';
-                }
-            default :
-                return '';
         }
     }
 
