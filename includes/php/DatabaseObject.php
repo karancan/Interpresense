@@ -30,16 +30,6 @@ abstract class DatabaseObject {
     }
 
     /**
-     * Clean an array keys and values or a single data point.
-     * @param mixed $data is the data to clean.
-     * @return mixed The cleaned data.
-     * @todo I'm not sure what Karan wants here…
-     */
-    public function clean($data) {
-
-    }
-
-    /**
      * Select a sub array based on the provided keys
      * @param array $keys are the keys to pick and clean from $data,
      * @param array $data is the data to pick from.
