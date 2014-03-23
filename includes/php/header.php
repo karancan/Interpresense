@@ -20,7 +20,7 @@ header('Content-Type: text/html; charset=utf-8');
     <link rel="stylesheet" media="screen" type="text/css" href="../includes/css/base.css">
     <link rel="stylesheet" media="screen" type="text/css" href="../includes/css/layout.css">
     <link rel="stylesheet" media="screen" type="text/css" href="../includes/css/skeleton.css">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="../includes/css/font-awesome.min.css">
 
     <meta name='application-name' content='Interpreter Manager'>
     <meta name='msapplication-tooltip' content='Interpreter Manager'>

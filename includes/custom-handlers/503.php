@@ -12,7 +12,7 @@ require_once '../php/config.php';
     <link rel="stylesheet" type="text/css" href="https://<?= URL_CSS ?>/base.css">
     <link rel="stylesheet" type="text/css" href="https://<?= URL_CSS ?>/layout.css">
     <link rel="stylesheet" type="text/css" href="https://<?= URL_CSS ?>/skeleton.css">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
     <title>Interpreter Manager - Temporarily unavailable /  Temporairement indisponible</title>
     <body>
         <div class="container">
