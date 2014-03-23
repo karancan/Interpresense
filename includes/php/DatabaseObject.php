@@ -156,26 +156,27 @@ abstract class DatabaseObject {
 
     /**
      * Build and execute SQL select.
-     * @param string $table is the table.
-     * @param array $keys are the keys to select. Everything is selected by default.
-     * @param string $condition is what follows the WHERE.
+     * @param string $table The table to select from
+     * @param array $keys The fields to select
+     * @param string $condition The WHERE clause. Warning: Unescaped
+     * @param int $fetchFormat One of PDO::FETCH_* constants. Ignored if the query is not a SELECT query.
+     *                         Defaults to an associative array.
      * @return array The data selected
-     * @todo Revamp
      */
-    protected function select($table, $keys = array('*'), $condition = NULL) {
+    protected function select($table, array $fields, $condition = null, $fetchFormat = \PDO::FETCH_ASSOC) {
 
         if (!is_string($table) || empty($table)) {
-            throw new InvalidArgumentException('DatabaseObject->select() requires a valid table name.');
+            throw new \InvalidArgumentException('Invalid table name');
         }
 
-        $keys = $this->clean($keys);
-        $sql = "SELECT " . implode(",", $keys) . " FROM `$table`";
+        $sql = "SELECT " . implode(",", $fields) . " FROM `$table`";
 
         if (is_string($condition) && !empty($condition)) {
             $sql .= " WHERE $condition";
         }
 
-        return $this->query($sql, true);
+        $results = $this->db->query($sql);
+        return $results->fetchAll($fetchFormat);
     }
 
     /**
