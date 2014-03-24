@@ -24,7 +24,6 @@ header('Content-Type: text/html; charset=utf-8');
     <script src="../includes/js/jquery.min.js"></script>
     <script src="../includes/js/jquery.datatables.min.js"></script>
     <script src="../includes/js/bootstrap.min.js"></script>
-    <script src="../includes/js/icheck.min.js"></script>
 
     <meta name='application-name' content='Interpreter Manager'>
     <meta name='msapplication-tooltip' content='Interpreter Manager'>
