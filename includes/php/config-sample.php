@@ -162,19 +162,21 @@ define('VENDOR_NAMESPACE', 'Intrepresense');
 
 //Autoloader for core classes
 spl_autoload_register(function($fqClassName) {
-    $lastSlash = strrpos(ltrim($fqClassName, '\\'), '\\');
-    $namespace = substr($fqClassName, 0, $lastSlash);
-    $className = substr($fqClassName, ++$lastSlash);
-    
-    if($namespace === VENDOR_NAMESPACE . '\\Includes') {
-        // Global class
-        require FS_PHP . "/classes/$className.php";
-    } elseif(strpos($namespace, VENDOR_NAMESPACE) === 0) {
-        // Module class
-        $file = FS_INTRANET . '/' . str_replace('\\', '/', $namespace) . "/models/$className.php";
-        
-        if(file_exists($file)) {
-            require $file;
+    if(strpos($fqClassName, VENDOR_NAMESPACE) === 0) {
+        $lastSlash = strrpos(ltrim($fqClassName, '\\'), '\\');
+        $className = substr($fqClassName, ++$lastSlash);
+        $namespace = ltrim(substr($fqClassName, 0, --$lastSlash), VENDOR_NAMESPACE);
+
+        if($namespace === '\\Includes') {
+            // Global class
+            require FS_PHP . "/classes/$className.php";
+        } else {
+            // Module class
+            $file = FS_INTERPRESENSE . '/' . str_replace('\\', '/', $namespace) . "/models/$className.php";
+
+            if(file_exists($file)) {
+                require $file;
+            }
         }
     }
 }, true);
