@@ -136,7 +136,7 @@ define('DATETIME_MYSQL', 'Y-m-d H:i:s');
 //Maintenance mode redirection
 $prevent_redirect_loop = array(FS_CUSTOM_HANDLERS.'/503.php');
 if (MAINTENANCE_MODE && !in_array($_SERVER['SCRIPT_FILENAME'], $prevent_redirect_loop)){
-    header('location: https://' . URL_CUSTOM_HANDLERS . '/503.php');
+    header('Location: https://' . URL_CUSTOM_HANDLERS . '/503.php');
     die();
 }
 
@@ -156,5 +156,19 @@ Locale::setDefault(DEFAULT_LANGUAGE);
 ini_set('session.gc_maxlifetime', 1800);
 ini_set('session.gc_probability', 1);
 ini_set('session.gc_divisor', 15);
+
+//Autoloader
+spl_autoload_register(function($fqClassName) {
+    $fqClassName = ltrim($fqClassName, '\\');
+    $lastSlash = strrpos($fqClassName, '\\');
+    
+    if($lastSlash) {
+        // Autoload module-specific classes
+        require FS_INTERPRESENCE . '/' . str_replace('\\', '/', substr($fqClassName, 0, $lastSlash)) . '/models/' . substr($fqClassName, $lastSlash + 1) . '.php';
+    } else {
+        // Autoload global classes
+        require FS_PHP . "/$fqClassName.php";
+    }
+}, true);
 
 /* ~~~~~~~~~~~~~~END : DO NOT EDIT~~~~~~~~~~~~~~ */
