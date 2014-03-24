@@ -1,6 +1,6 @@
 <?php
 
-require_once 'config.php';
+namespace Interpresense;
 
 /**
  * DatabaseObject class for handling database connections.
