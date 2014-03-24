@@ -8,9 +8,7 @@ require_once '../php/config.php';
 ?>
 <!DOCTYPE html>
 <html>
-    <link rel="stylesheet" type="text/css" href="https://<?= URL_CSS ?>/base.css">
-    <link rel="stylesheet" type="text/css" href="https://<?= URL_CSS ?>/layout.css">
-    <link rel="stylesheet" type="text/css" href="https://<?= URL_CSS ?>/skeleton.css">
+    <link rel="stylesheet" media="screen" type="text/css" href="../includes/css/bootflat.min.css">
     <link rel="stylesheet" href="../css/font-awesome.min.css">
     <title>Interpreter Manager - Access denied / Accès refusé</title>
     <body>
