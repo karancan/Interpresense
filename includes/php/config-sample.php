@@ -157,17 +157,25 @@ ini_set('session.gc_maxlifetime', 1800);
 ini_set('session.gc_probability', 1);
 ini_set('session.gc_divisor', 15);
 
-//Autoloader
+//Namespace for core classes
+define('VENDOR_NAMESPACE', 'Intrepresense');
+
+//Autoloader for core classes
 spl_autoload_register(function($fqClassName) {
-    $fqClassName = ltrim($fqClassName, '\\');
-    $lastSlash = strrpos($fqClassName, '\\');
+    $lastSlash = strrpos(ltrim($fqClassName, '\\'), '\\');
+    $namespace = substr($fqClassName, 0, $lastSlash);
+    $className = substr($fqClassName, ++$lastSlash);
     
-    if($lastSlash) {
-        // Autoload module-specific classes
-        require FS_INTERPRESENCE . '/' . str_replace('\\', '/', substr($fqClassName, 0, $lastSlash)) . '/models/' . substr($fqClassName, $lastSlash + 1) . '.php';
-    } else {
-        // Autoload global classes
-        require FS_PHP . "/$fqClassName.php";
+    if($namespace === VENDOR_NAMESPACE . '\\Includes') {
+        // Global class
+        require FS_PHP . "/classes/$className.php";
+    } elseif(strpos($namespace, VENDOR_NAMESPACE) === 0) {
+        // Module class
+        $file = FS_INTRANET . '/' . str_replace('\\', '/', $namespace) . "/models/$className.php";
+        
+        if(file_exists($file)) {
+            require $file;
+        }
     }
 }, true);
 
