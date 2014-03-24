@@ -42,6 +42,7 @@ define('FS_CSS', FS_INCLUDES."/css");
 define('FS_JS', FS_INCLUDES."/js");
 define('FS_L10N', FS_INCLUDES."/l10n");
 define('FS_PHP', FS_INCLUDES."/php");
+define('FS_VENDOR', FS_INCLUDES."/vendor");
 define('FS_CUSTOM_HANDLERS', FS_INCLUDES."/custom-handlers");
 
 /* ~~~~~~~~~~~~~~END : DO NOT EDIT~~~~~~~~~~~~~~ */
