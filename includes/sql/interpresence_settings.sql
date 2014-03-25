@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS `interpresence_settings`;
 CREATE TABLE `interpresence_settings` (
   `setting_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `setting_key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `setting_value` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `setting_value` text COLLATE utf8_unicode_ci DEFAULT NULL,
   `inserted_on` datetime NOT NULL,
   PRIMARY KEY (`setting_id`),
   UNIQUE KEY `setting_key_UNIQUE` (`setting_key`)
