@@ -1,11 +1,11 @@
 --
--- Table structure for table `interpresence_users`
+-- Table structure for table `interpresense_users`
 --
 
-DROP TABLE IF EXISTS `interpresence_users`;
+DROP TABLE IF EXISTS `interpresense_users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `interpresence_users` (
+CREATE TABLE `interpresense_users` (
   `user_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_uid` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `user_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
