@@ -24,6 +24,10 @@ header('Content-Type: text/html; charset=utf-8');
     <script src='../includes/vendor/jquery.min.js' charset='utf-8'></script>
     <script src='../includes/vendor/jquery.dataTables.min.js' charset='utf-8'></script>
     <script src='../includes/vendor/bootstrap/js/bootstrap.min.js' charset='utf-8'></script>
+    
+    <!--[if lt IE 9]>
+    <script src='../includes/vendor/html5shiv/html5shiv-printshiv.js' charset='utf-8'></script>
+    <![endif]-->
 
     <meta name='application-name' content='Interpreter Manager'>
     <meta name='msapplication-tooltip' content='Interpreter Manager'>
