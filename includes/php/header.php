@@ -17,7 +17,8 @@ header('Content-Type: text/html; charset=utf-8');
     <meta charset="utf-8">
     <meta name='viewport' content='width=device-width,initial-scale=1.0'>
     
-    <link rel='shortcut icon' href='<?= URL_INTERPRESENCE ?>/favicon.ico'>    
+    <link rel='shortcut icon' href='<?= URL_INTERPRESENCE ?>/favicon.ico'>
+    <link rel="stylesheet" media="screen" type="text/css" href="../includes/css/bootstrap.min.css">
     <link rel="stylesheet" media="screen" type="text/css" href="../includes/css/bootflat.min.css">
     <link rel="stylesheet" href="../includes/css/font-awesome.min.css">
 
