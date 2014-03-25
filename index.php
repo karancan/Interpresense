@@ -5,6 +5,6 @@
 
 Where to now…
 <br>
-<a href="admin/index.php">Admin?</a>
+<a href="Admin/index.php">Admin?</a>
 <br>
-<a href="service-provider/index.php">Service provider?</a>
+<a href="ServiceProvider/index.php">Service provider?</a>
