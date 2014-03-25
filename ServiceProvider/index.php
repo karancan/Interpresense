@@ -1,6 +1,6 @@
 <?php
 
-namespace ServiceProvider;
+namespace Interpresense\ServiceProvider;
 
 /**
  * Session
@@ -8,9 +8,10 @@ namespace ServiceProvider;
 session_start();
 
 /**
- * Configuration file
+ * Configuration file and settings
  */
 require '../includes/php/config.php';
+// @todo Determine settings loader
 
 /**
  * Models

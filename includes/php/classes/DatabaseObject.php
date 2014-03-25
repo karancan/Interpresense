@@ -1,6 +1,6 @@
 <?php
 
-namespace Interpresense;
+namespace Interpresense\Includes;
 
 /**
  * DatabaseObject class for handling database connections.
