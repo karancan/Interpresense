@@ -42,6 +42,7 @@ define('FS_CSS', FS_INCLUDES."/css");
 define('FS_JS', FS_INCLUDES."/js");
 define('FS_L10N', FS_INCLUDES."/l10n");
 define('FS_PHP', FS_INCLUDES."/php");
+define('FS_VENDOR', FS_INCLUDES."/vendor");
 define('FS_CUSTOM_HANDLERS', FS_INCLUDES."/custom-handlers");
 
 /* ~~~~~~~~~~~~~~END : DO NOT EDIT~~~~~~~~~~~~~~ */
@@ -136,7 +137,7 @@ define('DATETIME_MYSQL', 'Y-m-d H:i:s');
 //Maintenance mode redirection
 $prevent_redirect_loop = array(FS_CUSTOM_HANDLERS.'/503.php');
 if (MAINTENANCE_MODE && !in_array($_SERVER['SCRIPT_FILENAME'], $prevent_redirect_loop)){
-    header('location: https://' . URL_CUSTOM_HANDLERS . '/503.php');
+    header('Location: https://' . URL_CUSTOM_HANDLERS . '/503.php');
     die();
 }
 
@@ -156,5 +157,29 @@ Locale::setDefault(DEFAULT_LANGUAGE);
 ini_set('session.gc_maxlifetime', 1800);
 ini_set('session.gc_probability', 1);
 ini_set('session.gc_divisor', 15);
+
+//Namespace for core classes
+define('VENDOR_NAMESPACE', 'Intrepresense');
+
+//Autoloader for core classes
+spl_autoload_register(function($fqClassName) {
+    if(strpos($fqClassName, VENDOR_NAMESPACE) === 0) {
+        $lastSlash = strrpos(ltrim($fqClassName, '\\'), '\\');
+        $className = substr($fqClassName, ++$lastSlash);
+        $namespace = ltrim(substr($fqClassName, 0, --$lastSlash), VENDOR_NAMESPACE);
+
+        if($namespace === '\\Includes') {
+            // Global class
+            require FS_PHP . "/classes/$className.php";
+        } else {
+            // Module class
+            $file = FS_INTERPRESENSE . '/' . str_replace('\\', '/', $namespace) . "/models/$className.php";
+
+            if(file_exists($file)) {
+                require $file;
+            }
+        }
+    }
+}, true);
 
 /* ~~~~~~~~~~~~~~END : DO NOT EDIT~~~~~~~~~~~~~~ */
