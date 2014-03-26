@@ -16,7 +16,8 @@ header('Content-Type: text/html; charset=utf-8');
 <html>
     <meta charset="utf-8">
     <meta name='viewport' content='width=device-width,initial-scale=1.0'>
-        
+
+    <link rel='shortcut icon' href='<?= URL_INTERPRESENSE ?>/favicon.ico'>    
     <link rel='stylesheet' media='screen' type='text/css' href='../includes/vendor/bootstrap/css/bootstrap.min.css'>
     <link rel='stylesheet' media='screen' type='text/css' href='../includes/vendor/bootflat.min.css'>
     <link rel='stylesheet' href='../includes/vendor/fontawesome/css/font-awesome.min.css'>
@@ -29,9 +30,9 @@ header('Content-Type: text/html; charset=utf-8');
     <script src='../includes/vendor/html5shiv/html5shiv-printshiv.js' charset='utf-8'></script>
     <![endif]-->
 
-    <meta name='application-name' content='Interpreter Manager'>
-    <meta name='msapplication-tooltip' content='Interpreter Manager'>
-    <meta name='msapplication-starturl' content='<?= URL_INTRANET_INTERPRETER ?>/'>    
+    <meta name='application-name' content='Interpresense'>
+    <meta name='msapplication-tooltip' content='Interpresense'>
+    <meta name='msapplication-starturl' content='<?= URL_INTERPRESENSE ?>/'>    
 
     <title>
         Interpreter Manager –
