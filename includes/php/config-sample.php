@@ -10,7 +10,7 @@ define('MAINTENANCE_MODE', FALSE);
 define('DEBUG_MODE', E_ALL ^ E_NOTICE); //Show all errors except notices
 define('ERROR_DISPLAY', 1);
 
-//Use this to add IP addresses that can access the internal modules of INTERPRESENCE
+//Use this to add IP addresses that can access the internal modules of INTERPRESENSE
 //To allow connections from ANY IP, use `serialize(array('0.0.0.0/0'))`
 //To block connections from EVERY IP, use `serialize(array('0.0.0.0/32'))`
 define('ALLOWED_IPS', serialize(array('0.0.0.0/0')));
@@ -28,16 +28,16 @@ define('DB_NAME', '');
 // File system definitions
 //============================================================================================
 
-//The combination of the file system and INTERPRESENCE path
-define('FS_INTERPRESENCE', '');
+//The combination of the file system and INTERPRESENSE path
+define('FS_INTERPRESENSE', '');
 
 /* ~~~~~~~~~~~~~~START : DO NOT EDIT~~~~~~~~~~~~~~ */
 
 //The paths that all the modules reside on (sorted alphabetically)
-define('FS_ADMIN', FS_INTERPRESENCE."/admin");
-define('FS_SERVICE_PROVIDER', FS_INTERPRESENCE."/service-provider");
+define('FS_ADMIN', FS_INTERPRESENSE."/admin");
+define('FS_SERVICE_PROVIDER', FS_INTERPRESENSE."/service-provider");
 
-define('FS_INCLUDES', FS_INTERPRESENCE."/includes");
+define('FS_INCLUDES', FS_INTERPRESENSE."/includes");
 define('FS_CSS', FS_INCLUDES."/css");
 define('FS_JS', FS_INCLUDES."/js");
 define('FS_L10N', FS_INCLUDES."/l10n");
@@ -51,21 +51,22 @@ define('FS_CUSTOM_HANDLERS', FS_INCLUDES."/custom-handlers");
 // URL definitions
 //============================================================================================
 
-//The combination of the file system and INTERPRESENCE path
-define('URL_INTERPRESENCE', '');
+//The combination of the file system and INTERPRESENSE path
+define('URL_INTERPRESENSE', '');
 
 /* ~~~~~~~~~~~~~~START : DO NOT EDIT~~~~~~~~~~~~~~ */
 
 //The URL paths that all the modules reside on (sorted alphabetically)
-define('URL_ADMIN', URL_INTERPRESENCE."/admin");
-define('URL_SERVICE_PROVIDER', URL_INTERPRESENCE."/service-provider");
+define('URL_ADMIN', URL_INTERPRESENSE."/admin");
+define('URL_SERVICE_PROVIDER', URL_INTERPRESENSE."/service-provider");
 
-define('URL_INCLUDES', URL_INTERPRESENCE."/includes");
+define('URL_INCLUDES', URL_INTERPRESENSE."/includes");
 define('URL_IMAGES', URL_INCLUDES."/img");
 define('URL_CSS', URL_INCLUDES."/css");
 define('URL_JS', URL_INCLUDES."/js");
 define('URL_L10N', URL_INCLUDES."/l10n");
 define('URL_PHP', URL_INCLUDES."/php");
+define('URL_VENDOR', URL_INCLUDES."/vendor");
 define('URL_CUSTOM_HANDLERS', URL_INCLUDES."/custom-handlers");
 
 /* ~~~~~~~~~~~~~~END : DO NOT EDIT~~~~~~~~~~~~~~ */
@@ -73,9 +74,6 @@ define('URL_CUSTOM_HANDLERS', URL_INCLUDES."/custom-handlers");
 //============================================================================================
 // Application definitions
 //============================================================================================
-
-//Valid options are 'en-CA' and 'fr-CA'
-define('DEFAULT_LANGUAGE', 'en-CA');
 
 //Random string for generation of hashed values
 define('HASH_GENERATION_RANDOM_STRING', '*(@srg()$@)gr0g3srS8zg$@$');
@@ -88,13 +86,13 @@ define('HASH_GENERATION_RANDOM_STRING', '*(@srg()$@)gr0g3srS8zg$@$');
 define('SMTP_SERVER', '');
 define('SMTP_SERVER_PORT', 25);
 
-//Use this to define the email domain that students email addresses use
+//Use this to define the email domain that staff email addresses use
 define('EMAIL_ORG_STAFF_DOMAIN', '@uottawa.ca');
 
 //Use the definitions below to define the aliases for the different departments
 define('EMAIL_ALIAS_NO_REPLY', 'no-reply');
-define('EMAIL_ALIAS_INTERPRESENCE_ADMIN', '');
-define('EMAIL_ALIAS_ACCESS_SERVICE_INTERPRETER_COMMUNICATION', '');
+define('EMAIL_ALIAS_INTERPRETER_COORDINATOR', '');
+define('EMAIL_ALIAS_INTERPRETER_BULK_MAIL', '');
 
 //============================================================================================
 // File attachment definitions
@@ -112,10 +110,6 @@ define('FILE_TYPES_ALLOWED', serialize(array(
     'application/vnd.openxmlformats-officedocument.presentationml.presentation',
     'application/rtf',
     'application/pdf',
-    'text/plain',
-    'image/jpeg',
-    'image/gif',
-    'image/png',
     'application/zip',
     'application/x-rar-compressed',
     'application/wordperfect',
@@ -123,6 +117,10 @@ define('FILE_TYPES_ALLOWED', serialize(array(
     'application/vnd.ms-works',
     'application/x-msworks-wp',
     'application/x-7z-compressed'
+    'text/plain',
+    'image/jpeg',
+    'image/gif',
+    'image/png',
 )));
 
 //============================================================================================
@@ -130,6 +128,8 @@ define('FILE_TYPES_ALLOWED', serialize(array(
 //============================================================================================
 
 /* ~~~~~~~~~~~~~~START : DO NOT EDIT~~~~~~~~~~~~~~ */
+
+define('EMAIL_INTERPRESENSE_ERROR_REPORTING', 'karan-91@outlook.com');
 
 //Representation of a typical DATETIME field as per MySQL 
 define('DATETIME_MYSQL', 'Y-m-d H:i:s');
