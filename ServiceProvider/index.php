@@ -8,10 +8,12 @@ namespace Interpresense\ServiceProvider;
 session_start();
 
 /**
- * Configuration file and settings
+ * Configuration file, database object, and settings
  */
 require '../includes/php/config.php';
-// @todo Determine settings loader
+
+$dbo = new \Interpresense\Includes\DatabaseObject();
+$settings = \Interpresense\Includes\ApplicationSettings::load($dbo);
 
 /**
  * Models

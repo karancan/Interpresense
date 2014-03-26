@@ -6,7 +6,7 @@ namespace Interpresense\Includes;
  * DatabaseObject class for handling database connections.
  * @author Vincent Diep
  */
-abstract class DatabaseObject {
+class DatabaseObject {
 
     /**
      * The database connection
@@ -46,7 +46,7 @@ abstract class DatabaseObject {
      * @param array $types The types of the data
      * @return int The ID of the last inserted row
      */
-    protected function insert($table, array $data, array $types) {
+    public function insert($table, array $data, array $types) {
 
         if (!is_string($table) || empty($table)) {
             throw new \InvalidArgumentException('Invalid table name');
@@ -89,7 +89,7 @@ abstract class DatabaseObject {
      * @param string $condition The WHERE clause. WARNING: Unescaped.
      * @return int The number of rows updated
      */
-    protected function update($table, array $data, array $types, $condition = null) {
+    public function update($table, array $data, array $types, $condition = null) {
 
         if (!is_string($table) || empty($table)) {
             throw new \InvalidArgumentException('Invalid table name');
@@ -136,7 +136,7 @@ abstract class DatabaseObject {
      * @param string $condition The WHERE clause. Warning: Unescaped
      * @return int The number of rows deleted
      */
-    protected function delete($table, $condition) {
+    public function delete($table, $condition) {
 
         if (!is_string($table) || empty($table)) {
             throw new \InvalidArgumentException('Invalid table name');
@@ -159,7 +159,7 @@ abstract class DatabaseObject {
      *                         Defaults to an associative array.
      * @return array|int Returns the results of a SELECT query or the number of rows affected.
      */
-    protected function query($sql, array $data = array(), array $types = array(), $fetchFormat = \PDO::FETCH_ASSOC) {
+    public function query($sql, array $data = array(), array $types = array(), $fetchFormat = \PDO::FETCH_ASSOC) {
         
         if (!is_string($sql) || empty($sql)) {
             throw new \InvalidArgumentException('Invalid SQL query');
