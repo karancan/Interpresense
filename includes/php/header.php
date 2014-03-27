@@ -21,7 +21,7 @@ header('Content-Type: text/html; charset=utf-8');
     <link rel='stylesheet' media='screen' type='text/css' href='../includes/vendor/bootstrap/css/bootstrap.min.css'>
     <link rel='stylesheet' media='screen' type='text/css' href='../includes/vendor/bootflat.min.css'>
     <link rel='stylesheet' href='../includes/vendor/fontawesome/css/font-awesome.min.css'>
-    <link rel='stylesheet' href='includes/css/interpresense.css'>
+    <link rel='stylesheet' href='../includes/css/interpresense.css'>
     
     <script src='../includes/vendor/jquery.min.js' charset='utf-8'></script>
     <script src='../includes/vendor/jquery.dataTables.min.js' charset='utf-8'></script>

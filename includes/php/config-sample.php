@@ -159,7 +159,7 @@ ini_set('session.gc_probability', 1);
 ini_set('session.gc_divisor', 15);
 
 //Namespace for core classes
-define('VENDOR_NAMESPACE', 'Intrepresense');
+define('VENDOR_NAMESPACE', 'Interpresense');
 
 //Autoloader for core classes
 spl_autoload_register(function($fqClassName) {
