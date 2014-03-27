@@ -68,12 +68,12 @@ header('Content-Type: text/html; charset=utf-8');
                 
                 <div class="col-md-4 col-md-offset-1 text-center">
                     <p><i class="fa fa-user fa-5x"></i></p>
-                    <a href="ServiceProvider" class="btn-redirect btn btn-block btn-success btn-lg">I am an interpreter</a>
+                    <a href="ServiceProvider" class="btn-redirect btn btn-block btn-info btn-lg">I am an interpreter</a>
                 </div>
                 
                 <div class="col-md-4 col-md-offset-2 text-center">
                     <p><i class="fa fa-users fa-5x"></i></p>
-                    <a href="Admin" class="btn-redirect btn btn-block btn-success btn-lg">I am an administrator</a>
+                    <a href="Admin" class="btn-redirect btn btn-block btn-info btn-lg">I am an administrator</a>
                 </div>
                 
             </div>

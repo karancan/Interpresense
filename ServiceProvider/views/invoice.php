@@ -9,10 +9,10 @@
             <div class="col-md-3">
                 
                 <h3>From</h3>
-                <input type="text" class="form-control" placeholder="Your name">
-                <input type="text" class="form-control" placeholder="Your phone number">
-                <input type="text" class="form-control" placeholder="Your email">
-                <input type="text" class="form-control" placeholder="Your address">
+                <input type="text" class="form-control input-top" placeholder="Your name">
+                <input type="text" class="form-control input-center" placeholder="Your phone number">
+                <input type="text" class="form-control input-center" placeholder="Your email">
+                <input type="text" class="form-control input-bottom" placeholder="Your address">
             </div>
             
             <div class="col-md-5">
@@ -28,8 +28,8 @@
                 
                 <h2>INVOICE</h2>
                 
-                <input type="text" class="form-control" placeholder="Client name">
-                <input type="text" class="form-control" placeholder="Client ID number">
+                <input type="text" class="form-control input-top" placeholder="Client name">
+                <input type="text" class="form-control input-bottom" placeholder="Client ID number">
                 
             </div>
         </div>
@@ -108,3 +108,4 @@
 
 </div>
 <script src="includes/js/invoice.js" charset="utf-8"></script>
+<?die()?>

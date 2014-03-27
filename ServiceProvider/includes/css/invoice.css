@@ -36,3 +36,18 @@ h3{
     height: 2.4em;
     font-size: 1.2em;
 }
+.input-top{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 0;
+}
+.input-center{
+    border-radius: 0;
+}
+.input-top, .input-center{
+    border-bottom: 0;
+}
+.input-bottom{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
