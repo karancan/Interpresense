@@ -1,256 +1,109 @@
+<style>
+    @import url('includes/css/serviceProvider.css');
+</style>
 <div class="container">
+
     <form>
-        <div class="sixteen columns">
-            <div class="three columns">
+        
+        <div class="row">
+            <div class="col-md-3">
+                
                 <h3>From</h3>
-
-                <input type="text" name="name" placeholder="Name">
-                <input type="text" name="address" placeholder="Address">
-                <input type="text" name="phone" placeholder="Phone">
-                <input type="email" name="email" placeholder="Email">
-
+                <input type="text" placeholder="Your name"><br>
+                <input type="text" placeholder="Your phone number"><br>
+                <input type="text" placeholder="Your email"><br>
+                <input type="text" placeholder="Your address">
+            </div>
+            
+            <div class="col-md-6">
+            
                 <h3>To</h3>
-
-                <p>Department</p>
-                <p>Institution</p>
-                <p>Address</p>
+                <h5>Fetch from DB</h5>
+                <h5>Fetch from DB</h5>
+                <h5>Fetch from DB</h5>
+                
             </div>
-            <div style="text-align: right; float: right;" class="three columns">
+            
+            <div class="col-md-3 invoice-for">
+                
                 <h2>INVOICE</h2>
-
-                <input type="text" name="date" placeholder="Date">
-                <input type="text" name="client_number" placeholder="Client number">
-                <input type="text" name="client_name" placeholder="Client name">
+                
+                <input type="text" placeholder="Client name">
+                <input type="text" placeholder="Client ID number">
+                
             </div>
         </div>
-        <div class="sixteen columns">
-            <table>
-                <tr>
-                    <th scope="col" style="width: 35%;">Description</th>
-                    <th scope="col" style="width: 15%;">Start</th>
-                    <th scope="col" style="width: 15%;">End</th>
-                    <th scope="col" style="width: 10%;">Hours</th>
-                    <th scope="col" style="width: 15%;">Rate</th>
-                    <th scope="col" style="width: 10%;">Amount</th>
-                </tr>
-                <tr>
-                    <td><input type="text" name="" placeholder="Description"></td>
-                    <td><input type="text" name="" placeholder="Start"></td>
-                    <td><input type="text" name="" placeholder="End"></td>
-                    <td><input type="text" name="" placeholder="Hours" readonly></td>
-                    <td><input type="text" name="" placeholder="Rate"></td>
-                    <td><input type="text" name="" placeholder="Amount" readonly></td>
-                </tr>
-                <tr>
-                    <td><input type="text" name="" placeholder="Description"></td>
-                    <td><input type="text" name="" placeholder="Start"></td>
-                    <td><input type="text" name="" placeholder="End"></td>
-                    <td><input type="text" name="" placeholder="Hours" readonly></td>
-                    <td><input type="text" name="" placeholder="Rate"></td>
-                    <td><input type="text" name="" placeholder="Amount" readonly></td>
-                </tr>            
-                <tr>
-                    <td><input type="text" name="" placeholder="Description"></td>
-                    <td><input type="text" name="" placeholder="Start"></td>
-                    <td><input type="text" name="" placeholder="End"></td>
-                    <td><input type="text" name="" placeholder="Hours" readonly></td>
-                    <td><input type="text" name="" placeholder="Rate"></td>
-                    <td><input type="text" name="" placeholder="Amount" readonly></td>
-                </tr>
-                <tr>
-                    <td colspan="5" style="text-align: right; padding-right: 1em;">$</td>
-                    <td><input type="text" name="" placeholder="0" readonly></td>
-                </tr>
-                <tr>
-                    <th scope="col" style="width: 35%;">Description</th>
-                    <th scope="col" style="width: 15%;">Start</th>
-                    <th scope="col" style="width: 15%;">End</th>
-                    <th scope="col" style="width: 10%;">Hours</th>
-                    <th scope="col" style="width: 15%;">Rate</th>
-                    <th scope="col" style="width: 10%;">Amount</th>
-                </tr>
-                <tr>
-                    <td><input type="text" name="" placeholder="Description"></td>
-                    <td><input type="text" name="" placeholder="Start"></td>
-                    <td><input type="text" name="" placeholder="End"></td>
-                    <td><input type="text" name="" placeholder="Hours" readonly></td>
-                    <td><input type="text" name="" placeholder="Rate"></td>
-                    <td><input type="text" name="" placeholder="Amount" readonly></td>
-                </tr>
-                <tr>
-                    <td><input type="text" name="" placeholder="Description"></td>
-                    <td><input type="text" name="" placeholder="Start"></td>
-                    <td><input type="text" name="" placeholder="End"></td>
-                    <td><input type="text" name="" placeholder="Hours" readonly></td>
-                    <td><input type="text" name="" placeholder="Rate"></td>
-                    <td><input type="text" name="" placeholder="Amount" readonly></td>
-                </tr>            
-                <tr>
-                    <td><input type="text" name="" placeholder="Description"></td>
-                    <td><input type="text" name="" placeholder="Start"></td>
-                    <td><input type="text" name="" placeholder="End"></td>
-                    <td><input type="text" name="" placeholder="Hours" readonly></td>
-                    <td><input type="text" name="" placeholder="Rate"></td>
-                    <td><input type="text" name="" placeholder="Amount" readonly></td>
-                </tr>
-                <tr>
-                    <td colspan="5" style="text-align: right; padding-right: 1em;">$</td>
-                    <td><input type="text" name="" placeholder="0" readonly></td>
-                </tr>
-                <tr>
-                    <th scope="col" style="width: 35%;">Description</th>
-                    <th scope="col" style="width: 15%;">Start</th>
-                    <th scope="col" style="width: 15%;">End</th>
-                    <th scope="col" style="width: 10%;">Hours</th>
-                    <th scope="col" style="width: 15%;">Rate</th>
-                    <th scope="col" style="width: 10%;">Amount</th>
-                </tr>
-                <tr>
-                    <td><input type="text" name="" placeholder="Description"></td>
-                    <td><input type="text" name="" placeholder="Start"></td>
-                    <td><input type="text" name="" placeholder="End"></td>
-                    <td><input type="text" name="" placeholder="Hours" readonly></td>
-                    <td><input type="text" name="" placeholder="Rate"></td>
-                    <td><input type="text" name="" placeholder="Amount" readonly></td>
-                </tr>
-                <tr>
-                    <td><input type="text" name="" placeholder="Description"></td>
-                    <td><input type="text" name="" placeholder="Start"></td>
-                    <td><input type="text" name="" placeholder="End"></td>
-                    <td><input type="text" name="" placeholder="Hours" readonly></td>
-                    <td><input type="text" name="" placeholder="Rate"></td>
-                    <td><input type="text" name="" placeholder="Amount" readonly></td>
-                </tr>            
-                <tr>
-                    <td><input type="text" name="" placeholder="Description"></td>
-                    <td><input type="text" name="" placeholder="Start"></td>
-                    <td><input type="text" name="" placeholder="End"></td>
-                    <td><input type="text" name="" placeholder="Hours" readonly></td>
-                    <td><input type="text" name="" placeholder="Rate"></td>
-                    <td><input type="text" name="" placeholder="Amount" readonly></td>
-                </tr>
-                <tr>
-                    <td colspan="5" style="text-align: right; padding-right: 1em;">$</td>
-                    <td><input type="text" name="" placeholder="0" readonly></td>
-                </tr>
-                <tr>
-                    <th scope="col" style="width: 35%;">Description</th>
-                    <th scope="col" style="width: 15%;">Start</th>
-                    <th scope="col" style="width: 15%;">End</th>
-                    <th scope="col" style="width: 10%;">Hours</th>
-                    <th scope="col" style="width: 15%;">Rate</th>
-                    <th scope="col" style="width: 10%;">Amount</th>
-                </tr>
-                <tr>
-                    <td><input type="text" name="" placeholder="Description"></td>
-                    <td><input type="text" name="" placeholder="Start"></td>
-                    <td><input type="text" name="" placeholder="End"></td>
-                    <td><input type="text" name="" placeholder="Hours" readonly></td>
-                    <td><input type="text" name="" placeholder="Rate"></td>
-                    <td><input type="text" name="" placeholder="Amount" readonly></td>
-                </tr>
-                <tr>
-                    <td><input type="text" name="" placeholder="Description"></td>
-                    <td><input type="text" name="" placeholder="Start"></td>
-                    <td><input type="text" name="" placeholder="End"></td>
-                    <td><input type="text" name="" placeholder="Hours" readonly></td>
-                    <td><input type="text" name="" placeholder="Rate"></td>
-                    <td><input type="text" name="" placeholder="Amount" readonly></td>
-                </tr>            
-                <tr>
-                    <td><input type="text" name="" placeholder="Description"></td>
-                    <td><input type="text" name="" placeholder="Start"></td>
-                    <td><input type="text" name="" placeholder="End"></td>
-                    <td><input type="text" name="" placeholder="Hours" readonly></td>
-                    <td><input type="text" name="" placeholder="Rate"></td>
-                    <td><input type="text" name="" placeholder="Amount" readonly></td>
-                </tr>
-                <tr>
-                    <td colspan="5" style="text-align: right; padding-right: 1em;">$</td>
-                    <td><input type="text" name="" placeholder="0" readonly></td>
-                </tr>
-                <tr>
-                    <th scope="col" style="width: 35%;">Description</th>
-                    <th scope="col" style="width: 15%;">Start</th>
-                    <th scope="col" style="width: 15%;">End</th>
-                    <th scope="col" style="width: 10%;">Hours</th>
-                    <th scope="col" style="width: 15%;">Rate</th>
-                    <th scope="col" style="width: 10%;">Amount</th>
-                </tr>
-                <tr>
-                    <td><input type="text" name="" placeholder="Description"></td>
-                    <td><input type="text" name="" placeholder="Start"></td>
-                    <td><input type="text" name="" placeholder="End"></td>
-                    <td><input type="text" name="" placeholder="Hours" readonly></td>
-                    <td><input type="text" name="" placeholder="Rate"></td>
-                    <td><input type="text" name="" placeholder="Amount" readonly></td>
-                </tr>
-                <tr>
-                    <td><input type="text" name="" placeholder="Description"></td>
-                    <td><input type="text" name="" placeholder="Start"></td>
-                    <td><input type="text" name="" placeholder="End"></td>
-                    <td><input type="text" name="" placeholder="Hours" readonly></td>
-                    <td><input type="text" name="" placeholder="Rate"></td>
-                    <td><input type="text" name="" placeholder="Amount" readonly></td>
-                </tr>            
-                <tr>
-                    <td><input type="text" name="" placeholder="Description"></td>
-                    <td><input type="text" name="" placeholder="Start"></td>
-                    <td><input type="text" name="" placeholder="End"></td>
-                    <td><input type="text" name="" placeholder="Hours" readonly></td>
-                    <td><input type="text" name="" placeholder="Rate"></td>
-                    <td><input type="text" name="" placeholder="Amount" readonly></td>
-                </tr>
-                <tr>
-                    <td colspan="5" style="text-align: right; padding-right: 1em;">$</td>
-                    <td><input type="text" name="" placeholder="0" readonly></td>
-                </tr>
-                <tr>
-                    <th scope="col" style="width: 35%;">Description</th>
-                    <th scope="col" style="width: 15%;">Start</th>
-                    <th scope="col" style="width: 15%;">End</th>
-                    <th scope="col" style="width: 10%;">Hours</th>
-                    <th scope="col" style="width: 15%;">Rate</th>
-                    <th scope="col" style="width: 10%;">Amount</th>
-                </tr>
-                <tr>
-                    <td><input type="text" name="" placeholder="Description"></td>
-                    <td><input type="text" name="" placeholder="Start"></td>
-                    <td><input type="text" name="" placeholder="End"></td>
-                    <td><input type="text" name="" placeholder="Hours" readonly></td>
-                    <td><input type="text" name="" placeholder="Rate"></td>
-                    <td><input type="text" name="" placeholder="Amount" readonly></td>
-                </tr>
-                <tr>
-                    <td><input type="text" name="" placeholder="Description"></td>
-                    <td><input type="text" name="" placeholder="Start"></td>
-                    <td><input type="text" name="" placeholder="End"></td>
-                    <td><input type="text" name="" placeholder="Hours" readonly></td>
-                    <td><input type="text" name="" placeholder="Rate"></td>
-                    <td><input type="text" name="" placeholder="Amount" readonly></td>
-                </tr>            
-                <tr>
-                    <td><input type="text" name="" placeholder="Description"></td>
-                    <td><input type="text" name="" placeholder="Start"></td>
-                    <td><input type="text" name="" placeholder="End"></td>
-                    <td><input type="text" name="" placeholder="Hours" readonly></td>
-                    <td><input type="text" name="" placeholder="Rate"></td>
-                    <td><input type="text" name="" placeholder="Amount" readonly></td>
-                </tr>
-                <tr>
-                    <td colspan="5" style="text-align: right; padding-right: 1em;">$</td>
-                    <td><input type="text" name="" placeholder="0" readonly></td>
-                </tr>
-            </table>
+        
+        <div class="invoice-items-container">
+            
+            <h3>Invoice items</h3>
+        
         </div>
-        <div class="three columns">
-            <button type="button"><i class="fa fa-check"></i> Submit invoice</button>
+
+        <div class="row">
+            <div class="col-md-12">
+                
+                <div class="table-responsive">
+                    <table class="table table-hover invoice-table">
+                        
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Date</th>
+                                <th>Start</th>
+                                <th>End</th>
+                                <th>Hours <i class="fa fa-info-circle fa-2x"></i></th>
+                                <th>Rate</th>
+                                <th>Amount <i class="fa fa-info-circle fa-2x"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                //Just here for illustration purposes...
+                                for ($i=0; $i<4; $i++){
+                                    echo '<tr>';
+                                    echo '<td><input type="text"></td>';
+                                    echo '<td><input type="date"></td>';
+                                    echo '<td><input type="time" step="1"></td>';
+                                    echo '<td><input type="time" step="1" /></td>';
+                                    echo '<td>Something</td>';
+                                    echo '<td><input type="number"></td>';
+                                    echo '<td>Something</td>';
+                                    echo '</tr>';
+                                }
+                            ?>
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+                </div>
+                
+            </div>
+            
         </div>
-        <div class="three columns">
-            <button type="button"><i class="fa fa-floppy-o"></i> Save draft</button>
+        
+        <div class="row">
+            <div class="col-md-3 col-md-offset-9 invoice-total">
+                <h3>Total: $200.20</h3>
+            </div>
+        <div>
+        
+        <div class="row invoice-button-container">
+            
+            <div class="col-md-2 col-md-offset-6">
+                <button type="button" class="btn btn-danger btn-block invoice-buttons"><i class="fa fa-repeat"></i> Clear form</button>
+            </div>
+            
+            <div class="col-md-2">
+                <button type="button" class="btn btn-warning btn-block invoice-buttons"><i class="fa fa-save"></i> Save draft</button>
+            </div>
+            
+            <div class="col-md-2">
+                <button type="button" class="btn btn-success btn-block invoice-buttons"><i class="fa fa-check-square"></i> Submit invoice</button>
+            </div>
+        
         </div>
-        <div class="three columns">
-            <button type="button"><i class="fa fa-undo"></i> Clear form</button>
-        </div>
+
     </form>
+
 </div>

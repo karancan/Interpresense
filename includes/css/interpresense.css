@@ -5,6 +5,15 @@ body{
 }
 
 /**
+Form styles
+**/
+
+input, select, textarea{
+    padding: 0.2em !important;
+    line-height: 1.1em !important;
+}
+
+/**
 Header styles
 **/
 header{
@@ -14,8 +23,8 @@ header{
 /**
 Footer styles
 **/
-footer{
-    background-color: #656D78;
+footer .navbar{
+    background-color: rgba(101,109,120,0.5);
     color: white;
     margin-top: 2em;
 }

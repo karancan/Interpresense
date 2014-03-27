@@ -1,0 +1,16 @@
+.invoice-total, .invoice-for{
+    text-align: center;
+}
+.invoice-items-container{
+    margin-top: 1em;
+}
+.invoice-button-container{
+    margin-top: 8em;
+}
+.invoice-table{
+    margin-bottom: 0em !important;
+}
+.invoice-buttons{
+    height: 2.4em;
+    font-size: 1.2em;
+}
