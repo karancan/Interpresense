@@ -116,11 +116,11 @@ define('FILE_TYPES_ALLOWED', serialize(array(
     'application/x-wpwin',
     'application/vnd.ms-works',
     'application/x-msworks-wp',
-    'application/x-7z-compressed'
+    'application/x-7z-compressed',
     'text/plain',
     'image/jpeg',
     'image/gif',
-    'image/png',
+    'image/png'
 )));
 
 //============================================================================================
