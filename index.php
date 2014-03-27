@@ -13,9 +13,6 @@ header('Content-Type: text/html; charset=utf-8');
     <link rel='stylesheet' href='includes/css/interpresense.css'>
     
     <style>
-        body{
-            background-color: rgb(241, 242, 246);
-        }
         hr.inset {
             border: 0;
             height: 0;
@@ -55,7 +52,7 @@ header('Content-Type: text/html; charset=utf-8');
         
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <img class="logo" src="includes/img/logo_regular_1024_350.png">
+                    <img class="logo" src="includes/img/logo_regular_1024_350.png" alt="Interpresense">
                 </div>
             </div>
             

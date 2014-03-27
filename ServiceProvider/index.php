@@ -44,7 +44,7 @@ $translate = new \JsonI18n(\Locale::getDefault());
  * Content and actions
  */
 if (!isset($_GET['page'])) {
-    $viewFile = "views/index.php";
+    $viewFile = "views/invoice.php";
 } else {
     require_once FS_PHP.'/error.php';
 }
@@ -57,7 +57,7 @@ $actions = array('');
 if (!in_array($_GET['page'], $actions, true)) {
 
     require FS_PHP . '/header.php';
-    require 'views/nav.php';
+    require 'views/header.php';
 
     if(isset($viewFile) && file_exists($viewFile)) {
         require $viewFile;

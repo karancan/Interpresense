@@ -1,4 +1,24 @@
 body{
+    background-color: #E6E9ED;
     -webkit-font-smoothing: antialiased;
     font-family: 'Segoe UI', 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif !important;
+}
+
+/**
+Header styles
+**/
+header{
+    background-color: #CCD1D9;
+}
+
+/**
+Footer styles
+**/
+footer{
+    background-color: #656D78;
+    color: white;
+    margin-top: 2em;
+}
+footer .logo{
+    width: 10em;
 }
