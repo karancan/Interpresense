@@ -1,4 +1,34 @@
+/**
+ *Body styles
+ */
 body{
+    background-color: #f1f3f5;
     -webkit-font-smoothing: antialiased;
     font-family: 'Segoe UI', 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif !important;
+}
+
+/**
+ *Body header styles
+ */
+header{
+    background-color: #CCD1D9;
+}
+
+/**
+ *Body footer styles
+ */
+footer .navbar{
+    background-color: #CCD1D9;
+    color: white;
+    margin-top: 2em;
+}
+footer .logo{
+    width: 10em;
+}
+
+/**
+ *Bootstrap over-ride styles
+ */
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td{
+    vertical-align: middle;
 }

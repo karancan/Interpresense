@@ -1,0 +1,53 @@
+header h2{
+    font-weight: normal;
+}
+h3{
+    font-weight: normal;
+}
+.invoice-options-container{
+    margin-top: 25%;
+}
+.invoice-total{
+    text-align: center;
+}
+.invoice-total h3{
+    font-size: 1.4em;
+}
+#invoice-total-dollar-amount{
+    font-size: 1.6em !important;
+    font-weight: bold;
+}
+.invoice-for{
+    text-align: right;
+}
+.invoice-items-container{
+    margin-top: 1em;
+}
+.invoice-button-container{
+    margin-top: 8em;
+}
+.invoice-table{
+    margin-bottom: 0em !important;
+}
+.invoice-table thead th{
+    text-transform: uppercase;
+}
+.invoice-buttons{
+    height: 2.4em;
+    font-size: 1.2em;
+}
+.input-top{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 0;
+}
+.input-center{
+    border-radius: 0;
+}
+.input-top, .input-center{
+    border-bottom: 0;
+}
+.input-bottom{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
