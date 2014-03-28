@@ -2,6 +2,8 @@
 
 namespace Interpresense\ServiceProvider;
 
+use Interpresense\Includes\AntiXss;
+
 /**
  * Session
  */
@@ -15,6 +17,8 @@ require '../includes/php/config.php';
 $dbo = new \Interpresense\Includes\DatabaseObject();
 $settings = \Interpresense\Includes\ApplicationSettings::load($dbo);
 
+$antiXSS = new AntiXss();
+
 /**
  * Models
  */
@@ -23,9 +27,6 @@ $invoice = new Invoice($dbo);
 /**
  * Localization
  */
-require FS_VENDOR . '/JsonI18n/Translate.php';
-require FS_VENDOR . '/JsonI18n/DateFormat.php';
-
 if(!isset($_SESSION['lang'])) {
     $_SESSION['lang'] = DEFAULT_LANGUAGE;
 }
