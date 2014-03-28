@@ -18,6 +18,7 @@ $settings = \Interpresense\Includes\ApplicationSettings::load($dbo);
 /**
  * Models
  */
+$invoice = new Invoice($dbo);
 
 /**
  * Localization
