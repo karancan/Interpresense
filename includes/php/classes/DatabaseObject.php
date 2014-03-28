@@ -22,6 +22,8 @@ class DatabaseObject {
             $this->db = new \PDO('mysql:host=' . DB_HOSTNAME . ';dbname=' . DB_NAME . ';charset=utf8', DB_USERNAME, DB_PASSWORD);
 
             $this->db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            $this->db->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
+            $this->db->setAttribute(\PDO::ATTR_STRINGIFY_FETCHES, true);
             
             $this->db->exec('SET NAMES utf8;');
         } catch (\PDOException $e) {
