@@ -22,10 +22,10 @@
                             <li <?= ($current_view === "admin-settings" ? 'class="active"' : null) ?>><a href="settings.php">Settings</a></li>
                         </ul>
                         
-                        <form class="navbar-form navbar-left" role="search">
+                        <form class="navbar-form navbar-left" role="search" action="studentSearch.php">
                             <div class="form-search search-only">
                                 <i class="search-icon glyphicon glyphicon-search"></i>
-                                <input type="text" class="form-control search-query" placeholder="placeholder coming soon...">
+                                <input type="text" class="form-control search-query" placeholder="Search by student name or number...">
                             </div>
                         </form>
                      
