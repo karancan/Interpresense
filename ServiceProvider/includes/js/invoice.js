@@ -1,6 +1,6 @@
 /**
-*User wants to clear the form
-*/
+ *User wants to clear the form
+ */
 $('#invoice-btn-clear').click(function(){
     var double_check = confirm("Are you sure you want to clear this form?");
     if(double_check){
@@ -9,22 +9,22 @@ $('#invoice-btn-clear').click(function(){
 });
 
 /**
-*User wants to save a draft
-*/
+ *User wants to save a draft
+ */
 $('#invoice-btn-draft').click(function(){
     alert("Draft will be saved...you will receive an email");
 });
 
 /**
-*User wants to submit the invoice
-*/
+ *User wants to submit the invoice
+ */
 $('#invoice-btn-submit').click(function(){
     alert("Invoice will be submitted...you will receive an email");
 });
 
 /**
-*User is entering information in to the input fields in invoice rows
-*/
+ *User is entering information in to the input fields in invoice rows
+ */
 $(document).on('input focusout', '.invoice-item-input', function(){
 
     //Update the fields' UI state
@@ -62,15 +62,15 @@ $(document).on('input focusout', '.invoice-item-input', function(){
 });
 
 /**
-*Change the styling of an input to a negative state
-*/
+ *Change the styling of an input to a negative state
+ */
 function showInputFailure(element){
     element.closest('td').removeClass('has-success').addClass('has-error');
 }
 
 /**
-*Change the styling of an input to a positive state
-*/
+ *Change the styling of an input to a positive state
+ */
 function showInputSuccess(element){
     element.closest('td').removeClass('has-error').addClass('has-success');
 }
