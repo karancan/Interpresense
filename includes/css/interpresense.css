@@ -1,5 +1,5 @@
 /**
-Body styles
+*Body styles
 */
 body{
     background-color: #f1f3f5;
@@ -8,14 +8,14 @@ body{
 }
 
 /**
-Body header styles
+*Body header styles
 */
 header{
     background-color: #CCD1D9;
 }
 
 /**
-Body footer styles
+*Body footer styles
 */
 footer .navbar{
     background-color: #CCD1D9;
@@ -27,7 +27,7 @@ footer .logo{
 }
 
 /**
-Bootstrap over-ride styles
+*Bootstrap over-ride styles
 */
 .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td{
     vertical-align: middle;
