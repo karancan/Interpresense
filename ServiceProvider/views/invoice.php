@@ -49,32 +49,27 @@
                         <thead>
                             <tr>
                                 <th scope='col'>Description</th>
-                                <th scope='col' style='width: 5%;'>Date</th>
-                                <th scope='col' style='width: 2%;'>Start</th>
-                                <th scope='col' style='width: 2%;'>End</th>
-                                <th scope='col'>Hours <i class="fa fa-info-circle"></i></th>
-                                <th scope='col' style='width: 10%;'>Rate</th>
-                                <th scope='col'>Amount <i class="fa fa-info-circle"></i></th>
+                                <th scope='col'>Date</th>
+                                <th scope='col'>Start time</th>
+                                <th scope='col'>End time</th>
+                                <!-- TODO: don't know how to get tooltips working -->
+                                <th scope='col' style='width: 10%;' data-toggle='tooltip' data-placement='top' title='= end time - start time'>Hour(s) <i class="fa fa-info-circle"></i></th>
+                                <th scope='col'>Rate/hour ($)</th>
+                                <!-- TODO: don't know how to get tooltips working -->
+                                <th scope='col' style='width: 12%;' data-toggle='tooltip' data-placement='top' title='= rate * hours'>Amount ($) <i class="fa fa-info-circle"></i></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                                //Just here for illustration purposes...
-                                for ($i=0; $i<4; $i++){
-                                    echo '<tr>';
-                                    echo '<td><input type="text" class="form-control" placeholder="Add description here"></td>';
-                                    echo '<td><input type="date" class="form-control"></td>';
-                                    echo '<td><input type="time" step="1" class="form-control"></td>';
-                                    echo '<td><input type="time" step="1" class="form-control"/></td>';
-                                    echo '<td>Something</td>';
-                                    echo '<td><input type="number" class="form-control" placeholder="Add rate here"></td>';
-                                    echo '<td>Something</td>';
-                                    echo '</tr>';
-                                }
-                            ?>
+                            <tr class="invoice-item-row">
+                                <td><input type="text" class="form-control invoice-item-input" placeholder="Description"></td>
+                                <td><input type="date" class="form-control invoice-item-input"></td>
+                                <td><input type="time" step="1" class="form-control invoice-item-input"></td>
+                                <td><input type="time" step="1" class="form-control invoice-item-input"/></td>
+                                <td>x hours x min</td>
+                                <td><input type="number" class="form-control invoice-item-input" placeholder="Rate"></td>
+                                <td class="invoice-item-amounts">20.00</td>
                             </tr>
                         </tbody>
-                        
                     </table>
                 </div>
                 
@@ -84,7 +79,7 @@
         
         <div class="row">
             <div class="col-md-2 col-md-offset-10 invoice-total">
-                <h3>Total <span id="invoice-total-dollar-amount">$200.20</span></h3>
+                <h3>Total <span id="invoice-total-dollar-amount">N/A</span></h3>
             </div>
         <div>
         
@@ -108,4 +103,3 @@
 
 </div>
 <script src="includes/js/invoice.js" charset="utf-8"></script>
-<?die()?>
