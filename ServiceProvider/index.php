@@ -22,7 +22,8 @@ $settings = \Interpresense\Includes\ApplicationSettings::load($dbo);
 /**
  * Localization
  */
-require FS_VENDOR . '/JsonI18n.php';
+require FS_VENDOR . '/JsonI18n/Translate.php';
+require FS_VENDOR . '/JsonI18n/DateFormat.php';
 
 if(!isset($_SESSION['lang'])) {
     $_SESSION['lang'] = DEFAULT_LANGUAGE;
@@ -30,15 +31,15 @@ if(!isset($_SESSION['lang'])) {
 \Locale::setDefault($_SESSION['lang']);
 
 // Translation
-$translate = new \JsonI18n(\Locale::getDefault());
-// @todo Add resource files using $translate->addResource($file)
+$translate = new \JsonI18n\Translate(\Locale::getDefault());
+$translate->addResource('l10n/index.json');
 
 // Date formatting
-// @todo Figure this out
-// Perhaps $dateFmt = new \JsonI18nDate(\Locale::getDefault());
+$dateFmt = new \JsonI18n\DateFormat(\Locale::getDefault());
+$dateFmt->addResource(FS_L10N . '/dateFormatters.json');
 
 // Number formatting
-// @todo Also figure this out
+// @todo Figure this out
 
 /**
  * Content and actions
