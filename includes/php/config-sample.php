@@ -163,10 +163,13 @@ define('VENDOR_NAMESPACE', 'Interpresense');
 
 //Autoloader for core classes
 spl_autoload_register(function($fqClassName) {
+    $lastSlash = strrpos(ltrim($fqClassName, '\\'), '\\');
+    $className = substr($fqClassName, ++$lastSlash);
+    $namespace = substr($fqClassName, 0, --$lastSlash);
+    
     if(strpos($fqClassName, VENDOR_NAMESPACE) === 0) {
-        $lastSlash = strrpos(ltrim($fqClassName, '\\'), '\\');
-        $className = substr($fqClassName, ++$lastSlash);
-        $namespace = ltrim(substr($fqClassName, 0, --$lastSlash), VENDOR_NAMESPACE);
+        // It's one of ours
+        $namespace = ltrim($namespace, VENDOR_NAMESPACE);
 
         if($namespace === '\\Includes') {
             // Global class
@@ -178,6 +181,13 @@ spl_autoload_register(function($fqClassName) {
             if(file_exists($file)) {
                 require $file;
             }
+        }
+    } else {
+        // It's not one of ours, pray that the vendor followed PSR-0
+        
+        $file = FS_VENDOR . '/' . str_replace('\\', '/', $namespace) . "/$className.php";
+        if(file_exists($file)) {
+            require $file;
         }
     }
 }, true);
