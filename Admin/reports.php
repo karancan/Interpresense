@@ -22,7 +22,7 @@ $antiXSS = new AntiXss();
 /**
  * Models
  */
-$invoice = new Invoice($dbo);
+// @todo Plug in a model
 
 /**
  * Localization
@@ -63,6 +63,7 @@ if (!in_array($_GET['page'], $actions, true)) {
     
     require FS_PHP . '/header.php';
     require 'views/header.php';
+    require 'views/nav.php';
 
     if(isset($viewFile) && file_exists($viewFile)) {
         require $viewFile;

@@ -11,4 +11,3 @@
         </div>
     </div>
 </header>    
-<?php require_once 'views/nav.php'; ?>
