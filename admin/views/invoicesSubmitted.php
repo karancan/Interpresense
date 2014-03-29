@@ -8,7 +8,7 @@
             <h3 class="admin-page-title"><i class="fa fa-folder-open"></i> Invoices Submitted</h3>
         </div>
         <div class="col-md-2 col-md-offset-1">
-            <a href="https://<?= URL_INTERPRESENSE ?>/ServiceProvider/" target="_blank" type="button" class="btn btn-info btn-block admin-add-button"><i class="fa fa-plus"></i> Add finalized invoice</a>        
+            <a href="https://<?= URL_INTERPRESENSE ?>/ServiceProvider/" target="_blank" class="btn btn-info btn-block admin-add-button"><i class="fa fa-plus"></i> Add finalized invoice</a>        
         </div>
     </div>
     
