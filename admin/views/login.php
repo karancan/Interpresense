@@ -1,1 +1,0 @@
-<h1> This is the main view for admin. This page might need some work… </h1>

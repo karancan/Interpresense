@@ -18,12 +18,33 @@ header{
  *Body footer styles
  */
 footer .navbar{
-    background-color: #CCD1D9;
-    color: white;
     margin-top: 2em;
+}
+footer .navbar-text{
+    color: white !important;
 }
 footer .logo{
     width: 10em;
+}
+
+/**
+ *Form styles
+ */
+ 
+.input-top{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 0;
+}
+.input-center{
+    border-radius: 0;
+}
+.input-top, .input-center{
+    border-bottom: 0;
+}
+.input-bottom{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 /**
@@ -32,3 +53,6 @@ footer .logo{
 .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td{
     vertical-align: middle;
 }
+.modal-dialog-vertical-center{
+    margin-top: 10% !important;
+} 

@@ -41,7 +41,7 @@
             <h3 class="admin-page-title"><i class="fa fa-users"></i> Users</h3>
         </div>
         <div class="col-md-2 col-md-offset-1">
-            <button type="button" class="btn btn-info btn-block admin-add-button"><i class="fa fa-plus"></i> Add user</button>        
+            <a data-toggle="modal" href="#admin-add-modal" class="btn btn-info btn-block admin-add-button"><i class="fa fa-plus"></i> Add a user</a>        
         </div>
     </div>
     
@@ -74,4 +74,45 @@
         
     </div>
     
+</div>
+
+<div class="modal fade" id="admin-add-modal" tabindex="-1" role="dialog" aria-labelledby="admin-add-modal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-vertical-center">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Add a user</h4>
+            </div>
+            
+            <div class="modal-body">
+            
+                <div class="form-group">
+                    <label class="control-label" for="username">Username</label>
+                    <input type="text" class="form-control" id="username">
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label" for="first_name">First name</label>
+                    <input type="text" class="form-control" id="first_name">
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label" for="last_name">Last name</label>
+                    <input type="text" class="form-control" id="last_name">
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label" for="expires_on">Expires on</label>
+                    <input type="text" class="form-control" id="expires_on">
+                </div>
+            
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success"><i class="fa fa-check"></i> Confirm</button>
+            </div>
+            
+        </div>
+    </div>
 </div>

@@ -22,7 +22,7 @@ $antiXSS = new AntiXss();
 /**
  * Models
  */
-$invoice = new Invoice($dbo);
+// @todo Plug in a model
 
 /**
  * Localization
@@ -47,7 +47,7 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  * Content and actions
  */
 if (!isset($_GET['page'])) {
-    $viewFile = "views/invoicesSubmitted.php";
+    $viewFile = "views/reports.php";
 } else {
     require_once FS_PHP.'/error.php';
 }
@@ -59,10 +59,11 @@ $actions = array('');
 
 if (!in_array($_GET['page'], $actions, true)) {
     
-    $current_view = 'admin-submitted';
+    $current_view = 'admin-reports';
     
     require FS_PHP . '/header.php';
     require 'views/header.php';
+    require 'views/nav.php';
 
     if(isset($viewFile) && file_exists($viewFile)) {
         require $viewFile;
