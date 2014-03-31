@@ -34,7 +34,7 @@ if(!isset($_SESSION['lang'])) {
 
 // Translation
 $translate = new \JsonI18n\Translate(\Locale::getDefault());
-$translate->addResource('l10n/index.json');
+// @todo Plug in a l10n resource file
 
 // Date formatting
 $dateFmt = new \JsonI18n\DateFormat(\Locale::getDefault());
