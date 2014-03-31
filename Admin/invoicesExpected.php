@@ -1,6 +1,6 @@
 <?php
 
-namespace Interpresense\ServiceProvider;
+namespace Interpresense\Admin;
 
 use Interpresense\Includes\AntiXss;
 
