@@ -12,7 +12,7 @@ class DatabaseObject {
      * The database connection
      * @var \PDO
      */
-    protected $db;
+    public $db;
 
     /**
      * DatabaseObject Constructor
@@ -179,9 +179,8 @@ class DatabaseObject {
             // Prepare the statement
             $q = $this->db->prepare($sql);
 
-            $i = 0;
             foreach($types as $field => $type) {
-                $q->bindValue(":{$field}", $data[$i++], $type);
+                $q->bindValue(":{$field}", $data[$field], $type);
             }
 
             // Execute the statement
