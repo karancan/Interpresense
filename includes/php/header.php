@@ -3,9 +3,7 @@
 if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' or isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
     header('Strict-Transport-Security: max-age=31536000');
 } else {
-    $uri = 'https://' . URL_INTERPRESENSE . $_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING'];
-    header('HTTP/1.1 301 Moved Permanently');
-    header("Location: $uri");
+    header("Location: https://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']);
     die();
 }
 session_start();
