@@ -132,10 +132,30 @@ class Users extends \Interpresense\Includes\BaseModel {
     
     /**
      * Creates a user
+     * @param array $data The POST data
      * @todo
      */
-    public function createUser($data) {
+    public function createUser(array $data) {
+        $types = array(
+            'user_name' => \PDO::PARAM_STR,
+            'first_name' => \PDO::PARAM_STR,
+            'last_name' => \PDO::PARAM_STR,
+            'expires_on' => \PDO::PARAM_STR
+        );
         
+        // @todo: pass validators into the second parameter of key() if necessary
+        if(!Validator::key('user_name', $this->validators['username'])
+                ->key('first_name')
+                ->key('last_name')
+                ->key('expires_on')
+                ->validate($data)) {
+            throw new \InvalidArgumentException('Required data missing');
+        }
+        
+        $data = parent::$db->pick(array_keys($types), $data);
+        
+        // @todo: Super confused about the database structure.
+        // Need clarification before writing INSERT statement
     }
     
     /**
@@ -149,6 +169,17 @@ class Users extends \Interpresense\Includes\BaseModel {
         $username = parent::$db->db->quote($username);
         
         parent::$db->update('interpresense_users', $data, $types, "`user_name` = $username");
+    }
+    
+    /**
+     * Fetches a list of users
+     * @return array
+     */
+    public function fetchUsers() {
+        $sql = "SELECT `user_id`, `user_name`, `first_name`, `last_name`, `created_on`, `expires_on`, `is_confirmed`, `last_log_in`
+                  FROM `interpresense_users`;";
+        
+        return parent::$db->query($sql);
     }
     
     /**
