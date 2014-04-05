@@ -25,52 +25,58 @@ $('#invoice-btn-submit').click(function(){
 /**
  *User is entering information in to the input fields in invoice rows
  */
-$(document).on('input focusout', '.invoice-item-input', function(){
+$(document).on('input focusout', '.invoice-item-input', function() {
+    var $thisRow = $(this).closest(".invoice-item-row");
 
     //Update the fields' UI state
-    if($(this).val() === ""){
+    if($(this).val() === "") {
         showInputFailure($(this));
-        all_complete = false;
-    }
-    else{
+    } else {
         showInputSuccess($(this));
     }
-    
-    //Check to see if all the fields in the row have been completed
-    var all_complete = true;
-    $(this).closest('tr').find('.invoice-item-input').each(function(){
-        if($(this).val() === ""){
-            all_complete = false;
+
+    if (!$thisRow.next("tr").length) {
+        //Variable determining if all the fields in a row are succesfully completed.
+        var all_complete = true;
+
+        //Check to see if all the fields in the row have been completed
+        $thisRow.find('.invoice-item-input').each(function(){
+            if ($(this).hasClass("has-error") || $(this).val() === ""){
+                all_complete = false;
+            }
+        });
+
+        //If all fields have been completed, we can add a new row
+        if (all_complete) {
+            var $clone = $thisRow.clone();
+            $clone.find('.invoice-item-input').val('');
+            $clone.find('.has-success').each(function() {
+                $(this).removeClass("has-success");
+            });
+            $thisRow.after($clone);
         }
-    });
-    
-    //If all fields have been completed, we can add a new row
-    if (all_complete){
-        var tr = $(this).closest('tr');
-        var clone = tr.clone();
-        clone.find('.invoice-item-input').val('');
-        tr.after(clone);
+
+        //Update the total of all invoice items
+        var total_amount = 0;
+        $('.invoice-item-amounts').each(function() {
+            total_amount += parseInt($(this).text(), 10);
+        });
+
+        $('#invoice-total-dollar-amount').text('$' + total_amount.toFixed(2));
     }
-    
-    //Update the total of all invoice items
-    var total_amount = 0;
-    $('.invoice-item-amounts').each(function(){
-        total_amount = total_amount + parseInt($(this).text(), 10);
-    });
-    $('#invoice-total-dollar-amount').text('$' + total_amount.toFixed(2));
-    
+
 });
 
 /**
  *Change the styling of an input to a negative state
  */
-function showInputFailure(element){
+function showInputFailure(element) {
     element.closest('td').removeClass('has-success').addClass('has-error');
 }
 
 /**
  *Change the styling of an input to a positive state
  */
-function showInputSuccess(element){
+function showInputSuccess(element) {
     element.closest('td').removeClass('has-error').addClass('has-success');
 }
