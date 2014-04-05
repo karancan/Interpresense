@@ -22,7 +22,7 @@ $antiXSS = new AntiXss();
 /**
  * Models
  */
-$model = new ApplicationSettings($dbo);
+$model = new Settings($dbo);
 
 /**
  * Localization
@@ -60,7 +60,7 @@ if (!isset($_GET['page'])) {
 /**
  * View
  */
-$actions = array('change-setting');
+$actions = array('change-setting', 'delete-setting');
 
 if (!in_array($_GET['page'], $actions, true)) {
     
