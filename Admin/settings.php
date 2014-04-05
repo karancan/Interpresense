@@ -22,7 +22,7 @@ $antiXSS = new AntiXss();
 /**
  * Models
  */
-// @todo Plug in a model
+$model = new ApplicationSettings($dbo);
 
 /**
  * Localization
@@ -47,7 +47,12 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  * Content and actions
  */
 if (!isset($_GET['page'])) {
+    $appSettings = $model->fetchSettings();
     $viewFile = "views/settings.php";
+} elseif ($_GET['page'] === 'change-setting') {
+    $model->changeSetting($_POST['key'], $_POST['value']);
+} elseif ($_GET['page'] === 'delete-setting') {
+    $model->deleteSetting($_POST['key']);
 } else {
     require_once FS_PHP.'/error.php';
 }
@@ -55,7 +60,7 @@ if (!isset($_GET['page'])) {
 /**
  * View
  */
-$actions = array('');
+$actions = array('change-setting');
 
 if (!in_array($_GET['page'], $actions, true)) {
     

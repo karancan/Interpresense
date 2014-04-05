@@ -27,14 +27,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Pull in from database</td>
-                        <td>Pull in from database</td>
-                        <td class="table-option-cell">
-                            <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button>
-                            <button type="button" class="btn btn-danger"><i class="fa fa-minus"></i> Delete</button>
-                        </td>
-                    </tr>
+                    <?php
+                    foreach($appSettings as $s) {
+                        echo '<tr>' .
+                             "<td>{$s['setting_key']}</td>" .
+                             "<td>{$s['setting_value']}</td>" .
+                             '<td class="table-option-cell">
+                                <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button>
+                                <button type="button" class="btn btn-danger"><i class="fa fa-minus"></i> Delete</button>
+                              </td>' .
+                             '</tr>';
+                    }
+                    ?>
                 </tbody>
             </table>
         
