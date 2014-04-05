@@ -14,16 +14,10 @@ header('Content-Type: text/html; charset=utf-8');
     <link rel='stylesheet' href='//<?= URL_CSS ?>/interpresense.css'>
     
     <style>
-        .btn-redirect{
-            margin-top: 25%;
-        }
         h3{
             font-weight: normal;
             line-height: 1.5em;
-            
-        }
-        .logo{
-            width: 45%;
+            margin-top: 0;
         }
         video{
             width: 100%;
@@ -51,15 +45,15 @@ header('Content-Type: text/html; charset=utf-8');
             <div class="row">
                 
                 <div class="col-md-8">
-                    <img class="logo" src="//<?= URL_IMAGES ?>/logo_regular_1024_350.png" alt="Interpresense">
+                    <img class="external-page-logo" src="//<?= URL_IMAGES ?>/logo_regular_1024_350.png" alt="Interpresense">
                 </div>
                 
                 <div class="col-md-2">
-                    <a href="//<?= URL_INTERPRESENSE ?>/ServiceProvider/" class="btn-redirect btn btn-block btn-info"><i class="fa fa-hand-o-right"></i> I am an interpreter</a>
+                    <a href="//<?= URL_INTERPRESENSE ?>/ServiceProvider/" class="external-page-btn-redirect btn btn-block btn-info"><i class="fa fa-hand-o-right"></i> I am an interpreter</a>
                 </div>
                 
                 <div class="col-md-2">
-                    <a href="//<?= URL_INTERPRESENSE ?>/Admin/" class="btn-redirect btn btn-block btn-info"><i class="fa fa-hand-o-right"></i> I am an administrator</a>
+                    <a href="//<?= URL_INTERPRESENSE ?>/Admin/" class="external-page-btn-redirect btn btn-block btn-info"><i class="fa fa-hand-o-right"></i> I am an administrator</a>
                 </div>
                 
             </div>
@@ -84,9 +78,19 @@ header('Content-Type: text/html; charset=utf-8');
             <hr class="inset">
             
             <div class="row">
-                <div class="col-md-12">
-                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+            
+                <div class="col-md-8">
+                    <?= date('Y') ?> &copy; Vincent Diep, Mr. Julian Huff &amp; Karan Khiani
                 </div>
+                
+                <div class="col-md-2">
+                    <a href="#" class="btn btn-block btn-info"><i class="fa fa-phone"></i> Get in touch</a>
+                </div>
+            
+                <div class="col-md-2">
+                    <a href="mailto:<?= EMAIL_INTERPRESENSE_ERROR_REPORTING ?>?subject=Interpresense%20bug%20report" class="btn btn-block btn-warning"><i class="fa fa-bug"></i> Report a bug</a>
+                </div>
+            
             </div>
             
         </div>

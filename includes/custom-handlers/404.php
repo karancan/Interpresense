@@ -17,15 +17,6 @@ require_once '../php/config.php';
     <link rel='stylesheet' href='//<?= URL_VENDOR ?>/fontawesome/css/font-awesome.min.css'>
     <link rel='stylesheet' href='//<?= URL_CSS ?>/interpresense.css'>
     
-    <style>
-        .btn-redirect{
-            margin-top: 25%;
-        }
-        .logo{
-            width: 45%;
-        }
-    </style>
-    
     <script src='//<?= URL_VENDOR ?>/jquery.min.js' charset='utf-8'></script>
     <script src='//<?= URL_VENDOR ?>/jquery.dataTables.min.js' charset='utf-8'></script>
     <script src='//<?= URL_VENDOR ?>/bootstrap/js/bootstrap.min.js' charset='utf-8'></script>
@@ -46,15 +37,15 @@ require_once '../php/config.php';
             <div class="row">
                 
                 <div class="col-md-8">
-                    <img class="logo" src="//<?= URL_IMAGES ?>/logo_regular_1024_350.png" alt="Interpresense">
+                    <img class="external-page-logo" src="//<?= URL_IMAGES ?>/logo_regular_1024_350.png" alt="Interpresense">
                 </div>
                 
                 <div class="col-md-2">
-                    <a href="//<?= URL_INTERPRESENSE ?>/ServiceProvider/" class="btn-redirect btn btn-block btn-info"><i class="fa fa-hand-o-right"></i> I am an interpreter</a>
+                    <a href="//<?= URL_INTERPRESENSE ?>/ServiceProvider/" class="external-page-btn-redirect btn btn-block btn-info"><i class="fa fa-hand-o-right"></i> I am an interpreter</a>
                 </div>
                 
                 <div class="col-md-2">
-                    <a href="//<?= URL_INTERPRESENSE ?>/Admin/" class="btn-redirect btn btn-block btn-info"><i class="fa fa-hand-o-right"></i> I am an administrator</a>
+                    <a href="//<?= URL_INTERPRESENSE ?>/Admin/" class="external-page-btn-redirect btn btn-block btn-info"><i class="fa fa-hand-o-right"></i> I am an administrator</a>
                 </div>
                 
             </div>
@@ -70,9 +61,19 @@ require_once '../php/config.php';
             <hr class="inset">
             
             <div class="row">
-                <div class="col-md-12">
-                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+            
+                <div class="col-md-8">
+                    <?= date('Y') ?> &copy; Vincent Diep, Mr. Julian Huff &amp; Karan Khiani
                 </div>
+                
+                <div class="col-md-2">
+                    <a href="#" class="btn btn-block btn-info"><i class="fa fa-phone"></i> Get in touch</a>
+                </div>
+            
+                <div class="col-md-2">
+                    <a href="mailto:<?= EMAIL_INTERPRESENSE_ERROR_REPORTING ?>?subject=Interpresense%20bug%20report" class="btn btn-block btn-warning"><i class="fa fa-bug"></i> Report a bug</a>
+                </div>
+            
             </div>
             
         </div>
