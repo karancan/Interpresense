@@ -37,12 +37,7 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> [Insert username]<b class="caret"></b></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li class="dropdown-header">Language</li>
-                                    <li><a href="#">English <i class="fa fa-check"></i></a></li>
-                                    <li><a href="#">French</a></li>
-                                    <li class="divider"></li>
-                                    <li class="dropdown-header">Other</li>
-                                    <li><a href="#">Profile</a></li>
+                                    <li><a href="#"><i class="fa fa-sign-out"></i> Log out</a></li>
                                 </ul>
                             </li>
                         </ul>
