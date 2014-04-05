@@ -9,10 +9,42 @@
         
             <div class="col-md-6 col-md-offset-3 admin-login-form-inputs">
                 
-                <h4><i class="fa fa-lock"></i> Please log in to continue...</h4>
+                <div class="row">
+                    <h4><i class="fa fa-lock"></i> &nbsp;Please log in to continue...</h4>
+                </div>
                 
-                <input class="form-control input-lg input-top" type="text" placeholder="Username">
-                <input class="form-control input-lg input-bottom" type="text" placeholder="Password">
+                <div class="row">
+                    <div class="input-group">
+                        <input id="admin_user_name" type="text" class="form-control" placeholder="Username">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-info" tabindex="-1">Options</button>
+                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="mailto:<?= EMAIL_ALIAS_INTERPRETER_COORDINATOR . EMAIL_ORG_STAFF_DOMAIN ?>?subject=Interpresense:%20New%20account%20request"><i class="fa fa-plus"></i> &nbsp; Add new user</a></li>
+                                <li><a href="mailto:<?= EMAIL_ALIAS_INTERPRETER_COORDINATOR . EMAIL_ORG_STAFF_DOMAIN ?>?subject=Interpresense:%20Forgot%20username"><i class="fa fa-refresh"></i> &nbsp; Forgot username</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <br>
+                
+                <div class="row">
+                    <div class="input-group">
+                        <input id="admin_password" type="text" class="form-control" placeholder="Password">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-info" tabindex="-1">Options</button>
+                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="index.php?page=register-or-reset"><i class="fa fa-refresh"></i> &nbsp; Forgot password</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
                 
             </div>
         
@@ -22,10 +54,12 @@
             
             <div class="col-md-6 col-md-offset-3 admin-login-form-buttons">
                 
-                <button type="buttom" class="btn btn-warning"><i class="fa fa-refresh"></i> Reset password</button>
+                <div class="row">
                 
-                <button type="submit" class="btn btn-success pull-right"><i class="fa fa-check"></i> Log in</button>
-            
+                    <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Log me in</button>
+                
+                </div>
+                
             </div>
             
         </div>

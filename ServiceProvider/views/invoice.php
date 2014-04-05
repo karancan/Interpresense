@@ -36,7 +36,7 @@
         
         <div class="invoice-items-container">
             
-            <h3>Invoice items</h3>
+            <h3>Timesheet for adapted measures</h3>
         
         </div>
 
@@ -63,8 +63,30 @@
                             <tr class="invoice-item-row">
                                 <td><input type="text" class="form-control invoice-item-input" placeholder="Description"></td>
                                 <td><input type="date" class="form-control invoice-item-input"></td>
-                                <td><input type="time" step="1" class="form-control invoice-item-input"></td>
-                                <td><input type="time" step="1" class="form-control invoice-item-input"/></td>
+                                <td>
+                                    <select class="form-control">
+                                    <?php
+                                        //@todo: use hour min and max times from database
+                                        for($hours=7; $hours<=22; $hours++) {
+                                            for($mins=0; $mins<60; $mins+=30) {
+                                                echo '<option>'.str_pad($hours,2,'0',STR_PAD_LEFT).':'.str_pad($mins,2,'0',STR_PAD_LEFT).'</option>';
+                                            }
+                                        }
+                                    ?>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control">
+                                    <?php
+                                        //@todo: use hour min and max times from database
+                                        for($hours=7; $hours<=22; $hours++) {
+                                            for($mins=0; $mins<60; $mins+=30) {
+                                                echo '<option>'.str_pad($hours,2,'0',STR_PAD_LEFT).':'.str_pad($mins,2,'0',STR_PAD_LEFT).'</option>';
+                                            }
+                                        }
+                                    ?>
+                                    </select>
+                                </td>
                                 <td>x hours x min</td>
                                 <td><input type="number" class="form-control invoice-item-input" placeholder="Rate"></td>
                                 <td class="invoice-item-amounts">20.00</td>
