@@ -19,18 +19,22 @@ header('Content-Type: text/html; charset=utf-8');
             height: 0;
             border-top: 1px solid rgba(0, 0, 0, 0.1);
             border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-            margin: 4em 0;
+            margin: 1.5em 0 .25em;
         }
         .btn-redirect{
-            font-size: 2em;
+            margin-top: 25%;
         }
         h3{
             font-weight: normal;
             line-height: 1.5em;
-            margin-bottom: 0;
+            
         }
         .logo{
-            width: 75%;
+            width: 45%;
+        }
+        video{
+            width: 100%;
+            margin: 1em 0;
         }
     </style>
     
@@ -52,10 +56,22 @@ header('Content-Type: text/html; charset=utf-8');
         <div class="container">
         
             <div class="row">
-                <div class="col-md-12 text-center">
+                
+                <div class="col-md-8">
                     <img class="logo" src="includes/img/logo_regular_1024_350.png" alt="Interpresense">
                 </div>
+                
+                <div class="col-md-2">
+                    <a href="//<?= URL_INTERPRESENSE ?>/ServiceProvider/" class="btn-redirect btn btn-block btn-info"><i class="fa fa-hand-o-right"></i> I am an interpreter</a>
+                </div>
+                
+                <div class="col-md-2">
+                    <a href="//<?= URL_INTERPRESENSE ?>/Admin/" class="btn-redirect btn btn-block btn-info"><i class="fa fa-hand-o-right"></i> I am an administrator</a>
+                </div>
+                
             </div>
+            
+            <hr class="inset">
             
             <div class="row">
                 <div class="col-md-12 text-center">
@@ -63,26 +79,21 @@ header('Content-Type: text/html; charset=utf-8');
                 </div>
             </div>
             
-            <hr class="inset">
-            
             <div class="row">
-                
-                <div class="col-md-4 col-md-offset-1 text-center">
-                    <p><i class="fa fa-user fa-5x"></i></p>
-                    <a href="//<?= URL_INTERPRESENSE ?>/ServiceProvider/" class="btn-redirect btn btn-block btn-info btn-lg">I am an interpreter</a>
+                <div class="col-md-10 col-md-offset-1 text-center">
+                    <video>
+                        <source src="movie.mp4" type="video/mp4">
+                        <source src="movie.ogg" type="video/ogg">
+                    </video>
                 </div>
-                
-                <div class="col-md-4 col-md-offset-2 text-center">
-                    <p><i class="fa fa-users fa-5x"></i></p>
-                    <a href="//<?= URL_INTERPRESENSE ?>/Admin/" class="btn-redirect btn btn-block btn-info btn-lg">I am an administrator</a>
-                </div>
-                
             </div>
-            
+
             <hr class="inset">
             
             <div class="row">
-                <p><small>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</small></p>
+                <div class="col-md-12">
+                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+                </div>
             </div>
             
         </div>
