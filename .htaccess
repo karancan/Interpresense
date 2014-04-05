@@ -1,0 +1,3 @@
+ErrorDocument 404 /interpresense/includes/custom-handlers/404.php
+ErrorDocument 403 /interpresense/includes/custom-handlers/403.php
+ErrorDocument 503 /interpresense/includes/custom-handlers/503.php
