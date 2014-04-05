@@ -6,6 +6,13 @@ body{
     -webkit-font-smoothing: antialiased;
     font-family: 'Segoe UI', 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif !important;
 }
+hr.inset {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    margin: 1.5em 0 .25em;
+}
 
 /**
  *Body header styles
@@ -77,4 +84,12 @@ footer .logo{
 }
 .modal-dialog-vertical-center{
     margin-top: 10% !important;
-} 
+}
+
+/**
+ *Error pages
+ */
+.error-code{
+    font-size: 10em;
+    color: #606060;
+}

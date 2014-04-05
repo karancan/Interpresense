@@ -8,35 +8,73 @@ require_once '../php/config.php';
 ?>
 <!DOCTYPE html>
 <html>
-    <link rel="stylesheet" media="screen" type="text/css" href="../includes/css/bootflat.min.css">
-    <link rel="stylesheet" href="../css/font-awesome.min.css">
-    <title>Interpreter Manager - Access denied / Accès refusé</title>
+    <meta charset="utf-8">
+    <meta name='viewport' content='width=device-width,initial-scale=1.0'>
+
+    <link rel='shortcut icon' href='favicon.ico'>    
+    <link rel='stylesheet' media='screen' type='text/css' href='//<?= URL_VENDOR ?>/bootstrap/css/bootstrap.min.css'>
+    <link rel='stylesheet' media='screen' type='text/css' href='//<?= URL_VENDOR ?>/bootflat.min.css'>
+    <link rel='stylesheet' href='//<?= URL_VENDOR ?>/fontawesome/css/font-awesome.min.css'>
+    <link rel='stylesheet' href='//<?= URL_CSS ?>/interpresense.css'>
+    
+    <style>
+        .btn-redirect{
+            margin-top: 25%;
+        }
+        .logo{
+            width: 45%;
+        }
+    </style>
+    
+    <script src='//<?= URL_VENDOR ?>/jquery.min.js' charset='utf-8'></script>
+    <script src='//<?= URL_VENDOR ?>/jquery.dataTables.min.js' charset='utf-8'></script>
+    <script src='//<?= URL_VENDOR ?>/bootstrap/js/bootstrap.min.js' charset='utf-8'></script>
+    
+    <!--[if lt IE 9]>
+    <script src='../includes/vendor/html5shiv/html5shiv-printshiv.js' charset='utf-8'></script>
+    <![endif]-->
+
+    <meta name='application-name' content='Interpresense'>
+    <meta name='msapplication-tooltip' content='Interpresense'>
+    <meta name='msapplication-starturl' content='<?= $_SERVER['REQUEST_URI'] ?>/'>    
+
+    <title>Interpresense</title>
     <body>
+        
         <div class="container">
-            <div>
-                <i class="fa fa-exclamation-triangle fa-5x"></i>
+        
+            <div class="row">
+                
+                <div class="col-md-8">
+                    <img class="logo" src="//<?= URL_IMAGES ?>/logo_regular_1024_350.png" alt="Interpresense">
+                </div>
+                
+                <div class="col-md-2">
+                    <a href="//<?= URL_INTERPRESENSE ?>/ServiceProvider/" class="btn-redirect btn btn-block btn-info"><i class="fa fa-hand-o-right"></i> I am an interpreter</a>
+                </div>
+                
+                <div class="col-md-2">
+                    <a href="//<?= URL_INTERPRESENSE ?>/Admin/" class="btn-redirect btn btn-block btn-info"><i class="fa fa-hand-o-right"></i> I am an administrator</a>
+                </div>
+                
             </div>
-            <div class="status-code">
-                403
-            </div>
-            <div lang="en-CA">
-                <div>
-                    You do not have permission to access this resource
-                    <br><br>
-                    <span style="font-size: 0.7em;">
-                        If you think you should be able to access this page please contact the Interpreter Manager team…
-                    </span>
+            
+            <hr class="inset">
+            
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1 class="error-code"><i class="fa fa-frown-o fa-2x"></i><br>403</h1>
                 </div>
             </div>
-            <div lang="fr-CA">
-                <div>
-                    Vous n'avez pas la permission de voir cette page
-                    <br><br>
-                    <span style="font-size: 0.7em;">
-                        Si vous pensez que vous devriez voir cette page, s'il vous plait contacter l'équipe Interpreter Manager…
-                    </span>
+
+            <hr class="inset">
+            
+            <div class="row">
+                <div class="col-md-12">
+                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
                 </div>
             </div>
+            
         </div>
     </body>
 </html>
