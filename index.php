@@ -8,10 +8,10 @@ header('Content-Type: text/html; charset=utf-8');
     <meta name='viewport' content='width=device-width,initial-scale=1.0'>
 
     <link rel='shortcut icon' href='favicon.ico'>    
-    <link rel='stylesheet' media='screen' type='text/css' href='includes/vendor/bootstrap/css/bootstrap.min.css'>
-    <link rel='stylesheet' media='screen' type='text/css' href='includes/vendor/bootflat.min.css'>
-    <link rel='stylesheet' href='includes/vendor/fontawesome/css/font-awesome.min.css'>
-    <link rel='stylesheet' href='includes/css/interpresense.css'>
+    <link rel='stylesheet' media='screen' type='text/css' href='//<?= URL_VENDOR ?>/bootstrap/css/bootstrap.min.css'>
+    <link rel='stylesheet' media='screen' type='text/css' href='//<?= URL_VENDOR ?>/bootflat.min.css'>
+    <link rel='stylesheet' href='//<?= URL_VENDOR ?>/fontawesome/css/font-awesome.min.css'>
+    <link rel='stylesheet' href='//<?= URL_CSS ?>/interpresense.css'>
     
     <style>
         hr.inset {
@@ -38,9 +38,9 @@ header('Content-Type: text/html; charset=utf-8');
         }
     </style>
     
-    <script src='includes/vendor/jquery.min.js' charset='utf-8'></script>
-    <script src='includes/vendor/jquery.dataTables.min.js' charset='utf-8'></script>
-    <script src='includes/vendor/bootstrap/js/bootstrap.min.js' charset='utf-8'></script>
+    <script src='//<?= URL_VENDOR ?>/jquery.min.js' charset='utf-8'></script>
+    <script src='//<?= URL_VENDOR ?>/jquery.dataTables.min.js' charset='utf-8'></script>
+    <script src='//<?= URL_VENDOR ?>/bootstrap/js/bootstrap.min.js' charset='utf-8'></script>
     
     <!--[if lt IE 9]>
     <script src='../includes/vendor/html5shiv/html5shiv-printshiv.js' charset='utf-8'></script>
@@ -58,7 +58,7 @@ header('Content-Type: text/html; charset=utf-8');
             <div class="row">
                 
                 <div class="col-md-8">
-                    <img class="logo" src="includes/img/logo_regular_1024_350.png" alt="Interpresense">
+                    <img class="logo" src="//<?= URL_IMAGES ?>/logo_regular_1024_350.png" alt="Interpresense">
                 </div>
                 
                 <div class="col-md-2">
