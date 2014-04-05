@@ -41,8 +41,8 @@ class ApplicationSettings extends \Interpresense\Includes\BaseModel {
             throw new \InvalidArgumentException('Setting name must be a string.');
         }
         
-        $sql = 'INSERT INTO `interpresense_settings` ( `setting_key`, `setting_value`, `inserted_on` )
-                     VALUES (:setting_key, :setting_value, NOW())
+        $sql = 'INSERT INTO `interpresense_settings` ( `setting_key`, `setting_value`, `inserted_on`, `updated_on`)
+                     VALUES (:setting_key, :setting_value, NOW(), NOW())
     ON DUPLICATE KEY UPDATE `setting_value` = VALUES(`setting_value`),
                                `updated_on` = NOW();';
         
