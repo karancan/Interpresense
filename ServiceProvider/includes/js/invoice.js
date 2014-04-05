@@ -2,8 +2,7 @@
  *User wants to clear the form
  */
 $('#invoice-btn-clear').click(function(){
-    var double_check = confirm("Are you sure you want to clear this form?");
-    if(double_check){
+    if(confirm("Are you sure you want to clear this form?")){
         window.location.reload(true);
     }
 });
