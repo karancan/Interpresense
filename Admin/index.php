@@ -48,6 +48,8 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  */
 if (!isset($_GET['page'])) {
     $viewFile = "views/login.php";
+} else if ($_GET['page'] === "register-or-reset") {
+    $viewFile = "views/registerOrReset.php";
 } else {
     require_once FS_PHP.'/error.php';
 }
@@ -55,10 +57,10 @@ if (!isset($_GET['page'])) {
 /**
  * View
  */
-$actions = array('');
+$actions = array();
 
 if (!in_array($_GET['page'], $actions, true)) {
-    
+
     $current_view = '';
     
     require FS_PHP . '/header.php';

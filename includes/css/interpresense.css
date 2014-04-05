@@ -13,6 +13,20 @@ body{
 header{
     background-color: #CCD1D9;
 }
+header .header-options-container{
+    margin-top: 18%;
+}
+header .org-parent-name{
+    margin-bottom: 0;
+}
+header .org-name{
+    font-weight: normal;
+    margin-top: 0.1em;
+}
+header .org-logo{
+    width: 90%;
+    margin-top: 8%;
+}
 
 /**
  *Body footer styles
@@ -45,6 +59,14 @@ footer .logo{
 .input-bottom{
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+
+/**
+ *Table styles
+ */
+ 
+.table-option-cell{
+    text-align: right;
 }
 
 /**

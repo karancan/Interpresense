@@ -1,11 +1,5 @@
-header h2{
-    font-weight: normal;
-}
 h3{
     font-weight: normal;
-}
-.invoice-options-container{
-    margin-top: 25%;
 }
 .invoice-total{
     text-align: center;
