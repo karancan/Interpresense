@@ -38,6 +38,7 @@ define('FS_ADMIN', FS_INTERPRESENSE."/admin");
 define('FS_SERVICE_PROVIDER', FS_INTERPRESENSE."/service-provider");
 
 define('FS_INCLUDES', FS_INTERPRESENSE."/includes");
+define('FS_IMAGES', FS_INCLUDES."/img");
 define('FS_CSS', FS_INCLUDES."/css");
 define('FS_JS', FS_INCLUDES."/js");
 define('FS_L10N', FS_INCLUDES."/l10n");

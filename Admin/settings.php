@@ -53,6 +53,9 @@ if (!isset($_GET['page'])) {
     $model->changeSetting($_POST['key'], $_POST['value']);
 } elseif ($_GET['page'] === 'delete-setting') {
     $model->deleteSetting($_POST['key']);
+} else if ($_GET['page'] === "export-users") {
+    //@todo: add logic
+    die();
 } else {
     require_once FS_PHP.'/error.php';
 }
@@ -60,7 +63,7 @@ if (!isset($_GET['page'])) {
 /**
  * View
  */
-$actions = array('change-setting', 'delete-setting');
+$actions = array('change-setting', 'delete-setting', 'export-users');
 
 if (!in_array($_GET['page'], $actions, true)) {
     

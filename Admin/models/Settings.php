@@ -9,7 +9,7 @@ use Respect\Validation\Validator;
  *
  * @author Vincent
  */
-class ApplicationSettings extends \Interpresense\Includes\BaseModel {
+class Settings extends \Interpresense\Includes\BaseModel {
     
     /**
      * Constructor
