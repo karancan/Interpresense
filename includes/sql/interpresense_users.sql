@@ -7,11 +7,11 @@ DROP TABLE IF EXISTS `interpresense_users`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `interpresense_users` (
   `user_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `user_uid` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `user_uid` char(128) COLLATE utf8_unicode_ci NOT NULL,
   `user_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `user_password` binary(60) NOT NULL,
-  `user_password_reset_key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `user_password_reset_password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `user_password_reset_key` char(128) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `user_password_reset_password` binary(60) COLLATE utf8_unicode_ci DEFAULT NULL,
   `first_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `last_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_on` datetime NOT NULL,
