@@ -49,6 +49,7 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
 if (!isset($_GET['page'])) {
     $viewFile = "views/invoicesDrafts.php";
 } else if ($_GET['page'] === "export") {
+    //@todo: add logic
     die();
 } else {
     require_once FS_PHP.'/error.php';
