@@ -10,6 +10,7 @@ CREATE TABLE `interpresense_settings` (
   `setting_key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `setting_value` text COLLATE utf8_unicode_ci DEFAULT NULL,
   `inserted_on` datetime NOT NULL,
+  `updated_on` datetime NOT NULL
   PRIMARY KEY (`setting_id`),
   UNIQUE KEY `setting_key_UNIQUE` (`setting_key`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

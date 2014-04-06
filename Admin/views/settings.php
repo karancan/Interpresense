@@ -27,14 +27,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Pull in from database</td>
-                        <td>Pull in from database</td>
-                        <td class="table-option-cell">
-                            <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button>
-                            <button type="button" class="btn btn-danger"><i class="fa fa-minus"></i> Delete</button>
-                        </td>
-                    </tr>
+                    <?php
+                    foreach($appSettings as $s) {
+                        echo '<tr>' .
+                             "<td>{$s['setting_key']}</td>" .
+                             "<td>{$s['setting_value']}</td>" .
+                             '<td class="table-option-cell">
+                                <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button>
+                                <button type="button" class="btn btn-danger"><i class="fa fa-minus"></i> Delete</button>
+                              </td>' .
+                             '</tr>';
+                    }
+                    ?>
                 </tbody>
             </table>
         
@@ -86,7 +90,7 @@
 
 <div class="modal fade" id="admin-add-setting-modal" tabindex="-1" role="dialog" aria-labelledby="admin-add-setting-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-vertical-center">
-        <div class="modal-content">
+        <form action='settings.php?page=change-setting' method='POST' class="modal-content">
             
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -97,21 +101,21 @@
             
                 <div class="form-group">
                     <label class="control-label" for="setting_name">Setting name</label>
-                    <input type="text" class="form-control" id="setting_name">
+                    <input type="text" class="form-control" id="setting_name" name='key'>
                 </div>
                 
                 <div class="form-group">
                     <label class="control-label" for="setting_value">Setting value</label>
-                    <input type="text" class="form-control" id="setting_value">
+                    <input type="text" class="form-control" id="setting_value" name='value'>
                 </div>
             
             </div>
             
             <div class="modal-footer">
-                <button type="button" class="btn btn-success"><i class="fa fa-check"></i> Confirm</button>
+                <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Confirm</button>
             </div>
             
-        </div>
+        </form>
     </div>
 </div>
 
