@@ -4,11 +4,14 @@
 <div class="container">
     
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-8">
             <h3 class="admin-page-title"><i class="fa fa-folder-open"></i> Invoice Drafts</h3>
         </div>
-        <div class="col-md-2 col-md-offset-1">
+        <div class="col-md-2">
             <a href="https://<?= URL_INTERPRESENSE ?>/ServiceProvider/" target="_blank" class="btn btn-info btn-block admin-add-button"><i class="fa fa-plus"></i> Add draft invoice</a>        
+        </div>
+        <div class="col-md-2">
+            <a href="invoicesDrafts.php?page=export" class="btn btn-info btn-block admin-add-button"><i class="fa fa-table"></i> Export</a>
         </div>
     </div>
 

@@ -49,11 +49,14 @@
     <hr>
     
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-8">
             <h3 class="admin-page-title"><i class="fa fa-users"></i> Users</h3>
         </div>
-        <div class="col-md-2 col-md-offset-1">
+        <div class="col-md-2">
             <a data-toggle="modal" href="#admin-add-modal" class="btn btn-info btn-block admin-add-button"><i class="fa fa-plus"></i> Add a user</a>        
+        </div>
+        <div class="col-md-2">
+            <a href="settings.php?page=export-users" class="btn btn-info btn-block admin-add-button"><i class="fa fa-table"></i> Export</a>
         </div>
     </div>
     
