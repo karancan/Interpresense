@@ -33,11 +33,11 @@ class Users extends \Interpresense\Includes\BaseModel {
      * @return string
      */
     private function generateSalt($length = 22) {
-        $charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.';
+        $salt_charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.';
         $str = '';
-        $count = mb_strlen($charset);
+        $count = mb_strlen($salt_charset);
         while ($length--) {
-            $str .= $charset[mt_rand(0, $count-1)];
+            $str .= $salt_charset[mt_rand(0, $count-1)];
         }
         return $str;
     }
@@ -133,11 +133,12 @@ class Users extends \Interpresense\Includes\BaseModel {
     /**
      * Creates a user
      * @param array $data The POST data
-     * @todo
      */
     public function createUser(array $data) {
         $types = array(
+            'user_uid' => \PDO::PARAM_STR,
             'user_name' => \PDO::PARAM_STR,
+            'user_password' => \PDO::PARAM_STR,
             'first_name' => \PDO::PARAM_STR,
             'last_name' => \PDO::PARAM_STR,
             'expires_on' => \PDO::PARAM_STR
@@ -145,17 +146,23 @@ class Users extends \Interpresense\Includes\BaseModel {
         
         // @todo: pass validators into the second parameter of key() if necessary
         if(!Validator::key('user_name', $this->validators['username'])
+                ->key('user_password')
                 ->key('first_name')
                 ->key('last_name')
-                ->key('expires_on')
+                ->key('expires_on', Validator::date('Y-m-d'))
                 ->validate($data)) {
-            throw new \InvalidArgumentException('Required data missing');
+            throw new \InvalidArgumentException('Required data invalid or missing');
         }
+        
+        $data['user_uid'] = hash('sha512', microtime(true) . mt_rand());
+        $data['user_password'] = $this->passwordHash($data['user_password']);
         
         $data = parent::$db->pick(array_keys($types), $data);
         
-        // @todo: Super confused about the database structure.
-        // Need clarification before writing INSERT statement
+        $sql = 'INSERT INTO `interpresense_users` (`user_uid`, `user_name`, `user_password`, `first_name`, `last_name`, `created_on`, `updated_on`, `expires_on`)
+                     VALUES (:user_uid, :user_name, :user_password, :first_name, :last_name, NOW(), NOW() :expires_on);';
+        
+        parent::$db->query($sql, $types, $types);
     }
     
     /**
@@ -192,17 +199,71 @@ class Users extends \Interpresense\Includes\BaseModel {
     
     /**
      * Initiates a password reset request
-     * @todo
+     * @param string $username The username
+     * @param string $newPassword The new password
+     * @return string Returns the reset key if successful
      */
-    public function requestPasswordReset($username) {
+    public function requestPasswordReset($username, $newPassword) {
+        if(!$this->userExists($username)) {
+            throw new Exception('User does not exist.');
+        }
         
+        $resetHash = hash('sha256', microtime(true) . mt_rand());
+        
+        $sql = "UPDATE `interpresense_users`
+                   SET `user_password_reset_key = :user_password_reset_key, `user_password_reset_password` = :user_password_reset_password
+                 WHERE `user_name` = :user_name;";
+        
+        $data = array(
+            'user_name' => $username,
+            'user_password_reset_key' => $resetHash,
+            'user_password_reset_password' => $this->passwordHash($newPassword)
+        );
+        
+        $types = array(
+            'user_name' => \PDO::PARAM_STR,
+            'user_password_reset_key' => \PDO::PARAM_STR,
+            'user_password_reset_password' => \PDO::PARAM_STR
+        );
+        
+        if(parent::$db->query($sql, $data, $types)) {
+            return $resetHash;
+        }
     }
     
     /**
      * Resets a user's password
-     * @todo
+     * @param mixed $userId The ID of the user
+     * @param string $hash The password reset key
+     * @return boolean
      */
-    public function resetPassword($username, $hash) {
+    public function confirmPasswordReset($userId, $hash) {
         
+        if(!Validator::notEmpty()->digit()->validate($userId)) {
+            throw new \InvalidArgumentException('Invalid user ID');
+        }
+        
+        if(!Validator::notEmpty()->xdigit()->length(128, 128)->validate($hash)) {
+            throw new \InvalidArgumentException('Invalid reset key');
+        }     
+        
+        $sql = "UPDATE `interpresense_users`
+                   SET `user_password` = `user_password_reset_password`,
+                       `user_password_reset_key` = NULL,
+                       `user_password_reset_password` = NULL
+                 WHERE `user_id` = :user_id
+                   AND `user_password_reset_key` = :user_password_reset_key;";
+        
+        $data = array(
+            'user_id' => $userId,
+            'user_password_reset_key' => $hash
+        );
+        
+        $types = array(
+            'user_id' => \PDO::PARAM_STR,
+            'user_password_reset_key' => \PDO::PARAM_STR
+        );
+        
+        return (bool)parent::$db->query($sql, $data, $types);
     }
 }
