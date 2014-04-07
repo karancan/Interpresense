@@ -29,12 +29,12 @@
                 <tbody>
                     <?php
                     foreach($appSettings as $s) {
-                        echo '<tr>' .
+                        echo "<tr data-setting-id={$s['setting_key']}>" .
                              "<td>{$s['setting_key']}</td>" .
                              "<td>{$s['setting_value']}</td>" .
                              '<td class="table-option-cell">
-                                <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button>
-                                <button type="button" class="btn btn-danger"><i class="fa fa-minus"></i> Delete</button>
+                                <button type="button" class="btn btn-warning" data-toggle="modal" href="#admin-add-setting-modal"><i class="fa fa-edit"></i> Edit</button>
+                                <button type="button" class="btn btn-danger delete-setting"><i class="fa fa-minus"></i> Delete</button>
                               </td>' .
                              '</tr>';
                     }
@@ -162,3 +162,4 @@
         </div>
     </div>
 </div>
+<script charset='utf-8' src='includes/js/settings.js'></script>
