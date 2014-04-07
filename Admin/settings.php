@@ -48,6 +48,7 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  */
 if (!isset($_GET['page'])) {
     $appSettings = $model->fetchSettings();
+    $translate->addResource('l10n/settings.json');
     $viewFile = "views/settings.php";
 } elseif ($_GET['page'] === 'change-setting') {
     $model->changeSetting($_POST['key'], $_POST['value']);
