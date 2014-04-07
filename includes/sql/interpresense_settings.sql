@@ -22,6 +22,14 @@ CREATE TABLE `interpresense_settings` (
 
 LOCK TABLES `interpresense_settings` WRITE;
 /*!40000 ALTER TABLE `interpresense_settings` DISABLE KEYS */;
-INSERT INTO `interpresense_settings` VALUES (1,'invoice_file_attachments_allowed','1','2014-03-24 00:00:00','2014-03-24 00:00:00'),(2,'institution_name','University of Ottawa','2014-03-24 00:00:00','2014-03-24 00:00:00'),(3,'institution_address','550 Cumberland','2014-03-24 00:00:00','2014-03-24 00:00:00'),(4,'institution_email','adapt@uottawa.ca','2014-03-24 00:00:00','2014-03-24 00:00:00'),(5,'institution_phone','6135625800','2014-03-24 00:00:00','2014-03-24 00:00:00'),(6,'institution_default_lang','en-CA','2014-03-24 00:00:00','2014-03-24 00:00:00'),(7,'institution_logo',NULL,'2014-03-24 00:00:00','2014-03-24 00:00:00'),(8,'invoicing_earliest_possible_hour','7','2014-03-24 00:00:00','2014-03-24 00:00:00'),(9,'invoicing_latest_possible_hour','22','2014-03-24 00:00:00','2014-03-24 00:00:00');
+INSERT INTO `interpresense_settings` VALUES (1,'invoice_file_attachments_allowed','1',NOW(),NOW());
+INSERT INTO `interpresense_settings` VALUES (2,'institution_name','University of Ottawa',NOW(),NOW());
+INSERT INTO `interpresense_settings` VALUES (3,'institution_address','550 Cumberland',NOW(),NOW());
+INSERT INTO `interpresense_settings` VALUES (4,'institution_email','adapt@uottawa.ca',NOW(),NOW());
+INSERT INTO `interpresense_settings` VALUES (5,'institution_phone','6135625800',NOW(),NOW());
+INSERT INTO `interpresense_settings` VALUES (6,'institution_default_lang','en-CA',NOW(),NOW());
+INSERT INTO `interpresense_settings` VALUES (7,'institution_logo',NULL,NOW(),NOW());
+INSERT INTO `interpresense_settings` VALUES (8,'invoicing_earliest_possible_hour','7',NOW(),NOW());
+INSERT INTO `interpresense_settings` VALUES (9,'invoicing_latest_possible_hour','22',NOW(),NOW());
 /*!40000 ALTER TABLE `interpresense_settings` ENABLE KEYS */;
 UNLOCK TABLES;
