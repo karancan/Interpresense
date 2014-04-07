@@ -5,6 +5,7 @@ namespace Interpresense\Includes;
 /**
  * DatabaseObject class for handling database connections.
  * @author Vincent Diep
+ * @author Karan Khiani
  */
 class DatabaseObject {
 
@@ -70,17 +71,21 @@ class DatabaseObject {
         }
         $sql = substr($sql, 0, -1) . ");";
         
-        // Prepare the statement
-        $q = $this->db->prepare($sql);
-        
-        foreach($types as $field => $type) {
-            $q->bindValue(":{$field}", $data[$field], $type);
-        }
-        
-        // Execute the statement
-        $q->execute();
-        
-        return $this->db->lastInsertId();
+        try {
+            // Prepare the statement
+            $q = $this->db->prepare($sql);
+            
+            foreach($types as $field => $type) {
+                $q->bindValue(":{$field}", $data[$field], $type);
+            }
+            
+            // Execute the statement
+            $q->execute();
+            
+            return $this->db->lastInsertId();
+        } catch (\PDOException $e) {
+            // @todo: trigger email to admin (as specified in config)
+        }        
     }
 
     /**
@@ -117,19 +122,23 @@ class DatabaseObject {
         if ($condition !== null) {
             $sql .= " WHERE $condition;";
         }
+
+        try {
+            // Prepare the statement
+            $q = $this->db->prepare($sql);
+            
+            $i = 0;
+            foreach($types as $field => $type) {
+                $q->bindValue(":{$field}", $data[$i++], $type);
+            }
         
-        // Prepare the statement
-        $q = $this->db->prepare($sql);
-        
-        $i = 0;
-        foreach($types as $field => $type) {
-            $q->bindValue(":{$field}", $data[$i++], $type);
+            // Execute the statement
+            $q->execute();
+            
+            return $q->rowCount();
+        } catch (\PDOException $e) {
+            // @todo: trigger email to admin (as specified in config)
         }
-        
-        // Execute the statement
-        $q->execute();
-        
-        return $q->rowCount();
     }
 
     /**
@@ -149,7 +158,12 @@ class DatabaseObject {
         }
 
         $sql = "DELETE FROM `$table` WHERE $condition;";
-        return $this->db->exec($sql);
+        
+        try {
+            return $this->db->exec($sql);
+        } catch (\PDOException $e) {
+            // @todo: trigger email to admin (as specified in config)
+        }
     }
 
     /**
@@ -193,7 +207,7 @@ class DatabaseObject {
             return $q->rowCount();
             
         } catch (\PDOException $e) {
-            echo $e->getMessage() . " <br> [ THROWN BY QUERY ] => $sql";
+            // @todo: trigger email to admin (as specified in config)
         }
     }
 
