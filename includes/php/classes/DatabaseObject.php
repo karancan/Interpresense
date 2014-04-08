@@ -5,6 +5,7 @@ namespace Interpresense\Includes;
 /**
  * DatabaseObject class for handling database connections.
  * @author Vincent Diep
+ * @author Karan Khiani
  */
 class DatabaseObject {
 
@@ -41,8 +42,7 @@ class DatabaseObject {
         return array_intersect_key($data, array_flip($keys));
     }
 
-    /**
-     * Build and execute SQL delete.
+    /** Build and execute SQL delete.
      * @param string $table The table name
      * @param string $condition The WHERE clause. Warning: Unescaped
      * @return int The number of rows deleted
@@ -58,7 +58,12 @@ class DatabaseObject {
         }
 
         $sql = "DELETE FROM `$table` WHERE $condition;";
-        return $this->db->exec($sql);
+        
+        try {
+            return $this->db->exec($sql);
+        } catch (\PDOException $e) {
+            // @todo: trigger email to admin (as specified in config)
+        }
     }
 
     /**
@@ -102,7 +107,7 @@ class DatabaseObject {
             return $q->rowCount();
             
         } catch (\PDOException $e) {
-            echo $e->getMessage() . " <br> [ THROWN BY QUERY ] => $sql";
+            // @todo: trigger email to admin (as specified in config)
         }
     }
 

@@ -8,7 +8,7 @@
             <h3 class="admin-page-title"><i class="fa fa-gears"></i> Settings</h3>
         </div>
         <div class="col-md-2 col-md-offset-1">
-            <a data-toggle="modal" href="#admin-add-setting-modal" class="btn btn-info btn-block admin-add-button"><i class="fa fa-plus"></i> Add a setting</a>        
+            <a data-toggle="modal" href="#admin-add-setting-modal" data-action="add" class="btn btn-info btn-block admin-add-button"><i class="fa fa-plus"></i> Add a setting</a>        
         </div>
     </div>
     
@@ -18,7 +18,7 @@
         
             <h4>Application settings</h4>
             
-            <table class="table table-hover invoice-table">           
+            <table id="admin-settings-table" class="table table-hover invoice-table">           
                 <thead>
                     <tr>
                         <th scope='col'>Setting name</th>
@@ -29,12 +29,12 @@
                 <tbody>
                     <?php
                     foreach($appSettings as $s) {
-                        echo '<tr>' .
+                        echo "<tr data-setting-id='{$s['setting_key']}' data-setting-key='{$s['setting_key']}' data-setting-value='{$s['setting_value']}'>" .
                              "<td>{$s['setting_key']}</td>" .
                              "<td>{$s['setting_value']}</td>" .
                              '<td class="table-option-cell">
-                                <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button>
-                                <button type="button" class="btn btn-danger"><i class="fa fa-minus"></i> Delete</button>
+                                <button type="button" class="btn btn-warning" data-toggle="modal" href="#admin-add-setting-modal" data-action="edit"><i class="fa fa-edit"></i> Edit</button>
+                                <button type="button" class="btn btn-danger" data-action="delete"><i class="fa fa-minus"></i> Delete</button>
                               </td>' .
                              '</tr>';
                     }
@@ -66,7 +66,7 @@
         
             <h4>Existing user accounts</h4>
             
-            <table class="table table-hover invoice-table">           
+            <table id="admin-users-table" class="table table-hover invoice-table">           
                 <thead>
                     <tr>
                         <th scope='col'>User ID</th>
@@ -97,7 +97,7 @@
             
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Add a setting</h4>
+                <h4 class="modal-title">Add setting</h4>
             </div>
             
             <div class="modal-body">
@@ -162,3 +162,4 @@
         </div>
     </div>
 </div>
+<script charset='utf-8' src='includes/js/settings.js'></script>

@@ -34,7 +34,6 @@ if(!isset($_SESSION['lang'])) {
 
 // Translation
 $translate = new \JsonI18n\Translate(\Locale::getDefault());
-$translate->addResource('l10n/index.json');
 
 // Date formatting
 $dateFmt = new \JsonI18n\DateFormat(\Locale::getDefault());
@@ -47,6 +46,7 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  * Content and actions
  */
 if (!isset($_GET['page'])) {
+    $translate->addResource('l10n/invoice.json');
     $viewFile = "views/invoice.php";
 } else {
     require_once FS_PHP.'/error.php';

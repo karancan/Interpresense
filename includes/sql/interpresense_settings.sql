@@ -10,7 +10,7 @@ CREATE TABLE `interpresense_settings` (
   `setting_key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `setting_value` text COLLATE utf8_unicode_ci DEFAULT NULL,
   `inserted_on` datetime NOT NULL,
-  `updated_on` datetime NOT NULL
+  `updated_on` datetime NOT NULL,
   PRIMARY KEY (`setting_id`),
   UNIQUE KEY `setting_key_UNIQUE` (`setting_key`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -22,6 +22,17 @@ CREATE TABLE `interpresense_settings` (
 
 LOCK TABLES `interpresense_settings` WRITE;
 /*!40000 ALTER TABLE `interpresense_settings` DISABLE KEYS */;
-INSERT INTO `interpresense_settings` VALUES (1,'invoice_file_attachments_allowed','1','2014-03-24 00:00:00'),(2,'institution_name','University of Ottawa','2014-03-24 00:00:00'),(3,'institution_address','550 Cumberland','2014-03-24 00:00:00'),(4,'institution_email','adapt@uottawa.ca','2014-03-24 00:00:00'),(5,'institution_phone','6135625800','2014-03-24 00:00:00'),(6,'institution_default_lang','en-CA','2014-03-24 00:00:00'),(7,'institution_logo',NULL,'2014-03-24 00:00:00'),(8,'invoicing_earliest_possible_hour','7','2014-03-24 00:00:00'),(9,'invoicing_latest_possible_hour','22','2014-03-24 00:00:00');
+INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('institution_name','{"en-CA": "University of Ottawa", "fr-CA": "same thing in Francais"}',NOW(),NOW());
+INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('institution_dept_name','{"en-CA": "Access Service", "fr-CA": "same thing in Francais"}',NOW(),NOW());
+INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('institution_address','{"en": "DMS 3172", "fr": "same thing in Francais"}',NOW(),NOW());
+INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('institution_email','adapt@uottawa.ca',NOW(),NOW());
+INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('institution_phone','6135625800',NOW(),NOW());
+INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('institution_default_lang','en-CA',NOW(),NOW());
+INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('institution_logo',NULL,NOW(),NOW());
+INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('invoicing_earliest_possible_hour','7',NOW(),NOW());
+INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('invoicing_latest_possible_hour','22',NOW(),NOW());
+INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('invoicing_allow_drafts','1',NOW(),NOW());
+INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('invoicing_allow_file_attachments','1',NOW(),NOW());
+INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('service_provider_help_manual_uri','',NOW(),NOW());
 /*!40000 ALTER TABLE `interpresense_settings` ENABLE KEYS */;
 UNLOCK TABLES;

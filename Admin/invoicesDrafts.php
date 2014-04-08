@@ -47,6 +47,7 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  * Content and actions
  */
 if (!isset($_GET['page'])) {
+    $translate->addResource('l10n/invoicesDrafts.json');
     $viewFile = "views/invoicesDrafts.php";
 } else if ($_GET['page'] === "export") {
     //@todo: add logic

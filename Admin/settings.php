@@ -48,9 +48,12 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  */
 if (!isset($_GET['page'])) {
     $appSettings = $model->fetchSettings();
+    $translate->addResource('l10n/settings.json');
     $viewFile = "views/settings.php";
 } elseif ($_GET['page'] === 'change-setting') {
     $model->changeSetting($_POST['key'], $_POST['value']);
+    header('location: settings.php');
+    //@todo: add row focus
 } elseif ($_GET['page'] === 'delete-setting') {
     $model->deleteSetting($_POST['key']);
 } else if ($_GET['page'] === "export-users") {
