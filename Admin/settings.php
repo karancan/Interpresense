@@ -52,6 +52,8 @@ if (!isset($_GET['page'])) {
     $viewFile = "views/settings.php";
 } elseif ($_GET['page'] === 'change-setting') {
     $model->changeSetting($_POST['key'], $_POST['value']);
+    header('location: settings.php');
+    //@todo: add row focus
 } elseif ($_GET['page'] === 'delete-setting') {
     $model->deleteSetting($_POST['key']);
 } else if ($_GET['page'] === "export-users") {
