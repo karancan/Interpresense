@@ -16,6 +16,10 @@ $('[data-action="edit"]').click(function(){
     
     $('#admin-add-setting-modal .modal-title').text('Edit setting');
     $('#setting_name').val($(this).closest('tr').data('setting-key'));
+    var setting_value = $(this).closest('tr').data('setting-value');
+    if (typeof setting_value === 'object') {
+        //@todo: handling of JSON values which typically apply to multi-language values
+    }
     $('#setting_value').val($(this).closest('tr').data('setting-value'));
     
     // @todo: vdiep....add row highlighting
