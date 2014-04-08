@@ -42,7 +42,7 @@ class DatabaseObject {
         return array_intersect_key($data, array_flip($keys));
     }
 
-     * Build and execute SQL delete.
+    /** Build and execute SQL delete.
      * @param string $table The table name
      * @param string $condition The WHERE clause. Warning: Unescaped
      * @return int The number of rows deleted
