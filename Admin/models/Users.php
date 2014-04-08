@@ -170,12 +170,16 @@ class Users extends \Interpresense\Includes\BaseModel {
      * @param string $username The username
      */
     public function confirmUser($username) {
-        $data = array('is_confirmed' => 1);
-        $types = array('is_confirmed' => \PDO::PARAM_INT);
+        $data = array('user_name' => $username);
+        $types = array('user_name' => \PDO::PARAM_STR);
         
         $username = parent::$db->db->quote($username);
         
-        parent::$db->update('interpresense_users', $data, $types, "`user_name` = $username");
+        $sql = "UPDATE `interpresense_users`
+                   SET `is_confirmed` = 1
+                 WHERE `user_name` = :user_name;";
+        
+        parent::$db->query($sql, $data, $types);
     }
     
     /**

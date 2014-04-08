@@ -17,28 +17,6 @@ class Invoice extends \Interpresense\Includes\BaseModel {
     }
     
     /**
-     * Add things
-     * 
-     * Simple insert query example
-     * 
-     * @param array $data An array containing thing data
-     */
-    public function addThings(array $data) {
-        
-        $keys = array('thing_id', 'thing_name', 'thing_description');
-        
-        $data = parent::$db->pick($keys, $data);
-        
-        $types = array(
-            'thing_id' => \PDO::PARAM_INT,
-            'thing_name' => \PDO::PARAM_STR,
-            'thing_description' => \PDO::PARAM_STR
-        );
-        
-        parent::$db->insert('things', $data, $types);
-    }
-    
-    /**
      * Retrieve things
      * 
      * Simple select query example
