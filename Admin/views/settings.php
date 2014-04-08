@@ -29,7 +29,7 @@
                 <tbody>
                     <?php
                     foreach($appSettings as $s) {
-                        echo "<tr data-setting-id='{$s['setting_key']}' data-setting-key='{$s['setting_key']}' data-setting-value='{$s['setting_value']}'>" .
+                        echo "<tr data-setting-id='{$antiXSS->escape($s['setting_key'], 2)}' data-setting-key='{$antiXSS->escape($s['setting_key'], 2)}' data-setting-value='{$antiXSS->escape($s['setting_value'], 2)}'>" .
                              "<td>{$s['setting_key']}</td>" .
                              "<td>{$s['setting_value']}</td>" .
                              '<td class="table-option-cell">
