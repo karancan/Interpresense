@@ -22,6 +22,7 @@ header('Content-Type: text/html; charset=utf-8');
     <link rel='stylesheet' href='../includes/css/interpresense.css'>
     
     <script src='../includes/vendor/jquery.min.js' charset='utf-8'></script>
+    <script src='../includes/js/interpresense.js' charset='utf-8'></script>
     <script src='../includes/vendor/jquery.dataTables.min.js' charset='utf-8'></script>
     <script src='../includes/vendor/bootstrap/js/bootstrap.min.js' charset='utf-8'></script>
     
