@@ -71,6 +71,6 @@ class Settings extends \Interpresense\Includes\BaseModel {
         
         $key = parent::$db->db->quote($key);
         
-        parent::$db->delete('`interpresense_settings`', "`setting_key` = $key");
+        parent::$db->delete('interpresense_settings', "`setting_key` = $key");
     }
 }
