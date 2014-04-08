@@ -18,7 +18,7 @@
         
             <h4>Application settings</h4>
             
-            <table class="table table-hover invoice-table">           
+            <table id="admin-settings-table" class="table table-hover invoice-table">           
                 <thead>
                     <tr>
                         <th scope='col'>Setting name</th>
@@ -66,7 +66,7 @@
         
             <h4>Existing user accounts</h4>
             
-            <table class="table table-hover invoice-table">           
+            <table id="admin-users-table" class="table table-hover invoice-table">           
                 <thead>
                     <tr>
                         <th scope='col'>User ID</th>

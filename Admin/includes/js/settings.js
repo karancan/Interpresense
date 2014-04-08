@@ -5,7 +5,6 @@ $('[data-action="add"]').click(function(){
     
     $('#admin-add-setting-modal .modal-title').text('Add setting');
     $('#setting_name, #setting_value').val('');
-    // @todo: vdiep....add row highlighting
     
 });
 
@@ -22,7 +21,7 @@ $('[data-action="edit"]').click(function(){
     }
     $('#setting_value').val($(this).closest('tr').data('setting-value'));
     
-    // @todo: vdiep....add row highlighting
+    global.highlightRow($(this).closest('tr'));
     
 });
 
@@ -30,8 +29,10 @@ $('[data-action="edit"]').click(function(){
  *User wants to delete a setting
  */
 $('[data-action="delete"]').click(function(){
-
-    // @todo: vdiep....add row highlighting
+    
+    console.log(global);
+    console.log($(this).closest('tr'));
+    global.highlightRow($(this).closest('tr'));
     
     if(confirm("Are you sure you want to delete this setting? This action is not reversible and could cause the application to malfunction.")){
         $.ajax({
@@ -42,5 +43,14 @@ $('[data-action="delete"]').click(function(){
                 window.location.href = 'settings.php';
             }
         });
+    } else {
+        global.removeRowHighlighting($(this).closest('table'));
     }
+});
+
+/**
+ *The add/edit settings dialog has been closed
+ */
+$('#admin-add-setting-modal').on('hidden.bs.modal', function () {
+    global.removeRowHighlighting($('#admin-settings-table'));
 });
