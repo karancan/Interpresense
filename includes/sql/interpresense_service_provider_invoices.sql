@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS `interpresense_service_provider_invoices`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `interpresense_service_provider_invoices` (
   `invoice_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `invoice_uid` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `invoice_uid` char(128) COLLATE utf8_unicode_ci NOT NULL,
   `sp_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `sp_address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `sp_phone` char(10) COLLATE utf8_unicode_ci NOT NULL,
