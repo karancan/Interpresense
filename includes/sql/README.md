@@ -8,3 +8,4 @@ Please run the scripts in the following order:
 4. `interpresense_service_provider_invoice_items`
 5. `interpresense_service_provider_invoice_files`
 6. `interpresense_service_provider_invoices_notes`
+7. `interpresense_admin_reports`
