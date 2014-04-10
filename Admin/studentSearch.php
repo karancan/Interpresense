@@ -47,6 +47,13 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  * Content and actions
  */
 if (!isset($_GET['page'])) {
+    
+    //@todo: check if $_GET['student'] is valid and fetch student details. If invalid adjust view.
+    
+    //@todo: fetch student expected invoices
+    //@todo: fetch student submitted invoices
+    //@todo: fetch student draft invoices
+    
     $translate->addResource('l10n/studentSearch.json');
     $viewFile = "views/studentSearch.php";
 } else {
