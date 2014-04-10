@@ -116,6 +116,32 @@ class Invoice extends \Interpresense\Includes\BaseModel {
     }
     
     /**
+     * Updates a draft invoice
+     * @param array $data The POST data
+     * @todo Untested
+     */
+    public function updateDraftInvoice(array $data) {
+        $types = array(
+            'invoice_uid' => \PDO::PARAM_STR,
+            'sp_name' => \PDO::PARAM_STR,
+            'sp_address' => \PDO::PARAM_STR,
+            'sp_phone' => \PDO::PARAM_STR,
+            'sp_email' => \PDO::PARAM_STR,
+            'student_num' => \PDO::PARAM_INT,
+            'is_final' => \PDO::PARAM_INT,
+            'grand_total' => \PDO::PARAM_STR
+        );
+        
+        // @todo Add validation
+        
+        $sql = "UPDATE `interpresense_service_provider_invoices`
+                   SET `sp_name` = :sp_name, `sp_address` = :sp_address, `sp_phone` = :sp_phone, `sp_email` = :sp_email, `student_num` = :student_num, `grand_total` = :grand_total, `updated_on` = NOW()
+                 WHERE `invoice_uid` = :invoice_uid;";
+        
+        parent::$db->query($sql, $data, $types);
+    }
+    
+    /**
      * Retrieves the draft status of the invoice
      * @param string $invoiceUID The invoice UID
      * @return boolean TRUE if the invoice is a draft
