@@ -30,6 +30,16 @@ class AntiXss extends \Zend\Escaper\Escaper {
      * @throws \InvalidArgumentException In the case of invalid context
      */
     public function escape($string, $context = self::HTML_BODY) {
+        $type = gettype($string);
+        
+        if(in_array($type, array('boolean', 'integer', 'double', 'NULL'), true)) {
+            return $string;
+        }
+        
+        if(in_array($type, array('object', 'resource', 'unknown type'), true)) {
+            throw new \InvalidArgumentException("Unable to escape variable of type $type.");
+        }
+        
         if($context === self::HTML_BODY) {
             return parent::escapeHtml($string);
         }
