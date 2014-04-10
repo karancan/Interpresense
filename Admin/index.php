@@ -46,8 +46,16 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  * Content and actions
  */
 if (!isset($_GET['page'])) {
+    
+    //@todo: if session is already set, go to another page (remember to treat $_GET['next'])
+    
     $translate->addResource('l10n/login.json');
     $viewFile = "views/login.php";
+} else if ($_GET['page'] === "attempt-login") {
+    
+    //@todo: check if the user has good credentials upon form submit. If yes, go to another page (remember to treat $_GET['next'])
+    //If not, go to this controller with error in query string
+    
 } else if ($_GET['page'] === "register-or-reset") {
     $translate->addResource('l10n/registerOrReset.json');
     $viewFile = "views/registerOrReset.php";

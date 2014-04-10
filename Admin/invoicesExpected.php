@@ -5,14 +5,18 @@ namespace Interpresense\Admin;
 use Interpresense\Includes\AntiXss;
 
 /**
- * Session
- */
-session_start();
-
-/**
  * Configuration file, database object, and settings
  */
 require '../includes/php/config.php';
+
+/**
+ * Session
+ */
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('location: https://' . URL_ADMIN . '/index.php?next=' . $_SERVER['PHP_SELF'] . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : null) );
+    die();
+}
 
 $dbo = new \Interpresense\Includes\DatabaseObject();
 $settings = \Interpresense\Includes\ApplicationSettings::load($dbo);
