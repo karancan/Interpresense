@@ -5,7 +5,7 @@ namespace Interpresense\ServiceProvider;
 use Respect\Validation\Validator;
 
 /**
- * This is an example model that will probably be changed later on
+ * Invoice logic
  * @author Vincent Diep
  */
 class Invoice extends \Interpresense\Includes\BaseModel {
@@ -23,18 +23,18 @@ class Invoice extends \Interpresense\Includes\BaseModel {
     public function __construct(\Interpresense\Includes\DatabaseObject $db) {
         parent::__construct($db);
         
+        // @todo Validation rules
         $this->validators['invoice_uid'] = Validator::xdigit()->length(128, 128);
     }
     
     /**
      * Adds an invoice
      * @param array $data The POST data
+     * @param boolean $final Whether the new invoice is a draft or is a final copy
      * @return int The newly created invoice ID
-     * @todo
      */
-    public function addInvoice(array $data) {
+    public function addInvoice(array $data, $final = true) {
         
-        // @todo figure out what the fields represent
         $types = array(
             'invoice_uid' => \PDO::PARAM_STR,
             'sp_name' => \PDO::PARAM_STR,
@@ -46,20 +46,23 @@ class Invoice extends \Interpresense\Includes\BaseModel {
             'grand_total' => \PDO::PARAM_STR
         );
         
-        // @todo validators
+        // Validation
         if(!Validator::key('sp_name')
                ->key('sp_phone')
                ->key('sp_email')
                ->key('student_num')
-               ->validate($data)) {
+               ->validate($data) || !Validator::bool()->validate($final)) {
             throw new \InvalidArgumentException('Required data invalid or missing');
         }
         
         $data = parent::$db->pick(array_keys($types), $data);
         
-        $data['invoice_uid'] = hash('sha512', microtime(true) . mt_rand());
+        // Janitization
+        $data['sp_phone'] = preg_replace('/[[:^digit:]]/i', '', $data['sp_phone']);
         
-        // @todo amend query in accordance to understanding of the SQL
+        $data['invoice_uid'] = hash('sha512', microtime(true) . mt_rand());
+        $data['is_final'] = (int)$final;
+        
         $sql = "INSERT INTO `interpresense_service_provider_invoices` (`invoice_uid`, `sp_name`, `sp_address`, `sp_phone`, `sp_email`, `student_num`, `is_final`, `grand_total`, `inserted_on`, `updated_on`)
                      VALUES (:invoice_uid, :sp_name, :sp_address, :sp_phone, :sp_email, :student_num, :is_final, :grand_total, NOW(), NOW());";
         
@@ -79,7 +82,7 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         }
         
         $sql = "UPDATE `interpresense_service_provider_invoices`
-                   SET `is_final` = 1
+                   SET `is_final` = 1, `updated_on` = NOW()
                  WHERE `invoice_uid` = :invoice_uid;";
         
         $data = array('invoice_uid' => $invoiceUID);
@@ -92,7 +95,6 @@ class Invoice extends \Interpresense\Includes\BaseModel {
      * Loads a draft invoice
      * @param string $invoiceUID The invoice UID
      * @return array
-     * @todo
      */
     public function loadDraftInvoice($invoiceUID) {
         
@@ -104,7 +106,7 @@ class Invoice extends \Interpresense\Includes\BaseModel {
             throw new \RuntimeException('Cannot load a finalized invoice.');
         }
         
-        $sql = "SELECT things
+        $sql = "SELECT `sp_name`, `sp_address`, `sp_email`, `student_num`
                   FROM `interpresense_service_provider_invoices`
                  WHERE `invoice_uid` = :invoice_uid;";
         
@@ -112,7 +114,7 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         $types = array('invoice_uid' => \PDO::PARAM_STR);
         
         $result = parent::$db->query($sql, $data, $types);
-        return $result[0];
+        return reset($result);
     }
     
     /**
@@ -145,8 +147,6 @@ class Invoice extends \Interpresense\Includes\BaseModel {
      * Retrieves the draft status of the invoice
      * @param string $invoiceUID The invoice UID
      * @return boolean TRUE if the invoice is a draft
-     * 
-     * @todo Untested
      */
     private function getInvoiceDraftStatus($invoiceUID) {
         $sql = "SELECT `is_final`
@@ -158,8 +158,10 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         
         $result = parent::$db->query($sql, $data, $types, \PDO::FETCH_COLUMN);
         
-        // @TODO: What if the invoice UID does not exist?
+        if(empty($result)) {
+            throw new \RuntimeException('Requested invoice does not exist.');
+        }
         
-        return $result[0] === 0;
+        return reset($result) === '0';
     }
 }
