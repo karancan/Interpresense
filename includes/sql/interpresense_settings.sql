@@ -22,6 +22,7 @@ CREATE TABLE `interpresense_settings` (
 
 LOCK TABLES `interpresense_settings` WRITE;
 /*!40000 ALTER TABLE `interpresense_settings` DISABLE KEYS */;
+INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('installation_complete','0',NOW(),NOW());
 INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('institution_name','{"en-CA": "University of Ottawa", "fr-CA": "same thing in Francais"}',NOW(),NOW());
 INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('institution_dept_name','{"en-CA": "Access Service", "fr-CA": "same thing in Francais"}',NOW(),NOW());
 INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('institution_address','{"en": "DMS 3172", "fr": "same thing in Francais"}',NOW(),NOW());
