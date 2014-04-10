@@ -56,6 +56,12 @@ if (!isset($_GET['page'])) {
     //@todo: check if the user has good credentials upon form submit. If yes, go to another page (remember to treat $_GET['next'])
     //If not, go to this controller with error in query string
     
+    if (!empty($_GET['next'])){
+        header('location: ' . $_GET['next']);
+    } else {
+        header('location: invoicesExpected.php');
+    }
+    
 } else if ($_GET['page'] === "register-or-reset") {
     $translate->addResource('l10n/registerOrReset.json');
     $viewFile = "views/registerOrReset.php";

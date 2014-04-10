@@ -1,7 +1,7 @@
 <style>
     @import url('includes/css/login.css');
 </style>
-<form role="form" method="post" action="invoicesExpected.php" class="admin-login-form">
+<form role="form" method="post" action="index.php?page=attempt-login<?= (!empty($_GET['next']) ? '&next=' . $_GET['next'] : null) ?>" class="admin-login-form">
 
     <div class="container">
         
