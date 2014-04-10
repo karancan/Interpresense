@@ -51,6 +51,9 @@ if (!isset($_GET['page'])) {
 } else if ($_GET['page'] === "register-or-reset") {
     $translate->addResource('l10n/registerOrReset.json');
     $viewFile = "views/registerOrReset.php";
+} else if ($_GET['page'] === "logout") {
+    session_destroy();
+    header('location: https://'  . URL_ADMIN);
 } else {
     require_once FS_PHP.'/error.php';
 }

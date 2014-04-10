@@ -47,6 +47,9 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  * Content and actions
  */
 if (!isset($_GET['page'])) {
+
+    //@todo: fetch non-draft invoices from `interpresense_service_provider_invoices`
+    
     $translate->addResource('l10n/invoicesSubmitted.json');
     $viewFile = "views/invoicesSubmitted.php";
 } else if ($_GET['page'] === "export") {

@@ -47,6 +47,9 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  * Content and actions
  */
 if (!isset($_GET['page'])) {
+
+    //@todo: fetch data from TBD
+    
     $translate->addResource('l10n/invoicesExpected.json');
     $viewFile = "views/invoicesExpected.php";
 } else if ($_GET['page'] === "export") {

@@ -47,6 +47,10 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  * Content and actions
  */
 if (!isset($_GET['page'])) {
+
+    //@todo: fetch reports that have already been generated
+    //@todo: fetch report templates
+    
     $translate->addResource('l10n/reports.json');
     $viewFile = "views/reports.php";
 } else {
