@@ -80,6 +80,10 @@ class Users extends \Interpresense\Includes\BaseModel {
      */
     public function userExists($username) {
         
+        if(!$this->validators['username']->validate($username)) {
+            throw new \InvalidArgumentException('Invalid username.');
+        }
+        
         $sql = 'SELECT COUNT(*)
                   FROM `interpresense_users`
                  WHERE `user_name` = :username;';
@@ -97,12 +101,12 @@ class Users extends \Interpresense\Includes\BaseModel {
      * @todo Check is_confirmed?
      * @param string $username The username
      * @param string password The password
-     * @return array
+     * @return array|boolean Returns the user details, or FALSE on failure
      */
     public function login($username, $password) {
         
-        if(!$this->validators['username']->validate($username)) {
-            throw new \InvalidArgumentException('Invalid username.');
+        if(!$this->userExists($username)) {
+            return false;
         }
         
         $sql = 'SELECT `user_id`, `user_password`, `first_name`, `last_name`, `last_log_in`, `is_confirmed`

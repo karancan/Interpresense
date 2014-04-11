@@ -53,25 +53,31 @@ if (!isset($_GET['page'])) {
     
     $user = $users->login($_POST['user_name'], $_POST['user_password']);
     
-    if($user['is_confirmed'] === '0') {
-        
-        //@todo: the user is not confirmed, what to do?
-        echo 'user is not confirmed';
-        
-    } else {
-        session_regenerate_id(true);
-        $_SESSION['user_id'] = $user['user_id'];
-        $_SESSION['first_name'] = $user['first_name'];
-        $_SESSION['last_name'] = $user['last_name'];
-        
-        if (!empty($_GET['next'])) {
-            header("Location: {$_GET['next']}");
+    if($user) {
+        if($user['is_confirmed'] === '0') {
+
+            //@todo: the user is not confirmed, what to do?
+            echo 'user is not confirmed';
+
+        } else {
+            session_regenerate_id(true);
+            $_SESSION['user_id'] = $user['user_id'];
+            $_SESSION['first_name'] = $user['first_name'];
+            $_SESSION['last_name'] = $user['last_name'];
+
+            if (!empty($_GET['next'])) {
+                header("Location: {$_GET['next']}");
+                exit;
+            }
+
+            header('Location: invoicesExpected.php');
             exit;
         }
-        
-        header('Location: invoicesExpected.php');
-        exit;
+    } else {
+        // @todo: Handle login failure
+        echo 'fail';
     }
+    
 } else if ($_GET['page'] === "register-or-reset") {
     $translate->addResource('l10n/registerOrReset.json');
     $viewFile = "views/registerOrReset.php";
