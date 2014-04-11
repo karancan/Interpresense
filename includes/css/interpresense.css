@@ -41,11 +41,15 @@ header .org-logo{
 footer .navbar{
     margin-top: 2em;
 }
-footer .navbar-text{
-    color: white !important;
+footer .navbar-content{
+    margin-top: .5em;
 }
-footer .logo{
-    width: 10em;
+footer .navbar-content:first-child{
+    line-height: 2.5em;
+}
+footer .navbar-fixed-bottom{
+    background-color: #CCD1D9;
+    border-color: #CCD1D9;
 }
 
 /**
