@@ -82,7 +82,7 @@ header('Content-Type: text/html; charset=utf-8');
                 <div class="row navbar-content">
                 
                     <div class="col-md-8">
-                        <?= date('Y') ?> &copy; Interpresense by Vincent Diep, Mr. Julian Huff &amp; Karan Khiani
+                        <?= date('Y') ?> &copy; Interpresense by Vincent Diep, Julian Huff &amp; Karan Khiani
                     </div>
                     
                     <div class="col-md-2">
