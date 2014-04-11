@@ -66,8 +66,6 @@ if (!isset($_GET['page'])) {
 } else if ($_GET['page'] === "logout") {
     session_destroy();
     header('location: https://'  . URL_ADMIN);
-} else {
-    $viewFile = FS_PHP.'/error.php';
 }
 
 /**

@@ -57,8 +57,6 @@ if (!isset($_GET['page'])) {
 } else if ($_GET['page'] === "export") {
     //@todo: add logic
     die();
-} else {
-    $viewFile = FS_PHP.'/error.php';
 }
 
 /**
