@@ -80,6 +80,10 @@ class Users extends \Interpresense\Includes\BaseModel {
      */
     public function userExists($username) {
         
+        if(!$this->validators['username']->validate($username)) {
+            throw new \InvalidArgumentException('Invalid username.');
+        }
+        
         $sql = 'SELECT COUNT(*)
                   FROM `interpresense_users`
                  WHERE `user_name` = :username;';
@@ -97,15 +101,15 @@ class Users extends \Interpresense\Includes\BaseModel {
      * @todo Check is_confirmed?
      * @param string $username The username
      * @param string password The password
-     * @return array
+     * @return array|boolean Returns the user details, or FALSE on failure
      */
     public function login($username, $password) {
         
-        if(!$this->validators['username']->validate($username)) {
-            throw new \InvalidArgumentException('Invalid username.');
+        if(!$this->userExists($username)) {
+            return false;
         }
         
-        $sql = 'SELECT `user_name`, `user_password`, `first_name`, `last_name`, `last_log_in`, `is_confirmed`
+        $sql = 'SELECT `user_id`, `user_password`, `first_name`, `last_name`, `last_log_in`, `is_confirmed`
                   FROM `interpresense_users`
                  WHERE `user_name` = :username;';
         
@@ -127,7 +131,7 @@ class Users extends \Interpresense\Includes\BaseModel {
 
         parent::$db->query($uSql, $data, $types);
 
-        return $result[0];
+        return reset($result);
     }
     
     /**
@@ -160,9 +164,8 @@ class Users extends \Interpresense\Includes\BaseModel {
         $data = parent::$db->pick(array_keys($types), $data);
         
         $sql = 'INSERT INTO `interpresense_users` (`user_uid`, `user_name`, `user_password`, `first_name`, `last_name`, `created_on`, `updated_on`, `expires_on`)
-                     VALUES (:user_uid, :user_name, :user_password, :first_name, :last_name, NOW(), NOW() :expires_on);';
-        
-        parent::$db->query($sql, $types, $types);
+                     VALUES (:user_uid, :user_name, :user_password, :first_name, :last_name, NOW(), NOW(), :expires_on);';
+        parent::$db->query($sql, $data, $types);
     }
     
     /**

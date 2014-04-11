@@ -1,7 +1,7 @@
 <style>
     @import url('includes/css/login.css');
 </style>
-<form role="form" method="post" action="index.php?page=attempt-login<?= (!empty($_GET['next']) ? '&next=' . $_GET['next'] : null) ?>" class="admin-login-form">
+<form role="form" method="post" action="index.php?page=attempt-login<?= (!empty($_GET['next']) ? '&amp;next=' . $antiXSS->escape($_GET['next'], $antiXSS::URL_PARAM) : null) ?>" class="admin-login-form">
 
     <div class="container">
         
@@ -15,7 +15,7 @@
                 
                 <div class="row">
                     <div class="input-group">
-                        <input id="admin_user_name" type="text" class="form-control" placeholder="Username">
+                        <input id="admin_user_name" name="user_name" type="text" class="form-control" placeholder="Username" required>
                         <div class="input-group-btn">
                             <button type="button" class="btn btn-info" tabindex="-1">Options</button>
                             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" tabindex="-1">
@@ -33,7 +33,7 @@
                 
                 <div class="row">
                     <div class="input-group">
-                        <input id="admin_password" type="text" class="form-control" placeholder="Password">
+                        <input id="admin_password" name="user_password" type="password" class="form-control" placeholder="Password" required>
                         <div class="input-group-btn">
                             <button type="button" class="btn btn-info" tabindex="-1">Options</button>
                             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" tabindex="-1">

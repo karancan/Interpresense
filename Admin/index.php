@@ -20,7 +20,7 @@ session_start();
 /**
  * Models
  */
-// @todo Plug in a model
+$users = new Users($dbo);
 
 /**
  * Localization
@@ -51,13 +51,31 @@ if (!isset($_GET['page'])) {
     $viewFile = "views/login.php";
 } else if ($_GET['page'] === "attempt-login") {
     
-    //@todo: check if the user has good credentials upon form submit. If yes, go to another page (remember to treat $_GET['next'])
-    //If not, go to this controller with error in query string
+    $user = $users->login($_POST['user_name'], $_POST['user_password']);
     
-    if (!empty($_GET['next'])){
-        header('location: ' . $_GET['next']);
+    if($user) {
+        if($user['is_confirmed'] === '0') {
+
+            //@todo: the user is not confirmed, what to do?
+            echo 'user is not confirmed';
+
+        } else {
+            session_regenerate_id(true);
+            $_SESSION['user_id'] = $user['user_id'];
+            $_SESSION['first_name'] = $user['first_name'];
+            $_SESSION['last_name'] = $user['last_name'];
+
+            if (!empty($_GET['next'])) {
+                header("Location: {$_GET['next']}");
+                exit;
+            }
+
+            header('Location: invoicesExpected.php');
+            exit;
+        }
     } else {
-        header('location: invoicesExpected.php');
+        // @todo: Handle login failure
+        echo 'fail';
     }
     
 } else if ($_GET['page'] === "register-or-reset") {
@@ -65,13 +83,14 @@ if (!isset($_GET['page'])) {
     $viewFile = "views/registerOrReset.php";
 } else if ($_GET['page'] === "logout") {
     session_destroy();
-    header('location: https://'  . URL_ADMIN);
+    header('Location: https://'  . URL_ADMIN);
+    exit;
 }
 
 /**
  * View
  */
-$actions = array();
+$actions = array('attempt-login', 'logout');
 
 if (!in_array($_GET['page'], $actions, true)) {
 
