@@ -37,7 +37,7 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> [Insert username]<b class="caret"></b></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#"><i class="fa fa-sign-out"></i> Log out</a></li>
+                                    <li><a href="index.php?page=logout"><i class="fa fa-sign-out"></i> Log out</a></li>
                                 </ul>
                             </li>
                         </ul>

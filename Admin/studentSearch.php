@@ -5,19 +5,21 @@ namespace Interpresense\Admin;
 use Interpresense\Includes\AntiXss;
 
 /**
+ * Configuration file, database object, settings and Anti XSS
+ */
+require '../includes/php/config.php';
+$dbo = new \Interpresense\Includes\DatabaseObject();
+$settings = \Interpresense\Includes\ApplicationSettings::load($dbo);
+$antiXSS = new AntiXss();
+
+/**
  * Session
  */
 session_start();
-
-/**
- * Configuration file, database object, and settings
- */
-require '../includes/php/config.php';
-
-$dbo = new \Interpresense\Includes\DatabaseObject();
-$settings = \Interpresense\Includes\ApplicationSettings::load($dbo);
-
-$antiXSS = new AntiXss();
+if (!isset($_SESSION['user_id'])) {
+    header('location: https://' . URL_ADMIN . '/index.php?next=' . $_SERVER['PHP_SELF'] . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : null) );
+    die();
+}
 
 /**
  * Models
@@ -47,6 +49,13 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  * Content and actions
  */
 if (!isset($_GET['page'])) {
+    
+    //@todo: check if $_GET['student'] is valid and fetch student details. If invalid adjust view.
+    
+    //@todo: fetch student expected invoices
+    //@todo: fetch student submitted invoices
+    //@todo: fetch student draft invoices
+    
     $translate->addResource('l10n/studentSearch.json');
     $viewFile = "views/studentSearch.php";
 } else {

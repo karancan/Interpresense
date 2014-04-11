@@ -5,19 +5,17 @@ namespace Interpresense\Admin;
 use Interpresense\Includes\AntiXss;
 
 /**
+ * Configuration file, database object, settings and Anti XSS
+ */
+require '../includes/php/config.php';
+$dbo = new \Interpresense\Includes\DatabaseObject();
+$settings = \Interpresense\Includes\ApplicationSettings::load($dbo);
+$antiXSS = new AntiXss();
+
+/**
  * Session
  */
 session_start();
-
-/**
- * Configuration file, database object, and settings
- */
-require '../includes/php/config.php';
-
-$dbo = new \Interpresense\Includes\DatabaseObject();
-$settings = \Interpresense\Includes\ApplicationSettings::load($dbo);
-
-$antiXSS = new AntiXss();
 
 /**
  * Models
@@ -46,11 +44,28 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  * Content and actions
  */
 if (!isset($_GET['page'])) {
+    
+    //@todo: if session is already set, go to another page (remember to treat $_GET['next'])
+    
     $translate->addResource('l10n/login.json');
     $viewFile = "views/login.php";
+} else if ($_GET['page'] === "attempt-login") {
+    
+    //@todo: check if the user has good credentials upon form submit. If yes, go to another page (remember to treat $_GET['next'])
+    //If not, go to this controller with error in query string
+    
+    if (!empty($_GET['next'])){
+        header('location: ' . $_GET['next']);
+    } else {
+        header('location: invoicesExpected.php');
+    }
+    
 } else if ($_GET['page'] === "register-or-reset") {
     $translate->addResource('l10n/registerOrReset.json');
     $viewFile = "views/registerOrReset.php";
+} else if ($_GET['page'] === "logout") {
+    session_destroy();
+    header('location: https://'  . URL_ADMIN);
 } else {
     require_once FS_PHP.'/error.php';
 }
