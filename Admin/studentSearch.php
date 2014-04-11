@@ -58,8 +58,6 @@ if (!isset($_GET['page'])) {
     
     $translate->addResource('l10n/studentSearch.json');
     $viewFile = "views/studentSearch.php";
-} else {
-    require_once FS_PHP.'/error.php';
 }
 
 /**

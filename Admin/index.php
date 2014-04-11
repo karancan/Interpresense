@@ -85,8 +85,6 @@ if (!isset($_GET['page'])) {
     session_destroy();
     header('Location: https://'  . URL_ADMIN);
     exit;
-} else {
-    require_once FS_PHP.'/error.php';
 }
 
 /**

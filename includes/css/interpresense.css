@@ -106,3 +106,6 @@ footer .navbar-fixed-bottom{
     font-size: 10em;
     color: #606060;
 }
+.error-explanation{
+    margin-bottom: 2em;
+}
