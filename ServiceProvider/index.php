@@ -49,7 +49,7 @@ if (!isset($_GET['page'])) {
     $translate->addResource('l10n/invoice.json');
     $viewFile = "views/invoice.php";
 } else {
-    require_once FS_PHP.'/error.php';
+    $viewFile = FS_PHP.'/error.php';
 }
 
 /**

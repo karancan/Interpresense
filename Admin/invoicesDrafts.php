@@ -58,7 +58,7 @@ if (!isset($_GET['page'])) {
     //@todo: add logic
     die();
 } else {
-    require_once FS_PHP.'/error.php';
+    $viewFile = FS_PHP.'/error.php';
 }
 
 /**

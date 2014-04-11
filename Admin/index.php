@@ -67,7 +67,7 @@ if (!isset($_GET['page'])) {
     session_destroy();
     header('location: https://'  . URL_ADMIN);
 } else {
-    require_once FS_PHP.'/error.php';
+    $viewFile = FS_PHP.'/error.php';
 }
 
 /**
