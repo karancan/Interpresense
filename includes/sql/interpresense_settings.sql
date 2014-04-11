@@ -13,7 +13,7 @@ CREATE TABLE `interpresense_settings` (
   `updated_on` datetime NOT NULL,
   PRIMARY KEY (`setting_id`),
   UNIQUE KEY `setting_key_UNIQUE` (`setting_key`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

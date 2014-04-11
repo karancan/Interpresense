@@ -55,8 +55,6 @@ if (!isset($_GET['page'])) {
     
     $translate->addResource('l10n/reports.json');
     $viewFile = "views/reports.php";
-} else {
-    require_once FS_PHP.'/error.php';
 }
 
 /**

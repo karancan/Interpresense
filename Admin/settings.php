@@ -61,8 +61,6 @@ if (!isset($_GET['page'])) {
 } else if ($_GET['page'] === "export-users") {
     //@todo: add logic
     die();
-} else {
-    require_once FS_PHP.'/error.php';
 }
 
 /**
