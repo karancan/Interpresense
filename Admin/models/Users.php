@@ -124,13 +124,15 @@ class Users extends \Interpresense\Includes\BaseModel {
         
         unset($result[0]['user_password']);
 
-        // Update the last log in
-        $uSql = 'UPDATE `interpresense_users`
-                    SET `last_log_in` = NOW()
-                  WHERE `user_name` = :username;';
+        // Update the last log in only if user is already confirmed
+        if ($result[0]['is_confirmed'] === '1'){
+            $uSql = 'UPDATE `interpresense_users`
+                        SET `last_log_in` = NOW()
+                      WHERE `user_name` = :username;';
 
-        parent::$db->query($uSql, $data, $types);
-
+            parent::$db->query($uSql, $data, $types);
+        }
+        
         return reset($result);
     }
     

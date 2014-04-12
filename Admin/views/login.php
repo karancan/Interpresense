@@ -1,7 +1,26 @@
 <style>
     @import url('includes/css/login.css');
 </style>
-<form role="form" method="post" action="index.php?page=attempt-login<?= (!empty($_GET['next']) ? '&amp;next=' . $antiXSS->escape($_GET['next'], $antiXSS::URL_PARAM) : null) ?>" class="admin-login-form">
+
+<?php
+if ($_GET['mode'] === 'login-failed'){
+?>
+<div class="col-md-4 col-md-offset-4 alert alert-danger alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <strong>Unsuccessful!</strong> That user name and password combination is invalid...
+</div>
+<?php } ?>
+
+<?php
+if ($_GET['mode'] === 'unconfirmed-user'){
+?>
+<div class="col-md-4 col-md-offset-4 alert alert-warning alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <strong>Unsuccessful!</strong> Your account has not been activated yet...
+</div>
+<?php } ?>
+
+<form id="admin-log-in-form" role="form" method="post" action="index.php?page=attempt-login<?= (!empty($_GET['next']) ? '&amp;next=' . $antiXSS->escape($_GET['next'], $antiXSS::URL_PARAM) : null) ?>" class="admin-login-form">
 
     <div class="container">
         
@@ -67,3 +86,17 @@
     </div>
 
 </form>
+<script>
+    'use strict';
+    
+    //Input field for username should be automatically filled up
+    if(localStorage.getItem('interpresense_user_username') !== null) {
+        $('#admin_user_name').val(localStorage.getItem('interpresense_user_username'));
+    }
+    $('#admin_user_name').focus();
+    
+    //Save the user's user name in local storage
+    $('#admin-log-in-form').submit(function(){
+        localStorage.setItem('interpresense_user_username', $('#admin_user_name').val());
+    });
+</script>
