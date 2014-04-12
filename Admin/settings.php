@@ -49,6 +49,10 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  * Content and actions
  */
 if (!isset($_GET['page'])) {
+
+    //@todo: fetch activity types from `interpresence_service_provider_activities`
+    //@todo: fetch user list from `interpresense_users`
+    
     $appSettings = $model->fetchSettings();
     $translate->addResource('l10n/settings.json');
     $viewFile = "views/settings.php";
