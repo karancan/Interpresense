@@ -70,7 +70,7 @@ $actions = array('change-setting', 'delete-setting', 'export-users');
 
 if (!in_array($_GET['page'], $actions, true)) {
     
-    $current_view = 'admin-settings';
+    $current_view = '';
     
     require FS_PHP . '/header.php';
     require 'views/header.php';
