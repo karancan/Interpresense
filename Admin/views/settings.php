@@ -41,6 +41,25 @@
                     ?>
                 </tbody>
             </table>
+            
+            <h4>Activity types</h4>
+                    
+            <table id="admin-users-table" class="table table-hover invoice-table">           
+                <thead>
+                    <tr>
+                        <th scope='col'>Name</th>
+                        <th scope='col'>Nom</th>
+                        <th scope='col'>Added on</th>
+                        <th scope='col'>Deleted?</th>
+                        <th scope='col'>Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        
+                    </tr>
+                </tbody>
+            </table>
         
         </div>
         
