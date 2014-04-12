@@ -30,6 +30,10 @@ INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_
 INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('institution_phone','6135625800',NOW(),NOW());
 INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('institution_default_lang','en-CA',NOW(),NOW());
 INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('institution_logo',NULL,NOW(),NOW());
+INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('institution_dept_recipient_name','Joanne Heit',NOW(),NOW());
+INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('institution_dept_recipient_email','jheit@uottawa.ca',NOW(),NOW());
+INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('institution_dept_recipient_phone','613 562 5800 x4219',NOW(),NOW());
+INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('institution_dept_recipient_title','Assistant Academic Support and Client Services',NOW(),NOW());
 INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('invoicing_earliest_possible_hour','7',NOW(),NOW());
 INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('invoicing_latest_possible_hour','22',NOW(),NOW());
 INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('invoicing_allow_drafts','1',NOW(),NOW());
