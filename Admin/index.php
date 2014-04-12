@@ -45,7 +45,17 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  */
 if (!isset($_GET['page'])) {
     
-    //@todo: if session is already set, go to another page (remember to treat $_GET['next'])
+    if (isset($_SESSION['user_id'])){
+        
+        if (!empty($_GET['next'])) {
+            header("Location: {$_GET['next']}");
+            exit;
+        }
+
+        header('Location: invoicesSubmitted.php');
+        exit;
+        
+    }
     
     $translate->addResource('l10n/login.json');
     $viewFile = "views/login.php";
@@ -55,15 +65,16 @@ if (!isset($_GET['page'])) {
     
     if($user) {
         if($user['is_confirmed'] === '0') {
-
-            //@todo: the user is not confirmed, what to do?
-            echo 'user is not confirmed';
+        
+            header('Location: https://'  . URL_ADMIN . '/index.php?mode=unconfirmed-user');
+            exit;
 
         } else {
             session_regenerate_id(true);
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['first_name'] = $user['first_name'];
             $_SESSION['last_name'] = $user['last_name'];
+            $_SESSION['last_log_in'] = $user['last_log_in'];
 
             if (!empty($_GET['next'])) {
                 header("Location: {$_GET['next']}");
@@ -74,8 +85,8 @@ if (!isset($_GET['page'])) {
             exit;
         }
     } else {
-        // @todo: Handle login failure
-        echo 'fail';
+        header('Location: https://'  . URL_ADMIN . '/index.php?mode=login-failed');
+        exit;
     }
     
 } else if ($_GET['page'] === "register-or-reset") {
