@@ -35,5 +35,7 @@ INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_
 INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('invoicing_allow_drafts','1',NOW(),NOW());
 INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('invoicing_allow_file_attachments','1',NOW(),NOW());
 INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('service_provider_help_manual_uri','',NOW(),NOW());
+INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('primary_color_class_name','info',NOW(),NOW());
+INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `inserted_on`, `updated_on`) VALUES ('secondary_color_class_name','primary',NOW(),NOW());
 /*!40000 ALTER TABLE `interpresense_settings` ENABLE KEYS */;
 UNLOCK TABLES;
