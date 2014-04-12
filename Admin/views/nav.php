@@ -18,7 +18,6 @@
                     
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li <?= ($current_view === "admin-expected" ? 'class="active"' : null) ?>><a href="invoicesExpected.php"><i class="fa fa-file-text"></i> Invoices Expected</a></li>
                             <li <?= ($current_view === "admin-submitted" ? 'class="active"' : null) ?>><a href="invoicesSubmitted.php"><i class="fa fa-file-text"></i> Invoices Submitted</a></li>
                             <li <?= ($current_view === "admin-drafts" ? 'class="active"' : null) ?>><a href="invoicesDrafts.php"><i class="fa fa-file-text"></i> Invoice Drafts</a></li>
                             <li <?= ($current_view === "admin-reports" ? 'class="active"' : null) ?>><a href="reports.php"><i class="fa fa-bar-chart-o"></i> Reports</a></li>

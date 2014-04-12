@@ -70,7 +70,7 @@ if (!isset($_GET['page'])) {
                 exit;
             }
 
-            header('Location: invoicesExpected.php');
+            header('Location: invoicesSubmitted.php');
             exit;
         }
     } else {
