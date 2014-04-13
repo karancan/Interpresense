@@ -1,0 +1,10 @@
+{
+    "values": {
+        "en-CA": {
+            "foo": "bar"
+        },
+        "fr-CA": {
+            "foo": "bar"
+        }
+    }
+}
