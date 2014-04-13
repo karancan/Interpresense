@@ -65,7 +65,7 @@ require_once '../php/config.php';
                 <div class="row navbar-content">
                 
                     <div class="col-md-8">
-                        <?= date('Y') ?> &copy; Interpresense by Vincent Diep, Julian Huff &amp; Karan Khiani
+                        <?= date('Y') ?> &copy; Interpresense by Vincent Diep &amp; Karan Khiani
                     </div>
                     
                     <div class="col-md-2">
