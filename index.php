@@ -62,7 +62,7 @@ header('Content-Type: text/html; charset=utf-8');
             
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <h3>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC</h3>
+                    <h3>Intuitive &amp; user friendly for service providers. Powerful &amp; flexible for administrators.</h3>
                 </div>
             </div>
             
