@@ -113,6 +113,8 @@ if (!in_array($_GET['page'], $actions, true)) {
     $current_view = '';
     
     require FS_PHP . '/header.php';
+    
+    $translate->addResource('l10n/header.json');
     require 'views/header.php';
 
     if(isset($viewFile) && file_exists($viewFile)) {
