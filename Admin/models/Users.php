@@ -109,7 +109,7 @@ class Users extends \Interpresense\Includes\BaseModel {
             return false;
         }
         
-        $sql = 'SELECT `user_id`, `user_password`, `first_name`, `last_name`, `last_log_in`, `is_confirmed`
+        $sql = 'SELECT `user_id`, `user_password`, `first_name`, `last_name`, `last_log_in`, `expires_on`, `is_confirmed`
                   FROM `interpresense_users`
                  WHERE `user_name` = :username;';
         
@@ -123,9 +123,11 @@ class Users extends \Interpresense\Includes\BaseModel {
         }
         
         unset($result[0]['user_password']);
+        
+        $result[0]['expires_on'] = new \DateTime($result[0]['expires_on']);
 
         // Update the last log in only if user is already confirmed
-        if ($result[0]['is_confirmed'] === '1'){
+        if ($result[0]['is_confirmed'] === '1' && $result[0]['expires_on'] > new \DateTime()) {
             $uSql = 'UPDATE `interpresense_users`
                         SET `last_log_in` = NOW()
                       WHERE `user_name` = :username;';

@@ -69,6 +69,11 @@ if (!isset($_GET['page'])) {
             header('Location: https://'  . URL_ADMIN . '/index.php?mode=unconfirmed-user');
             exit;
 
+        } elseif($user['expires_on'] <= new \DateTime()) {
+            
+            header('Location: https://'  . URL_ADMIN . '/index.php?mode=expired-user');
+            exit;
+            
         } else {
             session_regenerate_id(true);
             $_SESSION['user_id'] = $user['user_id'];
