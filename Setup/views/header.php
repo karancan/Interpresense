@@ -47,3 +47,32 @@
         </div>
     </div>
 </header>
+
+<div class="container">
+
+    <div class="row">
+    
+        <div class="col-md-8">
+            <h3 class="setup-page-title"><i class="fa fa-tasks"></i> Interpresense installation</h3>
+        </div>
+    
+    </div>
+    
+    <div class="row">
+        
+        <div class="col-md-3">
+            <div class="well"><i class="fa fa-hdd-o"></i> <strong>Set up databases</strong><span class="setup-step-label pull-right">Step 1 of 4</span></div>
+        </div>
+        <div class="col-md-3">
+            <div class="well"><i class="fa fa-users"></i> <strong>Add users</strong><span class="setup-step-label pull-right">Step 2 of 4</span></div>
+        </div>
+        <div class="col-md-3">
+            <div class="well"><i class="fa fa-cog"></i> <strong>Configure the app</strong><span class="setup-step-label pull-right">Step 3 of 4</span></div>
+        </div>
+        <div class="col-md-3">
+            <div class="well"><i class="fa fa-check-square-o"></i> <strong>Installation complete</strong><span class="setup-step-label pull-right">Step 4 of 4</span></div>
+        </div>
+        
+    </div>
+    
+</div>
