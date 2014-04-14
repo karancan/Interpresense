@@ -5,7 +5,7 @@
     
     <div class="row">
         <div class="col-md-12">
-            <h3 class="admin-page-title"><i class="fa fa-search"></i> Searched for <?= $_GET['student'] ?></h3>
+            <h3 class="admin-page-title"><i class="fa fa-search"></i> Searched for <?= $_GET['client'] ?></h3>
         </div>
     </div>
     
