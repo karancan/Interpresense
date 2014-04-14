@@ -1,10 +1,10 @@
 {
     "values": {
         "en-CA": {
-            "foo": "bar"
+            "documentTitleTag": "Client search"
         },
         "fr-CA": {
-            "foo": "bar"
+            "documentTitleTag": "Recherche de clients"
         }
     }
 }

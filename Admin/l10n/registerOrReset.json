@@ -1,10 +1,10 @@
 {
     "values": {
         "en-CA": {
-            "foo": "bar"
+            "documentTitleTag": "Registration"
         },
         "fr-CA": {
-            "foo": "bar"
+            "documentTitleTag": "Inscription"
         }
     }
 }

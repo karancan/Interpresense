@@ -39,8 +39,10 @@ header('Content-Type: text/html; charset=utf-8');
     <title>
         Interpresense –
         <?php
-            if(isset($page_title)) {
-                echo $page_title;
+            try {
+                $translate->_e('documentTitleTag');
+            } catch (\OutOfBoundsException $e) {
+                echo 'Error';
             }
         ?>
     </title>
