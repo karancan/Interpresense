@@ -19,11 +19,13 @@ header('Content-Type: text/html; charset=utf-8');
     <link rel='stylesheet' media='screen' type='text/css' href='//<?= URL_VENDOR ?>/bootstrap/css/bootstrap.min.css'>
     <link rel='stylesheet' media='screen' type='text/css' href='//<?= URL_VENDOR ?>/bootflat.min.css'>
     <link rel='stylesheet' href='//<?= URL_VENDOR ?>/fontawesome/css/font-awesome.min.css'>
+    <link rel='stylesheet' href='//<?= URL_VENDOR ?>/summernote/dist/summernote.css'>
     <link rel='stylesheet' href='//<?= URL_CSS ?>/interpresense.css'>
 
     <script src='//<?= URL_VENDOR ?>/jquery.min.js' charset='utf-8'></script>
     <script src='//<?= URL_VENDOR ?>/jquery.dataTables.min.js' charset='utf-8'></script>
     <script src='//<?= URL_VENDOR ?>/bootstrap/js/bootstrap.min.js' charset='utf-8'></script>
+    <script src='//<?= URL_VENDOR ?>/summernote/dist/summernote.min.js' charset='utf-8'></script>
     <script src='//<?= URL_JS ?>/interpresense.js' charset='utf-8'></script>
     
     <!--[if lt IE 9]>

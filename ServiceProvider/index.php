@@ -48,12 +48,28 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
 if (!isset($_GET['page'])) {
     $translate->addResource('l10n/invoice.json');
     $viewFile = "views/invoice.php";
+} else if ($_GET['page'] === 'invoice-submission') {
+    
+    //@todo: the case where the user submits the invoice and sees a confirmation message and next steps
+    //@todo: trigger emails
+    
+    $translate->addResource('l10n/invoiceSubmission.json');
+    $viewFile = "views/invoiceSubmission.php";
+    
+} else if ($_GET['page'] === 'invoice-retrieval') {
+    
+    //@todo:  the case where the user clicks a link on their email to retrieve an invoice and is shown the possible options
+    //@todo: look for uid in the GET to be able to retrieve an invoice
+    
+    $translate->addResource('l10n/invoiceRetrieval.json');
+    $viewFile = "views/invoiceRetrieval.php";
+    
 }
 
 /**
  * View
  */
-$actions = array('');
+$actions = array('invoice-submission', 'invoice-retrieval');
 
 if (!in_array($_GET['page'], $actions, true)) {
 
