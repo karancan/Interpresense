@@ -46,6 +46,7 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
 if (!isset($_GET['page'])) {
     
     //@todo: check if installation has already been completed
+    //@todo: if installation is complete, go to appropriate view
     
     $translate->addResource('l10n/step1Database.json');
     $viewFile = "views/step1Database.php";
