@@ -60,24 +60,29 @@
     
     <div class="row">
         
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="well <?= ($setup_current_step === 1 ? 'setup-well-active' : ($setup_current_step > 1 ? 'setup-well-complete' : null) ) ?>">
-                <i class="fa fa-hdd-o"></i> <strong>Set up databases</strong><span class="setup-step-label pull-right">Step 1 of 4</span>
+                <i class="fa fa-legal"></i> <strong>EULA</strong><span class="setup-step-label pull-right">1 of 5</span>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="well <?= ($setup_current_step === 2 ? 'setup-well-active' : ($setup_current_step > 2 ? 'setup-well-complete' : null) ) ?>">
-                <i class="fa fa-users"></i> <strong>Add users</strong><span class="setup-step-label pull-right">Step 2 of 4</span>
+        <div class="col-md-2">
+            <div class="well <?= ($setup_current_step === 2 ? 'setup-well-active' : ($setup_current_step > 1 ? 'setup-well-complete' : null) ) ?>">
+                <i class="fa fa-hdd-o"></i> <strong>Database</strong><span class="setup-step-label pull-right">2 of 5</span>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="well <?= ($setup_current_step === 3 ? 'setup-well-active' : ($setup_current_step > 3 ? 'setup-well-complete' : null) ) ?>">
-                <i class="fa fa-cog"></i> <strong>Configure the app</strong><span class="setup-step-label pull-right">Step 3 of 4</span>
+        <div class="col-md-2">
+            <div class="well <?= ($setup_current_step === 3 ? 'setup-well-active' : ($setup_current_step > 2 ? 'setup-well-complete' : null) ) ?>">
+                <i class="fa fa-users"></i> <strong>Users</strong><span class="setup-step-label pull-right">3 of 5</span>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="well <?= ($setup_current_step === 4 ? 'setup-well-active' : null) ?>">
-                <i class="fa fa-check-square-o"></i> <strong>Installation complete</strong><span class="setup-step-label pull-right">Step 4 of 4</span>
+        <div class="col-md-2">
+            <div class="well <?= ($setup_current_step === 4 ? 'setup-well-active' : ($setup_current_step > 3 ? 'setup-well-complete' : null) ) ?>">
+                <i class="fa fa-cog"></i> <strong>Settings</strong><span class="setup-step-label pull-right">4 of 5</span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="well <?= ($setup_current_step === 5 ? 'setup-well-active' : null) ?>">
+                <i class="fa fa-check-square-o"></i> <strong>Complete</strong><span class="setup-step-label pull-right">5 of 5</span>
             </div>
         </div>
         

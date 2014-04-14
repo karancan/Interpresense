@@ -46,41 +46,52 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
 if (!isset($_GET['page'])) {
     
     //@todo: check if installation has already been completed
-    //@todo: if installation is complete, go to step 4
+    //@todo: if installation is complete, go to step 5
+    //@todo: check if EULA has been accepted. If yes, to step 2. Else step 1.
     
-    //Installation not complete
+    //Installation not complete and EULA not accepted
     header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-1');
     exit;
     
 } else if ($_GET['page'] === 'go-to-step-1') {
     
     $setup_current_step = 1;
-    $translate->addResource('l10n/step1Database.json');
-    $viewFile = "views/step1Database.php";
+    $translate->addResource('l10n/step1Eula.json');
+    $viewFile = "views/step1Eula.php";
     
 } else if ($_GET['page'] === 'go-to-step-2') {
     
     //@todo: save data from step 1
     
     $setup_current_step = 2;
-    $translate->addResource('l10n/step2Users.json');
-    $viewFile = "views/step2Users.php";
+    $translate->addResource('l10n/step2Database.json');
+    $viewFile = "views/step2Database.php";
     
 } else if ($_GET['page'] === 'go-to-step-3') {
     
     //@todo: save data from step 2
+    //@todo: fetch list of existing users
     
     $setup_current_step = 3;
-    $translate->addResource('l10n/step3Settings.json');
-    $viewFile = "views/step3Settings.php";
+    $translate->addResource('l10n/step3Users.json');
+    $viewFile = "views/step3Users.php";
 
 } else if ($_GET['page'] === 'go-to-step-4') {
     
     //@todo: save data from step 3
+    //@todo: fetch app settings
     
     $setup_current_step = 4;
-    $translate->addResource('l10n/step4Complete.json');
-    $viewFile = "views/step4Complete.php";
+    $translate->addResource('l10n/step4Settings.json');
+    $viewFile = "views/step4Settings.php";
+    
+} else if ($_GET['page'] === 'go-to-step-5') {
+    
+    //@todo: save data from step 4
+    
+    $setup_current_step = 5;
+    $translate->addResource('l10n/step5Complete.json');
+    $viewFile = "views/step5Complete.php";
     
 }
 
