@@ -62,7 +62,7 @@ header('Content-Type: text/html; charset=utf-8');
             
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <h3>Intuitive &amp; user friendly for service providers. Powerful &amp; flexible for administrators.</h3>
+                    <h3>Modern and intuitive for service providers. Powerful and flexible for administrators.</h3>
                 </div>
             </div>
             
