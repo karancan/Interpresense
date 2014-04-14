@@ -6,7 +6,7 @@
     <div class="row">
     
         <div class="col-md-12">
-            <h4><i class="fa fa-cog"></i> Configure the app</h4>
+            <h4><i class="fa fa-users"></i> Add users</h4>
         </div>
         
     </div>
