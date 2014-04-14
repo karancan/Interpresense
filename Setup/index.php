@@ -46,9 +46,42 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
 if (!isset($_GET['page'])) {
     
     //@todo: check if installation has already been completed
+    //@todo: if installation is complete, go to step 4
     
+    //Installation not complete
+    header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-1');
+    exit;
+    
+} else if ($_GET['page'] === 'go-to-step-1') {
+    
+    $setup_current_step = 1;
     $translate->addResource('l10n/step1Database.json');
     $viewFile = "views/step1Database.php";
+    
+} else if ($_GET['page'] === 'go-to-step-2') {
+    
+    //@todo: save data from step 1
+    
+    $setup_current_step = 2;
+    $translate->addResource('l10n/step2Users.json');
+    $viewFile = "views/step2Users.php";
+    
+} else if ($_GET['page'] === 'go-to-step-3') {
+    
+    //@todo: save data from step 2
+    
+    $setup_current_step = 3;
+    $translate->addResource('l10n/step3Settings.json');
+    $viewFile = "views/step3Settings.php";
+
+} else if ($_GET['page'] === 'go-to-step-4') {
+    
+    //@todo: save data from step 3
+    
+    $setup_current_step = 4;
+    $translate->addResource('l10n/step4Complete.json');
+    $viewFile = "views/step4Complete.php";
+    
 }
 
 /**

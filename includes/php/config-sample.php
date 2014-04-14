@@ -34,8 +34,9 @@ define('FS_INTERPRESENSE', '');
 /* ~~~~~~~~~~~~~~START : DO NOT EDIT~~~~~~~~~~~~~~ */
 
 //The paths that all the modules reside on (sorted alphabetically)
-define('FS_ADMIN', FS_INTERPRESENSE."/admin");
-define('FS_SERVICE_PROVIDER', FS_INTERPRESENSE."/service-provider");
+define('FS_ADMIN', FS_INTERPRESENSE."/Admin");
+define('FS_SERVICE_PROVIDER', FS_INTERPRESENSE."/ServiceProvider");
+define('FS_SETUP', FS_INTERPRESENSE."/Setup");
 
 define('FS_INCLUDES', FS_INTERPRESENSE."/includes");
 define('FS_IMAGES', FS_INCLUDES."/img");
@@ -58,8 +59,9 @@ define('URL_INTERPRESENSE', '');
 /* ~~~~~~~~~~~~~~START : DO NOT EDIT~~~~~~~~~~~~~~ */
 
 //The URL paths that all the modules reside on (sorted alphabetically)
-define('URL_ADMIN', URL_INTERPRESENSE."/admin");
-define('URL_SERVICE_PROVIDER', URL_INTERPRESENSE."/service-provider");
+define('URL_ADMIN', URL_INTERPRESENSE."/Admin");
+define('URL_SERVICE_PROVIDER', URL_INTERPRESENSE."/ServiceProvider");
+define('URL_SETUP', URL_INTERPRESENSE."/Setup");
 
 define('URL_INCLUDES', URL_INTERPRESENSE."/includes");
 define('URL_IMAGES', URL_INCLUDES."/img");

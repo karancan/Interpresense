@@ -1,0 +1,15 @@
+.setup-page-title{
+    font-weight: normal;
+    margin-top: .5em;
+    margin-bottom: 1em;
+}
+.setup-step-label{
+    color: #858585;
+    text-shadow: text-shadow:0 1px 0 #FFFFFF;;
+}
+.setup-well-active{
+    background-color: #ffd368;
+}
+.setup-well-complete{
+    background-color: #b3dd87;
+}
