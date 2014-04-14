@@ -4,11 +4,12 @@
     margin-bottom: 1em;
 }
 .setup-step-label{
-    color: #c3c3c3;
+    color: #858585;
+    text-shadow: text-shadow:0 1px 0 #FFFFFF;;
 }
 .setup-well-active{
-    background-color: #FFCE54;
+    background-color: #ffd368;
 }
 .setup-well-complete{
-    background-color: #A0D468;
+    background-color: #b3dd87;
 }
