@@ -23,10 +23,10 @@
                             <li <?= ($current_view === "admin-reports" ? 'class="active"' : null) ?>><a href="reports.php"><i class="fa fa-bar-chart-o"></i> Reports</a></li>
                         </ul>
                         
-                        <form class="navbar-form navbar-left" role="search" action="studentSearch.php" method="get">
+                        <form class="navbar-form navbar-left" role="search" action="clientSearch.php" method="get">
                             <div class="form-search search-only">
                                 <i class="search-icon glyphicon glyphicon-search"></i>
-                                <input type="text" class="form-control search-query" name="student" placeholder="Search for a student...">
+                                <input type="text" class="form-control search-query" name="client" placeholder="Search for a client...">
                             </div>
                         </form>
                      
