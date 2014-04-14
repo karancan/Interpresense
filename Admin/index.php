@@ -69,6 +69,11 @@ if (!isset($_GET['page'])) {
             header('Location: https://'  . URL_ADMIN . '/index.php?mode=unconfirmed-user');
             exit;
 
+        } elseif($user['expires_on'] <= new \DateTime()) {
+            
+            header('Location: https://'  . URL_ADMIN . '/index.php?mode=expired-user');
+            exit;
+            
         } else {
             session_regenerate_id(true);
             $_SESSION['user_id'] = $user['user_id'];
@@ -108,6 +113,8 @@ if (!in_array($_GET['page'], $actions, true)) {
     $current_view = '';
     
     require FS_PHP . '/header.php';
+    
+    $translate->addResource('l10n/header.json');
     require 'views/header.php';
 
     if(isset($viewFile) && file_exists($viewFile)) {

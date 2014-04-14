@@ -1,10 +1,10 @@
 {
     "values": {
         "en-CA": {
-            "foo": "bar"
+            "documentTitleTag": "Submitted invoices"
         },
         "fr-CA": {
-            "foo": "bar"
+            "documentTitleTag": "Factures soumises"
         }
     }
 }

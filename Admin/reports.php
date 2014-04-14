@@ -67,7 +67,11 @@ if (!in_array($_GET['page'], $actions, true)) {
     $current_view = 'admin-reports';
     
     require FS_PHP . '/header.php';
+
+    $translate->addResource('l10n/header.json');
     require 'views/header.php';
+    
+    $translate->addResource('l10n/nav.json');
     require 'views/nav.php';
 
     if(isset($viewFile) && file_exists($viewFile)) {

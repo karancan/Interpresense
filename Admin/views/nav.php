@@ -35,7 +35,7 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?= $antiXSS->escape("{$_SESSION['first_name']} {$_SESSION['last_name']}"); ?><b class="caret"></b></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Last log in ... ?</a></li>
+                                    <li><a href="#">Last log in <?= $dateFmt->format($_SESSION['last_log_in'], 'day_date_time') ?>?</a></li>
                                     <li class="divider"></li>
                                     <li><a href="settings.php"><i class="fa fa-gears"></i> Settings</a></li>
                                     <li><a href="index.php?page=logout"><i class="fa fa-sign-out"></i> Log out</a></li>

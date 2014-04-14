@@ -18,6 +18,13 @@ if ($_GET['mode'] === 'unconfirmed-user'){
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
     <strong>Unsuccessful!</strong> Your account has not been activated yet...
 </div>
+
+<?php } elseif ($_GET['mode'] === 'expired-user') { ?>
+
+<div class="col-md-4 col-md-offset-4 alert alert-warning alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <strong>Unsuccessful!</strong> Your account has been expired...
+</div>
 <?php } ?>
 
 <form id="admin-log-in-form" role="form" method="post" action="index.php?page=attempt-login<?= (!empty($_GET['next']) ? '&amp;next=' . $antiXSS->escape($_GET['next'], $antiXSS::URL_PARAM) : null) ?>" class="admin-login-form">

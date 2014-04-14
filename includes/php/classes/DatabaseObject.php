@@ -17,10 +17,14 @@ class DatabaseObject {
 
     /**
      * DatabaseObject Constructor
+     * @param string $host The hostname of the database server
+     * @param string $db The name of the database
+     * @param string $user The database username
+     * @param string $password The database user password
      */
-    public function __construct() {
+    public function __construct($host = DB_HOSTNAME, $db = DB_NAME, $user = DB_USERNAME, $password = DB_PASSWORD) {
         try {
-            $this->db = new \PDO('mysql:host=' . DB_HOSTNAME . ';dbname=' . DB_NAME . ';charset=utf8', DB_USERNAME, DB_PASSWORD);
+            $this->db = new \PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $password);
 
             $this->db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             $this->db->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
@@ -107,6 +111,66 @@ class DatabaseObject {
             return $q->rowCount();
             
         } catch (\PDOException $e) {
+            echo $e->getMessage();
+            // @todo: trigger email to admin (as specified in config)
+        }
+    }
+    
+    /**
+     * Execute prepared statements with sets of parameter value sets
+     * @param string $sql A parameterized SQL query with named parameters
+     * @param array $data An array of data sets to bind
+     * @param array $types The types of data
+     * @return array|void Returns the results of a SELECT query.
+     */
+    public function batchManipulationQuery($sql, array $data = array(), array $types = array()) {        
+        
+        if (!is_string($sql) || empty($sql)) {
+            throw new \InvalidArgumentException('Invalid SQL query');
+        }
+        
+        if (!preg_match('/^(INSERT|UPDATE|DELETE|REPLACE)/', mb_strtoupper(substr(ltrim($sql), 0, 6)))) {
+            throw new \InvalidArgumentException('This method only works with data manipulation statements');
+        }
+        
+        try {
+            // Prepare the statement
+            $q = $this->db->prepare($sql);
+
+            foreach($types as $field => $type) {
+                $q->bindParam(":{$field}", $$field, $type);
+            }
+            
+            // Start transaction
+            $this->db->beginTransaction();
+            
+            // Loop through set of data sets
+            $numTypes = sizeof($types);
+            foreach($data as $r) {
+                
+                if(sizeof($r) !== $numTypes) {
+                    $this->db->rollBack();
+                    throw new \LengthException('Number of data values do not match number of data types');
+                }
+                
+                // Loop through fields of data set
+                foreach($r as $field => $value) {
+                    $$field = $value;
+                }
+                $q->execute();
+            }
+            
+            // Commit
+            $this->db->commit();
+            
+        } catch (\PDOException $e) {
+            // If we are in a transaction, roll it back
+            try {
+                $this->db->rollBack();
+            } catch (\PDOException $e2) {
+                
+            }
+            
             // @todo: trigger email to admin (as specified in config)
         }
     }
