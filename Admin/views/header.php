@@ -6,7 +6,9 @@
                 <div class="col-md-1">
                     
                     <div class="row">
-                        <img class="org-logo" alt="University of Ottawa" src="../includes/img/logo_icon_379_379.png">
+                        <a href="//<?= URL_INTERPRESENSE ?>/">
+                            <img class="org-logo" alt="Interpresense" src="../includes/img/logo_icon_379_379.png">
+                        </a>
                     </div>
                     
                 </div>

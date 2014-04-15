@@ -1,10 +1,10 @@
 {
     "values": {
         "en-CA": {
-            "foo": "bar"
+            "documentTitleTag": "Interpresense installation- Step 1"
         },
         "fr-CA": {
-            "foo": "bar"
+            "documentTitleTag": "bar"
         }
     }
 }
