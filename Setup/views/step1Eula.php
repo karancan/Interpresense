@@ -25,16 +25,14 @@
                 </div>
             </div>
             
-            <!-- @todo: add checkbox -->
-            
         </div>
     
     </div>
     
     <div class="row">
     
-        <div class="col-md-2">
-            <a href="index.php?page=go-to-step-2" class="btn btn-success btn-block"><i class="fa fa-check"></i> Save and proceed</a>
+        <div class="col-md-3">
+            <a href="index.php?page=go-to-step-2" class="btn btn-success btn-block"><i class="fa fa-check"></i> Acknowledge and proceed</a>
         </div>
     
     </div>

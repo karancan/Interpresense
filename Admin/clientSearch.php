@@ -50,11 +50,8 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  */
 if (!isset($_GET['page'])) {
     
-    //@todo: check if $_GET['client'] is valid and fetch client details. If invalid adjust view.
-    
-    //@todo: fetch client expected invoices
-    //@todo: fetch client submitted invoices
-    //@todo: fetch client draft invoices
+    //@todo: fetch client submitted invoices i.e. $_GET['client'] matches any entries of `interpresense_invoices.client_num` and `is_approved` = 1
+    //@todo: fetch client draft invoices i.e. $_GET['client'] matches any entries of `interpresense_invoices.client_num` and `is_approved` = 0
     
     $translate->addResource('l10n/clientSearch.json');
     $viewFile = "views/clientSearch.php";

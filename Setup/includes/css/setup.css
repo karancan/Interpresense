@@ -7,6 +7,12 @@
     color: #858585;
     text-shadow: 0 1px 0 #fff;
 }
+.setup-step-description{
+    color: #7d7d7d;
+}
+.setup-step-container{
+    margin: 2em 0 2em;
+}
 .setup-well-active{
     background-color: #ffd368;
 }

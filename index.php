@@ -45,7 +45,9 @@ header('Content-Type: text/html; charset=utf-8');
             <div class="row">
                 
                 <div class="col-md-8">
-                    <img class="external-page-logo" src="//<?= URL_IMAGES ?>/logo_regular_1024_350.png" alt="Interpresense">
+                    <a href="//<?= URL_INTERPRESENSE ?>/">
+                        <img class="external-page-logo" src="//<?= URL_IMAGES ?>/logo_regular_1024_350.png" alt="Interpresense">
+                    </a>
                 </div>
                 
                 <div class="col-md-2">
