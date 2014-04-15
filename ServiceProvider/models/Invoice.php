@@ -37,8 +37,13 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         
         $types = array(
             'invoice_uid' => \PDO::PARAM_STR,
+            'invoice_id_for_sp' => \PDO::PARAM_STR,
+            'invoice_id_for_org' => \PDO::PARAM_STR,
             'sp_name' => \PDO::PARAM_STR,
             'sp_address' => \PDO::PARAM_STR,
+            'sp_postal_code' => \PDO::PARAM_STR,
+            'sp_city' => \PDO::PARAM_STR,
+            'sp_province' => \PDO::PARAM_STR,
             'sp_phone' => \PDO::PARAM_STR,
             'sp_email' => \PDO::PARAM_STR,
             'client_num' => \PDO::PARAM_INT,
@@ -63,8 +68,8 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         $data['invoice_uid'] = hash('sha512', microtime(true) . mt_rand());
         $data['is_final'] = (int)$final;
         
-        $sql = "INSERT INTO `interpresense_service_provider_invoices` (`invoice_uid`, `sp_name`, `sp_address`, `sp_phone`, `sp_email`, `client_num`, `is_final`, `grand_total`, `inserted_on`, `updated_on`)
-                     VALUES (:invoice_uid, :sp_name, :sp_address, :sp_phone, :sp_email, :client_num, :is_final, :grand_total, NOW(), NOW());";
+        $sql = "INSERT INTO `interpresense_service_provider_invoices` (`invoice_uid`, `invoice_id_for_sp`, `invoice_id_for_org`, `sp_name`, `sp_address`, `sp_postal_code`, `sp_city`, `sp_province`, `sp_phone`, `sp_email`, `client_num`, `is_final`, `grand_total`, `inserted_on`, `updated_on`)
+                     VALUES (:invoice_uid, :invoice_id_for_sp, :invoice_id_for_org, :sp_name, :sp_address, :sp_postal_code, :sp_city, :sp_province, :sp_phone, :sp_email, :client_num, :is_final, :grand_total, NOW(), NOW());";
         
         parent::$db->query($sql, $data, $types);
         
