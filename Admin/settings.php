@@ -54,8 +54,10 @@ if (!isset($_GET['page'])) {
     //@todo: fetch user list from `interpresense_users`
     
     $appSettings = $model->fetchSettings();
+    
     $translate->addResource('l10n/settings.json');
     $viewFile = "views/settings.php";
+    
 } elseif ($_GET['page'] === 'change-setting') {
     $model->changeSetting($_POST['key'], $_POST['value']);
     header('location: settings.php');

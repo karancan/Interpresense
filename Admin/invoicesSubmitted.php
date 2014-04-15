@@ -54,6 +54,26 @@ if (!isset($_GET['page'])) {
     
     $translate->addResource('l10n/invoicesSubmitted.json');
     $viewFile = "views/invoicesSubmitted.php";
+    
+} else if ($_GET['page'] === "fetch-invoice-details") {
+    
+    //@todo: mark invoice as viewed
+    //@todo: given an invoice ID, fetch everything about an invoice itself
+    //@todo: given an invoice ID, fetch invoice items
+    
+} else if ($_GET['page'] === "fetch-invoice-files") {
+    
+    //@todo: given an invoice ID, fetch all the files belonging to that invoice
+    
+} else if ($_GET['page'] === "fetch-invoice-notes") {
+
+    //@todo: given an invoice ID, fetch all the notes belonging to that invoice
+    
+} else if ($_GET['page'] === "mark-invoice-as-draft") {
+
+    //@todo: for a given invoice id, mark `is_approved` as 0 and nullify the fields that state who approved it and when
+    //@todo: create an invoice note stating that the invoice was mark as un-approved (or as a draft)
+
 } else if ($_GET['page'] === "export") {
     //@todo: add logic
     die();
@@ -62,7 +82,7 @@ if (!isset($_GET['page'])) {
 /**
  * View
  */
-$actions = array('export');
+$actions = array('fetch-invoice-details', 'fetch-invoice-files', 'fetch-invoice-notes', 'mark-invoice-as-draft', 'export');
 
 if (!in_array($_GET['page'], $actions, true)) {
     
