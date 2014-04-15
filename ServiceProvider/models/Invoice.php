@@ -77,6 +77,33 @@ class Invoice extends \Interpresense\Includes\BaseModel {
     }
     
     /**
+     * Retrieves an invoice ID given an invoice UID
+     * @param string $invoiceUID The invoice UID
+     * @return null|int The ID of the invoice, or NULL if it does not exist.
+     */
+    public function getInvoiceIdFromUid($invoiceUID) {
+        
+        if(!$this->validators['invoice_uid']->validate($invoiceUID)) {
+            throw new \InvalidArgumentException('Invalid invoice UID');
+        }
+        
+        $sql = "SELECT `invoice_id`
+                  FROM `interpresense_service_provider_invoices`
+                 WHERE `invoice_uid` = :invoice_uid;";
+        
+        $data = array('invoice_uid' => $invoiceUID);
+        $types = array('invoice_uid' => \PDO::PARAM_STR);
+        
+        $result = parent::$db->query($sql, $data, $types, \PDO::FETCH_COLUMN);
+        
+        if(empty($result)) {
+            return null;
+        }
+        
+        return (int)reset($result);
+    }
+    
+    /**
      * Marks a draft invoice as final
      * @param string $invoiceUID The invoice UID
      */
