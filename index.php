@@ -52,7 +52,7 @@ header('Content-Type: text/html; charset=utf-8');
                     </div>
                     <div class="col-md-2 col-md-offset-2">
                         <div class="btn-group header-options-container pull-right">
-                            <button type="button" class="btn btn-info"><i class="fa fa-gear"></i> Language</button>
+                            <button type="button" class="btn btn-info"><i class="fa fa-font"></i> Language</button>
                             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
