@@ -45,6 +45,8 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  */
 if (!isset($_GET['page'])) {
     
+    //@todo: first we need to check if installation is complete. If yes, continue, If not, go to setup module
+    
     if (isset($_SESSION['user_id'])){
         
         if (!empty($_GET['next'])) {
