@@ -37,8 +37,13 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         
         $types = array(
             'invoice_uid' => \PDO::PARAM_STR,
+            'invoice_id_for_sp' => \PDO::PARAM_STR,
+            'invoice_id_for_org' => \PDO::PARAM_STR,
             'sp_name' => \PDO::PARAM_STR,
             'sp_address' => \PDO::PARAM_STR,
+            'sp_postal_code' => \PDO::PARAM_STR,
+            'sp_city' => \PDO::PARAM_STR,
+            'sp_province' => \PDO::PARAM_STR,
             'sp_phone' => \PDO::PARAM_STR,
             'sp_email' => \PDO::PARAM_STR,
             'client_num' => \PDO::PARAM_INT,
@@ -63,12 +68,39 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         $data['invoice_uid'] = hash('sha512', microtime(true) . mt_rand());
         $data['is_final'] = (int)$final;
         
-        $sql = "INSERT INTO `interpresense_service_provider_invoices` (`invoice_uid`, `sp_name`, `sp_address`, `sp_phone`, `sp_email`, `client_num`, `is_final`, `grand_total`, `inserted_on`, `updated_on`)
-                     VALUES (:invoice_uid, :sp_name, :sp_address, :sp_phone, :sp_email, :client_num, :is_final, :grand_total, NOW(), NOW());";
+        $sql = "INSERT INTO `interpresense_service_provider_invoices` (`invoice_uid`, `invoice_id_for_sp`, `invoice_id_for_org`, `sp_name`, `sp_address`, `sp_postal_code`, `sp_city`, `sp_province`, `sp_phone`, `sp_email`, `client_num`, `is_final`, `grand_total`, `inserted_on`, `updated_on`)
+                     VALUES (:invoice_uid, :invoice_id_for_sp, :invoice_id_for_org, :sp_name, :sp_address, :sp_postal_code, :sp_city, :sp_province, :sp_phone, :sp_email, :client_num, :is_final, :grand_total, NOW(), NOW());";
         
         parent::$db->query($sql, $data, $types);
         
         return parent::$db->db->lastInsertId();
+    }
+    
+    /**
+     * Retrieves an invoice ID given an invoice UID
+     * @param string $invoiceUID The invoice UID
+     * @return null|int The ID of the invoice, or NULL if it does not exist.
+     */
+    public function getInvoiceIdFromUid($invoiceUID) {
+        
+        if(!$this->validators['invoice_uid']->validate($invoiceUID)) {
+            throw new \InvalidArgumentException('Invalid invoice UID');
+        }
+        
+        $sql = "SELECT `invoice_id`
+                  FROM `interpresense_service_provider_invoices`
+                 WHERE `invoice_uid` = :invoice_uid;";
+        
+        $data = array('invoice_uid' => $invoiceUID);
+        $types = array('invoice_uid' => \PDO::PARAM_STR);
+        
+        $result = parent::$db->query($sql, $data, $types, \PDO::FETCH_COLUMN);
+        
+        if(empty($result)) {
+            return null;
+        }
+        
+        return (int)reset($result);
     }
     
     /**

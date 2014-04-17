@@ -23,8 +23,12 @@ class Users extends \Interpresense\Includes\BaseModel {
     public function __construct(\Interpresense\Includes\DatabaseObject $db) {
         parent::__construct($db);
         
-        // @todo More rules?
-        $this->validators['username'] = Validator::string()->notEmpty();
+        $this->validators['user_id'] = Validator::notEmpty()->noWhitespace()->digit()->positive();
+        $this->validators['username'] = Validator::notEmpty()->string()->alnum();
+        $this->validators['user_password_reset_key'] = Validator::notEmpty()->length(128, 128)->xdigit();
+        $this->validators['first_name'] = Validator::notEmpty()->string()->regex('/^[\w .\']+$/');
+        $this->validators['last_name'] = Validator::notEmpty()->string()->regex('/^[\w .\']+$/');
+        $this->validators['expires_on'] = Validator::notEmpty()->date('Y-m-d');
     }
     
     /**
@@ -152,12 +156,11 @@ class Users extends \Interpresense\Includes\BaseModel {
             'expires_on' => \PDO::PARAM_STR
         );
         
-        // @todo: pass validators into the second parameter of key() if necessary
         if(!Validator::key('user_name', $this->validators['username'])
                 ->key('user_password')
-                ->key('first_name')
-                ->key('last_name')
-                ->key('expires_on', Validator::date('Y-m-d'))
+                ->key('first_name', $this->validators['first_name'])
+                ->key('last_name', $this->validators['last_name'])
+                ->key('expires_on', $this->validators['expires_on'])
                 ->validate($data)) {
             throw new \InvalidArgumentException('Required data invalid or missing');
         }
@@ -177,14 +180,16 @@ class Users extends \Interpresense\Includes\BaseModel {
      * @param string $username The username
      */
     public function confirmUser($username) {
-        $data = array('user_name' => $username);
-        $types = array('user_name' => \PDO::PARAM_STR);
         
-        $username = parent::$db->db->quote($username);
+        if(!$this->userExists($username)) {
+            throw new Exception('User does not exist.');
+        }
         
         $sql = "UPDATE `interpresense_users`
                    SET `is_confirmed` = 1
                  WHERE `user_name` = :user_name;";
+        $data = array('user_name' => $username);
+        $types = array('user_name' => \PDO::PARAM_STR);
         
         parent::$db->query($sql, $data, $types);
     }
@@ -250,11 +255,11 @@ class Users extends \Interpresense\Includes\BaseModel {
      */
     public function confirmPasswordReset($userId, $hash) {
         
-        if(!Validator::notEmpty()->digit()->validate($userId)) {
+        if(!$this->validators['user_id']->validate($userId)) {
             throw new \InvalidArgumentException('Invalid user ID');
         }
         
-        if(!Validator::notEmpty()->xdigit()->length(128, 128)->validate($hash)) {
+        if(!$this->validators['user_password_reset_key']->validate($hash)) {
             throw new \InvalidArgumentException('Invalid reset key');
         }     
         
