@@ -44,7 +44,8 @@ define('FS_CSS', FS_INCLUDES."/css");
 define('FS_JS', FS_INCLUDES."/js");
 define('FS_L10N', FS_INCLUDES."/l10n");
 define('FS_PHP', FS_INCLUDES."/php");
-define('FS_VENDOR', FS_INCLUDES."/vendor");
+define('FS_VENDOR_BACKEND', FS_INCLUDES."/vendor/backend");
+define('FS_VENDOR_FRONTEND', FS_INCLUDES."/vendor/frontend");
 define('FS_CUSTOM_HANDLERS', FS_INCLUDES."/custom-handlers");
 
 /* ~~~~~~~~~~~~~~END : DO NOT EDIT~~~~~~~~~~~~~~ */
@@ -69,7 +70,8 @@ define('URL_CSS', URL_INCLUDES."/css");
 define('URL_JS', URL_INCLUDES."/js");
 define('URL_L10N', URL_INCLUDES."/l10n");
 define('URL_PHP', URL_INCLUDES."/php");
-define('URL_VENDOR', URL_INCLUDES."/vendor");
+define('URL_VENDOR_BACKEND', URL_INCLUDES."/vendor/backend");
+define('URL_VENDOR_FRONTEND', URL_INCLUDES."/vendor/frontend");
 define('URL_CUSTOM_HANDLERS', URL_INCLUDES."/custom-handlers");
 
 /* ~~~~~~~~~~~~~~END : DO NOT EDIT~~~~~~~~~~~~~~ */
@@ -188,7 +190,7 @@ spl_autoload_register(function($fqClassName) {
     } else {
         // It's not one of ours, pray that the vendor followed PSR-0
         
-        $file = FS_VENDOR . '/' . str_replace('\\', '/', $namespace) . "/$className.php";
+        $file = FS_VENDOR_BACKEND . '/' . str_replace('\\', '/', $namespace) . "/$className.php";
         if(file_exists($file)) {
             require $file;
         }

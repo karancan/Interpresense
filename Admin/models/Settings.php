@@ -5,8 +5,7 @@ namespace Interpresense\Admin;
 use Respect\Validation\Validator;
 
 /**
- * Description of ApplicationSettings
- *
+ * Class for manipulating application settings
  * @author Vincent
  */
 class Settings extends \Interpresense\Includes\BaseModel {
