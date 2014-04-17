@@ -154,7 +154,6 @@ ini_set('display_errors', ERROR_DISPLAY);
 if(!class_exists('Locale')) {
     die('The php_intl extension must be installed.');
 }
-Locale::setDefault(DEFAULT_LANGUAGE);
 
 //Increase the probability of the session garbage collection being run
 //Example: After 30 minues (1800 seconds) of a user having a sesssion, there is
