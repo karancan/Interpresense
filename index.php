@@ -91,7 +91,7 @@ header('Content-Type: text/html; charset=utf-8');
                             </video>
                         </div>
                         <div class="jumbotron-contents">
-                            <h1 class="interpresense-objective">An invoicing solution built for organizations catering to clients with disabilities.</h1>
+                            <h1 class="interpresense-objective">An invoicing solution built for organizations catering to clients with disabilities</h1>
                             <h2>Modern and intuitive for <a class="interpresense-module-link" href="//<?= URL_SERVICE_PROVIDER ?>/">service providers</a></h2>
                             <p>Interpreters, note-takers and other service providers create, save and send invoices.</p>
                             <h2>Powerful and flexible for <a class="interpresense-module-link" href="//<?= URL_ADMIN ?>/">administrators</a></h2>
