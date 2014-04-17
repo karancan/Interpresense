@@ -14,14 +14,6 @@ header('Content-Type: text/html; charset=utf-8');
     <link rel='stylesheet' href='//<?= URL_CSS ?>/interpresense.css'>
     
     <style>
-        .external-page-logo{
-            width: 35%;
-        }
-        header{
-            background-color: inherit;
-            position: relative;
-            top: 1em;
-        }
         video{
             width: 100%;
         }
@@ -56,7 +48,7 @@ header('Content-Type: text/html; charset=utf-8');
         
         <div class="container">
             
-            <header>
+            <header class="external-page-header">
             
                 <div class="row">
                     <div class="col-md-8">
