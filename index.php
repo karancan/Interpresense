@@ -7,10 +7,10 @@ header('Content-Type: text/html; charset=utf-8');
     <meta charset="utf-8">
     <meta name='viewport' content='width=device-width,initial-scale=1.0'>
 
-    <link rel='shortcut icon' href='favicon.ico'>    
-    <link rel='stylesheet' media='screen' type='text/css' href='//<?= URL_VENDOR ?>/bootstrap/css/bootstrap.min.css'>
-    <link rel='stylesheet' media='screen' type='text/css' href='//<?= URL_VENDOR ?>/bootflat.min.css'>
-    <link rel='stylesheet' href='//<?= URL_VENDOR ?>/fontawesome/css/font-awesome.min.css'>
+    <link rel='shortcut icon' href='favicon.ico'>
+    <link rel='stylesheet' media='screen' type='text/css' href='//<?= URL_VENDOR_FRONTEND ?>/bootstrap/dist/css/bootstrap.min.css'>
+    <link rel='stylesheet' media='screen' type='text/css' href='//<?= URL_VENDOR_FRONTEND ?>/Bootflat/bootflat/css/bootflat.min.css'>
+    <link rel='stylesheet' href='//<?= URL_VENDOR_FRONTEND ?>/fontawesome/css/font-awesome.min.css'>
     <link rel='stylesheet' href='//<?= URL_CSS ?>/interpresense.css'>
     
     <style>
@@ -31,9 +31,9 @@ header('Content-Type: text/html; charset=utf-8');
         }
     </style>
     
-    <script src='//<?= URL_VENDOR ?>/jquery.min.js' charset='utf-8'></script>
-    <script src='//<?= URL_VENDOR ?>/jquery.dataTables.min.js' charset='utf-8'></script>
-    <script src='//<?= URL_VENDOR ?>/bootstrap/js/bootstrap.min.js' charset='utf-8'></script>
+    <script src='//<?= URL_VENDOR_FRONTEND ?>/jquery/dist/jquery.min.js' charset='utf-8'></script>
+    <script src='//<?= URL_VENDOR_FRONTEND ?>/bootstrap/dist/js/bootstrap.min.js' charset='utf-8'></script>
+    <script src='//<?= URL_VENDOR_FRONTEND ?>/DataTables/media/js/jquery.dataTables.js' charset='utf-8'></script>
     
     <!--[if lt IE 9]>
     <script src='../includes/vendor/html5shiv/html5shiv-printshiv.js' charset='utf-8'></script>

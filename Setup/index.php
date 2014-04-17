@@ -26,7 +26,7 @@ session_start();
  * Localization
  */
 if(!isset($_SESSION['lang'])) {
-    $_SESSION['lang'] = DEFAULT_LANGUAGE;
+    $_SESSION['lang'] = $settings['institution_default_lang'];
 }
 \Locale::setDefault($_SESSION['lang']);
 
