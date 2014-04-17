@@ -60,8 +60,7 @@ if (!isset($_GET['page'])) {
     
 } elseif ($_GET['page'] === 'change-setting') {
     $model->changeSetting($_POST['key'], $_POST['value']);
-    header('location: settings.php');
-    //@todo: add row focus
+    header('location: settings.php?focus=' . $_POST['key']);
 } elseif ($_GET['page'] === 'delete-setting') {
     $model->deleteSetting($_POST['key']);
 } else if ($_GET['page'] === "export-users") {
