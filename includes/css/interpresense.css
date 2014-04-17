@@ -96,15 +96,28 @@ footer .navbar-fixed-bottom{
 /**
  *External and error pages
  */
+header.external-page-header{
+    background-color: #f1f3f5;
+    position: relative;
+    top: 1em;
+}
 .external-page-logo{
-    width: 40%;
+    width: 35%;
 }
 .external-page-btn-redirect{
     margin-top: 25%;
 }
 .error-code{
-    font-size: 10em;
-    color: #606060;
+    font-size: 10em !important;
+    color: #720014 !important;
+}
+h1.error-description{
+    margin-top: 0;
+    font-weight: bold;
+}
+.error-code-container{
+    background-color: #e6e9ed;
+    padding-bottom: 0.8em;
 }
 .error-explanation{
     margin-bottom: 2em;

@@ -33,27 +33,43 @@ require_once '../php/config.php';
         
         <div class="container">
         
-            <div class="row">
-                
-                <div class="col-md-8">
-                    <img class="external-page-logo" src="//<?= URL_IMAGES ?>/logo_regular_1024_350.png" alt="Interpresense">
-                </div>
-                
-                <div class="col-md-2">
-                    <a href="//<?= URL_INTERPRESENSE ?>/ServiceProvider/" class="external-page-btn-redirect btn btn-block btn-info"><i class="fa fa-hand-o-right"></i> I am an interpreter</a>
-                </div>
-                
-                <div class="col-md-2">
-                    <a href="//<?= URL_INTERPRESENSE ?>/Admin/" class="external-page-btn-redirect btn btn-block btn-info"><i class="fa fa-hand-o-right"></i> I am an administrator</a>
-                </div>
-                
-            </div>
+            <header class="external-page-header">
             
-            <hr class="inset">
+                <div class="row">
+                    <div class="col-md-8">
+                        <a href="//<?= URL_INTERPRESENSE ?>/">
+                            <img class="external-page-logo" src="//<?= URL_IMAGES ?>/logo_regular_1024_350.png" alt="Interpresense">
+                        </a>
+                    </div>
+                    <div class="col-md-2 col-md-offset-2">
+                        <div class="btn-group header-options-container pull-right">
+                            <button type="button" class="btn btn-info"><i class="fa fa-font"></i> Language</button>
+                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">English <i class="fa fa-check"></i></a></li>
+                                <li><a href="#">French</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            
+            </header>
             
             <div class="row">
-                <div class="col-md-12 text-center">
-                    <h1 class="error-code"><i class="fa fa-frown-o fa-2x"></i><br>403</h1>
+                <div class="col-md-12">
+                    <div class="jumbotron">
+                        <div class="jumbotron-photo error-code-container">
+                            <h1 class="error-code text-center"><i class="fa fa-thumbs-o-down"></i> 403</h1>
+                        </div>
+                        <div class="jumbotron-contents">
+                            <h1 class="error-description">You do not have sufficient privileges to be able to access this page…</h1>
+                            <h2>I am a <a class="interpresense-module-link" href="//<?= URL_SERVICE_PROVIDER ?>/">service provider</a> looking to fill out an invoice</h2>
+                            <h2>I am an <a class="interpresense-module-link" href="//<?= URL_ADMIN ?>/">administrator</a> looking to review invoices and generate reports</h2>
+                        </div>
+                    </div>
                 </div>
             </div>
 
