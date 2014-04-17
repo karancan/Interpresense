@@ -14,14 +14,28 @@ header('Content-Type: text/html; charset=utf-8');
     <link rel='stylesheet' href='//<?= URL_CSS ?>/interpresense.css'>
     
     <style>
+        .external-page-logo{
+            width: 35%;
+        }
         header{
             background-color: inherit;
+            position: relative;
+            top: 1em;
         }
         video{
             width: 100%;
         }
         .jumbotron, footer{
             margin: 2em 0;
+        }
+        .interpresense-module-link{
+            font-weight: bold;
+        }
+        .interpresense-objective{
+            margin-top: 0;
+        }
+        .jumbotron h2{
+            color: #7d7d7d;
         }
     </style>
     
@@ -77,10 +91,10 @@ header('Content-Type: text/html; charset=utf-8');
                             </video>
                         </div>
                         <div class="jumbotron-contents">
-                            <h1>Modern and intuitive for <a href="//<?= URL_SERVICE_PROVIDER ?>/">service providers</a>. Powerful and flexible for <a href="//<?= URL_ADMIN ?>/">administrators</a>.</h1>
-                            <h2><a href="//<?= URL_SERVICE_PROVIDER ?>/">Service providers</a></h2>
+                            <h1 class="interpresense-objective">An invoicing solution built for organizations catering to clients with disabilities.</h1>
+                            <h2>Modern and intuitive for <a class="interpresense-module-link" href="//<?= URL_SERVICE_PROVIDER ?>/">service providers</a></h2>
                             <p>Interpreters, note-takers and other service providers create, save and send invoices.</p>
-                            <h2><a href="//<?= URL_ADMIN ?>/">Administrators</a></h2>
+                            <h2>Powerful and flexible for <a class="interpresense-module-link" href="//<?= URL_ADMIN ?>/">administrators</a></h2>
                             <p>Administrators receive, approve and respond to invoices and generate reports and statistics in a few clicks.</p>
                         </div>
                     </div>
