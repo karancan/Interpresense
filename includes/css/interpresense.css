@@ -36,9 +36,15 @@ header .org-logo{
 }
 
 /**
+ *Body footer styles
+ */
+.footer-container{
+    margin-top: 6em;
+}
+
+/**
  *Form styles
  */
- 
 .input-top{
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
