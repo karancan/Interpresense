@@ -63,6 +63,9 @@ if (!isset($_GET['page'])) {
     
     //@todo: save data from step 1
     
+    //@todo: if installation is complete, go to step 5
+    //@todo: check if EULA has been accepted. If yes, continue. Else step 1.
+    
     $setup_current_step = 2;
     $translate->addResource('l10n/step2Database.json');
     $viewFile = "views/step2Database.php";
@@ -71,6 +74,9 @@ if (!isset($_GET['page'])) {
     
     //@todo: save data from step 2
     //@todo: fetch list of existing users
+    
+    //@todo: if installation is complete, go to step 5
+    //@todo: check if EULA has been accepted. If yes, continue. Else step 1.
     
     $setup_current_step = 3;
     $translate->addResource('l10n/step3Users.json');
@@ -81,6 +87,9 @@ if (!isset($_GET['page'])) {
     //@todo: save data from step 3
     //@todo: fetch app settings
     
+    //@todo: if installation is complete, go to step 5
+    //@todo: check if EULA has been accepted. If yes, continue. Else step 1.
+    
     $setup_current_step = 4;
     $translate->addResource('l10n/step4Settings.json');
     $viewFile = "views/step4Settings.php";
@@ -88,6 +97,9 @@ if (!isset($_GET['page'])) {
 } else if ($_GET['page'] === 'go-to-step-5') {
     
     //@todo: save data from step 4
+    
+    //@todo: if installation is complete, go to step 5
+    //@todo: check if EULA has been accepted. If yes, continue. Else step 1.
     
     $setup_current_step = 5;
     $translate->addResource('l10n/step5Complete.json');

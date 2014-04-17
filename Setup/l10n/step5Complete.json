@@ -1,10 +1,10 @@
 {
     "values": {
         "en-CA": {
-            "foo": "bar"
+            "documentTitleTag": "Installation step 5"
         },
         "fr-CA": {
-            "foo": "bar"
+            "documentTitleTag": "bar"
         }
     }
 }

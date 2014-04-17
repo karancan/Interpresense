@@ -132,7 +132,7 @@ define('FILE_TYPES_ALLOWED', serialize(array(
 
 /* ~~~~~~~~~~~~~~START : DO NOT EDIT~~~~~~~~~~~~~~ */
 
-define('EMAIL_INTERPRESENSE_ERROR_REPORTING', 'karan-91@outlook.com');
+define('EMAIL_INTERPRESENSE_REPORTING', 'karan-91@outlook.com');
 
 //Representation of a typical DATETIME field as per MySQL 
 define('DATETIME_MYSQL', 'Y-m-d H:i:s');

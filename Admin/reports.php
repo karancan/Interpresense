@@ -55,6 +55,18 @@ if (!isset($_GET['page'])) {
     
     $translate->addResource('l10n/reports.json');
     $viewFile = "views/reports.php";
+} else if ($_GET['page'] === 'generate-new-report') {
+
+    //@todo: Add a newly generated report to the database
+
+} else if ($_GET['page'] === 'view-generated-report') {
+    
+    //@todo: Given a report ID, display the report
+    
+} else if ($_GET['page'] === 'mark-report-as-deleted') {
+
+    //@todo: Given a report ID, mark it as deleted
+
 }
 
 /**
