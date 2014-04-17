@@ -188,7 +188,7 @@ spl_autoload_register(function($fqClassName) {
     } else {
         // It's not one of ours, pray that the vendor followed PSR-0
         
-        $file = FS_VENDOR . '/' . str_replace('\\', '/', $namespace) . "/$className.php";
+        $file = FS_VENDOR . '/backend/' . str_replace('\\', '/', $namespace) . "/$className.php";
         if(file_exists($file)) {
             require $file;
         }
