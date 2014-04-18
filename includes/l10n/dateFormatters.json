@@ -7,6 +7,9 @@
             "day_date_time": {
                 "pattern": "EEE d MMM, yyyy @ HH:mm"
             },
+            "date_time": {
+                "pattern": "d MMM, yyyy @ HH:mm"
+            },
             "day": {
                 "pattern": "cccc"
             }
@@ -17,6 +20,9 @@
             },
             "day_date_time": {
                 "pattern": "EEE d MMM, yyyy à HH:mm"
+            },
+            "date_time": {
+                "pattern": "d MMM, yyyy à HH:mm"
             },
             "day": {
                 "pattern": "cccc"

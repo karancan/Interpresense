@@ -182,3 +182,7 @@
     </div>
 </div>
 <script charset='utf-8' src='includes/js/settings.js'></script>
+<script>
+    'use strict';
+    var focus = '<?= $antiXSS->escape($_GET['focus'], $antiXSS::JS) ?>';
+</script>

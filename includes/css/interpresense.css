@@ -38,24 +38,14 @@ header .org-logo{
 /**
  *Body footer styles
  */
-footer .navbar{
-    margin-top: 2em;
-}
-footer .navbar-content{
-    margin-top: .5em;
-}
-footer .navbar-content:first-child{
-    line-height: 2.5em;
-}
-footer .navbar-fixed-bottom{
-    background-color: #CCD1D9;
-    border-color: #CCD1D9;
+.footer-container{
+    margin-top: 6em;
+    margin-bottom: 2em;
 }
 
 /**
  *Form styles
  */
- 
 .input-top{
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;

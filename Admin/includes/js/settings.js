@@ -1,4 +1,14 @@
 /**
+ *If a row needs to be focussed on, we highlight it
+ */
+$(document).ready(function(){
+    if (focus !== ''){
+        global.highlightRow($('[data-setting-id="' + focus + '"]'));
+        //@todo: add scroll
+    }
+});
+
+/**
  *User wants to add a setting
  */
 $('[data-action="add"]').click(function(){
@@ -30,8 +40,6 @@ $('[data-action="edit"]').click(function(){
  */
 $('[data-action="delete"]').click(function(){
     
-    console.log(global);
-    console.log($(this).closest('tr'));
     global.highlightRow($(this).closest('tr'));
     
     if(confirm("Are you sure you want to delete this setting? This action is not reversible and could cause the application to malfunction.")){

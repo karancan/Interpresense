@@ -18,7 +18,7 @@
         
         <div class="col-md-3 text-center">
         
-            <a href="#" class="btn btn-warning btn-lg btn-block"><i class="fa fa-bug"></i> Report this error</a>
+            <a href="mailto:<?= EMAIL_INTERPRESENSE_REPORTING ?>?subject=Interpresense%20bug%20report" class="btn btn-warning btn-lg btn-block"><i class="fa fa-bug"></i> Report this error</a>
             
         </div>
         
