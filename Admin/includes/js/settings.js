@@ -3,7 +3,7 @@
  */
 $(document).ready(function(){
     if (focus !== ''){
-        global.highlightRow($('[data-setting-id="' + focus + '"]'));
+        global.highlightRow($('[data-setting-id="' + focus + '"]'), 15000);
         //@todo: add scroll
     }
 });
