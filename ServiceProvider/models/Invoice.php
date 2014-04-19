@@ -152,7 +152,6 @@ class Invoice extends \Interpresense\Includes\BaseModel {
     /**
      * Updates a draft invoice
      * @param array $data The POST data
-     * @todo Untested
      */
     public function updateDraftInvoice(array $data) {
         $types = array(
