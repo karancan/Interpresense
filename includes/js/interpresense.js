@@ -27,7 +27,7 @@ var global = {};
             row.addClass('highlighted-row');
             if(duration && duration > 0 && isFinite(duration)) {
                 row.animate({
-                    backgroundColor: 'inherit'
+                    backgroundColor: 'rgb(241, 243, 245)'
                 }, duration, function() {
                     row.removeClass('highlighted-row');
                 });
