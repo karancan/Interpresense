@@ -102,7 +102,6 @@ class Users extends \Interpresense\Includes\BaseModel {
     
     /**
      * Logins a user in
-     * @todo Check is_confirmed?
      * @param string $username The username
      * @param string password The password
      * @return array|boolean Returns the user details, or FALSE on failure
@@ -188,6 +187,7 @@ class Users extends \Interpresense\Includes\BaseModel {
         $sql = "UPDATE `interpresense_users`
                    SET `is_confirmed` = 1
                  WHERE `user_name` = :user_name;";
+
         $data = array('user_name' => $username);
         $types = array('user_name' => \PDO::PARAM_STR);
         
@@ -206,11 +206,31 @@ class Users extends \Interpresense\Includes\BaseModel {
     }
     
     /**
-     * Modifies a user
-     * @todo
+     * Update user details
+     * @param array $data The POST data
      */
-    public function modifyUser($data) {
+    public function updateUser(array $data) {
         
+        $types = array(
+            'user_id' => \PDO::PARAM_INT,
+            'first_name' => \PDO::PARAM_STR,
+            'last_name' => \PDO::PARAM_STR
+        );
+        
+        if (!Validator::key('user_id', $this->validators['user_id'])
+                ->key('first_name', $this->validators['first_name'])
+                ->key('last_name', $this->validators['last_name'])
+                ->validate($data)) {
+            throw new \InvalidArgumentException('Required data missing or invalid.');
+        }
+        
+        $data = parent::$db->pick(array_keys($types), $data);
+        
+        $sql = "UPDATE `interpresense_users`
+                   SET `first_name` = :first_name, `last_name` = :last_name, `updated_on` = NOW()
+                WHERE `user_id` = :user_id;";
+        
+        parent::$db->query($sql, $data, $types);
     }
     
     /**
