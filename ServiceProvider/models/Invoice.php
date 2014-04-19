@@ -138,7 +138,7 @@ class Invoice extends \Interpresense\Includes\BaseModel {
             throw new \RuntimeException('Cannot load a finalized invoice.');
         }
         
-        $sql = "SELECT `sp_name`, `sp_address`, `sp_email`, `client_num`
+        $sql = "SELECT `invoice_id`, `sp_name`, `sp_address`, `sp_email`, `client_num`
                   FROM `interpresense_service_provider_invoices`
                  WHERE `invoice_uid` = :invoice_uid;";
         

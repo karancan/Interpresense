@@ -23,6 +23,7 @@ header('Content-Type: text/html; charset=utf-8');
     <link rel='stylesheet' href='//<?= URL_CSS ?>/interpresense.css'>
 
     <script src='//<?= URL_VENDOR_FRONTEND ?>/jquery/dist/jquery.min.js' charset='utf-8'></script>
+    <script src='//<?= URL_VENDOR_FRONTEND ?>/jquery-color/jquery.color.js' charset='utf-8'></script>
     <script src='//<?= URL_VENDOR_FRONTEND ?>/bootstrap/dist/js/bootstrap.min.js' charset='utf-8'></script>
     <script src='//<?= URL_VENDOR_FRONTEND ?>/DataTables/media/js/jquery.dataTables.js' charset='utf-8'></script>
     <script src='//<?= URL_VENDOR_FRONTEND ?>/summernote/summernote-dist/summernote.min.js' charset='utf-8'></script>
