@@ -114,7 +114,7 @@ class InvoiceNotes extends \Interpresense\Includes\BaseModel {
         }
         
         $sql = "UPDATE `interpresense_service_provider_invoices_notes`
-                   SET `is_deleted` = 1
+                   SET `is_deleted` = 1, `updated_on` = NOW()
                  WHERE `note_id` = :note_id;";
         
         $data = array('note_id' => $noteID);
@@ -132,8 +132,9 @@ class InvoiceNotes extends \Interpresense\Includes\BaseModel {
             throw new \InvalidArgumentException('Invalid invoice ID.');
         }
         
-        $sql = "DELETE FROM `interpresense_service_provider_invoices_notes`
-                      WHERE `invoice_id` = :invoice_id;";
+        $sql = "UPDATE `interpresense_service_provider_invoices_notes`
+                   SET `is_deleted` = 1, `updated_on` = NOW()
+                 WHERE `invoice_id` = :invoice_id;";
         
         $data = array('invoice_id' => $invoiceID);
         $types = array('invoice_id' => \PDO::PARAM_INT);
