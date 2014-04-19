@@ -45,60 +45,71 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  */
 if (!isset($_GET['page'])) {
     
-    //@todo: check if installation has already been completed
-    //@todo: if installation is complete, go to step 5
+    if ($settings['installation_complete']) {
+        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-5');
+    }
+    
     //@todo: check if EULA has been accepted. If yes, to step 2. Else step 1.
     
     //Installation not complete and EULA not accepted
     header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-1');
     exit;
     
-} else if ($_GET['page'] === 'go-to-step-1') {
+} elseif ($_GET['page'] === 'go-to-step-1') {
+    
+    if ($settings['installation_complete']) {
+        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-5');
+    }
     
     $setup_current_step = 1;
     $translate->addResource('l10n/step1Eula.json');
     $viewFile = "views/step1Eula.php";
     
-} else if ($_GET['page'] === 'go-to-step-2') {
+} elseif ($_GET['page'] === 'go-to-step-2') {
     
     //@todo: save data from step 1
     
-    //@todo: if installation is complete, go to step 5
+    if ($settings['installation_complete']) {
+        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-5');
+    }
+    
     //@todo: check if EULA has been accepted. If yes, continue. Else step 1.
     
     $setup_current_step = 2;
     $translate->addResource('l10n/step2Database.json');
     $viewFile = "views/step2Database.php";
     
-} else if ($_GET['page'] === 'go-to-step-3') {
+} elseif ($_GET['page'] === 'go-to-step-3') {
     
     //@todo: save data from step 2
     //@todo: fetch list of existing users
     
-    //@todo: if installation is complete, go to step 5
+    if ($settings['installation_complete']) {
+        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-5');
+    }
     //@todo: check if EULA has been accepted. If yes, continue. Else step 1.
     
     $setup_current_step = 3;
     $translate->addResource('l10n/step3Users.json');
     $viewFile = "views/step3Users.php";
 
-} else if ($_GET['page'] === 'go-to-step-4') {
+} elseif ($_GET['page'] === 'go-to-step-4') {
     
     //@todo: save data from step 3
     //@todo: fetch app settings
     
-    //@todo: if installation is complete, go to step 5
+    if ($settings['installation_complete']) {
+        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-5');
+    }
     //@todo: check if EULA has been accepted. If yes, continue. Else step 1.
     
     $setup_current_step = 4;
     $translate->addResource('l10n/step4Settings.json');
     $viewFile = "views/step4Settings.php";
     
-} else if ($_GET['page'] === 'go-to-step-5') {
+} elseif ($_GET['page'] === 'go-to-step-5') {
     
     //@todo: save data from step 4
-    
-    //@todo: if installation is complete, go to step 5
     //@todo: check if EULA has been accepted. If yes, continue. Else step 1.
     
     $setup_current_step = 5;
