@@ -25,6 +25,8 @@ if (!isset($_SESSION['user_id'])) {
  * Models
  */
 $model = new Settings($dbo);
+$usersModel = new Users($dbo);
+$activitiesModel = new Activities($dbo);
 
 /**
  * Localization
@@ -49,9 +51,8 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  */
 if (!isset($_GET['page'])) {
 
-    //@todo: fetch activity types from `interpresence_service_provider_activities`
-    //@todo: fetch user list from `interpresense_users`
-    
+    $activities = $activitiesModel->fetchActivities();
+    $users = $usersModel->fetchUsers();
     $appSettings = $model->fetchSettings();
     
     $translate->addResource('l10n/settings.json');
