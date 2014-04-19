@@ -68,13 +68,13 @@ if (!isset($_GET['page'])) {
         try {
             $draft = $invoice->loadDraftInvoice($_GET['uid']);
             $items = $invoiceItems->fetchItems($draft['invoice_id']);
+        
+            $translate->addResource('l10n/invoiceRetrieval.json');
+            $viewFile = "views/invoiceRetrieval.php";
         } catch (\InvalidArgumentException $e) {
             // Invalid UID
-            // @todo What now?
+            // This block is intentionally left empty to fall back to the error page
         }
-        
-        $translate->addResource('l10n/invoiceRetrieval.json');
-        $viewFile = "views/invoiceRetrieval.php";
     }
     
 }
