@@ -24,7 +24,7 @@ if (!isset($_SESSION['user_id'])) {
 /**
  * Models
  */
-// @todo Plug in a model
+$model = new ClientSearch($dbo);
 
 /**
  * Localization
@@ -49,8 +49,8 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  */
 if (!isset($_GET['page'])) {
     
-    //@todo: fetch client submitted invoices i.e. $_GET['client'] matches any entries of `interpresense_invoices.client_num` and `is_approved` = 1
-    //@todo: fetch client draft invoices i.e. $_GET['client'] matches any entries of `interpresense_invoices.client_num` and `is_approved` = 0
+    $finalInvoices = $model->fetchFinalizedInvoices($_GET['client']);
+    $draftInvoices = $model->fetchDraftInvoices($_GET['client']);
     
     $translate->addResource('l10n/clientSearch.json');
     $viewFile = "views/clientSearch.php";
@@ -59,7 +59,7 @@ if (!isset($_GET['page'])) {
 /**
  * View
  */
-$actions = array('');
+$actions = array();
 
 if (!in_array($_GET['page'], $actions, true)) {
     

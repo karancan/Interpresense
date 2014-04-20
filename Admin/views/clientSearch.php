@@ -5,7 +5,7 @@
     
     <div class="row">
         <div class="col-md-12">
-            <h3 class="admin-page-title"><i class="fa fa-search"></i> Searched for <?= $_GET['client'] ?></h3>
+            <h3 class="admin-page-title"><i class="fa fa-search"></i> Entries for client <code><?= $_GET['client'] ?></code></h3>
         </div>
     </div>
     
@@ -13,7 +13,7 @@
         
         <div class="col-md-12">
         
-            <h4>Submitted invoices</h4>
+            <h4>Finalized invoices</h4>
             
             <table class="table table-hover">           
                 <thead>
