@@ -33,3 +33,9 @@ h3{
 .page-title{
     font-weight: normal;
 }
+.invoice-instructions{
+    color: #666;
+}
+.invoice-instructions .page-title{
+    margin-top: 0.2em;
+}

@@ -2,7 +2,22 @@
     @import url('includes/css/serviceProvider.css');
 </style>
 <div class="container">
-
+    
+    <div class="row">
+        
+        <div class="col-md-12">
+            <div class="well invoice-instructions">
+                <h3 class="page-title"><i class="fa fa-info-circle"></i> Invoicing instructions</h3>
+                <ul>
+                    <li>Lorem ipsum wipsum dimsum wipsum dimsum wipsum dimsumwipsum dimsum wipsum dimsum wipsum dimsum wipsum dimsum</li>
+                    <li>Lorem ipsum wipsum dimsum wipsum dimsum wipsum dimsumwipsum dimsum wipsum dimsum wipsum dimsum wipsum dimsum</li>
+                    <li>Lorem ipsum wipsum dimsum wipsum dimsum wipsum dimsumwipsum dimsum wipsum dimsum wipsum dimsum wipsum dimsum</li>
+                <ul>
+            </div>
+        </div>
+        
+    </div>
+    
     <form method="post" action="#">
         
         <div class="row">
