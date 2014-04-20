@@ -54,6 +54,7 @@ if (!isset($_GET['page'])) {
     
     $translate->addResource('l10n/invoicesSubmitted.json');
     $viewFile = "views/invoicesSubmitted.php";
+    print_r($settings);
     
 } else if ($_GET['page'] === "fetch-invoice-details") {
     

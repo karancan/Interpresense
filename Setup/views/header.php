@@ -32,13 +32,10 @@
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                <li class="dropdown-header">Language</li>
                                 <li><a href="#">English <i class="fa fa-check"></i></a></li>
                                 <li><a href="#">French</a></li>
                                 <li class="divider"></li>
-                                <li class="dropdown-header">Other</li>
-                                <li><a href="#">Help manual</a></li>
-                                <li><a href="#">Contact department</a></li>
+                                <li><a href="<?= empty($settings['service_provider_help_manual_uri']) ? '#' : $settings['service_provider_help_manual_uri'] ?>">Help manual</a></li>
                             </ul>
                         </div>
                     </div>
