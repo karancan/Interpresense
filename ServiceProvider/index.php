@@ -82,7 +82,7 @@ if (!isset($_GET['page'])) {
 /**
  * View
  */
-$actions = array('invoice-retrieval');
+$actions = array();
 
 if (!in_array($_GET['page'], $actions, true)) {
 

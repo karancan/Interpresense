@@ -28,8 +28,8 @@
                 
                 <h2>INVOICE</h2>
                 
-                <input type="text" class="form-control input-top" placeholder="Client name">
-                <input type="text" class="form-control input-bottom" placeholder="Client ID number">
+                <input type="text" class="form-control input-top" placeholder="Client ID number">
+                <input type="text" class="form-control input-bottom" placeholder="Client name" readonly title="Enter a client ID to see a name appear here...">
                 
             </div>
         </div>
