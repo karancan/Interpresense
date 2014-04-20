@@ -57,7 +57,6 @@
 
         <div class="row">
             <div class="col-md-12">
-                
                 <div class="table-responsive">
                     <table class="table table-hover invoice-table">
                         
@@ -109,9 +108,7 @@
                         </tbody>
                     </table>
                 </div>
-                
             </div>
-            
         </div>
         
         <div class="row">
@@ -119,6 +116,14 @@
                 <h3>Total <span id="invoice-total-dollar-amount">N/A</span></h3>
             </div>
         <div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <h3><i class="fa fa-files-o"></i> Attachments</h3>
+            </div>
+        </div>
+        
+        <!-- @todo: add table for potential attachments -->
         
         <div class="row invoice-button-container">
             
