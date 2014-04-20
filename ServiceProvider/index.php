@@ -48,7 +48,9 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  */
 if (!isset($_GET['page'])) {
 
-    //@todo: first we need to check if installation is complete. If yes, continue, If not, go to setup module
+    if (!$settings['installation_complete']) {
+        header('Location: https://'  . URL_SETUP . '/');
+    }
 
     $translate->addResource('l10n/invoice.json');
     $viewFile = "views/invoice.php";
