@@ -50,14 +50,22 @@
                         <th scope='col'>Name</th>
                         <th scope='col'>Nom</th>
                         <th scope='col'>Added on</th>
-                        <th scope='col'>Deleted?</th>
-                        <th scope='col'>Options</th>
+                        <th scope='col'></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        
-                    </tr>
+                    <?php
+                    foreach($activities as $s) {
+                        echo "<tr data-activity-id='{$antiXSS->escape($s['activity_id'], $antiXSS::HTML_ATTR)}'>" .
+                             "<td>{$s['activity_name_en']}</td>" .
+                             "<td>{$s['activity_name_fr']}</td>" .
+                             "<td>" . $dateFmt->format($s['inserted_on'], 'date_time') . "</td>" .
+                             '<td class="table-option-cell"> 
+                             <!-- @todo: add edit and delete buttons -->
+                              </td>' .
+                             '</tr>';
+                    }
+                    ?>
                 </tbody>
             </table>
         
