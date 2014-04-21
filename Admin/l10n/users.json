@@ -1,0 +1,10 @@
+{
+    "values": {
+        "en-CA": {
+            "documentTitleTag": "Users"
+        },
+        "fr-CA": {
+            "documentTitleTag": "Utilisateurs"
+        }
+    }
+}
