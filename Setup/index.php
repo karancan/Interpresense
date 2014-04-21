@@ -47,11 +47,15 @@ if (!isset($_GET['page'])) {
     
     if ($settings['installation_complete']) {
         header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-5');
+        exit;
     }
     
     if ($settings['installation_accepted_eula']) {
-        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-2');
+        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-3');
+        exit;
     }
+    
+    //@todo: check if DB settings are set in config.php. If so, skip step 1
     
     //Installation not complete and EULA not accepted
     header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-1');
@@ -61,15 +65,19 @@ if (!isset($_GET['page'])) {
     
     if ($settings['installation_complete']) {
         header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-5');
+        exit;
     }
     
     if ($settings['installation_accepted_eula']) {
         header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-2');
+        exit;
     }
     
+    //@todo: check if DB settings are set in config.php. If so, skip this step
+    
     $setup_current_step = 1;
-    $translate->addResource('l10n/step1Eula.json');
-    $viewFile = "views/step1Eula.php";
+    $translate->addResource('l10n/step1Database.json');
+    $viewFile = "views/step1Database.php";
     
 } elseif ($_GET['page'] === 'go-to-step-2') {
     
@@ -77,15 +85,17 @@ if (!isset($_GET['page'])) {
     
     if ($settings['installation_complete']) {
         header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-5');
+        exit;
     }
     
     if (!$settings['installation_accepted_eula']) {
-        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-1');
+        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-2');
+        exit;
     }
     
     $setup_current_step = 2;
-    $translate->addResource('l10n/step2Database.json');
-    $viewFile = "views/step2Database.php";
+    $translate->addResource('l10n/step2Eula.json');
+    $viewFile = "views/step2Eula.php";
     
 } elseif ($_GET['page'] === 'go-to-step-3') {
     
@@ -94,11 +104,15 @@ if (!isset($_GET['page'])) {
     
     if ($settings['installation_complete']) {
         header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-5');
+        exit;
     }
     
     if (!$settings['installation_accepted_eula']) {
-        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-1');
+        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-2');
+        exit;
     }
+    
+    //@todo: check if DB settings are set in config.php. If NOT, go to step 1
     
     $setup_current_step = 3;
     $translate->addResource('l10n/step3Users.json');
@@ -111,11 +125,15 @@ if (!isset($_GET['page'])) {
     
     if ($settings['installation_complete']) {
         header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-5');
+        exit;
     }
     
     if (!$settings['installation_accepted_eula']) {
-        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-1');
+        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-2');
+        exit;
     }
+    
+    //@todo: check if DB settings are set in config.php. If NOT, go to step 1
     
     $setup_current_step = 4;
     $translate->addResource('l10n/step4Settings.json');
@@ -126,8 +144,11 @@ if (!isset($_GET['page'])) {
     //@todo: save data from step 4
     
     if (!$settings['installation_accepted_eula']) {
-        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-1');
+        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-2');
+        exit;
     }
+    
+    //@todo: check if DB settings are set in config.php. If NOT, go to step 1
     
     $setup_current_step = 5;
     $translate->addResource('l10n/step5Complete.json');
