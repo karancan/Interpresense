@@ -50,8 +50,7 @@ class InvoiceFiles extends \Interpresense\Includes\BaseModel {
         }
         
         $sql .= " FROM `interpresense_service_provider_invoice_files`
-                 WHERE `invoice_id` = :invoice_id
-                   AND `is_deleted` = 0;";
+                 WHERE `invoice_id` = :invoice_id";
         
         $data = array('invoice_id' => $invoiceID);
         $types = array('invoice_id' => \PDO::PARAM_INT);
