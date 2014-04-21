@@ -37,9 +37,9 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="#">Last log in <?= $dateFmt->format($_SESSION['last_log_in'], 'date_time') ?></a></li>
                                     <li class="divider"></li>
-                                    <li><a href="settings.php"><i class="fa fa-gears"></i> Settings</a></li>
-                                    <li><a href="users.php"><i class="fa fa-users"></i> Users</a></li>
-                                    <li><a href="index.php?page=logout"><i class="fa fa-sign-out"></i> Log out</a></li>
+                                    <li><a href="settings.php"><i class="fa fa-gears fa-fw"></i> Settings</a></li>
+                                    <li><a href="users.php"><i class="fa fa-users fa-fw"></i> Users</a></li>
+                                    <li><a href="index.php?page=logout"><i class="fa fa-sign-out fa-fw"></i> Log out</a></li>
                                 </ul>
                             </li>
                         </ul>
