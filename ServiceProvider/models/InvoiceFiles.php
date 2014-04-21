@@ -28,7 +28,7 @@ class InvoiceFiles extends \Interpresense\Includes\BaseModel {
         $this->validators['file_name'] = Validator::notEmpty()->string();
         $this->validators['file_content'] = Validator::notEmpty()->string(); //@todo: not sure about this one
         $this->validators['file_type'] = Validator::notEmpty()->string();
-        $this->validators['file_size'] = Validator::notEmpty()->noWhitespace()->digit()->positive();
+        $this->validators['file_size'] = Validator::notEmpty()->int();
     }
     
     /**
