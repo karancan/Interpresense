@@ -28,8 +28,8 @@ class ClientSearch extends \Interpresense\Includes\BaseModel {
     
     /**
      * Retrieves a list of all finalized invoices pertaining to a client
-     * @return array
      * @param $clientID The ID of a client
+     * @return array
      */
     public function fetchFinalizedInvoices($clientID) {
         $sql = "SELECT `invoice_id`, `sp_name`, `sp_email`, `is_approved`
@@ -45,8 +45,8 @@ class ClientSearch extends \Interpresense\Includes\BaseModel {
     
     /**
      * Retrieves a list of all draft invoices pertaining to a client
-     * @return array
      * @param $clientID The ID of a client
+     * @return array
      */
     public function fetchDraftInvoices($clientID) {
         $sql = "SELECT `invoice_id`, `sp_name`, `sp_email`, `is_approved`

@@ -62,13 +62,11 @@ if (!isset($_GET['page'])) {
 } elseif ($_GET['page'] === 'delete-setting') {
     $model->deleteSetting($_POST['key']);
 } elseif ($_GET['page'] === 'change-activity') {
-    
-    //@todo: add call to function and finalize UI
-    
+    $activitiesModel->updateActivity($_POST);
+    //@todo: finalize UI
 } elseif ($_GET['page'] === 'delete-activity') {
-    
-    //@todo: add call to function and finalize UI
-    
+    $activitiesModel->deleteActivity($_POST['activity_id']);
+    //@todo: finalize UI
 }
 
 /**
