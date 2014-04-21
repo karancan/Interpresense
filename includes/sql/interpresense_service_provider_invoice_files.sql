@@ -12,7 +12,6 @@ CREATE TABLE `interpresense_service_provider_invoice_files` (
   `file_content` longblob NOT NULL,
   `file_type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `file_size` int(11) unsigned NOT NULL,
-  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
   `inserted_on` datetime NOT NULL,
   `updated_on` datetime NOT NULL,
   PRIMARY KEY (`file_id`),

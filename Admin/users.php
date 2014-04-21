@@ -25,7 +25,7 @@ if (!isset($_SESSION['user_id'])) {
  * Models
  */
 $model = new Settings($dbo);
-$activitiesModel = new Activities($dbo);
+$usersModel = new Users($dbo);
 
 /**
  * Localization
@@ -50,31 +50,28 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  */
 if (!isset($_GET['page'])) {
 
-    $activities = $activitiesModel->fetchActivities();
-    $appSettings = $model->fetchSettings();
+    $users = $usersModel->fetchUsers();
     
     $translate->addResource('l10n/settings.json');
-    $viewFile = "views/settings.php";
+    $viewFile = "views/users.php";
     
-} elseif ($_GET['page'] === 'change-setting') {
-    $model->changeSetting($_POST['key'], $_POST['value']);
-    header('location: settings.php?focus=' . $_POST['key']);
-} elseif ($_GET['page'] === 'delete-setting') {
-    $model->deleteSetting($_POST['key']);
-} elseif ($_GET['page'] === 'change-activity') {
+} elseif ($_GET['page'] === 'change-user') {
     
-    //@todo: add call to function and finalize UI
+    //@todo: add logic for when a user is added or updated
     
-} elseif ($_GET['page'] === 'delete-activity') {
+} elseif ($_GET['page'] === 'delete-users') {
     
-    //@todo: add call to function and finalize UI
+    //@todo: add logic for when a user is deleted
     
+} else if ($_GET['page'] === 'export-users') {
+    //@todo: add logic
+    die();
 }
 
 /**
  * View
  */
-$actions = array('change-setting', 'delete-setting', 'change-activity', 'delete-activity');
+$actions = array('export-users');
 
 if (!in_array($_GET['page'], $actions, true)) {
     

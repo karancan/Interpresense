@@ -1,8 +1,23 @@
 <style>
-    @import url('includes/css/invoice.css');
+    @import url('includes/css/serviceProvider.css');
 </style>
 <div class="container">
-
+    
+    <div class="row">
+        
+        <div class="col-md-12">
+            <div class="well invoice-instructions">
+                <h3 class="page-title"><i class="fa fa-info-circle"></i> Invoicing instructions</h3>
+                <ul>
+                    <li>Lorem ipsum wipsum dimsum wipsum dimsum wipsum dimsumwipsum dimsum wipsum dimsum wipsum dimsum wipsum dimsum</li>
+                    <li>Lorem ipsum wipsum dimsum wipsum dimsum wipsum dimsumwipsum dimsum wipsum dimsum wipsum dimsum wipsum dimsum</li>
+                    <li>Lorem ipsum wipsum dimsum wipsum dimsum wipsum dimsumwipsum dimsum wipsum dimsum wipsum dimsum wipsum dimsum</li>
+                <ul>
+            </div>
+        </div>
+        
+    </div>
+    
     <form method="post" action="#">
         
         <div class="row">
@@ -28,8 +43,8 @@
                 
                 <h2>INVOICE</h2>
                 
-                <input type="text" class="form-control input-top" placeholder="Client name">
-                <input type="text" class="form-control input-bottom" placeholder="Client ID number">
+                <input type="text" class="form-control input-top" placeholder="Client ID number">
+                <input type="text" class="form-control input-bottom" placeholder="Client name" readonly title="Enter a client ID to see a name appear here...">
                 
             </div>
         </div>
@@ -42,7 +57,6 @@
 
         <div class="row">
             <div class="col-md-12">
-                
                 <div class="table-responsive">
                     <table class="table table-hover invoice-table">
                         
@@ -94,9 +108,7 @@
                         </tbody>
                     </table>
                 </div>
-                
             </div>
-            
         </div>
         
         <div class="row">
@@ -104,6 +116,14 @@
                 <h3>Total <span id="invoice-total-dollar-amount">N/A</span></h3>
             </div>
         <div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <h3><i class="fa fa-files-o"></i> Attachments</h3>
+            </div>
+        </div>
+        
+        <!-- @todo: add table for potential attachments -->
         
         <div class="row invoice-button-container">
             
