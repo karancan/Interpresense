@@ -8,6 +8,9 @@
     .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-text:hover{
         color: black;
     }
+    #search-input{
+        width: 130%;
+    }
 </style>
 <div class="container">
     
@@ -23,13 +26,12 @@
                             <li <?= ($current_view === "admin-reports" ? 'class="active"' : null) ?>><a href="reports.php"><i class="fa fa-bar-chart-o"></i> Reports</a></li>
                         </ul>
                         
-                        <form class="navbar-form navbar-left" role="search" action="clientSearch.php" method="get">
+                        <form class="navbar-form navbar-left" role="search" action="search.php" method="get">
                             <div class="form-search search-only">
                                 <i class="search-icon glyphicon glyphicon-search"></i>
-                                <input type="text" class="form-control search-query" name="client" placeholder="Search for a client...">
+                                <input id="search-input" type="text" class="form-control search-query" name="q" placeholder="Search for a client or service provider...">
                             </div>
                         </form>
-                     
                         
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
