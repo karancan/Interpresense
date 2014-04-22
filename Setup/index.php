@@ -25,7 +25,7 @@ session_start();
  * Models
  */
 //If the user is trying to begin installation, there is no model to be initiated
-if ($_GET['page'] != '' && $_GET['page'] != 'go-to-step-1'){
+if ($_GET['page'] !== '' && $_GET['page'] !== 'go-to-step-1'){
     $model = new Setup($dbo);
 }
 
