@@ -50,15 +50,15 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
 if (!isset($_GET['page'])) {
     
     //Does the search query match any invoices pertaining to a client
-    $finalInvoices = $model->fetchFinalizedInvoices($_GET['q']);
-    $draftInvoices = $model->fetchDraftInvoices($_GET['q']);
+    $finalInvoicesForClient = $model->fetchFinalizedInvoicesForClient($_GET['q']);
+    $draftInvoicesForClient = $model->fetchDraftInvoicesForClient($_GET['q']);
     
-    //@todo: does the search query match anything pertaining to a service provider
-    
-    //@todo: highlight in the view whether it pertains to a client or service provider
+    //Does the search query match any invoices pertaining to a service provider
+    $finalInvoicesForSP = $model->fetchFinalizedInvoicesForServiceProvider($_GET['q']);
+    $draftInvoicesForSP = $model->fetchDraftInvoicesForServiceProvider($_GET['q']);
     
     $translate->addResource('l10n/search.json');
-    $viewFile = "views/search.php";
+    $viewFile = "views/search.php"; //@todo: highlight in the view whether it pertains to a client or service provider
 }
 
 /**
