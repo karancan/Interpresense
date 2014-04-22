@@ -23,7 +23,7 @@ class Search extends \Interpresense\Includes\BaseModel {
     public function __construct(\Interpresense\Includes\DatabaseObject $db) {
         parent::__construct($db);
         
-        $this->validators['client_num'] = Validator::noWhitespace()->digit()->positive();
+        $this->validators['client_id'] = Validator::notEmpty()->string();
         $this->validators['sp_name'] = Validator::notEmpty()->string();
         $this->validators['sp_email'] = Validator::notEmpty()->email();
         $this->validators['sp_hst_number'] = Validator::notEmpty()->string();
@@ -31,28 +31,28 @@ class Search extends \Interpresense\Includes\BaseModel {
     
     /**
      * Retrieves a list of all finalized invoices pertaining to a client
-     * @param $clientID The ID of a client
+     * @param string $q The ID of a client
      * @return array
      */
-    public function fetchFinalizedInvoicesForClient($clientID) {
-        $sql = "SELECT `invoice_id`, `sp_name`, `sp_email`, `is_approved`, `client_num`
+    public function fetchFinalizedInvoicesForClient($q) {
+        $sql = "SELECT `invoice_id`, `sp_name`, `sp_email`, `is_approved`, `client_id`
                   FROM `interpresense_service_provider_invoices`
                  WHERE `is_final` = 1
-                   AND `client_num` = :client_num;";
+                   AND `client_id` = :client_id;";
         
-        $data = array('client_num' => $clientID);
-        $types = array('client_num' => \PDO::PARAM_INT);
+        $data = array('client_id' => $q);
+        $types = array('client_id' => \PDO::PARAM_STR);
         
         return parent::$db->query($sql, $data, $types);
     }
     
     /**
      * Retrieves a list of all finalized invoices pertaining to a service provider
-     * @param $q The query string
+     * @param string $q The query string
      * @return array
      */
     public function fetchFinalizedInvoicesForServiceProvider($q) {
-        $sql = "SELECT `invoice_id`, `sp_name`, `sp_email`, `is_approved`, `client_num`
+        $sql = "SELECT `invoice_id`, `sp_name`, `sp_email`, `is_approved`, `client_id`
                   FROM `interpresense_service_provider_invoices`
                  WHERE `is_final` = 1
                    AND `sp_name` LIKE '%:sp_name%'
@@ -67,17 +67,17 @@ class Search extends \Interpresense\Includes\BaseModel {
     
     /**
      * Retrieves a list of all draft invoices pertaining to a client
-     * @param $clientID The ID of a client
+     * @param string $q The ID of a client
      * @return array
      */
-    public function fetchDraftInvoicesForClient($clientID) {
-        $sql = "SELECT `invoice_id`, `sp_name`, `sp_email`, `is_approved`, `client_num`
+    public function fetchDraftInvoicesForClient($q) {
+        $sql = "SELECT `invoice_id`, `sp_name`, `sp_email`, `is_approved`, `client_id`
                   FROM `interpresense_service_provider_invoices`
                  WHERE `is_final` = 0
-                   AND `client_num` = :client_num;";
+                   AND `client_id` = :client_id;";
         
-        $data = array('client_num' => $clientID);
-        $types = array('client_num' => \PDO::PARAM_INT);
+        $data = array('client_id' => $q);
+        $types = array('client_id' => \PDO::PARAM_STR);
         
         return parent::$db->query($sql, $data, $types);
     }
@@ -88,7 +88,7 @@ class Search extends \Interpresense\Includes\BaseModel {
      * @return array
      */
     public function fetchDraftInvoicesForServiceProvider($q) {
-        $sql = "SELECT `invoice_id`, `sp_name`, `sp_email`, `is_approved`, `client_num`
+        $sql = "SELECT `invoice_id`, `sp_name`, `sp_email`, `is_approved`, `client_id`
                   FROM `interpresense_service_provider_invoices`
                  WHERE `is_final` = 0
                    AND `sp_name` LIKE '%:sp_name%'

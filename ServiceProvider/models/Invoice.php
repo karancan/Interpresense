@@ -46,7 +46,7 @@ class Invoice extends \Interpresense\Includes\BaseModel {
             'sp_province' => \PDO::PARAM_STR,
             'sp_phone' => \PDO::PARAM_STR,
             'sp_email' => \PDO::PARAM_STR,
-            'client_num' => \PDO::PARAM_INT,
+            'client_id' => \PDO::PARAM_STR,
             'is_final' => \PDO::PARAM_INT,
             'grand_total' => \PDO::PARAM_STR
         );
@@ -55,7 +55,7 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         if(!Validator::key('sp_name')
                ->key('sp_phone')
                ->key('sp_email')
-               ->key('client_num')
+               ->key('client_id')
                ->validate($data) || !Validator::bool()->validate($final)) {
             throw new \InvalidArgumentException('Required data invalid or missing');
         }
@@ -68,8 +68,8 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         $data['invoice_uid'] = hash('sha512', microtime(true) . mt_rand());
         $data['is_final'] = (int)$final;
         
-        $sql = "INSERT INTO `interpresense_service_provider_invoices` (`invoice_uid`, `invoice_id_for_sp`, `invoice_id_for_org`, `sp_name`, `sp_address`, `sp_postal_code`, `sp_city`, `sp_province`, `sp_phone`, `sp_email`, `client_num`, `is_final`, `grand_total`, `inserted_on`, `updated_on`)
-                     VALUES (:invoice_uid, :invoice_id_for_sp, :invoice_id_for_org, :sp_name, :sp_address, :sp_postal_code, :sp_city, :sp_province, :sp_phone, :sp_email, :client_num, :is_final, :grand_total, NOW(), NOW());";
+        $sql = "INSERT INTO `interpresense_service_provider_invoices` (`invoice_uid`, `invoice_id_for_sp`, `invoice_id_for_org`, `sp_name`, `sp_address`, `sp_postal_code`, `sp_city`, `sp_province`, `sp_phone`, `sp_email`, `client_id`, `is_final`, `grand_total`, `inserted_on`, `updated_on`)
+                     VALUES (:invoice_uid, :invoice_id_for_sp, :invoice_id_for_org, :sp_name, :sp_address, :sp_postal_code, :sp_city, :sp_province, :sp_phone, :sp_email, :client_id, :is_final, :grand_total, NOW(), NOW());";
         
         parent::$db->query($sql, $data, $types);
         
@@ -138,7 +138,7 @@ class Invoice extends \Interpresense\Includes\BaseModel {
             throw new \RuntimeException('Cannot load a finalized invoice.');
         }
         
-        $sql = "SELECT `invoice_id`, `sp_name`, `sp_address`, `sp_email`, `client_num`
+        $sql = "SELECT `invoice_id`, `sp_name`, `sp_address`, `sp_email`, `client_id`
                   FROM `interpresense_service_provider_invoices`
                  WHERE `invoice_uid` = :invoice_uid;";
         
@@ -160,7 +160,7 @@ class Invoice extends \Interpresense\Includes\BaseModel {
             'sp_address' => \PDO::PARAM_STR,
             'sp_phone' => \PDO::PARAM_STR,
             'sp_email' => \PDO::PARAM_STR,
-            'client_num' => \PDO::PARAM_INT,
+            'client_id' => \PDO::PARAM_STR,
             'is_final' => \PDO::PARAM_INT,
             'grand_total' => \PDO::PARAM_STR
         );
@@ -168,7 +168,7 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         // @todo Add validation
         
         $sql = "UPDATE `interpresense_service_provider_invoices`
-                   SET `sp_name` = :sp_name, `sp_address` = :sp_address, `sp_phone` = :sp_phone, `sp_email` = :sp_email, `client_num` = :client_num, `grand_total` = :grand_total, `updated_on` = NOW()
+                   SET `sp_name` = :sp_name, `sp_address` = :sp_address, `sp_phone` = :sp_phone, `sp_email` = :sp_email, `client_id` = :client_id, `grand_total` = :grand_total, `updated_on` = NOW()
                  WHERE `invoice_uid` = :invoice_uid;";
         
         parent::$db->query($sql, $data, $types);
