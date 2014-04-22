@@ -32,7 +32,9 @@ class DatabaseObject {
             
             $this->db->exec('SET NAMES utf8;');
         } catch (\PDOException $e) {
-            die('Connection failed: ' . $e->getMessage());
+            //Database connection failed and so we go to the setup module
+            header('Location: //' . URL_SETUP . '/index.php?page=go-to-step-1&mode=fail&reason=' . urlencode($e->getMessage()));
+            exit;
         }
     }
 

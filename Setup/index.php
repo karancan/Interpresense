@@ -8,9 +8,13 @@ use Interpresense\Includes\AntiXss;
  * Configuration file, database object, settings and Anti XSS
  */
 require '../includes/php/config.php';
-$dbo = new \Interpresense\Includes\DatabaseObject();
-$settings = \Interpresense\Includes\ApplicationSettings::load($dbo);
-$antiXSS = new AntiXss();
+
+//If the user is trying to begin installation, there is no point in attempting a connection
+if ($_GET['page'] !== '' && $_GET['page'] !== 'go-to-step-1'){
+    $dbo = new \Interpresense\Includes\DatabaseObject();
+    $settings = \Interpresense\Includes\ApplicationSettings::load($dbo);
+    $antiXSS = new AntiXss();
+}
 
 /**
  * Session
@@ -20,7 +24,10 @@ session_start();
 /**
  * Models
  */
-$model = new Setup($dbo);
+//If the user is trying to begin installation, there is no model to be initiated
+if ($_GET['page'] != '' && $_GET['page'] != 'go-to-step-1'){
+    $model = new Setup($dbo);
+}
 
 /**
  * Localization
@@ -45,6 +52,18 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  */
 if (!isset($_GET['page'])) {
     
+    //By default, we always just deflect to step 1
+    header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-1');
+    exit;
+    
+} elseif ($_GET['page'] === 'go-to-step-1') {
+
+    $setup_current_step = 1;
+    $translate->addResource('l10n/step1Database.json');
+    $viewFile = "views/step1Database.php";
+    
+} elseif ($_GET['page'] === 'go-to-step-2') {
+    
     if ($settings['installation_complete']) {
         header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-5');
         exit;
@@ -55,31 +74,13 @@ if (!isset($_GET['page'])) {
         exit;
     }
     
-    //@todo: check if DB settings are set in config.php. If so, skip step 1
+    //@todo: create database tables
     
-    //Installation not complete and EULA not accepted
-    header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-1');
-    exit;
+    $setup_current_step = 2;
+    $translate->addResource('l10n/step2Eula.json');
+    $viewFile = "views/step2Eula.php";
     
-} elseif ($_GET['page'] === 'go-to-step-1') {
-    
-    if ($settings['installation_complete']) {
-        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-5');
-        exit;
-    }
-    
-    if ($settings['installation_accepted_eula']) {
-        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-2');
-        exit;
-    }
-    
-    //@todo: check if DB settings are set in config.php. If so, skip this step
-    
-    $setup_current_step = 1;
-    $translate->addResource('l10n/step1Database.json');
-    $viewFile = "views/step1Database.php";
-    
-} elseif ($_GET['page'] === 'go-to-step-2') {
+} elseif ($_GET['page'] === 'go-to-step-3') {
     
     $model->acceptEula();
     
@@ -93,26 +94,7 @@ if (!isset($_GET['page'])) {
         exit;
     }
     
-    $setup_current_step = 2;
-    $translate->addResource('l10n/step2Eula.json');
-    $viewFile = "views/step2Eula.php";
-    
-} elseif ($_GET['page'] === 'go-to-step-3') {
-    
-    //@todo: save data from step 2
     //@todo: fetch list of existing users
-    
-    if ($settings['installation_complete']) {
-        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-5');
-        exit;
-    }
-    
-    if (!$settings['installation_accepted_eula']) {
-        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-2');
-        exit;
-    }
-    
-    //@todo: check if DB settings are set in config.php. If NOT, go to step 1
     
     $setup_current_step = 3;
     $translate->addResource('l10n/step3Users.json');
@@ -121,7 +103,6 @@ if (!isset($_GET['page'])) {
 } elseif ($_GET['page'] === 'go-to-step-4') {
     
     //@todo: save data from step 3
-    //@todo: fetch app settings
     
     if ($settings['installation_complete']) {
         header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-5');
@@ -133,7 +114,7 @@ if (!isset($_GET['page'])) {
         exit;
     }
     
-    //@todo: check if DB settings are set in config.php. If NOT, go to step 1
+    //@todo: fetch app settings
     
     $setup_current_step = 4;
     $translate->addResource('l10n/step4Settings.json');
@@ -147,8 +128,6 @@ if (!isset($_GET['page'])) {
         header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-2');
         exit;
     }
-    
-    //@todo: check if DB settings are set in config.php. If NOT, go to step 1
     
     $setup_current_step = 5;
     $translate->addResource('l10n/step5Complete.json');
