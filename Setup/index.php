@@ -8,9 +8,13 @@ use Interpresense\Includes\AntiXss;
  * Configuration file, database object, settings and Anti XSS
  */
 require '../includes/php/config.php';
-$dbo = new \Interpresense\Includes\DatabaseObject();
-$settings = \Interpresense\Includes\ApplicationSettings::load($dbo);
-$antiXSS = new AntiXss();
+
+//If the user is trying to begin installation, there is no point in attempting a connection
+if ($_GET['page'] !== '' && $_GET['page'] !== 'go-to-step-1'){
+    $dbo = new \Interpresense\Includes\DatabaseObject();
+    $settings = \Interpresense\Includes\ApplicationSettings::load($dbo);
+    $antiXSS = new AntiXss();
+}
 
 /**
  * Session
@@ -20,7 +24,10 @@ session_start();
 /**
  * Models
  */
-$model = new Setup($dbo);
+//If the user is trying to begin installation, there is no model to be initiated
+if ($_GET['page'] !== '' && $_GET['page'] !== 'go-to-step-1'){
+    $model = new Setup($dbo);
+}
 
 /**
  * Localization
@@ -45,60 +52,49 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  */
 if (!isset($_GET['page'])) {
     
-    if ($settings['installation_complete']) {
-        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-5');
-    }
-    
-    if ($settings['installation_accepted_eula']) {
-        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-2');
-    }
-    
-    //Installation not complete and EULA not accepted
+    //By default, we always just deflect to step 1
     header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-1');
     exit;
     
 } elseif ($_GET['page'] === 'go-to-step-1') {
+
+    $setup_current_step = 1;
+    $translate->addResource('l10n/step1Database.json');
+    $viewFile = "views/step1Database.php";
+    
+} elseif ($_GET['page'] === 'go-to-step-2') {
     
     if ($settings['installation_complete']) {
         header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-5');
+        exit;
     }
     
     if ($settings['installation_accepted_eula']) {
-        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-2');
+        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-3');
+        exit;
     }
     
-    $setup_current_step = 1;
-    $translate->addResource('l10n/step1Eula.json');
-    $viewFile = "views/step1Eula.php";
+    //@todo: create database tables
     
-} elseif ($_GET['page'] === 'go-to-step-2') {
+    $setup_current_step = 2;
+    $translate->addResource('l10n/step2Eula.json');
+    $viewFile = "views/step2Eula.php";
+    
+} elseif ($_GET['page'] === 'go-to-step-3') {
     
     $model->acceptEula();
     
     if ($settings['installation_complete']) {
         header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-5');
+        exit;
     }
     
     if (!$settings['installation_accepted_eula']) {
-        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-1');
+        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-2');
+        exit;
     }
     
-    $setup_current_step = 2;
-    $translate->addResource('l10n/step2Database.json');
-    $viewFile = "views/step2Database.php";
-    
-} elseif ($_GET['page'] === 'go-to-step-3') {
-    
-    //@todo: save data from step 2
     //@todo: fetch list of existing users
-    
-    if ($settings['installation_complete']) {
-        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-5');
-    }
-    
-    if (!$settings['installation_accepted_eula']) {
-        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-1');
-    }
     
     $setup_current_step = 3;
     $translate->addResource('l10n/step3Users.json');
@@ -107,15 +103,18 @@ if (!isset($_GET['page'])) {
 } elseif ($_GET['page'] === 'go-to-step-4') {
     
     //@todo: save data from step 3
-    //@todo: fetch app settings
     
     if ($settings['installation_complete']) {
         header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-5');
+        exit;
     }
     
     if (!$settings['installation_accepted_eula']) {
-        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-1');
+        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-2');
+        exit;
     }
+    
+    //@todo: fetch app settings
     
     $setup_current_step = 4;
     $translate->addResource('l10n/step4Settings.json');
@@ -126,7 +125,8 @@ if (!isset($_GET['page'])) {
     //@todo: save data from step 4
     
     if (!$settings['installation_accepted_eula']) {
-        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-1');
+        header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-2');
+        exit;
     }
     
     $setup_current_step = 5;

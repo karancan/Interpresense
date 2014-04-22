@@ -61,12 +61,12 @@
         
         <div class="col-md-2">
             <div class="well <?= ($setup_current_step === 1 ? 'setup-well-active' : ($setup_current_step > 1 ? 'setup-well-complete' : null) ) ?>">
-                <i class="fa fa-legal"></i> <strong>EULA</strong><span class="setup-step-label pull-right">1 of 5</span>
+                <i class="fa fa-hdd-o"></i> <strong>Database</strong><span class="setup-step-label pull-right">1 of 5</span>
             </div>
         </div>
         <div class="col-md-2">
             <div class="well <?= ($setup_current_step === 2 ? 'setup-well-active' : ($setup_current_step > 1 ? 'setup-well-complete' : null) ) ?>">
-                <i class="fa fa-hdd-o"></i> <strong>Database</strong><span class="setup-step-label pull-right">2 of 5</span>
+                <i class="fa fa-legal"></i> <strong>EULA</strong><span class="setup-step-label pull-right">2 of 5</span>
             </div>
         </div>
         <div class="col-md-2">

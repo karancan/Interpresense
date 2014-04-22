@@ -54,10 +54,10 @@ if (!isset($_GET['page'])) {
     $translate->addResource('l10n/invoicesDrafts.json');
     $viewFile = "views/invoicesDrafts.php";
     
-} else if ($_GET['page'] === "mark-invoice-as-approved") {
+} else if ($_GET['page'] === "mark-invoice-as-finalized") {
 
-    //@todo: for a given invoice ID, mark it as approved taking note of when and by who
-    //@todo: create an invoice note indicating that the invoice was approved
+    //@todo: for a given invoice ID, mark it as finalized
+    //@todo: create an invoice note indicating that the invoice was finalized, when and by who
 
 } else if ($_GET['page'] === "delete-invoice") {
 
@@ -71,7 +71,7 @@ if (!isset($_GET['page'])) {
 /**
  * View
  */
-$actions = array('mark-invoice-as-approved', 'delete-invoice', 'export');
+$actions = array('mark-invoice-as-finalized', 'delete-invoice', 'export');
 
 if (!in_array($_GET['page'], $actions, true)) {
     

@@ -1,6 +1,16 @@
 <style>
     @import url('includes/css/setup.css');
 </style>
+
+<?php
+if ($_GET['mode'] === 'fail'){
+?>
+<div class="col-md-6 col-md-offset-3 alert alert-danger alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <strong>Unsuccessful!</strong> <?= urldecode($_GET['reason'])?>
+</div>
+<?php } ?>
+
 <div class="container">
     
     <div class="row">
@@ -42,7 +52,7 @@
     <div class="row">
     
         <div class="col-md-3">
-            <a href="index.php?page=go-to-step-3" class="btn btn-success btn-block"><i class="fa fa-check"></i> Test connection and proceed</a>
+            <a href="index.php?page=go-to-step-2" class="btn btn-success btn-block"><i class="fa fa-check"></i> Test connection and proceed</a>
         </div>
     
     </div>
