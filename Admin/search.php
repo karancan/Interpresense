@@ -24,7 +24,7 @@ if (!isset($_SESSION['user_id'])) {
 /**
  * Models
  */
-$model = new ClientSearch($dbo);
+$model = new Search($dbo);
 
 /**
  * Localization
@@ -49,11 +49,16 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  */
 if (!isset($_GET['page'])) {
     
-    $finalInvoices = $model->fetchFinalizedInvoices($_GET['client']);
-    $draftInvoices = $model->fetchDraftInvoices($_GET['client']);
+    //Does the search query match any invoices pertaining to a client
+    $finalInvoices = $model->fetchFinalizedInvoices($_GET['q']);
+    $draftInvoices = $model->fetchDraftInvoices($_GET['q']);
     
-    $translate->addResource('l10n/clientSearch.json');
-    $viewFile = "views/clientSearch.php";
+    //@todo: does the search query match anything pertaining to a service provider
+    
+    //@todo: highlight in the view whether it pertains to a client or service provider
+    
+    $translate->addResource('l10n/search.json');
+    $viewFile = "views/search.php";
 }
 
 /**

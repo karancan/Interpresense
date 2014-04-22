@@ -5,7 +5,7 @@
     
     <div class="row">
         <div class="col-md-12">
-            <h3 class="admin-page-title"><i class="fa fa-search"></i> Entries for client <code><?= $_GET['client'] ?></code></h3>
+            <h3 class="admin-page-title"><i class="fa fa-search"></i> Entries for <code><?= $_GET['q'] ?></code></h3>
         </div>
     </div>
     

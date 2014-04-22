@@ -5,10 +5,10 @@ namespace Interpresense\Admin;
 use Respect\Validation\Validator;
 
 /**
- * Client search logic
+ * Search logic
  * @author Karan Khiani
  */
-class ClientSearch extends \Interpresense\Includes\BaseModel {
+class Search extends \Interpresense\Includes\BaseModel {
     
     /**
      * Validation objects
