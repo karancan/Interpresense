@@ -58,7 +58,7 @@ if (!isset($_GET['page'])) {
     $draftInvoicesForSP = $model->fetchDraftInvoicesForServiceProvider($_GET['q']);
     
     $translate->addResource('l10n/search.json');
-    $viewFile = "views/search.php"; //@todo: highlight in the view whether it pertains to a client or service provider
+    $viewFile = "views/search.php";
 }
 
 /**
