@@ -49,8 +49,16 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  */
 if (!isset($_GET['page'])) {
 
-    //@todo: fetch non-draft invoices from `interpresense_service_provider_invoices`. Take in to account `start` and `end` from GET
-    //@todo: if `start` and `end` do not exist in GET, use `admin_default_date_filter_range_days` key in `interpresense_settings`
+    $filter_start_date = date("Y-m-d", strtotime('-' . $settings['admin_default_date_filter_range_days'] . ' days'));
+    if (!empty($_GET['start'])){
+        $filter_start_date = $_GET['start'];
+    }
+    $filter_end_date = date("Y-m-d", strtotime('+' . $settings['admin_default_date_filter_range_days'] . ' days'));
+    if (!empty($_GET['end'])){
+        $filter_end_date = $_GET['end'];
+    }
+    
+    //@todo: fetch non-draft invoices from `interpresense_service_provider_invoices`
     
     $translate->addResource('l10n/invoicesSubmitted.json');
     $viewFile = "views/invoicesSubmitted.php"; //@todo: if no invoices to be shown, show appropriate message
@@ -76,7 +84,6 @@ if (!isset($_GET['page'])) {
 
 } else if ($_GET['page'] === "export") {
     //@todo: add logic. Take in to account `start` and `end` from GET
-    //@todo: if `start` and `end` do not exist in GET, use `admin_default_date_filter_range_days` key in `interpresense_settings`
     die();
 }
 

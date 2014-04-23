@@ -11,7 +11,7 @@
             <a href="https://<?= URL_INTERPRESENSE ?>/ServiceProvider/" target="_blank" class="btn btn-info btn-block admin-add-button"><i class="fa fa-plus"></i> Add finalized invoice</a>        
         </div>
         <div class="col-md-2">
-            <a href="invoicesSubmitted.php?page=export" class="btn btn-info btn-block admin-add-button"><i class="fa fa-table"></i> Export</a>
+            <a href="invoicesSubmitted.php?page=export&start=<?= $filter_start_date ?>&end=<?= $filter_end_date ?>" class="btn btn-info btn-block admin-add-button"><i class="fa fa-table"></i> Export</a>
         </div>
     </div>
     
@@ -22,8 +22,8 @@
             <!-- @todo: add datepickers to form inputs -->
             <form method="get" action="invoicesSubmitted.php">
                 <h4>Finalized invoices added between 
-                    <input id="interpresense_admin_invoices_submitted_start_date" name="start" class="admin-page-filter-input" type="text" value="<?= (!empty($_GET['start']) ? $_GET['start'] : null) ?>"> and 
-                    <input id="interpresense_admin_invoices_submitted_end_date" name="end" class="admin-page-filter-input" type="text" value="<?= (!empty($_GET['end']) ? $_GET['end'] : null) ?>">
+                    <input id="interpresense_admin_invoices_submitted_start_date" name="start" class="admin-page-filter-input" type="text" value="<?= $filter_start_date ?>"> and 
+                    <input id="interpresense_admin_invoices_submitted_end_date" name="end" class="admin-page-filter-input" type="text" value="<?= $filter_end_date ?>">
                 </h4>
             </form>
             
