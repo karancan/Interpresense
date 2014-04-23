@@ -49,10 +49,10 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  */
 if (!isset($_GET['page'])) {
 
-    //@todo: fetch non-draft invoices from `interpresense_service_provider_invoices`
+    //@todo: fetch non-draft invoices from `interpresense_service_provider_invoices`. Take in to account `start` and `end` from GET
     
     $translate->addResource('l10n/invoicesSubmitted.json');
-    $viewFile = "views/invoicesSubmitted.php";
+    $viewFile = "views/invoicesSubmitted.php"; //@todo: if no invoices to be shown, show appropriate message
     
 } else if ($_GET['page'] === "fetch-invoice-details") {
     
@@ -74,7 +74,7 @@ if (!isset($_GET['page'])) {
     //@todo: create an invoice note stating that the invoice was mark as un-approved (or as a draft)
 
 } else if ($_GET['page'] === "export") {
-    //@todo: add logic
+    //@todo: add logic. Take in to account `start` and `end` from GET
     die();
 }
 

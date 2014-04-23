@@ -18,8 +18,14 @@
     <div class="row">
         
         <div class="col-md-12">
-        
-            <h4>Existing draft invoices</h4>
+            
+            <!-- @todo: add datepickers to form inputs -->
+            <form method="get" action="invoicesDrafts.php">
+                <h4>Draft invoices added between 
+                    <input name="start" class="admin-page-filter-input" type="text" value="<?= (!empty($_GET['start']) ? $_GET['start'] : null) ?>"> and 
+                    <input name="end" class="admin-page-filter-input" type="text" value="<?= (!empty($_GET['end']) ? $_GET['end'] : null) ?>">
+                </h4>
+            </form>
             
             <table class="table table-hover invoice-table">           
                 <thead>
@@ -42,3 +48,4 @@
     </div>
     
 </div>
+<script charset='utf-8' src='includes/js/admin.js'></script>

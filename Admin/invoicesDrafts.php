@@ -49,10 +49,10 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  */
 if (!isset($_GET['page'])) {
     
-    //@todo: fetch draft invoices from `interpresense_service_provider_invoices`
+    //@todo: fetch draft invoices from `interpresense_service_provider_invoices`.  Take in to account `start` and `end` from GET
     
     $translate->addResource('l10n/invoicesDrafts.json');
-    $viewFile = "views/invoicesDrafts.php";
+    $viewFile = "views/invoicesDrafts.php"; //@todo: if no invoices to be shown, show appropriate message
     
 } else if ($_GET['page'] === "mark-invoice-as-finalized") {
 
@@ -64,7 +64,7 @@ if (!isset($_GET['page'])) {
     //@todo: given an invoice ID, delete everything pertaining to the invoice including notes, items and files
     
 } else if ($_GET['page'] === "export") {
-    //@todo: add logic
+    //@todo: add logic. Take in to account `start` and `end` from GET
     die();
 }
 
