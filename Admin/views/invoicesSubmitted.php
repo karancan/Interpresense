@@ -22,8 +22,8 @@
             <!-- @todo: add datepickers to form inputs -->
             <form method="get" action="invoicesSubmitted.php">
                 <h4>Finalized invoices added between 
-                    <input name="start" class="admin-page-filter-input" type="text" value="<?= (!empty($_GET['start']) ? $_GET['start'] : null) ?>"> and 
-                    <input name="end" class="admin-page-filter-input" type="text" value="<?= (!empty($_GET['end']) ? $_GET['end'] : null) ?>">
+                    <input id="interpresense_admin_invoices_submitted_start_date" name="start" class="admin-page-filter-input" type="text" value="<?= (!empty($_GET['start']) ? $_GET['start'] : null) ?>"> and 
+                    <input id="interpresense_admin_invoices_submitted_end_date" name="end" class="admin-page-filter-input" type="text" value="<?= (!empty($_GET['end']) ? $_GET['end'] : null) ?>">
                 </h4>
             </form>
             
