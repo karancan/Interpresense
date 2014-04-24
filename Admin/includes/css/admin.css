@@ -4,3 +4,12 @@
 .admin-add-button{
     margin-top: 20%;
 }
+.admin-page-filter-input{
+    background-color: transparent;
+    border: 0;
+    width: 8em;
+    margin: 0 .3em;
+    text-decoration: underline;
+    color: #48698a !important;
+    cursor: pointer;
+}

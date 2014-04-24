@@ -49,10 +49,19 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  */
 if (!isset($_GET['page'])) {
     
+    $filter_start_date = date("Y-m-d", strtotime('-' . $settings['admin_default_date_filter_range_days'] . ' days'));
+    if (!empty($_GET['start'])){
+        $filter_start_date = $_GET['start'];
+    }
+    $filter_end_date = date("Y-m-d", strtotime('+' . $settings['admin_default_date_filter_range_days'] . ' days'));
+    if (!empty($_GET['end'])){
+        $filter_end_date = $_GET['end'];
+    }
+    
     //@todo: fetch draft invoices from `interpresense_service_provider_invoices`
     
     $translate->addResource('l10n/invoicesDrafts.json');
-    $viewFile = "views/invoicesDrafts.php";
+    $viewFile = "views/invoicesDrafts.php"; //@todo: if no invoices to be shown, show appropriate message
     
 } else if ($_GET['page'] === "mark-invoice-as-finalized") {
 
@@ -64,7 +73,7 @@ if (!isset($_GET['page'])) {
     //@todo: given an invoice ID, delete everything pertaining to the invoice including notes, items and files
     
 } else if ($_GET['page'] === "export") {
-    //@todo: add logic
+    //@todo: add logic. Take in to account `start` and `end` from GET
     die();
 }
 
