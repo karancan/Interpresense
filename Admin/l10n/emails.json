@@ -1,0 +1,10 @@
+{
+    "values": {
+        "en-CA": {
+            "documentTitleTag": "Email templates"
+        },
+        "fr-CA": {
+            "documentTitleTag": "Modèles de courrier électronique"
+        }
+    }
+}
