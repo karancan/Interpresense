@@ -20,6 +20,8 @@
                     <tr>
                         <th scope='col'>Name</th>
                         <th scope='col'>Description</th>
+                        <th scope='col'>CC</th>
+                        <th scope='col'>BCC</th>
                         <th scope='col'>Options</th>
                     </tr>
                 </thead>
