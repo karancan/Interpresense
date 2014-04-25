@@ -12,17 +12,39 @@
     </div>
     
     <div class="row">
-    
-        <!-- Insert content -->
-    
+        
+        <p class="col-md-12">An administrative user must exist before the application can be used…</p>
+        
     </div>
     
-    <div class="row">
-    
-        <div class="col-md-2">
-            <a href="index.php?page=go-to-step-4" class="btn btn-success btn-block"><i class="fa fa-check"></i> Save and proceed</a>
+    <form action="index.php?page=go-to-step-4" method="POST" class="row">
+        
+        <div class="form-group col-md-12">
+            <label class="control-label" for="username">Username</label>
+            <input type="text" class="form-control" id="username">
         </div>
-    
-    </div>
+
+        <div class="form-group col-md-12">
+            <label class="control-label" for="first_name">First name</label>
+            <input type="text" class="form-control" id="first_name">
+        </div>
+
+        <div class="form-group col-md-12">
+            <label class="control-label" for="last_name">Last name</label>
+            <input type="text" class="form-control" id="last_name">
+        </div>
+
+        <div class="form-group col-md-12">
+            <label class="control-label" for="expires_on">Expires on</label>
+            <input type="text" class="form-control datepicker" id="expires_on">
+        </div>
+        
+        <p class="col-md-12">More users can be added later on.</p>
+
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-success btn-block"><i class="fa fa-check"></i> Save and proceed</button>
+        </div>
+        
+    </form>
     
 </div>

@@ -1,12 +1,15 @@
-### Order of execution
-
-Please run the scripts in the following order:
-
-1. `interpresense_settings`
-2. `interpresense_users`
-3. `interpresense_service_provider_activities`
-4. `interpresense_service_provider_invoices`
-5. `interpresense_service_provider_invoice_items`
-6. `interpresense_service_provider_invoice_files`
-7. `interpresense_service_provider_invoices_notes`
-8. `interpresense_admin_reports`
+{
+    "description": "Order of execution: Please run the scripts in the following order.",
+    "tables": [
+        "interpresense_settings",
+        "interpresense_users",
+        "interpresense_email_templates",
+        "interpresense_service_provider_activities",
+        "interpresense_service_provider_invoices",
+        "interpresense_service_provider_invoice_items",
+        "interpresense_service_provider_invoice_files",
+        "interpresense_service_provider_invoices_notes",
+        "interpresense_admin_report_templates",
+        "interpresense_admin_reports"
+    ]
+}
