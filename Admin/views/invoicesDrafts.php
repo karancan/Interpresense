@@ -11,7 +11,7 @@
             <a href="https://<?= URL_INTERPRESENSE ?>/ServiceProvider/" target="_blank" class="btn btn-info btn-block admin-add-button"><i class="fa fa-plus"></i> Add draft invoice</a>        
         </div>
         <div class="col-md-2">
-            <a href="invoicesDrafts.php?page=export&start=<?= $filter_start_date ?>&end=<?= $filter_end_date ?>" class="btn btn-info btn-block admin-add-button"><i class="fa fa-table"></i> Export</a>
+            <a href="invoicesDrafts.php?page=export&start=<?= $filter_start_date ?>&end=<?= $filter_end_date ?>" class="btn btn-info btn-block admin-add-button"><i class="fa fa-table"></i> Export (CSV format)</a>
         </div>
     </div>
 

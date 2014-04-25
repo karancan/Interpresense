@@ -23,7 +23,8 @@ class Emails extends \Interpresense\Includes\BaseModel {
     public function __construct(\Interpresense\Includes\DatabaseObject $db) {
         parent::__construct($db);
         
-        //@todo: add constructor body
+        $this->validators['cc'] = Validator::email();
+        $this->validators['bcc'] = Validator::email();
     }
     
     /**
@@ -43,7 +44,18 @@ class Emails extends \Interpresense\Includes\BaseModel {
      */
     public function updateEmailTemplate(array $data) {
         
-        //@todo: add function body
+        $sql = 'UPDATE `interpresense_email_templates`
+                   SET cc = :cc, bcc = :bcc, content = :content
+                 WHERE `email_id` = :email_id;';
+        
+        $types = array(
+            'cc' => \PDO::PARAM_STR,
+            'bcc' => \PDO::PARAM_STR,
+            'content' => \PDO::PARAM_STR,
+            'email_id' => \PDO::PARAM_INT
+        );
+        
+        parent::$db->query($sql, $data, $types);
         
     }
 }

@@ -78,6 +78,10 @@ header .org-logo{
 .highlighted-row td, .highlighted-row th {
     background-color: inherit !important;
 }
+.empty-table-placeholder{
+    text-align: center;
+    color: #808080;
+}
 
 /**
  *Bootstrap over-ride styles
