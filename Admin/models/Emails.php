@@ -45,6 +45,14 @@ class Emails extends \Interpresense\Includes\BaseModel {
      */
     public function updateEmailTemplate(array $data) {
         
+        if(!Validator::key('email_id', $this->validators['email_id'])
+               ->key('subject', $this->validators['subject'])
+               ->key('cc', $this->validators['cc'])
+               ->key('bcc', $this->validators['bcc'])
+               ->validate($data)) {
+            throw new \InvalidArgumentException('Required data missing or invalid.');
+        }
+        
         $sql = 'UPDATE `interpresense_email_templates`
                    SET subject = :subject, cc = :cc, bcc = :bcc, content = :content
                  WHERE `email_id` = :email_id;';
@@ -56,6 +64,8 @@ class Emails extends \Interpresense\Includes\BaseModel {
             'content' => \PDO::PARAM_STR,
             'email_id' => \PDO::PARAM_INT
         );
+        
+        $data = parent::$db->pick(array_keys($types), $data);
         
         parent::$db->query($sql, $data, $types);
         
