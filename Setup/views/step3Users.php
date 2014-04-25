@@ -13,7 +13,7 @@
     
     <div class="row">
         
-        <p class="col-md-12">A user must exist before the system can be used.</p>
+        <p class="col-md-12">An administrative user must exist before the application can be used…</p>
         
     </div>
     
