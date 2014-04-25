@@ -74,7 +74,7 @@
                 
                 <div class="form-group">
                     <label class="control-label" for="expires_on">Expires on</label>
-                    <input type="text" class="form-control" id="expires_on">
+                    <input type="text" class="form-control datepicker" id="expires_on">
                 </div>
             
             </div>
@@ -86,3 +86,11 @@
         </div>
     </div>
 </div>
+<script>
+    
+    //Init datepickers
+    $('.datepicker').datepicker({
+      format: 'yyyy-mm-dd'
+    });
+    
+</script>
