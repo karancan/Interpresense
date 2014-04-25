@@ -95,18 +95,41 @@ class Invoice extends \Interpresense\Includes\BaseModel {
     
     /**
      * Retrieves invoices
+     * @param string $startRange The start of the date range
+     * @param string $endRange The end of the date range
      * @param boolean $finalOnly Fetch finalized invoices only. Defaults to true.
      * @return array
      */
-    public function fetchInvoices($finalOnly = true) {
-        $sql = "SELECT `invoice_id`, `invoice_uid`, `invoice_id_for_sp`, `invoice_id_for_org`, `sp_name`, `sp_address`, `sp_postal_code`, `sp_city`, `sp_province`, `sp_phone`, `sp_email`, `sp_hst_number`, `client_num`, `is_final`, `inserted_on`, `updated_on`, `is_approved, `approved_on`, `approved_by`, `admin_viewed`, `admin_last_viewed_on`, `admin_last_viewed_by`
-                  FROM `interpresense_service_provider_invoices`";
+    public function fetchInvoices($startRange, $endRange, $finalOnly = true) {
+        $dateValidator = Validator::notEmpty()->date('Y-m-d');
         
-        if($finalOnly) {
-            $sql .= ' WHERE `is_final` = 1;';
+        if (!$dateValidator->validate($startRange) || !$dateValidator->validate($endRange)) {
+            throw new \InvalidArgumentException('Invalid dates.');
         }
         
-        return parent::$db->query($sql);
+        if (new DateTime($startRange) > new DateTime($endRange)) {
+            return array();
+        }
+        
+        $sql = "SELECT `invoice_id`, `invoice_uid`, `invoice_id_for_sp`, `invoice_id_for_org`, `sp_name`, `sp_address`, `sp_postal_code`, `sp_city`, `sp_province`, `sp_phone`, `sp_email`, `sp_hst_number`, `client_num`, `is_final`, `inserted_on`, `updated_on`, `is_approved`, `approved_on`, `approved_by`, `admin_viewed`, `admin_last_viewed_on`, `admin_last_viewed_by`
+                  FROM `interpresense_service_provider_invoices`
+                 WHERE `inserted_on` BETWEEN :start AND :end";
+        
+        if($finalOnly) {
+            $sql .= ' AND `is_final` = 1;';
+        }
+        
+        $data = array(
+            'start' => $startRange,
+            'end' => $endRange
+        );
+        
+        $types = array(
+            'start' => \PDO::PARAM_STR,
+            'end' => \PDO::PARAM_STR
+        );
+        
+        return parent::$db->query($sql, $data, $types);
     }
     
     /**
