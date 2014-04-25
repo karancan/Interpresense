@@ -24,7 +24,7 @@ if (!isset($_SESSION['user_id'])) {
 /**
  * Models
  */
-$model = new ClientSearch($dbo);
+$model = new Emails($dbo);
 
 /**
  * Localization
@@ -48,18 +48,22 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  * Content and actions
  */
 if (!isset($_GET['page'])) {
+
+    //@todo: fetch emails
     
-    $finalInvoices = $model->fetchFinalizedInvoices($_GET['client']);
-    $draftInvoices = $model->fetchDraftInvoices($_GET['client']);
+    $translate->addResource('l10n/emails.json');
+    $viewFile = "views/emails.php";
     
-    $translate->addResource('l10n/clientSearch.json');
-    $viewFile = "views/clientSearch.php";
+} elseif ($_GET['page'] === 'update-email') {
+    
+    //@todo: add logic for when a user is added or updated
+    
 }
 
 /**
  * View
  */
-$actions = array();
+$actions = array('update-email');
 
 if (!in_array($_GET['page'], $actions, true)) {
     
@@ -72,7 +76,6 @@ if (!in_array($_GET['page'], $actions, true)) {
     
     $translate->addResource('l10n/nav.json');
     require 'views/nav.php';
-
 
     if(isset($viewFile) && file_exists($viewFile)) {
         require $viewFile;

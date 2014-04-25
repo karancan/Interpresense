@@ -18,7 +18,7 @@ CREATE TABLE `interpresense_service_provider_invoices` (
   `sp_phone` char(10) COLLATE utf8_unicode_ci NOT NULL,
   `sp_email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `sp_hst_number` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `client_num` int(11) unsigned NOT NULL,
+  `client_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `is_final` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'Value of 0 indicates draft invoice. Value of 1 indicates final invoice.',
   `grand_total` decimal(6,2) DEFAULT NULL,
   `inserted_on` datetime NOT NULL,

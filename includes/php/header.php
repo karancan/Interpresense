@@ -18,6 +18,7 @@ header('Content-Type: text/html; charset=utf-8');
     <link rel='shortcut icon' href='//<?= URL_INTERPRESENSE ?>/favicon.ico'>
     <link rel='stylesheet' media='screen' type='text/css' href='//<?= URL_VENDOR_FRONTEND ?>/bootstrap/dist/css/bootstrap.min.css'>
     <link rel='stylesheet' media='screen' type='text/css' href='//<?= URL_VENDOR_FRONTEND ?>/Bootflat/bootflat/css/bootflat.min.css'>
+    <link rel='stylesheet' media='screen' type='text/css' href='//<?= URL_VENDOR_FRONTEND ?>/bootstrap-datepicker/css/datepicker3.css'>
     <link rel='stylesheet' href='//<?= URL_VENDOR_FRONTEND ?>/fontawesome/css/font-awesome.min.css'>
     <link rel='stylesheet' href='//<?= URL_VENDOR_FRONTEND ?>/summernote/summernote-dist/summernote.css'>
     <link rel='stylesheet' href='//<?= URL_CSS ?>/interpresense.css'>
@@ -25,6 +26,7 @@ header('Content-Type: text/html; charset=utf-8');
     <script src='//<?= URL_VENDOR_FRONTEND ?>/jquery/dist/jquery.min.js' charset='utf-8'></script>
     <script src='//<?= URL_VENDOR_FRONTEND ?>/jquery-color/jquery.color.js' charset='utf-8'></script>
     <script src='//<?= URL_VENDOR_FRONTEND ?>/bootstrap/dist/js/bootstrap.min.js' charset='utf-8'></script>
+    <script src='//<?= URL_VENDOR_FRONTEND ?>/bootstrap-datepicker/js/bootstrap-datepicker.js' charset='utf-8'></script>
     <script src='//<?= URL_VENDOR_FRONTEND ?>/DataTables/media/js/jquery.dataTables.js' charset='utf-8'></script>
     <script src='//<?= URL_VENDOR_FRONTEND ?>/summernote/summernote-dist/summernote.min.js' charset='utf-8'></script>
     <script src='//<?= URL_JS ?>/interpresense.js' charset='utf-8'></script>

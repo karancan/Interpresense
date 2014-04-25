@@ -24,7 +24,7 @@ if (!isset($_SESSION['user_id'])) {
 /**
  * Models
  */
-// @todo Plug in a model
+$model = new Search($dbo);
 
 /**
  * Localization
@@ -49,42 +49,26 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  */
 if (!isset($_GET['page'])) {
     
-    $filter_start_date = date("Y-m-d", strtotime('-' . $settings['admin_default_date_filter_range_days'] . ' days'));
-    if (!empty($_GET['start'])){
-        $filter_start_date = $_GET['start'];
-    }
-    $filter_end_date = date("Y-m-d", strtotime('+' . $settings['admin_default_date_filter_range_days'] . ' days'));
-    if (!empty($_GET['end'])){
-        $filter_end_date = $_GET['end'];
-    }
+    //Does the search query match any invoices pertaining to a client
+    $finalInvoicesForClient = $model->fetchFinalizedInvoicesForClient($_GET['q']); //@todo: test the integrity of the results provided by this function
+    $draftInvoicesForClient = $model->fetchDraftInvoicesForClient($_GET['q']); //@todo: test the integrity of the results provided by this function
     
-    //@todo: fetch draft invoices from `interpresense_service_provider_invoices`
+    //Does the search query match any invoices pertaining to a service provider
+    $finalInvoicesForSP = $model->fetchFinalizedInvoicesForServiceProvider($_GET['q']); //@todo: test the integrity of the results provided by this function
+    $draftInvoicesForSP = $model->fetchDraftInvoicesForServiceProvider($_GET['q']); //@todo: test the integrity of the results provided by this function
     
-    $translate->addResource('l10n/invoicesDrafts.json');
-    $viewFile = "views/invoicesDrafts.php"; //@todo: if no invoices to be shown, show appropriate message
-    
-} else if ($_GET['page'] === "mark-invoice-as-finalized") {
-
-    //@todo: for a given invoice ID, mark it as finalized
-    //@todo: create an invoice note indicating that the invoice was finalized, when and by who
-
-} else if ($_GET['page'] === "delete-invoice") {
-
-    //@todo: given an invoice ID, delete everything pertaining to the invoice including notes, items and files
-    
-} else if ($_GET['page'] === "export") {
-    //@todo: add logic. Take in to account `start` and `end` from GET
-    die();
+    $translate->addResource('l10n/search.json');
+    $viewFile = "views/search.php";
 }
 
 /**
  * View
  */
-$actions = array('mark-invoice-as-finalized', 'delete-invoice', 'export');
+$actions = array();
 
 if (!in_array($_GET['page'], $actions, true)) {
     
-    $current_view = 'admin-drafts';
+    $current_view = '';
     
     require FS_PHP . '/header.php';
     
@@ -93,6 +77,7 @@ if (!in_array($_GET['page'], $actions, true)) {
     
     $translate->addResource('l10n/nav.json');
     require 'views/nav.php';
+
 
     if(isset($viewFile) && file_exists($viewFile)) {
         require $viewFile;

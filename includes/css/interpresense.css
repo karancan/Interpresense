@@ -13,6 +13,9 @@ hr.inset {
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     margin: 1.5em 0;
 }
+.interpresense-loader{
+    display: none;
+}
 
 /**
  *Body header styles
@@ -84,6 +87,9 @@ header .org-logo{
 }
 .modal-dialog-vertical-center{
     margin-top: 10% !important;
+}
+.datepicker{
+    z-index: 1151 !important;
 }
 
 /**

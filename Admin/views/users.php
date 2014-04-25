@@ -11,7 +11,7 @@
             <a data-toggle="modal" href="#admin-add-modal" class="btn btn-info btn-block admin-add-button"><i class="fa fa-plus"></i> Add a user</a>        
         </div>
         <div class="col-md-2">
-            <a href="settings.php?page=export-users" class="btn btn-info btn-block admin-add-button"><i class="fa fa-table"></i> Export</a>
+            <a href="users.php?page=export-users" class="btn btn-info btn-block admin-add-button"><i class="fa fa-table"></i> Export</a>
         </div>
     </div>
     
@@ -74,7 +74,7 @@
                 
                 <div class="form-group">
                     <label class="control-label" for="expires_on">Expires on</label>
-                    <input type="text" class="form-control" id="expires_on">
+                    <input type="text" class="form-control datepicker" id="expires_on">
                 </div>
             
             </div>
@@ -86,3 +86,11 @@
         </div>
     </div>
 </div>
+<script>
+    
+    //Init datepickers
+    $('.datepicker').datepicker({
+      format: 'yyyy-mm-dd'
+    });
+    
+</script>
