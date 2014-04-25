@@ -77,6 +77,79 @@ class Invoice extends \Interpresense\Includes\BaseModel {
     }
     
     /**
+     * Retrieves an invoice
+     * @param int $invoiceID The invoice ID
+     * @return array
+     */
+    public function fetchInvoice($invoiceID) {
+        
+        $sql = "SELECT `invoice_uid`, `invoice_id_for_sp`, `invoice_id_for_org`, `sp_name`, `sp_address`, `sp_postal_code`, `sp_city`, `sp_province`, `sp_phone`, `sp_email`, `sp_hst_number`, `client_num`, `is_final`, `inserted_on`, `updated_on`, `is_approved, `approved_on`, `approved_by`, `admin_viewed`, `admin_last_viewed_on`, `admin_last_viewed_by`
+                  FROM `interpresense_service_provider_invoices`
+                 WHERE `invoice_id` = :invoice_id;";
+        
+        $data = array('invoice_id' => $invoiceID);
+        $types = array('invoice_id' => \PDO::PARAM_INT);
+        
+        return parent::$db->query($sql, $data, $types);
+    }
+    
+    /**
+     * Retrieves invoices
+     * @param string $startRange The start of the date range
+     * @param string $endRange The end of the date range
+     * @param string $status Filters invoices by status. Default is all.
+     * @return array
+     */
+    public function fetchInvoices($startRange, $endRange, $status = 'all') {
+        $dateValidator = Validator::notEmpty()->date('Y-m-d');
+        
+        if (!$dateValidator->validate($startRange) || !$dateValidator->validate($endRange)) {
+            throw new \InvalidArgumentException('Invalid dates.');
+        }
+        
+        if (new DateTime($startRange) > new DateTime($endRange)) {
+            return array();
+        }
+        
+        $sql = "SELECT `invoice_id`, `invoice_uid`, `invoice_id_for_sp`, `invoice_id_for_org`, `sp_name`, `sp_address`, `sp_postal_code`, `sp_city`, `sp_province`, `sp_phone`, `sp_email`, `sp_hst_number`, `client_num`, `is_final`, `inserted_on`, `updated_on`, `is_approved`, `approved_on`, `approved_by`, `admin_viewed`, `admin_last_viewed_on`, `admin_last_viewed_by`
+                  FROM `interpresense_service_provider_invoices`
+                 WHERE `inserted_on` BETWEEN :start AND :end";
+        
+        if ($status === 'final') {
+            $sql .= ' AND `is_final` = 1;';
+        } elseif ($status === 'draft') {
+            $sql .= ' AND `is_final` = 0;';
+        }
+        
+        $data = array(
+            'start' => $startRange,
+            'end' => $endRange
+        );
+        
+        $types = array(
+            'start' => \PDO::PARAM_STR,
+            'end' => \PDO::PARAM_STR
+        );
+        
+        return parent::$db->query($sql, $data, $types);
+    }
+    
+    /**
+     * Marks an invoice as a draft
+     * @param int $invoiceID The invoice ID
+     */
+    public function markInvoiceAsDraft($invoiceID) {
+        $sql = "UPDATE `interpresense_service_provider_invoices`
+                   SET `is_final` = 0, `is_approved` = 0, `approved_by` = NULL, `updated_on` = NOW()
+                 WHERE `invoice_id` = :invoice_id;";
+        
+        $data = array('invoice_id' => $invoiceID);
+        $types = array('invoice_id' => \PDO::PARAM_INT);
+        
+        parent::$db->query($sql, $data, $types);
+    }
+    
+    /**
      * Retrieves an invoice ID given an invoice UID
      * @param string $invoiceUID The invoice UID
      * @return null|int The ID of the invoice, or NULL if it does not exist.
@@ -105,20 +178,16 @@ class Invoice extends \Interpresense\Includes\BaseModel {
     
     /**
      * Marks a draft invoice as final
-     * @param string $invoiceUID The invoice UID
+     * @param int $invoiceID The invoice ID
      */
-    public function finalizeDraftInvoice($invoiceUID) {
-        
-        if(!$this->validators['invoice_uid']->validate($invoiceUID)) {
-            throw new \InvalidArgumentException('Invalid invoice UID');
-        }
+    public function finalizeDraftInvoice($invoiceID) {
         
         $sql = "UPDATE `interpresense_service_provider_invoices`
                    SET `is_final` = 1, `updated_on` = NOW()
-                 WHERE `invoice_uid` = :invoice_uid;";
+                 WHERE `invoice_id` = :invoice_id;";
         
-        $data = array('invoice_uid' => $invoiceUID);
-        $types = array('invoice_uid' => \PDO::PARAM_STR);
+        $data = array('invoice_id' => $invoiceID);
+        $types = array('invoice_id' => \PDO::PARAM_INT);
         
         parent::$db->query($sql, $data, $types);
     }
@@ -172,6 +241,59 @@ class Invoice extends \Interpresense\Includes\BaseModel {
                  WHERE `invoice_uid` = :invoice_uid;";
         
         parent::$db->query($sql, $data, $types);
+    }
+    
+    /**
+     * Mark invoice as approved
+     * @param int $invoiceID The invoice ID
+     */
+    public function approveInvoice($invoiceID) {
+        $sql = "UPDATE `interpresense_service_provider_invoices`
+                   SET `is_approved` = 1, `approved_by` = :user_id, `approved_on` = NOW(), `updated_on` = NOW()
+                 WHERE `invoice_id` = :invoice_id;";
+        
+        $data = array(
+            'invoice_id' => $invoiceID,
+            'user_id' => $_SESSION['user_id']
+        );
+        
+        $types = array(
+            'invoice_id' => \PDO::PARAM_INT,
+            'user_id' => \PDO::PARAM_INT
+        );
+        
+        parent::$db->query($sql, $data, $types);
+    }
+    
+    /**
+     * Marks an invoice as viewed
+     * @param int $invoiceID The invoice ID
+     */
+    public function markInvoiceViewed($invoiceID) {
+        $sql = "UPDATE `interpresense_service_provider_invoices`
+                   SET `admin_viewed` = 1, `admin_last_viewed_on` = NOW(), `admin_last_viewed_by` = :user_id, `updated_on` = NOW()
+                 WHERE `invoice_id` = :invoice_id;";
+        
+        $data = array(
+            'invoice_id' => $invoiceID,
+            'user_id' => $_SESSION['user_id']
+        );
+        
+        $types = array(
+            'invoice_id' => \PDO::PARAM_INT,
+            'user_id' => \PDO::PARAM_INT
+        );
+        
+        parent::$db->query($sql, $data, $types);
+    }
+    
+    /**
+     * Deletes an invoice
+     * @param int $invoiceID The invoice ID
+     * @todo
+     */
+    public function deleteInvoice($invoiceID) {
+        
     }
     
     /**
