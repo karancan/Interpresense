@@ -41,7 +41,7 @@
         
         <div class="col-md-12">
         
-            <h4>Report templates</h4>
+            <h4>Templates</h4>
             
             <table class="table table-hover">           
                 <thead>

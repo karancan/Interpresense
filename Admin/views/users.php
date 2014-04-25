@@ -11,7 +11,7 @@
             <a data-toggle="modal" href="#admin-add-modal" class="btn btn-info btn-block admin-add-button"><i class="fa fa-plus"></i> Add a user</a>        
         </div>
         <div class="col-md-2">
-            <a href="settings.php?page=export-users" class="btn btn-info btn-block admin-add-button"><i class="fa fa-table"></i> Export</a>
+            <a href="users.php?page=export-users" class="btn btn-info btn-block admin-add-button"><i class="fa fa-table"></i> Export</a>
         </div>
     </div>
     
