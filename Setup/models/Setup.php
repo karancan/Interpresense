@@ -17,6 +17,32 @@ class Setup extends \Interpresense\Includes\BaseModel {
     }
     
     /**
+     * Creates database tables
+     */
+    public function createTables() {
+        $tables = array(
+            'interpresense_settings',
+            'interpresense_users',
+            'interpresense_service_provider_activities',
+            'interpresense_service_provider_invoices',
+            'interpresense_service_provider_invoice_items',
+            'interpresense_service_provider_invoice_files',
+            'interpresense_service_provider_invoices_notes',
+            'interpresense_admin_report_templates',
+            'interpresense_admin_reports'
+        );
+        
+        // Drop tables in reverse order to avoid foreign key constraint errors
+        $dropSql = 'DROP TABLE IF EXISTS ' . implode(',', array_reverse($tables)) . ';';
+        parent::$db->db->exec($dropSql);
+        
+        foreach($tables as $table) {
+            $sql = file_get_contents(FS_INCLUDES . "/sql/$table.sql");
+            parent::$db->db->exec($sql);
+        }
+    }
+    
+    /**
      * Accept EULA
      */
     public function acceptEula() {
