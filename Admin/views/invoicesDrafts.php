@@ -22,8 +22,9 @@
             <!-- @todo: add datepickers to form inputs -->
             <form method="get" action="invoicesDrafts.php">
                 <h4>Draft invoices added between 
-                    <input id="interpresense_admin_invoices_drafts_start_date" name="start" class="admin-page-filter-input" type="text" value="<?= $filter_start_date ?>"> and 
-                    <input id="interpresense_admin_invoices_drafts_end_date" name="end" class="admin-page-filter-input" type="text" value="<?= $filter_end_date ?>">
+                    <input id="interpresense_admin_invoices_drafts_start_date" name="start" class="admin-page-filter-input datepicker" type="text" value="<?= $filter_start_date ?>"> and 
+                    <input id="interpresense_admin_invoices_drafts_end_date" name="end" class="admin-page-filter-input datepicker" type="text" value="<?= $filter_end_date ?>">
+                    <img src="//<?= URL_IMAGES ?>/loader.gif" class="interpresense-loader">
                 </h4>
             </form>
             
@@ -49,3 +50,11 @@
     
 </div>
 <script charset='utf-8' src='includes/js/admin.js'></script>
+<script>
+    
+    //Init datepickers
+    $('.datepicker').datepicker({
+      format: 'yyyy-mm-dd'
+    });
+    
+</script>
