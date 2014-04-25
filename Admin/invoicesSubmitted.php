@@ -62,7 +62,7 @@ if (!isset($_GET['page'])) {
         $filter_end_date = $_GET['end'];
     }
     
-    $invoices = $invoicesModel->fetchInvoices($filter_start_date, $filter_end_date);
+    $invoices = $invoicesModel->fetchInvoices($filter_start_date, $filter_end_date, 'final');
     
     $translate->addResource('l10n/invoicesSubmitted.json');
     $viewFile = "views/invoicesSubmitted.php"; //@todo: if no invoices to be shown, show appropriate message

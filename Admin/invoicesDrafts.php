@@ -24,7 +24,7 @@ if (!isset($_SESSION['user_id'])) {
 /**
  * Models
  */
-// @todo Plug in a model
+$invoicesModel = new \Interpresense\ServiceProvider\Invoice($dbo);
 
 /**
  * Localization
@@ -58,21 +58,21 @@ if (!isset($_GET['page'])) {
         $filter_end_date = $_GET['end'];
     }
     
-    //@todo: fetch draft invoices from `interpresense_service_provider_invoices`
+    $invoices = $invoicesModel->fetchInvoices($filter_start_date, $filter_end_date, 'draft');
     
     $translate->addResource('l10n/invoicesDrafts.json');
     $viewFile = "views/invoicesDrafts.php"; //@todo: if no invoices to be shown, show appropriate message
     
-} else if ($_GET['page'] === "mark-invoice-as-finalized") {
+} elseif ($_GET['page'] === "mark-invoice-as-finalized") {
 
-    //@todo: for a given invoice ID, mark it as finalized
+    $invoicesModel->finalizeDraftInvoice($_GET['invoice_id']);
     //@todo: create an invoice note indicating that the invoice was finalized, when and by who
 
-} else if ($_GET['page'] === "delete-invoice") {
+} elseif ($_GET['page'] === "delete-invoice") {
 
     //@todo: given an invoice ID, delete everything pertaining to the invoice including notes, items and files
     
-} else if ($_GET['page'] === "export") {
+} elseif ($_GET['page'] === "export") {
     //@todo: add logic. Take in to account `start` and `end` from GET
     die();
 }

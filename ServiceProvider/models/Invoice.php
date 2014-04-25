@@ -97,10 +97,10 @@ class Invoice extends \Interpresense\Includes\BaseModel {
      * Retrieves invoices
      * @param string $startRange The start of the date range
      * @param string $endRange The end of the date range
-     * @param boolean $finalOnly Fetch finalized invoices only. Defaults to true.
+     * @param string $status Filters invoices by status. Default is all.
      * @return array
      */
-    public function fetchInvoices($startRange, $endRange, $finalOnly = true) {
+    public function fetchInvoices($startRange, $endRange, $status = 'all') {
         $dateValidator = Validator::notEmpty()->date('Y-m-d');
         
         if (!$dateValidator->validate($startRange) || !$dateValidator->validate($endRange)) {
@@ -115,8 +115,10 @@ class Invoice extends \Interpresense\Includes\BaseModel {
                   FROM `interpresense_service_provider_invoices`
                  WHERE `inserted_on` BETWEEN :start AND :end";
         
-        if($finalOnly) {
+        if ($status === 'final') {
             $sql .= ' AND `is_final` = 1;';
+        } elseif ($status === 'draft') {
+            $sql .= ' AND `is_final` = 0;';
         }
         
         $data = array(
@@ -176,20 +178,16 @@ class Invoice extends \Interpresense\Includes\BaseModel {
     
     /**
      * Marks a draft invoice as final
-     * @param string $invoiceUID The invoice UID
+     * @param int $invoiceID The invoice ID
      */
-    public function finalizeDraftInvoice($invoiceUID) {
-        
-        if(!$this->validators['invoice_uid']->validate($invoiceUID)) {
-            throw new \InvalidArgumentException('Invalid invoice UID');
-        }
+    public function finalizeDraftInvoice($invoiceID) {
         
         $sql = "UPDATE `interpresense_service_provider_invoices`
                    SET `is_final` = 1, `updated_on` = NOW()
-                 WHERE `invoice_uid` = :invoice_uid;";
+                 WHERE `invoice_id` = :invoice_id;";
         
-        $data = array('invoice_uid' => $invoiceUID);
-        $types = array('invoice_uid' => \PDO::PARAM_STR);
+        $data = array('invoice_id' => $invoiceID);
+        $types = array('invoice_id' => \PDO::PARAM_INT);
         
         parent::$db->query($sql, $data, $types);
     }
