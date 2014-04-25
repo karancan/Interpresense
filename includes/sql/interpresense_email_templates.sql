@@ -10,8 +10,11 @@ CREATE TABLE `interpresense_email_templates` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `content` text COLLATE utf8_unicode_ci NOT NULL,
   `description` text COLLATE utf8_unicode_ci NOT NULL,
+  `subject` text COLLATE utf8_unicode_ci NOT NULL,
   `cc` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `bcc` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`email_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+-- @todo: add insert statements for emails that are available

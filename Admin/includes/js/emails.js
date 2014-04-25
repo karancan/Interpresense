@@ -15,6 +15,7 @@ $('[data-action="edit"]').click(function(){
     
     //Set form values
     $('#email_id').val($(this).closest('tr').data('email-id'));
+    $('#email_subject').val($(this).closest('tr').data('email-subject'));
     $('#email_cc').val($(this).closest('tr').data('email-cc'));
     $('#email_bcc').val($(this).closest('tr').data('email-bcc'));
     $('#email_content').val($(this).closest('tr').data('email-content'));

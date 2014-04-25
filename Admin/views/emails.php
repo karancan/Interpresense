@@ -20,6 +20,7 @@
                     <tr>
                         <th scope='col'>Name</th>
                         <th scope='col'>Description</th>
+                        <th scope='col'>Subject</td>
                         <th scope='col'>CC</th>
                         <th scope='col'>BCC</th>
                         <th scope='col'></th>
@@ -29,15 +30,17 @@
                     <tr>
                         <?php
                         if (empty($emailTemplates)){
-                            echo "<tr><td colspan='5' class='empty-table-placeholder'>No email templates at this time…</td></tr>";
+                            echo "<tr><td colspan='6' class='empty-table-placeholder'>No email templates at this time…</td></tr>";
                         } else {
                             foreach($emailTemplates as $e) {
                                 echo "<tr data-email-id='{$antiXSS->escape($e['email_id'], $antiXSS::HTML_ATTR)}'
+                                          data-email-subject='{$antiXSS->escape($e['subject'], $antiXSS::HTML_ATTR)}'
                                           data-email-cc='{$antiXSS->escape($e['cc'], $antiXSS::HTML_ATTR)}'
                                           data-email-bcc='{$antiXSS->escape($e['bcc'], $antiXSS::HTML_ATTR)}'
                                           data-email-content='{$antiXSS->escape($e['content'], $antiXSS::HTML_ATTR)}'>" .
                                      "<td>{$e['name']}</td>" .
                                      "<td>{$e['description']}</td>" .
+                                     "<td>{$e['subject']}</td>" .
                                      "<td>{$e['cc']}</td>" .
                                      "<td>{$e['bcc']}</td>" .
                                      '<td class="table-option-cell"> 
@@ -69,7 +72,12 @@
             </div>
             
             <div class="modal-body">
-            
+                
+               <div class="form-group">
+                    <label class="control-label" for="email_subject">Subject</label>
+                    <input type="text" class="form-control" id="email_subject" name='subject'>
+                </div>
+                
                 <div class="form-group">
                     <label class="control-label" for="email_cc">Who gets CC'd</label>
                     <input type="text" class="form-control" id="email_cc" name='cc'>
