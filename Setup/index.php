@@ -74,7 +74,7 @@ if (!isset($_GET['page'])) {
         exit;
     }
     
-    //@todo: create database tables
+    $model->createTables();
     
     $setup_current_step = 2;
     $translate->addResource('l10n/step2Eula.json');
@@ -94,7 +94,8 @@ if (!isset($_GET['page'])) {
         exit;
     }
     
-    //@todo: fetch list of existing users
+    $usersModel = new \Interpresense\Admin\Users($dbo);
+    $users = $usersModel->fetchUsers();
     
     $setup_current_step = 3;
     $translate->addResource('l10n/step3Users.json');
@@ -114,7 +115,8 @@ if (!isset($_GET['page'])) {
         exit;
     }
     
-    //@todo: fetch app settings
+    $settingsModel = new \Interpresense\Admin\Settings($dbo);
+    $settings = $settingsModel->fetchSettings();
     
     $setup_current_step = 4;
     $translate->addResource('l10n/step4Settings.json');
@@ -128,6 +130,8 @@ if (!isset($_GET['page'])) {
         header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-2');
         exit;
     }
+    
+    $model->finishInstallation();
     
     $setup_current_step = 5;
     $translate->addResource('l10n/step5Complete.json');
