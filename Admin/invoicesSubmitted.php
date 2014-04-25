@@ -24,7 +24,10 @@ if (!isset($_SESSION['user_id'])) {
 /**
  * Models
  */
-// @todo Plug in a model
+$invoicesModel = new \Interpresense\ServiceProvider\Invoice($dbo);
+$invoiceItems = new \Interpresense\ServiceProvider\InvoiceItems($dbo);
+$invoiceFiles = new \Interpresense\ServiceProvider\InvoiceFiles($dbo);
+$invoiceNotes = new InvoiceNotes($dbo);
 
 /**
  * Localization
@@ -49,28 +52,32 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  */
 if (!isset($_GET['page'])) {
 
-    //@todo: fetch non-draft invoices from `interpresense_service_provider_invoices`
-    
+    $invoices = $invoicesModel->fetchInvoices();
     $translate->addResource('l10n/invoicesSubmitted.json');
     $viewFile = "views/invoicesSubmitted.php";
     
 } else if ($_GET['page'] === "fetch-invoice-details") {
     
-    //@todo: mark invoice as viewed
-    //@todo: given an invoice ID, fetch everything about an invoice itself
-    //@todo: given an invoice ID, fetch invoice items
+    $invoicesModel->markInvoiceViewed($_GET['invoice_id']);
+    $invoice = $invoicesModel->fetchInvoice($_GET['invoice_id']);
+    $items = $invoiceItems->fetchItems($_GET['invoice_id']);
+    // @todo output
     
 } else if ($_GET['page'] === "fetch-invoice-files") {
     
-    //@todo: given an invoice ID, fetch all the files belonging to that invoice
+    $files = $invoiceFiles->fetchFiles($_GET['invoice_id']);
+    // @todo output JSON encoding file content doesn't seem like a good idea
     
 } else if ($_GET['page'] === "fetch-invoice-notes") {
 
-    //@todo: given an invoice ID, fetch all the notes belonging to that invoice
+    $notes = $invoiceNotes->fetchNotes($_GET['invoice_id']);
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode($notes);
+    exit;
     
 } else if ($_GET['page'] === "mark-invoice-as-draft") {
-
-    //@todo: for a given invoice id, mark `is_approved` as 0 and nullify the fields that state who approved it and when
+    
+    $invoicesModel->markInvoiceAsDraft($_GET['invoice_id']);
     //@todo: create an invoice note stating that the invoice was mark as un-approved (or as a draft)
 
 } else if ($_GET['page'] === "export") {
