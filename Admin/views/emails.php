@@ -40,10 +40,11 @@
                                           data-email-content='{$antiXSS->escape($e['content'], $antiXSS::HTML_ATTR)}'>" .
                                      "<td>{$e['name']}</td>" .
                                      "<td>{$e['description']}</td>" .
-                                     "<td>{$e['subject']}</td>" .
-                                     "<td>{$e['cc']}</td>" .
-                                     "<td>{$e['bcc']}</td>" .
-                                     '<td class="table-option-cell"> 
+                                     "<td>{$antiXSS->escape($e['subject'], $antiXSS::HTML_BODY)}</td>" .
+                                     "<td>{$antiXSS->escape($e['cc'], $antiXSS::HTML_BODY)}</td>" .
+                                     "<td>{$antiXSS->escape($e['bcc'], $antiXSS::HTML_BODY)}</td>" .
+                                     '<td class="table-option-cell">
+                                          <button type="button" class="btn btn-info" data-toggle="modal" href="#admin-view-email-modal" data-action="view"><i class="fa fa-eye"></i> View content</button>
                                           <button type="button" class="btn btn-warning" data-toggle="modal" href="#admin-edit-email-modal" data-action="edit"><i class="fa fa-edit"></i> Edit template</button>
                                       </td>' .
                                      '</tr>';
@@ -102,6 +103,30 @@
         </form>
     </div>
 </div>
+
+<div class="modal fade" id="admin-view-email-modal" tabindex="-1" role="dialog" aria-labelledby="admin-view-email-modal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-vertical-center">
+        
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">View email content</h4>
+            </div>
+            
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label" for="email_content_view">Email content</label>
+                    <textarea class="form-control" rows="20" id="email_content_view"></textarea>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+            </div>
+            
+        </div>
+    </div>
+</div>
+
 <script charset='utf-8' src='includes/js/emails.js'></script>
 <script>
     'use strict';

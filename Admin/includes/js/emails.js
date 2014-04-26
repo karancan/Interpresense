@@ -25,6 +25,16 @@ $('[data-action="edit"]').click(function(){
 });
 
 /**
+ *User wants to view an email template
+ */
+$('[data-action="view"]').click(function(){
+    
+    $('#email_content_view').val($(this).closest('tr').data('email-content'));
+    global.highlightRow($(this).closest('tr'));
+    
+});
+
+/**
  *The add/edit settings dialog has been closed
  */
 $('#admin-edit-email-modal').on('hidden.bs.modal', function () {
