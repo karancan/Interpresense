@@ -39,7 +39,21 @@
                 </thead>
                 <tbody>
                     <tr>
-                        
+                        <?php
+                        if (empty($invoices)){
+                            echo "<tr><td colspan='4' class='empty-table-placeholder'>No finalized invoices at this time…</td></tr>";
+                        } else {
+                            foreach($invoices as $i) {
+                                echo "<tr data-invoice-id='{$antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR)}'>" .
+                                     "<td>Coming soon</td>" .
+                                     "<td>Coming soon</td>" .
+                                     "<td>Coming soon</td>" .
+                                     '<td class="table-option-cell">
+                                      </td>' .
+                                     '</tr>';
+                            }
+                        }
+                        ?>
                     </tr>
                 </tbody>
             </table>

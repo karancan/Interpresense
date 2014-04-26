@@ -24,7 +24,7 @@ if (!isset($_SESSION['user_id'])) {
 /**
  * Models
  */
-// @todo Plug in a model
+$model = new Reports($dbo);
 
 /**
  * Localization
@@ -49,20 +49,20 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  */
 if (!isset($_GET['page'])) {
 
-    //@todo: fetch reports that have already been generated
-    //@todo: fetch report templates
+    $reportsGenerated = $model->fetchReportsGenerated();
+    $reportTemplates = $model->fetchReportTemplates();
     
     $translate->addResource('l10n/reports.json');
     $viewFile = "views/reports.php";
-} else if ($_GET['page'] === 'generate-new-report') {
+} elseif ($_GET['page'] === 'generate-new-report') {
 
     //@todo: Add a newly generated report to the database
 
-} else if ($_GET['page'] === 'view-generated-report') {
+} elseif ($_GET['page'] === 'view-generated-report') {
     
     //@todo: Given a report ID, display the report
     
-} else if ($_GET['page'] === 'mark-report-as-deleted') {
+} elseif ($_GET['page'] === 'mark-report-as-deleted') {
 
     //@todo: Given a report ID, mark it as deleted
 
@@ -71,7 +71,7 @@ if (!isset($_GET['page'])) {
 /**
  * View
  */
-$actions = array('');
+$actions = array();
 
 if (!in_array($_GET['page'], $actions, true)) {
     

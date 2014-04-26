@@ -35,7 +35,14 @@ $('[data-action="view"]').click(function(){
 });
 
 /**
- *The add/edit settings dialog has been closed
+ *The view email template dialog has been closed
+ */
+$('#admin-view-email-modal').on('hidden.bs.modal', function () {
+    global.removeRowHighlighting($('#admin-email-templates-table'));
+});
+
+/**
+ *The edit email template dialog has been closed
  */
 $('#admin-edit-email-modal').on('hidden.bs.modal', function () {
     global.removeRowHighlighting($('#admin-email-templates-table'));
