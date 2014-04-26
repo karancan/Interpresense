@@ -11,7 +11,7 @@
             <a href="https://<?= URL_INTERPRESENSE ?>/ServiceProvider/" target="_blank" class="btn btn-info btn-block admin-add-button"><i class="fa fa-plus"></i> Add draft invoice</a>        
         </div>
         <div class="col-md-2">
-            <a href="invoicesDrafts.php?page=export&start=<?= $filter_start_date ?>&end=<?= $filter_end_date ?>" class="btn btn-info btn-block admin-add-button"><i class="fa fa-table"></i> Export</a>
+            <a href="invoicesDrafts.php?page=export&start=<?= $antiXSS->escape($filter_start_date, $antiXSS::URL_PARAM) ?>&end=<?= $antiXSS->escape($filter_end_date, $antiXSS::URL_PARAM) ?>" class="btn btn-info btn-block admin-add-button"><i class="fa fa-table"></i> Export (CSV format)</a>
         </div>
     </div>
 
@@ -22,8 +22,8 @@
             <!-- @todo: add datepickers to form inputs -->
             <form method="get" action="invoicesDrafts.php">
                 <h4>Draft invoices added between 
-                    <input id="interpresense_admin_invoices_drafts_start_date" name="start" class="admin-page-filter-input datepicker" type="text" value="<?= $filter_start_date ?>"> and 
-                    <input id="interpresense_admin_invoices_drafts_end_date" name="end" class="admin-page-filter-input datepicker" type="text" value="<?= $filter_end_date ?>">
+                    <input id="interpresense_admin_invoices_drafts_start_date" name="start" class="admin-page-filter-input datepicker" type="text" value="<?= $antiXSS->escape($filter_start_date, $antiXSS::HTML_ATTR) ?>"> and 
+                    <input id="interpresense_admin_invoices_drafts_end_date" name="end" class="admin-page-filter-input datepicker" type="text" value="<?= $antiXSS->escape($filter_end_date, $antiXSS::HTML_ATTR) ?>">
                     <img src="//<?= URL_IMAGES ?>/loader.gif" class="interpresense-loader">
                 </h4>
             </form>
