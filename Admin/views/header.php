@@ -32,8 +32,8 @@
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">English <i class="fa fa-check"></i></a></li>
-                                <li><a href="#">French</a></li>
+                                <li><a href="//<?= URL_PHP ?>/lang.php">English <i class="fa fa-check"></i></a></li>
+                                <li><a href="//<?= URL_PHP ?>/lang.php">French</a></li>
                                 <li class="divider"></li>
                                 <li><a href="<?= empty($settings['service_provider_help_manual_uri']) ? 'settings.php' : $settings['service_provider_help_manual_uri'] ?>">Help manual</a></li>
                             </ul>
