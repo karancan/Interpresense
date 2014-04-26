@@ -35,7 +35,24 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <!-- @todo: spit out all users -->
+                        <?php
+                        if (empty($users)){
+                            echo "<tr><td colspan='7' class='empty-table-placeholder'>No administrative users to be shown at this point…</td></tr>";
+                        } else {
+                            foreach($users as $u) {
+                                echo "<tr data-user-id='{$antiXSS->escape($u['user_id'], $antiXSS::HTML_ATTR)}'>" .
+                                     "<td>Coming soon</td>" .
+                                     "<td>Coming soon</td>" .
+                                     "<td>Coming soon</td>" .
+                                     "<td>Coming soon</td>" .
+                                     "<td>Coming soon</td>" .
+                                     "<td>Coming soon</td>" .
+                                     '<td class="table-option-cell">
+                                      </td>' .
+                                     '</tr>';
+                            }
+                        }
+                        ?>
                     </tr>
                 </tbody>
             </table>

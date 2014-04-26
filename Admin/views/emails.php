@@ -5,7 +5,7 @@
     
     <div class="row">
         <div class="col-md-8">
-            <h3 class="admin-page-title"><i class="fa fa-users"></i> Email templates</h3>
+            <h3 class="admin-page-title"><i class="fa fa-envelope"></i> Email templates</h3>
         </div>
     </div>
     
@@ -91,7 +91,7 @@
                 
                 <div class="form-group">
                     <label class="control-label" for="email_content">Email content</label>
-                    <textarea class="form-control" rows="3" id="email_content" name='content'></textarea>
+                    <textarea class="form-control" rows="10" id="email_content" name='content'></textarea>
                 </div>
             
             </div>

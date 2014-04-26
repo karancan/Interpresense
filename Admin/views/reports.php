@@ -28,7 +28,20 @@
                 </thead>
                 <tbody>
                     <tr>
-                        
+                        <?php
+                        if (empty($reportsGenerated)){
+                            echo "<tr><td colspan='3' class='empty-table-placeholder'>No reports have been generated at this point…</td></tr>";
+                        } else {
+                            foreach($reportsGenerated as $r) {
+                                echo "<tr data-report-id='{$antiXSS->escape($r['report_id'], $antiXSS::HTML_ATTR)}'>" .
+                                     "<td>Coming soon</td>" .
+                                     "<td>Coming soon</td>" .
+                                     '<td class="table-option-cell">
+                                      </td>' .
+                                     '</tr>';
+                            }
+                        }
+                        ?>
                     </tr>
                 </tbody>
             </table>
@@ -41,7 +54,7 @@
         
         <div class="col-md-12">
         
-            <h4>Templates</h4>
+            <h4>Report templates</h4>
             
             <table class="table table-hover">           
                 <thead>
@@ -53,7 +66,20 @@
                 </thead>
                 <tbody>
                     <tr>
-                        
+                        <?php
+                        if (empty($reportsTemplates)){
+                            echo "<tr><td colspan='3' class='empty-table-placeholder'>No report templates to be shown at this point…</td></tr>";
+                        } else {
+                            foreach($reportsTemplates as $r) {
+                                echo "<tr data-template-id='{$antiXSS->escape($r['template_id'], $antiXSS::HTML_ATTR)}'>" .
+                                     "<td>Coming soon</td>" .
+                                     "<td>Coming soon</td>" .
+                                     '<td class="table-option-cell">
+                                      </td>' .
+                                     '</tr>';
+                            }
+                        }
+                        ?>
                     </tr>
                 </tbody>
             </table>
