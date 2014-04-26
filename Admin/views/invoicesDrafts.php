@@ -11,7 +11,7 @@
             <a href="https://<?= URL_INTERPRESENSE ?>/ServiceProvider/" target="_blank" class="btn btn-info btn-block admin-add-button"><i class="fa fa-plus"></i> Add draft invoice</a>        
         </div>
         <div class="col-md-2">
-            <a href="invoicesDrafts.php?page=export&start=<?= $antiXSS->escape($filter_start_date, $antiXSS::HTML_ATTR) ?>&end=<?= $antiXSS->escape($filter_end_date, $antiXSS::HTML_ATTR) ?>" class="btn btn-info btn-block admin-add-button"><i class="fa fa-table"></i> Export (CSV format)</a>
+            <a href="invoicesDrafts.php?page=export&start=<?= $antiXSS->escape($filter_start_date, $antiXSS::URL_PARAM) ?>&end=<?= $antiXSS->escape($filter_end_date, $antiXSS::URL_PARAM) ?>" class="btn btn-info btn-block admin-add-button"><i class="fa fa-table"></i> Export (CSV format)</a>
         </div>
     </div>
 
