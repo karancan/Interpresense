@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 header('Content-Type: text/html; charset=utf-8');
 header('HTTP/1.1 403 Forbidden');
 
@@ -49,8 +49,8 @@ require_once '../php/config.php';
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="//<?= URL_PHP ?>/lang.php">English <i class="fa fa-check"></i></a></li>
-                                <li><a href="//<?= URL_PHP ?>/lang.php">French</a></li>
+                                <li><a href="//<?= URL_PHP ?>/lang.php?lang=en-CA">English <?= ($_SESSION['lang'] === 'en-CA' ? '<i class="fa fa-check"></i>' : null)?></a></li>
+                                <li><a href="//<?= URL_PHP ?>/lang.php?lang=fr-CA">Français <?= ($_SESSION['lang'] === 'fr-CA' ? '<i class="fa fa-check"></i>' : null)?></a></li>
                             </ul>
                         </div>
                     </div>
