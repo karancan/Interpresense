@@ -41,7 +41,7 @@ require_once '../php/config.php';
                             <img class="external-page-logo" src="//<?= URL_IMAGES ?>/logo_regular_1024_350.png" alt="Interpresense">
                         </a>
                     </div>
-                    <div class="col-md-2 col-md-offset-2">
+                    <div class="col-md-2 pull-right">
                         <div class="btn-group header-options-container pull-right">
                             <button type="button" class="btn btn-info"><i class="fa fa-font"></i> Language</button>
                             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
