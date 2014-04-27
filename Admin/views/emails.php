@@ -40,9 +40,9 @@
                                           data-email-content='{$antiXSS->escape($e['content'], $antiXSS::HTML_ATTR)}'>" .
                                      "<td>{$e['name']}</td>" .
                                      "<td>{$e['description']}</td>" .
-                                     "<td>{$antiXSS->escape($e['subject'], $antiXSS::HTML_BODY)}</td>" .
-                                     "<td>{$antiXSS->escape($e['cc'], $antiXSS::HTML_BODY)}</td>" .
-                                     "<td>{$antiXSS->escape($e['bcc'], $antiXSS::HTML_BODY)}</td>" .
+                                     "<td>{$antiXSS->escape($e['subject'])}</td>" .
+                                     "<td>{$antiXSS->escape($e['cc'])}</td>" .
+                                     "<td>{$antiXSS->escape($e['bcc'])}</td>" .
                                      '<td class="table-option-cell">
                                           <button type="button" class="btn btn-info" data-toggle="modal" href="#admin-view-email-modal" data-action="view"><i class="fa fa-eye"></i> View content</button>
                                           <button type="button" class="btn btn-warning" data-toggle="modal" href="#admin-edit-email-modal" data-action="edit"><i class="fa fa-edit"></i> Edit template</button>
