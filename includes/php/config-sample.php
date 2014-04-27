@@ -80,6 +80,9 @@ define('URL_CUSTOM_HANDLERS', URL_INCLUDES."/custom-handlers");
 // Application definitions
 //============================================================================================
 
+//Acceptable languages
+define('AVAILABLE_LANGUAGES', serialize(array('en-CA', 'fr-CA')));
+
 //Random string for generation of hashed values
 define('HASH_GENERATION_RANDOM_STRING', '*(@srg()$@)gr0g3srS8zg$@$');
 

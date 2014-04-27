@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'includes/php/config.php';
 header('Content-Type: text/html; charset=utf-8');
 ?>
@@ -56,7 +57,7 @@ header('Content-Type: text/html; charset=utf-8');
                             <img class="external-page-logo" src="//<?= URL_IMAGES ?>/logo_regular_1024_350.png" alt="Interpresense">
                         </a>
                     </div>
-                    <div class="col-md-2 col-md-offset-2">
+                    <div class="col-md-2 pull-right">
                         <div class="btn-group header-options-container pull-right">
                             <button type="button" class="btn btn-info"><i class="fa fa-font"></i> Language</button>
                             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
@@ -64,8 +65,8 @@ header('Content-Type: text/html; charset=utf-8');
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">English <i class="fa fa-check"></i></a></li>
-                                <li><a href="#">French</a></li>
+                                <li><a href="//<?= URL_PHP ?>/lang.php?lang=en-CA">English <?= ($_SESSION['lang'] === 'en-CA' ? '<i class="fa fa-check"></i>' : null)?></a></li>
+                                <li><a href="//<?= URL_PHP ?>/lang.php?lang=fr-CA">Français <?= ($_SESSION['lang'] === 'fr-CA' ? '<i class="fa fa-check"></i>' : null)?></a></li>
                             </ul>
                         </div>
                     </div>
@@ -80,13 +81,14 @@ header('Content-Type: text/html; charset=utf-8');
                             <video>
                                 <source src="movie.mp4" type="video/mp4">
                                 <source src="movie.ogg" type="video/ogg">
+                                <!-- @todo: add video. If possible, add with custom play/pause controls for a better look. Font Awesome has video player icons -->
                             </video>
                         </div>
                         <div class="jumbotron-contents">
                             <h1 class="interpresense-objective">An invoicing solution built for organizations catering to clients with disabilities</h1>
-                            <h2>Modern and intuitive for <a class="interpresense-module-link" href="//<?= URL_SERVICE_PROVIDER ?>/">service providers</a></h2>
+                            <h2><i class="fa fa-fw fa-angle-double-right"></i>Modern and intuitive for <a class="interpresense-module-link" href="//<?= URL_SERVICE_PROVIDER ?>/">service providers</a></h2>
                             <p>Interpreters, note-takers and other service providers create, save and send invoices.</p>
-                            <h2>Powerful and flexible for <a class="interpresense-module-link" href="//<?= URL_ADMIN ?>/">administrators</a></h2>
+                            <h2><i class="fa fa-fw fa-angle-double-right"></i>Powerful and flexible for <a class="interpresense-module-link" href="//<?= URL_ADMIN ?>/">administrators</a></h2>
                             <p>Administrators receive, approve and respond to invoices and generate reports and statistics in a few clicks.</p>
                         </div>
                     </div>
