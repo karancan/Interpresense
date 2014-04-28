@@ -56,10 +56,12 @@
     
 </div>
 <script>
+    'use strict';
     
     //Init datepickers
-    $('.datepicker').datepicker({
-      format: 'yyyy-mm-dd'
+    $('#expires_on').datepicker({
+        format: 'yyyy-mm-dd',
+        startDate: new Date()
     });
     
 </script>
