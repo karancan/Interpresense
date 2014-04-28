@@ -64,13 +64,12 @@ if (!isset($_GET['page'])) {
 } elseif ($_GET['page'] === 'change-activity') {
     
     if (empty($_POST['activity_id'])){
-        $activitiesModel->addActivity($_POST);
+        $updated = $activitiesModel->addActivity($_POST);
     } else {
-        $activitiesModel->updateActivity($_POST);
+        $updated = $activitiesModel->updateActivity($_POST);
     }
     
-    header('location: settings.php?focus=' . $_POST['key']); //@todo: get focus working
-    //@todo: finalize UI
+    header('location: settings.php?focus=' . $updated); //@todo: get focus working
 } elseif ($_GET['page'] === 'delete-activity') {
     $activitiesModel->deleteActivity($_POST['activity_id']);
 }

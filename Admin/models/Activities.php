@@ -65,7 +65,7 @@ class Activities extends \Interpresense\Includes\BaseModel {
         }
         
         $sql = "UPDATE `interpresense_service_provider_activities`
-                   SET `activity_name_en` = :activity_name_en, `activity_name_fr` = :activity_name_fr, `updated_on` = NOW())
+                   SET `activity_name_en` = :activity_name_en, `activity_name_fr` = :activity_name_fr, `updated_on` = NOW()
                  WHERE `activity_id` = :activity_id;";
         
         $types = array(
@@ -77,6 +77,7 @@ class Activities extends \Interpresense\Includes\BaseModel {
         $data = parent::$db->pick(array_keys($types), $data);
         
         parent::$db->query($sql, $data, $types);
+        return $data['activity_id'];
     }
     
     /**
@@ -84,7 +85,7 @@ class Activities extends \Interpresense\Includes\BaseModel {
      * @return array
      */
     public function fetchActivities() {
-        $sql = "SELECT `activity_name_en`, `activity_name_fr`, `inserted_on`
+        $sql = "SELECT `activity_id`, `activity_name_en`, `activity_name_fr`, `inserted_on`
                   FROM `interpresense_service_provider_activities`
                  WHERE `is_deleted` = 0;";
         
