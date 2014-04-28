@@ -12,6 +12,7 @@ $(document).ready(function(){
  *User wants to add a setting
  */
 $('[data-action="add-setting"]').click(function(){
+    $('#setting_description_container').hide();
     $('#admin-add-setting-modal .modal-title').text('Add setting');
     $('#setting_name, #setting_value').val('');
 });
@@ -29,7 +30,7 @@ $('[data-action="add-activity"]').click(function(){
  */
 $('#admin-settings-table [data-action="edit"]').click(function(){
     
-    $('#setting_description_container').hide();
+    $('#setting_description_container').show();
     $('#admin-add-setting-modal .modal-title').text('Edit setting');
     $('#setting_name').val($(this).closest('tr').data('setting-key'));
     var setting_value = $(this).closest('tr').data('setting-value');

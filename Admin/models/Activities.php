@@ -50,7 +50,7 @@ class Activities extends \Interpresense\Includes\BaseModel {
         $data = parent::$db->pick(array_keys($types), $data);
         
         parent::$db->query($sql, $data, $types);
-        //@todo: return last insert ID
+        return parent::$db->db->lastInsertId();
     }
     
     /**

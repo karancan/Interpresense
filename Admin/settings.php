@@ -69,7 +69,7 @@ if (!isset($_GET['page'])) {
         $updated = $activitiesModel->updateActivity($_POST);
     }
     
-    header('location: settings.php?focus=' . $updated); //@todo: get focus working
+    header('location: settings.php?focus=' . $updated);
 } elseif ($_GET['page'] === 'delete-activity') {
     $activitiesModel->deleteActivity($_POST['activity_id']);
 }
