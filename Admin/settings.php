@@ -62,11 +62,17 @@ if (!isset($_GET['page'])) {
 } elseif ($_GET['page'] === 'delete-setting') {
     $model->deleteSetting($_POST['key']);
 } elseif ($_GET['page'] === 'change-activity') {
-    $activitiesModel->updateActivity($_POST);
+    
+    if (empty($_POST['activity_id'])){
+        $activitiesModel->addActivity($_POST);
+    } else {
+        $activitiesModel->updateActivity($_POST);
+    }
+    
+    header('location: settings.php?focus=' . $_POST['key']); //@todo: get focus working
     //@todo: finalize UI
 } elseif ($_GET['page'] === 'delete-activity') {
     $activitiesModel->deleteActivity($_POST['activity_id']);
-    //@todo: finalize UI
 }
 
 /**

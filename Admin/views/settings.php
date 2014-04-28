@@ -11,7 +11,7 @@
             <a data-toggle="modal" href="#admin-add-setting-modal" data-action="add-setting" class="btn btn-info btn-block admin-add-button"><i class="fa fa-plus"></i> Add a setting</a>        
         </div>
         <div class="col-md-2">
-            <a data-toggle="modal" href="#admin-add-activity-modal" data-action="add=activity" class="btn btn-info btn-block admin-add-button"><i class="fa fa-plus"></i> Add an activity</a>        
+            <a data-toggle="modal" href="#admin-add-activity-modal" data-action="add-activity" class="btn btn-info btn-block admin-add-button"><i class="fa fa-plus"></i> Add an activity</a>        
         </div>
     </div>
     
@@ -35,7 +35,7 @@
                         echo "<tr><td colspan='3' class='empty-table-placeholder'>No settings to be shown at this point…</td></tr>";
                     } else {
                         foreach($appSettings as $s) {
-                            echo "<tr data-setting-id='{$antiXSS->escape($s['setting_key'], $antiXSS::HTML_ATTR)}'
+                            echo "<tr data-focus='{$antiXSS->escape($s['setting_key'], $antiXSS::HTML_ATTR)}'
                                       data-setting-key='{$antiXSS->escape($s['setting_key'], $antiXSS::HTML_ATTR)}'
                                       data-setting-value='{$antiXSS->escape($s['setting_value'], $antiXSS::HTML_ATTR)}'
                                       data-setting-description='" . (empty($s['description_en']) ? 'N/A' : $antiXSS->escape($s['description_en'], $antiXSS::HTML_ATTR)). "'>" .
@@ -69,7 +69,7 @@
                         echo "<tr><td colspan='4' class='empty-table-placeholder'>No service provider activities to be shown at this point…</td></tr>";
                     } else {
                         foreach($activities as $s) {
-                            echo "<tr data-activity-id='{$antiXSS->escape($s['activity_id'], $antiXSS::HTML_ATTR)}'
+                            echo "<tr data-focus='{$antiXSS->escape($s['activity_id'], $antiXSS::HTML_ATTR)}'
                                       data-activity-name-en='{$antiXSS->escape($s['activity_name_en'], $antiXSS::HTML_ATTR)}'
                                       data-activity-name-fr='{$antiXSS->escape($s['activity_name_fr'], $antiXSS::HTML_ATTR)}'>" .
                                  "<td>{$s['activity_name_en']}</td>" .
@@ -98,12 +98,12 @@
             
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Add setting</h4>
+                <h4 class="modal-title"></h4>
             </div>
             
             <div class="modal-body">
                 
-                <div class="form-group">
+                <div id="setting_description_container" class="form-group">
                     <label class="control-label">Description</label>
                     <p id="setting_description"></p>
                 </div>
@@ -130,11 +130,13 @@
 
 <div class="modal fade" id="admin-add-activity-modal" tabindex="-1" role="dialog" aria-labelledby="admin-add-setting-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-vertical-center">
-        <form action='settings.php?page=change-setting' method='POST' class="modal-content">
+        <form action='settings.php?page=change-activity' method='POST' class="modal-content">
+            
+            <input type="hidden" name="activity_id" value="">
             
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Add an activity</h4>
+                <h4 class="modal-title"></h4>
             </div>
             
             <div class="modal-body">
