@@ -5,13 +5,14 @@ $(document).ready(function(){
     if (focus !== ''){
         global.highlightRow($('[data-setting-id="' + focus + '"]'), 15000);
         //@todo: add scroll
+        //@todo: needs to work with settings and activities
     }
 });
 
 /**
  *User wants to add a setting
  */
-$('[data-action="add"]').click(function(){
+$('[data-action="add-setting"]').click(function(){
     
     $('#admin-add-setting-modal .modal-title').text('Add setting');
     $('#setting_name, #setting_value').val('');
@@ -21,7 +22,7 @@ $('[data-action="add"]').click(function(){
 /**
  *User wants to edit a setting
  */
-$('[data-action="edit"]').click(function(){
+$('#admin-settings-table [data-action="edit"]').click(function(){
     
     $('#admin-add-setting-modal .modal-title').text('Edit setting');
     $('#setting_name').val($(this).closest('tr').data('setting-key'));
@@ -39,7 +40,7 @@ $('[data-action="edit"]').click(function(){
 /**
  *User wants to delete a setting
  */
-$('[data-action="delete"]').click(function(){
+$('#admin-settings-table [data-action="delete"]').click(function(){
     
     global.highlightRow($(this).closest('tr'));
     
