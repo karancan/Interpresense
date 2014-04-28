@@ -32,7 +32,10 @@
                         echo "<tr><td colspan='3' class='empty-table-placeholder'>No settings to be shown at this point…</td></tr>";
                     } else {
                         foreach($appSettings as $s) {
-                            echo "<tr data-setting-id='{$antiXSS->escape($s['setting_key'], $antiXSS::HTML_ATTR)}' data-setting-key='{$antiXSS->escape($s['setting_key'], $antiXSS::HTML_ATTR)}' data-setting-value='{$antiXSS->escape($s['setting_value'], $antiXSS::HTML_ATTR)}'>" .
+                            echo "<tr data-setting-id='{$antiXSS->escape($s['setting_key'], $antiXSS::HTML_ATTR)}'
+                                      data-setting-key='{$antiXSS->escape($s['setting_key'], $antiXSS::HTML_ATTR)}'
+                                      data-setting-value='{$antiXSS->escape($s['setting_value'], $antiXSS::HTML_ATTR)}'
+                                      data-setting-description='" . (empty($s['description_en']) ? 'N/A' : $antiXSS->escape($s['description_en'], $antiXSS::HTML_ATTR)). "'>" .
                                  "<td>{$s['setting_key']}</td>" .
                                  "<td>{$s['setting_value']}</td>" .
                                  '<td class="table-option-cell">
@@ -93,7 +96,12 @@
             </div>
             
             <div class="modal-body">
-            
+                
+                <div class="form-group">
+                    <label class="control-label">Description</label>
+                    <p id="setting_description"></p>
+                </div>
+                
                 <div class="form-group">
                     <label class="control-label" for="setting_name">Setting name</label>
                     <input type="text" class="form-control" id="setting_name" name='key'>

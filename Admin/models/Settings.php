@@ -23,7 +23,7 @@ class Settings extends \Interpresense\Includes\BaseModel {
      * @return array
      */
     public function fetchSettings() {
-        $sql = 'SELECT `setting_key`, `setting_value`
+        $sql = 'SELECT `setting_key`, `setting_value`, `description_en`, `description_fr`
                   FROM `interpresense_settings`;';
         
         return parent::$db->query($sql);

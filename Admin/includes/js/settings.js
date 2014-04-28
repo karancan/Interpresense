@@ -30,6 +30,7 @@ $('[data-action="edit"]').click(function(){
         //@todo: handling of JSON values which typically apply to multi-language values
     }
     $('#setting_value').val($(this).closest('tr').data('setting-value'));
+    $('#setting_description').html($(this).closest('tr').data('setting-description'));
     
     global.highlightRow($(this).closest('tr'));
     
