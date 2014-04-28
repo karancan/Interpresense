@@ -49,15 +49,15 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  */
 if (!isset($_GET['page'])) {
 
-    //@todo: fetch emails
+    $emailTemplates = $model->fetchEmailTemplates();
     
     $translate->addResource('l10n/emails.json');
     $viewFile = "views/emails.php";
     
 } elseif ($_GET['page'] === 'update-email') {
     
-    //@todo: add logic for when a user is added or updated
-    
+    $model->updateEmailTemplate($_POST);
+    header('Location: emails.php?focus=' . $_POST['email_id']);    
 }
 
 /**

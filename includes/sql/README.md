@@ -1,8 +1,9 @@
 {
-    "description": "Order of execution: Please run the scripts in the following order.",
+    "description": "This file is in JSON format as it is parsed by the application. Tables are in the order that they should be created. When dropping tables, drop in reverse order.",
     "tables": [
         "interpresense_settings",
         "interpresense_users",
+        "interpresense_template_placeholders",
         "interpresense_email_templates",
         "interpresense_service_provider_activities",
         "interpresense_service_provider_invoices",

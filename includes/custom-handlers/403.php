@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 header('Content-Type: text/html; charset=utf-8');
 header('HTTP/1.1 403 Forbidden');
 
@@ -41,7 +41,7 @@ require_once '../php/config.php';
                             <img class="external-page-logo" src="//<?= URL_IMAGES ?>/logo_regular_1024_350.png" alt="Interpresense">
                         </a>
                     </div>
-                    <div class="col-md-2 col-md-offset-2">
+                    <div class="col-md-2 pull-right">
                         <div class="btn-group header-options-container pull-right">
                             <button type="button" class="btn btn-info"><i class="fa fa-font"></i> Language</button>
                             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
@@ -49,8 +49,8 @@ require_once '../php/config.php';
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">English <i class="fa fa-check"></i></a></li>
-                                <li><a href="#">French</a></li>
+                                <li><a href="//<?= URL_PHP ?>/lang.php?lang=en-CA">English <?= ($_SESSION['lang'] === 'en-CA' ? '<i class="fa fa-check"></i>' : null)?></a></li>
+                                <li><a href="//<?= URL_PHP ?>/lang.php?lang=fr-CA">Français <?= ($_SESSION['lang'] === 'fr-CA' ? '<i class="fa fa-check"></i>' : null)?></a></li>
                             </ul>
                         </div>
                     </div>

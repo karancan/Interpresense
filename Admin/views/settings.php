@@ -28,15 +28,22 @@
                 </thead>
                 <tbody>
                     <?php
-                    foreach($appSettings as $s) {
-                        echo "<tr data-setting-id='{$antiXSS->escape($s['setting_key'], $antiXSS::HTML_ATTR)}' data-setting-key='{$antiXSS->escape($s['setting_key'], $antiXSS::HTML_ATTR)}' data-setting-value='{$antiXSS->escape($s['setting_value'], $antiXSS::HTML_ATTR)}'>" .
-                             "<td>{$s['setting_key']}</td>" .
-                             "<td>{$s['setting_value']}</td>" .
-                             '<td class="table-option-cell">
-                                <button type="button" class="btn btn-warning" data-toggle="modal" href="#admin-add-setting-modal" data-action="edit"><i class="fa fa-edit"></i> Edit</button>
-                                <button type="button" class="btn btn-danger" data-action="delete"><i class="fa fa-minus"></i> Delete</button>
-                              </td>' .
-                             '</tr>';
+                    if (empty($appSettings)){
+                        echo "<tr><td colspan='3' class='empty-table-placeholder'>No settings to be shown at this point…</td></tr>";
+                    } else {
+                        foreach($appSettings as $s) {
+                            echo "<tr data-setting-id='{$antiXSS->escape($s['setting_key'], $antiXSS::HTML_ATTR)}'
+                                      data-setting-key='{$antiXSS->escape($s['setting_key'], $antiXSS::HTML_ATTR)}'
+                                      data-setting-value='{$antiXSS->escape($s['setting_value'], $antiXSS::HTML_ATTR)}'
+                                      data-setting-description='" . (empty($s['description_en']) ? 'N/A' : $antiXSS->escape($s['description_en'], $antiXSS::HTML_ATTR)). "'>" .
+                                 "<td>{$s['setting_key']}</td>" .
+                                 "<td>{$s['setting_value']}</td>" .
+                                 '<td class="table-option-cell">
+                                    <button type="button" class="btn btn-warning" data-toggle="modal" href="#admin-add-setting-modal" data-action="edit"><i class="fa fa-edit"></i> Edit</button>
+                                    <button type="button" class="btn btn-danger" data-action="delete"><i class="fa fa-minus"></i> Delete</button>
+                                  </td>' .
+                                 '</tr>';
+                        }
                     }
                     ?>
                 </tbody>
@@ -55,15 +62,19 @@
                 </thead>
                 <tbody>
                     <?php
-                    foreach($activities as $s) {
-                        echo "<tr data-activity-id='{$antiXSS->escape($s['activity_id'], $antiXSS::HTML_ATTR)}'>" .
-                             "<td>{$s['activity_name_en']}</td>" .
-                             "<td>{$s['activity_name_fr']}</td>" .
-                             "<td>" . $dateFmt->format($s['inserted_on'], 'date_time') . "</td>" .
-                             '<td class="table-option-cell"> 
-                             <!-- @todo: add edit and delete buttons -->
-                              </td>' .
-                             '</tr>';
+                    if (empty($activities)){
+                        echo "<tr><td colspan='4' class='empty-table-placeholder'>No service provider activities to be shown at this point…</td></tr>";
+                    } else {
+                        foreach($activities as $s) {
+                            echo "<tr data-activity-id='{$antiXSS->escape($s['activity_id'], $antiXSS::HTML_ATTR)}'>" .
+                                 "<td>{$s['activity_name_en']}</td>" .
+                                 "<td>{$s['activity_name_fr']}</td>" .
+                                 "<td>" . $dateFmt->format($s['inserted_on'], 'date_time') . "</td>" .
+                                 '<td class="table-option-cell"> 
+                                 <!-- @todo: add edit and delete buttons -->
+                                  </td>' .
+                                 '</tr>';
+                        }
                     }
                     ?>
                 </tbody>
@@ -85,7 +96,12 @@
             </div>
             
             <div class="modal-body">
-            
+                
+                <div class="form-group">
+                    <label class="control-label">Description</label>
+                    <p id="setting_description"></p>
+                </div>
+                
                 <div class="form-group">
                     <label class="control-label" for="setting_name">Setting name</label>
                     <input type="text" class="form-control" id="setting_name" name='key'>

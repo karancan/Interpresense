@@ -11,7 +11,7 @@
             <a data-toggle="modal" href="#admin-add-modal" class="btn btn-info btn-block admin-add-button"><i class="fa fa-plus"></i> Add a user</a>        
         </div>
         <div class="col-md-2">
-            <a href="users.php?page=export-users" class="btn btn-info btn-block admin-add-button"><i class="fa fa-table"></i> Export</a>
+            <a href="users.php?page=export-users" class="btn btn-info btn-block admin-add-button"><i class="fa fa-table"></i> Export (CSV format)</a>
         </div>
     </div>
     
@@ -35,7 +35,24 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <!-- @todo: spit out all users -->
+                        <?php
+                        if (empty($users)){
+                            echo "<tr><td colspan='7' class='empty-table-placeholder'>No administrative users to be shown at this point…</td></tr>";
+                        } else {
+                            foreach($users as $u) {
+                                echo "<tr data-user-id='{$antiXSS->escape($u['user_id'], $antiXSS::HTML_ATTR)}'>" .
+                                     "<td>Coming soon</td>" .
+                                     "<td>Coming soon</td>" .
+                                     "<td>Coming soon</td>" .
+                                     "<td>Coming soon</td>" .
+                                     "<td>Coming soon</td>" .
+                                     "<td>Coming soon</td>" .
+                                     '<td class="table-option-cell">
+                                      </td>' .
+                                     '</tr>';
+                            }
+                        }
+                        ?>
                     </tr>
                 </tbody>
             </table>
