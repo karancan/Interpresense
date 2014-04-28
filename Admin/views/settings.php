@@ -110,7 +110,7 @@
                 
                 <div class="form-group">
                     <label class="control-label" for="setting_name">Setting name</label>
-                    <input type="text" class="form-control" id="setting_name" name='key'>
+                    <input type="text" class="form-control" id="setting_name" name='key' required>
                 </div>
                 
                 <div class="form-group">
@@ -143,12 +143,12 @@
                 
                 <div class="form-group">
                     <label class="control-label" for="setting_name">Name (English)</label>
-                    <input type="text" class="form-control" id="name_en" name='activity_name_en'>
+                    <input type="text" class="form-control" id="name_en" name='activity_name_en' required>
                 </div>
                 
                 <div class="form-group">
                     <label class="control-label" for="setting_value">Name (Français)</label>
-                    <input type="text" class="form-control" id="name_fr" name='activity_name_fr'>
+                    <input type="text" class="form-control" id="name_fr" name='activity_name_fr' required>
                 </div>
             
             </div>
