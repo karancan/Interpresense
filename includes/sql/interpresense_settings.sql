@@ -9,6 +9,8 @@ CREATE TABLE `interpresense_settings` (
   `setting_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `setting_key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `setting_value` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description_en` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description_fr` text COLLATE utf8_unicode_ci DEFAULT NULL,  
   `inserted_on` datetime NOT NULL,
   `updated_on` datetime NOT NULL,
   PRIMARY KEY (`setting_id`),
