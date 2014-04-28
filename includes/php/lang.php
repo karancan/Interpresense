@@ -12,5 +12,5 @@ if (isset($_GET['lang']) && in_array($_GET['lang'], $acceptableLanguages)){
     //@todo: fetch default language from database and use that
 }
 
-header("Location: " . $_SERVER['HTTP_REFERER']);
+header("Location: " . $_SERVER['HTTP_REFERER']); //@todo: what is HTTP referer is empty?
 exit;
