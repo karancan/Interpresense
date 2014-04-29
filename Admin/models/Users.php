@@ -152,14 +152,12 @@ class Users extends \Interpresense\Includes\BaseModel {
         $types = array(
             'user_uid' => \PDO::PARAM_STR,
             'user_name' => \PDO::PARAM_STR,
-            'user_password' => \PDO::PARAM_STR,
             'first_name' => \PDO::PARAM_STR,
             'last_name' => \PDO::PARAM_STR,
             'expires_on' => \PDO::PARAM_STR
         );
         
         if(!Validator::key('user_name', $this->validators['username'])
-                ->key('user_password')
                 ->key('first_name', $this->validators['first_name'])
                 ->key('last_name', $this->validators['last_name'])
                 ->key('expires_on', $this->validators['expires_on'])
@@ -168,12 +166,11 @@ class Users extends \Interpresense\Includes\BaseModel {
         }
         
         $data['user_uid'] = hash('sha512', microtime(true) . mt_rand());
-        $data['user_password'] = $this->passwordHash($data['user_password']);
         
         $data = parent::$db->pick(array_keys($types), $data);
         
-        $sql = 'INSERT INTO `interpresense_users` (`user_uid`, `user_name`, `user_password`, `first_name`, `last_name`, `created_on`, `updated_on`, `expires_on`)
-                     VALUES (:user_uid, :user_name, :user_password, :first_name, :last_name, NOW(), NOW(), :expires_on);';
+        $sql = 'INSERT INTO `interpresense_users` (`user_uid`, `user_name`, `first_name`, `last_name`, `created_on`, `updated_on`, `expires_on`)
+                     VALUES (:user_uid, :user_name, :first_name, :last_name, NOW(), NOW(), :expires_on);';
         parent::$db->query($sql, $data, $types);
     }
     

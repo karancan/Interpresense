@@ -9,7 +9,7 @@ CREATE TABLE `interpresense_users` (
   `user_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_uid` char(128) NOT NULL,
   `user_name` varchar(255) NOT NULL,
-  `user_password` binary(60) NOT NULL,
+  `user_password` binary(60) DEFAULT NULL,
   `user_password_reset_key` char(128) DEFAULT NULL,
   `user_password_reset_password` binary(60) DEFAULT NULL,
   `first_name` varchar(255) NOT NULL,
