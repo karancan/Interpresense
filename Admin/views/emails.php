@@ -1,4 +1,5 @@
 <style>
+    @import url('//<?= URL_VENDOR_FRONTEND ?>/summernote/summernote-dist/summernote.css');
     @import url('includes/css/admin.css');
 </style>
 <div class="container">
@@ -91,7 +92,7 @@
                 
                 <div class="form-group">
                     <label class="control-label" for="email_content">Email content</label>
-                    <textarea class="form-control" rows="10" id="email_content" name='content'></textarea>
+                    <textarea class="form-control summernote" rows="10" id="email_content" name='content'></textarea>
                 </div>
             
             </div>
@@ -116,7 +117,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label class="control-label" for="email_content_view">Email content</label>
-                    <textarea class="form-control" rows="20" id="email_content_view"></textarea>
+                    <textarea class="form-control summernote" rows="20" id="email_content_view"></textarea>
                 </div>
             </div>
             
@@ -127,8 +128,13 @@
     </div>
 </div>
 
+<script src='//<?= URL_VENDOR_FRONTEND ?>/summernote/summernote-dist/summernote.min.js'></script>
 <script charset='utf-8' src='includes/js/emails.js'></script>
 <script>
     'use strict';
     var focus = '<?= $antiXSS->escape($_GET['focus'], $antiXSS::JS) ?>';
+    
+    $('.summernote').summernote({
+        height: '300'
+    });
 </script>

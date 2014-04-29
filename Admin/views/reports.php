@@ -1,4 +1,5 @@
 <style>
+    @import url('//<?= URL_VENDOR_FRONTEND ?>/summernote/summernote-dist/summernote.css');
     @import url('includes/css/admin.css');
 </style>
 <div class="container">
@@ -165,4 +166,5 @@
         </div>
     </div>
 </div>
+<script src='//<?= URL_VENDOR_FRONTEND ?>/summernote/summernote-dist/summernote.min.js'></script>
 <script charset='utf-8' src='includes/js/reports.js'></script>
