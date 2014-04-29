@@ -146,7 +146,7 @@
 </div>
 
 <div class="modal fade" id="admin-add-template-modal" tabindex="-1" role="dialog" aria-labelledby="admin-add-template-modal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-vertical-center">
+    <div class="modal-dialog modal-dialog-vertical-center modal-wide">
         <div class="modal-content">
             
             <div class="modal-header">
