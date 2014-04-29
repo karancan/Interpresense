@@ -27,6 +27,7 @@ session_start();
 //If the user is trying to begin installation, there is no model to be initiated
 if ($_GET['page'] !== '' && $_GET['page'] !== 'go-to-step-1'){
     $model = new Setup($dbo);
+    $usersModel = new \Interpresense\Admin\Users($dbo);
 }
 
 /**
@@ -94,7 +95,6 @@ if (!isset($_GET['page'])) {
         exit;
     }
     
-    $usersModel = new \Interpresense\Admin\Users($dbo);
     $users = $usersModel->fetchUsers();
     
     $setup_current_step = 3;
@@ -103,7 +103,7 @@ if (!isset($_GET['page'])) {
 
 } elseif ($_GET['page'] === 'go-to-step-4') {
     
-    //@todo: save data from step 3
+    $usersModel->createUser($_POST);
     
     if ($settings['installation_complete']) {
         header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-5');
