@@ -59,11 +59,7 @@ if (!isset($_GET['page'])) {
     
     //@todo: add logic for when a user is added or updated
     
-} elseif ($_GET['page'] === 'delete-users') {
-    
-    //@todo: add logic for when a user is deleted
-    
-} else if ($_GET['page'] === 'export-users') {
+} elseif ($_GET['page'] === 'export-users') {
     //@todo: add logic
     die();
 }

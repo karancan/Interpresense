@@ -73,7 +73,12 @@
             </div>
             
             <div class="modal-body">
-            
+                
+                <div class="form-group">
+                    <label class="control-label">Instructions</label>
+                    <p>The user will receive an email to confirm their account and set up their password after the account has been added.</p>
+                </div>
+                
                 <div class="form-group">
                     <label class="control-label" for="username">Username</label>
                     <input type="text" class="form-control" id="username">
