@@ -25,6 +25,7 @@ if (!isset($_SESSION['user_id'])) {
  * Models
  */
 $model = new Emails($dbo);
+$placeholdersModel = new PlaceHolders($dbo);
 
 /**
  * Localization
@@ -50,6 +51,7 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
 if (!isset($_GET['page'])) {
 
     $emailTemplates = $model->fetchEmailTemplates();
+    $emailPlaceholders = $placeholdersModel->fetchPlaceholders(1, 0);
     
     $translate->addResource('l10n/emails.json');
     $viewFile = "views/emails.php";

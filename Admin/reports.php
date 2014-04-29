@@ -25,6 +25,7 @@ if (!isset($_SESSION['user_id'])) {
  * Models
  */
 $model = new Reports($dbo);
+$placeholdersModel = new PlaceHolders($dbo);
 
 /**
  * Localization
@@ -51,7 +52,8 @@ if (!isset($_GET['page'])) {
 
     $reportsGenerated = $model->fetchReportsGenerated();
     $reportTemplates = $model->fetchReportTemplates();
-    
+    $reportPlaceholders = $placeholdersModel->fetchPlaceholders(0, 1);
+
     $translate->addResource('l10n/reports.json');
     $viewFile = "views/reports.php";
 } elseif ($_GET['page'] === 'generate-new-report') {
