@@ -66,10 +66,11 @@ $('#admin-settings-table [data-action="delete"]').click(function(){
         $.ajax({
             type: 'post',
             url: 'settings.php?page=delete-setting',
-            data: 'key=' + $(this).closest('tr').data('setting-key'),
-            success: function(){
-                window.location.href = 'settings.php';
+            data: {
+                key: $(this).closest('tr').data('setting-key')
             }
+        }).done(function() {
+            window.location.href = 'settings.php';
         });
     } else {
         global.removeRowHighlighting($(this).closest('table'));
@@ -87,10 +88,11 @@ $('#admin-activities-table [data-action="delete"]').click(function(){
         $.ajax({
             type: 'post',
             url: 'settings.php?page=delete-activity',
-            data: 'activity_id=' + $(this).closest('tr').data('focus'),
-            success: function(){
-                window.location.href = 'settings.php';
+            data: {
+                activity_id: $(this).closest('tr').data('focus')
             }
+        }).done(function() {
+            window.location.href = 'settings.php';
         });
     } else {
         global.removeRowHighlighting($(this).closest('table'));
