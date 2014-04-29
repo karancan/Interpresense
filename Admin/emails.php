@@ -25,7 +25,7 @@ if (!isset($_SESSION['user_id'])) {
  * Models
  */
 $model = new Emails($dbo);
-$placeholdersModel = new PlaceHolders($dbo);
+$placeholdersModel = new Placeholders($dbo);
 
 /**
  * Localization
