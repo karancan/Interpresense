@@ -68,6 +68,14 @@ if (!isset($_GET['page'])) {
 
     //@todo: Given a report ID, mark it as deleted
 
+} elseif ($_GET['page'] === 'add-template') {
+
+    //@todo: Add a new report template
+
+} elseif ($_GET['page'] === 'mark-template-as-deleted') {
+
+    //@todo: Given a template ID, mark it as deleted
+
 }
 
 /**

@@ -18,10 +18,17 @@ $('[data-action="edit"]').click(function(){
     $('#email_subject').val($(this).closest('tr').data('email-subject'));
     $('#email_cc').val($(this).closest('tr').data('email-cc'));
     $('#email_bcc').val($(this).closest('tr').data('email-bcc'));
-    $('#email_content').val($(this).closest('tr').data('email-content'));
+    $('#email_content').code($(this).closest('tr').data('email-content'));
     
     global.highlightRow($(this).closest('tr'));
     
+});
+
+/**
+ *User has finished editing email template
+ */
+$('#admin-form-update-email').submit(function(e){
+    $('#email_content').html($('#email_content').code());
 });
 
 /**
@@ -29,7 +36,7 @@ $('[data-action="edit"]').click(function(){
  */
 $('[data-action="view"]').click(function(){
     
-    $('#email_content_view').val($(this).closest('tr').data('email-content'));
+    $('#email_content_view').code($(this).closest('tr').data('email-content'));
     global.highlightRow($(this).closest('tr'));
     
 });

@@ -1,4 +1,5 @@
 <style>
+    @import url('//<?= URL_VENDOR_FRONTEND ?>/summernote/summernote-dist/summernote.css');
     @import url('includes/css/admin.css');
 </style>
 <div class="container">
@@ -62,8 +63,8 @@
 </div>
 
 <div class="modal fade" id="admin-edit-email-modal" tabindex="-1" role="dialog" aria-labelledby="admin-edit-email-modal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-vertical-center">
-        <form action='emails.php?page=update-email' method='POST' class="modal-content">
+    <div class="modal-dialog modal-dialog-vertical-center modal-wide">
+        <form id="admin-form-update-email" action='emails.php?page=update-email' method='POST' class="modal-content">
             
             <input type="hidden" id="email_id" name="email_id" value="">
             
@@ -91,7 +92,7 @@
                 
                 <div class="form-group">
                     <label class="control-label" for="email_content">Email content</label>
-                    <textarea class="form-control" rows="10" id="email_content" name='content'></textarea>
+                    <textarea class="form-control summernote" id="email_content" name='content'></textarea>
                 </div>
             
             </div>
@@ -105,7 +106,7 @@
 </div>
 
 <div class="modal fade" id="admin-view-email-modal" tabindex="-1" role="dialog" aria-labelledby="admin-view-email-modal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-vertical-center">
+    <div class="modal-dialog modal-dialog-vertical-center modal-wide">
         
         <div class="modal-content">
             <div class="modal-header">
@@ -116,7 +117,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label class="control-label" for="email_content_view">Email content</label>
-                    <textarea class="form-control" rows="20" id="email_content_view"></textarea>
+                    <textarea class="form-control summernote-readonly" id="email_content_view"></textarea>
                 </div>
             </div>
             
@@ -127,8 +128,21 @@
     </div>
 </div>
 
+<script src='//<?= URL_VENDOR_FRONTEND ?>/summernote/summernote-dist/summernote.min.js'></script>
 <script charset='utf-8' src='includes/js/emails.js'></script>
 <script>
     'use strict';
     var focus = '<?= $antiXSS->escape($_GET['focus'], $antiXSS::JS) ?>';
+    
+    //Init rich text editor
+    $('.summernote').summernote({
+        height: '300',
+        tabsize: 3
+    });
+    
+    $('.summernote-readonly').summernote({
+        height: '300',
+        tabsize: 3,
+        toolbar: []
+    });
 </script>

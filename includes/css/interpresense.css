@@ -16,6 +16,9 @@ hr.inset {
 .interpresense-loader{
     display: none;
 }
+.modal-wide{
+    width: 50% !important;
+}
 
 /**
  *Body header styles
@@ -68,7 +71,6 @@ header .org-logo{
 /**
  *Table styles
  */
- 
 .table-option-cell{
     text-align: right;
 }
