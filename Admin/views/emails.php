@@ -92,7 +92,7 @@
                 
                 <div class="form-group">
                     <label class="control-label" for="email_content">Email content</label>
-                    <textarea class="form-control summernote" rows="10" id="email_content" name='content'></textarea>
+                    <textarea class="form-control summernote" id="email_content" name='content'></textarea>
                 </div>
             
             </div>
@@ -117,7 +117,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label class="control-label" for="email_content_view">Email content</label>
-                    <textarea class="form-control summernote-readonly" rows="20" id="email_content_view"></textarea>
+                    <textarea class="form-control summernote-readonly" id="email_content_view"></textarea>
                 </div>
             </div>
             
