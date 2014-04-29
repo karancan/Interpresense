@@ -64,7 +64,7 @@
 
 <div class="modal fade" id="admin-edit-email-modal" tabindex="-1" role="dialog" aria-labelledby="admin-edit-email-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-vertical-center modal-wide">
-        <form action='emails.php?page=update-email' method='POST' class="modal-content">
+        <form id="admin-form-update-email" action='emails.php?page=update-email' method='POST' class="modal-content">
             
             <input type="hidden" id="email_id" name="email_id" value="">
             
@@ -117,7 +117,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label class="control-label" for="email_content_view">Email content</label>
-                    <textarea class="form-control summernote" rows="20" id="email_content_view"></textarea>
+                    <textarea class="form-control summernote-readonly" rows="20" id="email_content_view"></textarea>
                 </div>
             </div>
             
@@ -134,7 +134,15 @@
     'use strict';
     var focus = '<?= $antiXSS->escape($_GET['focus'], $antiXSS::JS) ?>';
     
+    //Init rich text editor
     $('.summernote').summernote({
-        height: '300'
+        height: '300',
+        tabsize: 3
+    });
+    
+    $('.summernote-readonly').summernote({
+        height: '300',
+        tabsize: 3,
+        toolbar: []
     });
 </script>
