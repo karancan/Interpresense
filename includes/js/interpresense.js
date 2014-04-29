@@ -29,7 +29,9 @@ var global = {};
                 row.animate({
                     backgroundColor: 'transparent'
                 }, duration, function() {
-                    row.removeClass('highlighted-row');
+                    row.css({
+                        backgroundColor: ''
+                    }).removeClass('highlighted-row');
                 });
             }
         }
