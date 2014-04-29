@@ -27,7 +27,7 @@ class Users extends \Interpresense\Includes\BaseModel {
         
         $this->validators['user_id'] = Validator::notEmpty()->noWhitespace()->digit()->positive();
         $this->validators['username'] = Validator::notEmpty()->string()->alnum();
-        $this->validators['user_password_reset_key'] = Validator::notEmpty()->length(128, 128)->xdigit();
+        $this->validators['user_password_reset_key'] = Validator::notEmpty()->length(64, 64)->xdigit();
         $this->validators['first_name'] = Validator::notEmpty()->string()->regex('/^[\w .\'-]+$/');
         $this->validators['last_name'] = Validator::notEmpty()->string()->regex('/^[\w .\'-]+$/');
         $this->validators['expires_on'] = Validator::notEmpty()->date('Y-m-d')->min($today->format('Y-m-d'), true);
@@ -240,13 +240,13 @@ class Users extends \Interpresense\Includes\BaseModel {
      */
     public function requestPasswordReset($username, $newPassword) {
         if(!$this->userExists($username)) {
-            throw new Exception('User does not exist.');
+            throw new \Exception('User does not exist.');
         }
         
         $resetHash = hash('sha256', microtime(true) . mt_rand());
         
         $sql = "UPDATE `interpresense_users`
-                   SET `user_password_reset_key = :user_password_reset_key, `user_password_reset_password` = :user_password_reset_password
+                   SET `user_password_reset_key` = :user_password_reset_key, `user_password_reset_password` = :user_password_reset_password
                  WHERE `user_name` = :user_name;";
         
         $data = array(
@@ -268,14 +268,14 @@ class Users extends \Interpresense\Includes\BaseModel {
     
     /**
      * Resets a user's password
-     * @param mixed $userId The ID of the user
+     * @param string $username The username
      * @param string $hash The password reset key
      * @return boolean
      */
-    public function confirmPasswordReset($userId, $hash) {
+    public function confirmPasswordReset($username, $hash) {
         
-        if(!$this->validators['user_id']->validate($userId)) {
-            throw new \InvalidArgumentException('Invalid user ID');
+        if (!$this->userExists($username)) {
+            throw new \Exception('User does not exist.');
         }
         
         if(!$this->validators['user_password_reset_key']->validate($hash)) {
@@ -285,17 +285,18 @@ class Users extends \Interpresense\Includes\BaseModel {
         $sql = "UPDATE `interpresense_users`
                    SET `user_password` = `user_password_reset_password`,
                        `user_password_reset_key` = NULL,
-                       `user_password_reset_password` = NULL
-                 WHERE `user_id` = :user_id
+                       `user_password_reset_password` = NULL,
+                       `updated_on` = NOW()
+                 WHERE `user_name` = :username
                    AND `user_password_reset_key` = :user_password_reset_key;";
         
         $data = array(
-            'user_id' => $userId,
+            'username' => $username,
             'user_password_reset_key' => $hash
         );
         
         $types = array(
-            'user_id' => \PDO::PARAM_STR,
+            'username' => \PDO::PARAM_STR,
             'user_password_reset_key' => \PDO::PARAM_STR
         );
         
