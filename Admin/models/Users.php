@@ -24,14 +24,13 @@ class Users extends \Interpresense\Includes\BaseModel {
         parent::__construct($db);
         
         $today = new \DateTime();
-        $today->setTime(0, 0, 0);
         
         $this->validators['user_id'] = Validator::notEmpty()->noWhitespace()->digit()->positive();
         $this->validators['username'] = Validator::notEmpty()->string()->alnum();
         $this->validators['user_password_reset_key'] = Validator::notEmpty()->length(128, 128)->xdigit();
         $this->validators['first_name'] = Validator::notEmpty()->string()->regex('/^[\w .\'-]+$/');
         $this->validators['last_name'] = Validator::notEmpty()->string()->regex('/^[\w .\'-]+$/');
-        $this->validators['expires_on'] = Validator::notEmpty()->date('Y-m-d')->min($today, true);
+        $this->validators['expires_on'] = Validator::notEmpty()->date('Y-m-d')->min($today->format('Y-m-d'), true);
     }
     
     /**

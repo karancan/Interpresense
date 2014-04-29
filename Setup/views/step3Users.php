@@ -20,28 +20,28 @@
         <div class="row">
             <div class="form-group col-md-4">
                 <label class="control-label" for="username">Username</label>
-                <input type="text" class="form-control" id="username" required maxlength="255" pattern="\w+">
+                <input type="text" class="form-control" name="user_name" id="username" required maxlength="255" pattern="\w+">
             </div>
         </div>
         
         <div class="row">
             <div class="form-group col-md-4">
                 <label class="control-label" for="first_name">First name</label>
-                <input type="text" class="form-control" id="first_name" required maxlength="255" pattern="[\w .'-]+">
+                <input type="text" class="form-control" name="first_name" id="first_name" required maxlength="255" pattern="[\w .'-]+">
             </div>
         </div>
         
         <div class="row">
             <div class="form-group col-md-4">
                 <label class="control-label" for="last_name">Last name</label>
-                <input type="text" class="form-control" id="last_name" required maxlength="255" pattern="[\w .'-]+">
+                <input type="text" class="form-control" name="last_name" id="last_name" required maxlength="255" pattern="[\w .'-]+">
             </div>
         </div>
         
         <div class="row">
             <div class="form-group col-md-4">
                 <label class="control-label" for="expires_on">Expires on</label>
-                <input type="text" class="form-control datepicker" id="expires_on" required maxlength="10">
+                <input type="text" class="form-control datepicker" name="expires_on" id="expires_on" required maxlength="10">
             </div>
         </div>
             
