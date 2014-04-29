@@ -22,8 +22,6 @@ class Placeholders extends \Interpresense\Includes\BaseModel {
      */
     public function __construct(\Interpresense\Includes\DatabaseObject $db) {
         parent::__construct($db);
-        
-        //@todo: `forEmails` and `forReports`
     }
     
     /**
@@ -32,15 +30,24 @@ class Placeholders extends \Interpresense\Includes\BaseModel {
      * @param int $forReports Fetch placeholders pertaining to report templates. Default is 0
      * @return array
      */
-    public function fetchPlaceholders($forEmails = 0, $forReports = 0) {
+    public function fetchPlaceholders($forEmails = 1, $forReports = 1) {
         
-        //@todo: validate parameters
+        $tinyIntValidator = Validator::int()->in(array(0,1));
+        
+        if (!$tinyIntValidator->validate($forEmails) || !$tinyIntValidator->validate($forReports)){
+            throw new \InvalidArgumentException('Cannot fetch placeholders with invalid filtering parameters');
+        }
     
         $sql = 'SELECT `placeholder`, `description_en`, `description_fr`
                   FROM `interpresense_template_placeholders`
                  WHERE `for_emails` = :for_emails
-                   AND `for_reports` = :for_reports;';
+                    OR `for_reports` = :for_reports;';
         
-        return parent::$db->query($sql);
+        $types = array(
+            'for_emails' => \PDO::PARAM_INT,
+            'for_reports' => \PDO::PARAM_INT
+        );
+        
+        return parent::$db->query($sql, array('for_emails' => $forEmails, 'for_reports' => $forReports), $types);
     }
 }
