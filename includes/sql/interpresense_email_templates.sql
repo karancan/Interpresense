@@ -17,4 +17,4 @@ CREATE TABLE `interpresense_email_templates` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
--- @todo: add insert statements for emails that are available
+-- @todo: add insert statements for emails that are available (invoice added, invoice approved, account creation, account update account password reset, ...?)

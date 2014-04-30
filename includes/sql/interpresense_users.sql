@@ -16,7 +16,7 @@ CREATE TABLE `interpresense_users` (
   `last_name` varchar(255) NOT NULL,
   `created_on` datetime NOT NULL,
   `updated_on` datetime NOT NULL,
-  `expires_on` datetime NOT NULL,
+  `expires_on` date NOT NULL,
   `is_confirmed` tinyint(1) NOT NULL DEFAULT '0',
   `last_log_in` datetime DEFAULT NULL,
   PRIMARY KEY (`user_id`),

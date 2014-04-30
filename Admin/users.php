@@ -56,14 +56,22 @@ if (!isset($_GET['page'])) {
     $viewFile = "views/users.php";
     
 } elseif ($_GET['page'] === 'change-user') {
+
+    if (empty($_POST['user_id'])){
+        $updated = $usersModel->createUser($_POST);
+        
+        //@todo: send account creation email
+        
+    } else {
+        $updated = $usersModel->updateUser($_POST);
+        
+        //@todo: send account update email
+    }
     
-    //@todo: add logic for when a user is added or updated
+    header('Location: users.php?focus=' . $updated);
     
-} elseif ($_GET['page'] === 'delete-users') {
     
-    //@todo: add logic for when a user is deleted
-    
-} else if ($_GET['page'] === 'export-users') {
+} elseif ($_GET['page'] === 'export-users') {
     //@todo: add logic
     die();
 }
