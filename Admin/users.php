@@ -59,6 +59,20 @@ if (!isset($_GET['page'])) {
     
     //@todo: add logic for when a user is added or updated
     
+    if (empty($_POST['user_id'])){
+        $updated = $usersModel->createUser($_POST); //@todo: throws invalid argument exception
+        
+        //@todo: send account creation email
+        
+    } else {
+        $updated = $usersModel->updateUser($_POST); //@todo: throws invalid argument exception
+        
+        //@todo: send account update email
+    }
+    
+    header('Location: users.php?focus=' . $updated);
+    
+    
 } elseif ($_GET['page'] === 'export-users') {
     //@todo: add logic
     die();
