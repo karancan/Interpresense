@@ -171,6 +171,7 @@ class Users extends \Interpresense\Includes\BaseModel {
         $sql = 'INSERT INTO `interpresense_users` (`user_uid`, `user_name`, `first_name`, `last_name`, `created_on`, `updated_on`, `expires_on`)
                      VALUES (:user_uid, :user_name, :first_name, :last_name, NOW(), NOW(), :expires_on);';
         parent::$db->query($sql, $data, $types);
+        return parent::$db->db->lastInsertId();
     }
     
     /**
@@ -212,13 +213,17 @@ class Users extends \Interpresense\Includes\BaseModel {
         
         $types = array(
             'user_id' => \PDO::PARAM_INT,
+            'user_name' => \PDO::PARAM_STR,
             'first_name' => \PDO::PARAM_STR,
-            'last_name' => \PDO::PARAM_STR
+            'last_name' => \PDO::PARAM_STR,
+            'expires_on' => \PDO::PARAM_STR
         );
         
         if (!Validator::key('user_id', $this->validators['user_id'])
+                ->key('user_name', $this->validators['username'])
                 ->key('first_name', $this->validators['first_name'])
                 ->key('last_name', $this->validators['last_name'])
+                ->key('expires_on', $this->validators['expires_on'])
                 ->validate($data)) {
             throw new \InvalidArgumentException('Required data missing or invalid.');
         }
@@ -226,10 +231,12 @@ class Users extends \Interpresense\Includes\BaseModel {
         $data = parent::$db->pick(array_keys($types), $data);
         
         $sql = "UPDATE `interpresense_users`
-                   SET `first_name` = :first_name, `last_name` = :last_name, `updated_on` = NOW()
+                   SET `first_name` = :first_name, `last_name` = :last_name, `updated_on` = NOW(), `expires_on` = :expires_on, `user_name` = :user_name
                 WHERE `user_id` = :user_id;";
         
         parent::$db->query($sql, $data, $types);
+        
+        return $data['user_id'];
     }
     
     /**
