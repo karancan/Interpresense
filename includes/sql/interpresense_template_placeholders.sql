@@ -49,5 +49,6 @@ INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_e
 /*!40000 ALTER TABLE `interpresense_template_placeholders` ENABLE KEYS */;
 UNLOCK TABLES;
 
+-- @todo: review ministry report and add placeholders based on values used on the report
 -- @todo: add Francais descriptions
 -- @todo: update Wiki
