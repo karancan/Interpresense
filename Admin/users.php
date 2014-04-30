@@ -56,16 +56,14 @@ if (!isset($_GET['page'])) {
     $viewFile = "views/users.php";
     
 } elseif ($_GET['page'] === 'change-user') {
-    
-    //@todo: add logic for when a user is added or updated
-    
+
     if (empty($_POST['user_id'])){
-        $updated = $usersModel->createUser($_POST); //@todo: throws invalid argument exception
+        $updated = $usersModel->createUser($_POST);
         
         //@todo: send account creation email
         
     } else {
-        $updated = $usersModel->updateUser($_POST); //@todo: throws invalid argument exception
+        $updated = $usersModel->updateUser($_POST);
         
         //@todo: send account update email
     }

@@ -123,7 +123,8 @@
     
     //Init datepickers
     $('.datepicker').datepicker({
-      format: 'yyyy-mm-dd'
+        format: 'yyyy-mm-dd',
+        startDate: '+1d'
     });
     
 </script>
