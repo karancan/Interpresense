@@ -9,10 +9,10 @@
             <h3 class="admin-page-title"><i class="fa fa-bar-chart-o"></i> Reports</h3>
         </div>
         <div class="col-md-2">
-            <a data-toggle="modal" href="#admin-add-modal" class="btn btn-info btn-block admin-add-button"><i class="fa fa-bar-chart-o"></i> Generate report</a>        
+            <a data-toggle="modal" href="#admin-add-modal" data-action="add-report" class="btn btn-info btn-block admin-add-button"><i class="fa fa-bar-chart-o"></i> Generate report</a>        
         </div>
         <div class="col-md-2">
-            <a data-toggle="modal" href="#admin-add-template-modal" class="btn btn-info btn-block admin-add-button"><i class="fa fa-plus"></i> Add a template</a>        
+            <a data-toggle="modal" href="#admin-add-template-modal" data-action="add-template" class="btn btn-info btn-block admin-add-button"><i class="fa fa-plus"></i> Add a template</a>        
         </div>
     </div>
     
@@ -85,7 +85,8 @@
                         } else {
                             foreach($reportTemplates as $r) {
                                 echo "<tr data-focus='template-{$antiXSS->escape($r['template_id'], $antiXSS::HTML_ATTR)}'
-                                          data-template-id='{$antiXSS->escape($r['template_id'], $antiXSS::HTML_ATTR)}'>" .
+                                          data-template-id='{$antiXSS->escape($r['template_id'], $antiXSS::HTML_ATTR)}'
+                                          data-template-content='{$antiXSS->escape($r['content'], $antiXSS::HTML_ATTR)}'>" .
                                      "<td>" . $r['name'] . "</td>" .
                                      "<td>" . $r['description'] . "</td>" .
                                      "<td>" . $r['emp_name'] . "</td>" .
@@ -110,7 +111,7 @@
 
 <div class="modal fade" id="admin-add-modal" tabindex="-1" role="dialog" aria-labelledby="admin-add-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-vertical-center">
-        <div class="modal-content">
+        <form method="POST" action="reports.php?page=generate-new-report" class="modal-content">
             
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -120,7 +121,7 @@
             <div class="modal-body">
             
                 <?php
-                if (empty($reportsTemplates)){
+                if (empty($reportTemplates)){
                 ?>
                 
                 <p>A report cannot be generated at this time because there are no templates…</p>
@@ -130,15 +131,20 @@
                 ?>
                 
                 <div class="form-group">
-                    <label class="control-label" for="report_type">Select the template you'd like to use</label>
-                    <select class="form-control" id="report_type">
+                    <label class="control-label" for="template_id">Select the template you'd like to use</label>
+                    <select class="form-control" id="template_id" name="template_id" required>
                         <option value="">Pick a template…</option>
                         <?php
-                        foreach($reportsTemplates as $r) {
+                        foreach($reportTemplates as $r) {
                             echo '<option value="' . $antiXSS->escape($r['template_id'], $antiXSS::HTML_ATTR) . '">' . $antiXSS->escape($r['name']) . '</option>';
                         }
                         ?>
                     </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label" for="report_name">Give this report a name</label>
+                    <input type="text" class="form-control" id="report_name" name='report_name' required>
                 </div>
                 
                 <?php } ?>
@@ -147,8 +153,8 @@
                 
             <div class="modal-footer">
                 <?php
-                if (!empty($reportsTemplates)){
-                    echo '<button type="button" class="btn btn-success"><i class="fa fa-check"></i> Confirm</button>';
+                if (!empty($reportTemplates)){
+                    echo '<button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Confirm</button>';
                 }
                 else{
                     echo '<button type="button" class="btn btn-info pull-left" id="redirect-add-template"><i class="fa fa-plus"></i> Add a template</button>';
@@ -156,7 +162,7 @@
                 ?>
             </div>
             
-        </div>
+        </form>
     </div>
 </div>
 
@@ -166,17 +172,17 @@
             
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Add a template</h4>
+                <h4 class="modal-title"></h4>
             </div>
             
             <div class="modal-body">
                 
-                <div class="form-group">
+                <div class="form-group group-add-template">
                     <label class="control-label" for="email_subject">Name</label>
                     <input type="text" class="form-control" id="template_name" name='name'>
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group group-add-template">
                     <label class="control-label" for="email_cc">Description</label>
                     <input type="text" class="form-control" id="template_description" name='description'>
                 </div>
@@ -189,7 +195,7 @@
             </div>
                 
             <div class="modal-footer">
-                <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Confirm</button>
+                <button type="submit" class="btn btn-success group-add-template"><i class="fa fa-check"></i> Confirm</button>
             </div>
             
         </div>

@@ -40,7 +40,7 @@
                                     <li><a href="#">Last log in <?= $dateFmt->format($_SESSION['last_log_in'], 'date_time') ?></a></li>
                                     <li class="divider"></li>
                                     <li><a href="settings.php"><i class="fa fa-gears fa-fw"></i> Settings</a></li>
-                                    <li><a href="emails.php"><i class="fa fa-envelope fa-fw"></i> Email templates</a></li>
+                                    <li><a href="emails.php"><i class="fa fa-envelope fa-fw"></i> Emails</a></li>
                                     <li><a href="users.php"><i class="fa fa-users fa-fw"></i> Users</a></li>
                                     <li><a href="index.php?page=logout"><i class="fa fa-sign-out fa-fw"></i> Log out</a></li>
                                 </ul>
