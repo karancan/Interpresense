@@ -111,7 +111,7 @@ header('Content-Type: text/html; charset=utf-8');
                     </div>
                 
                     <div class="col-md-2">
-                        <a href="mailto:<?= EMAIL_INTERPRESENSE_REPORTING ?>?subject=Interpresense%20bug%20report" class="btn btn-block btn-warning"><i class="fa fa-bug"></i> Report a bug</a>
+                        <a href="mailto:<?= EMAIL_INTERPRESENSE_REPORTING ?>?subject=Interpresense%20bug%20report" class="btn btn-block btn-warning"><i class="fa fa-bug"></i> Report an issue</a>
                     </div>
                 
                 </div>
