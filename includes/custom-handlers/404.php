@@ -80,7 +80,8 @@ require_once '../php/config.php';
                 <div class="row navbar-content">
                 
                     <div class="col-md-8">
-                        <?= date('Y') ?> &copy; Interpresense by Vincent Diep &amp; Karan Khiani
+                        <img class="dev-logo" src="//<?= URL_IMAGES ?>/logo_icon_379_379.png">
+                        Powered by Interpresense
                     </div>
                     
                     <div class="col-md-2">
