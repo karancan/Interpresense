@@ -4,7 +4,9 @@
 $(document).ready(function(){
     if (focus !== ''){
         global.highlightRow($('[data-user-id="' + focus + '"]'), 15000);
-        //@todo: add scroll
+        $('html, body').animate({
+            scrollTop: $('[data-user-id="' + focus + '"]').offset().top
+        }, 1000);
     }
 });
 

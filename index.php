@@ -102,7 +102,8 @@ header('Content-Type: text/html; charset=utf-8');
                 <div class="row navbar-content">
                 
                     <div class="col-md-8">
-                        <?= date('Y') ?> &copy; Interpresense by Vincent Diep &amp; Karan Khiani
+                        <img class="dev-logo" src="//<?= URL_IMAGES ?>/logo_icon_379_379.png">
+                        Interpresense is brought to you by <a class="dev-social" href="http://ca.linkedin.com/pub/vincent-diep/47/847/5b9">Vincent Diep</a> &amp; <a class="dev-social" href="http://ca.linkedin.com/pub/karan-khiani/88/469/bab/">Karan Khiani</a>
                     </div>
                     
                     <div class="col-md-2">
@@ -110,7 +111,7 @@ header('Content-Type: text/html; charset=utf-8');
                     </div>
                 
                     <div class="col-md-2">
-                        <a href="mailto:<?= EMAIL_INTERPRESENSE_REPORTING ?>?subject=Interpresense%20bug%20report" class="btn btn-block btn-warning"><i class="fa fa-bug"></i> Report a bug</a>
+                        <a href="mailto:<?= EMAIL_INTERPRESENSE_REPORTING ?>?subject=Interpresense%20bug%20report" class="btn btn-block btn-warning"><i class="fa fa-bug"></i> Report an issue</a>
                     </div>
                 
                 </div>

@@ -59,6 +59,7 @@ if (!isset($_GET['page'])) {
 } elseif ($_GET['page'] === 'generate-new-report') {
 
     //@todo: Add a newly generated report to the database
+    //@todo: Focus on `report-[reportID]`
 
 } elseif ($_GET['page'] === 'view-generated-report') {
     
@@ -71,6 +72,7 @@ if (!isset($_GET['page'])) {
 } elseif ($_GET['page'] === 'add-template') {
 
     //@todo: Add a new report template
+    //@todo: Focus on `template-[templateID]`
 
 } elseif ($_GET['page'] === 'mark-template-as-deleted') {
 
