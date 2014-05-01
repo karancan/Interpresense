@@ -48,7 +48,7 @@ class Reports extends \Interpresense\Includes\BaseModel {
      * @return array
      */
     public function fetchReportTemplates() {
-        $sql = 'SELECT t.name, t.description, t.inserted_on,
+        $sql = 'SELECT t.name, t.description, t.inserted_on, t.template_id,
                        CONCAT(u.first_name, " ", u.last_name) AS emp_name
                   FROM `interpresense_admin_report_templates` t
                   JOIN `interpresense_users` u
