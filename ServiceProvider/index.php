@@ -56,7 +56,15 @@ if (!isset($_GET['page'])) {
     $viewFile = "views/invoice.php";
 } elseif ($_GET['page'] === 'invoice-submission') {
     
-    //@todo: the case where the user submits the invoice and sees a confirmation message and next steps
+    //@todo: distinguish between submitting a draft vs a final invoice
+    $invoiceID = $invoice->addInvoice($_POST, false);
+    
+    $item_keys = array('item_id', 'description', 'course_code', 'activity_id', 'service_date', 'start_time', 'end_time', 'rate');
+    
+    \Interpresense\Includes\DatabaseObject::pick($keys, $_POST);
+    
+    $invoiceItems->changeItems($invoiceID, $item);
+    
     //@todo: trigger emails
     
     $translate->addResource('l10n/invoiceSubmission.json');
@@ -64,7 +72,6 @@ if (!isset($_GET['page'])) {
     
 } elseif ($_GET['page'] === 'invoice-retrieval') {
     
-    //@todo:  the case where the user clicks a link on their email to retrieve an invoice and is shown the possible options
     if (isset($_GET['uid'])) {
         
         try {

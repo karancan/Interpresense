@@ -54,7 +54,7 @@ class Emails extends \Interpresense\Includes\BaseModel {
         }
         
         $sql = 'UPDATE `interpresense_email_templates`
-                   SET subject = :subject, cc = :cc, bcc = :bcc, content = :content
+                   SET `subject` = :subject, `cc` = :cc, `bcc` = :bcc, `content` = :content
                  WHERE `email_id` = :email_id;';
         
         $types = array(
