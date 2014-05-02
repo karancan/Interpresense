@@ -63,11 +63,14 @@ if (!isset($_GET['page'])) {
 
 } elseif ($_GET['page'] === 'view-generated-report') {
     
-    //@todo: Given a report ID, display the report
+    $report = $model->fetchReport($_GET['report_id']);
+    
+    header("Content-Type: {$report['report_file_type']}");
+    echo $report;
     
 } elseif ($_GET['page'] === 'mark-report-as-deleted') {
 
-    //@todo: Given a report ID, mark it as deleted
+    $model->deleteReport($_GET['report_id']);
 
 } elseif ($_GET['page'] === 'add-template') {
 

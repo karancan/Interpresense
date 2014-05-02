@@ -1,7 +1,7 @@
 <style>
     @import url('includes/css/login.css');
 </style>
-<form role="form" method="post" action="invoicesExpected.php" class="admin-login-form">
+<form role="form" method="post" action="index.php?page=initiate-reset" class="admin-login-form">
 
     <div class="container">
         
@@ -14,19 +14,19 @@
                 </div>
                 
                 <div class="row">
-                    <input id="admin_username" type="text" class="form-control" placeholder="Username">
+                    <input id="admin_username" name="username" type="text" class="form-control" placeholder="Username" required maxlength="255" pattern="\w+">
                 </div>
                 
                 <br>
                 
                 <div class="row">
-                    <input id="admin_password" type="password" class="form-control" placeholder="Password">
+                    <input id="admin_password" name="user_password" type="password" class="form-control" placeholder="Password" required>
                 </div>
                 
                 <br>
                 
                 <div class="row">
-                    <input id="admin_password_2" type="password" class="form-control" placeholder="Re-enter password">
+                    <input id="admin_password_2" type="password" class="form-control" placeholder="Re-enter password" required>
                 </div>
                 
             </div>
@@ -51,3 +51,12 @@
     </div>
 
 </form>
+<script>
+    'use strict';
+    
+    $('.admin-login-form').submit(function(e) {
+        if($('#admin_password').val() !== $('#admin_password_2').val()) {
+            e.preventDefault();
+        }
+    });
+</script>

@@ -58,4 +58,36 @@ class Reports extends \Interpresense\Includes\BaseModel {
         return parent::$db->query($sql);
     }
     
+    /**
+     * Retrieves a report
+     * @param int $reportID The report ID
+     * @return array
+     */
+    public function fetchReport($reportID) {
+        $sql = "SELECT `generated_by`, `report_name`, `report_content`, `report_file_type`, `report_file_size`, `inserted_on`, `updated_on`
+                  FROM `interpresense_admin_reports`
+                 WHERE `report_id` = :report_id
+                   AND `is_deleted` = 0;";
+        
+        $data = array('report_id' => $reportID);
+        $types = array('report_id' => \PDO::PARAM_INT);
+        
+        return parent::$db->query($sql, $data, $types);
+    }
+    
+    /**
+     * Marks a report as deleted
+     * @param int $reportID The report ID
+     */
+    public function deleteReport($reportID) {
+        $sql = "UPDATE `interpresense_admin_reports`
+                   SET `is_deleted` = 1, `updated_on` = NOW()
+                 WHERE `report_id` = :report_id;";
+        
+        $data = array('report_id' => $reportID);
+        $types = array('report_id' => \PDO::PARAM_INT);
+        
+        parent::$db->query($sql, $data, $types);
+    }
+    
 }

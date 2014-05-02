@@ -20,7 +20,7 @@ CREATE TABLE `interpresense_service_provider_invoice_items` (
   PRIMARY KEY (`item_id`),
   KEY `link_to_invoice_idx` (`invoice_id`),
   KEY `link_to_activity_idx` (`activity_id`),
-  CONSTRAINT `link_to_invoice` FOREIGN KEY (`invoice_id`) REFERENCES `interpresense_service_provider_invoices` (`invoice_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `link_to_invoice` FOREIGN KEY (`invoice_id`) REFERENCES `interpresense_service_provider_invoices` (`invoice_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `link_to_activity` FOREIGN KEY (`activity_id`) REFERENCES `interpresense_service_provider_activities` (`activity_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

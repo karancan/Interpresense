@@ -72,9 +72,11 @@ class InvoiceItems extends \Interpresense\Includes\BaseModel {
             throw new \InvalidArgumentException('Invalid invoice ID.');
         }
         
-        $sql = "INSERT INTO `interpresense_service_provider_invoice_items` (`item_id`, `invoice_id`, `description`, `service_date`, `start_time`, `end_time`, `rate`, `inserted_on`, `updated_on`)
-                     VALUES (:item_id, :invoice_id, :description, :service_date, :start_time, :end_time, :rate, NOW(), NOW())
+        $sql = "INSERT INTO `interpresense_service_provider_invoice_items` (`item_id`, `invoice_id`, `description`, `course_code`, `activity_id` `service_date`, `start_time`, `end_time`, `rate`, `inserted_on`, `updated_on`)
+                     VALUES (:item_id, :invoice_id, :description, :course_code, :activity_id, :service_date, :start_time, :end_time, :rate, NOW(), NOW())
     ON DUPLICATE KEY UPDATE `description` = VALUES(`description`),
+                            `course_code` = VALUES(`course_code`),
+                            `activity_id` = VALUES(`activity_id`),
                             `service_date` = VALUES(`service_date`),
                             `start_time` = VALUES(`start_time`),
                             `end_time` = VALUES(`end_time`),
@@ -88,7 +90,16 @@ class InvoiceItems extends \Interpresense\Includes\BaseModel {
                 $item['item_id'] = 0;
             }
             
-            // @todo Validate data
+            if(!Validator::key('description', $this->validators['description'])
+                ->key('course_code', $this->validators['course_code'])
+                ->key('activity_id', $this->validators['activity_id'])
+                ->key('service_date', $this->validators['service_date'])
+                ->key('start_time', $this->validators['start_time'])
+                ->key('end_time', $this->validators['end_time'])
+                ->key('rate', $this->validators['rate'])
+                ->validate($item)) {
+                throw new \InvalidArgumentException('Data invalid for one or more invoice items.');
+            }
         }
         unset($item);
         

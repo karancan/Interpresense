@@ -99,6 +99,18 @@ if (!isset($_GET['page'])) {
 } else if ($_GET['page'] === "register-or-reset") {
     $translate->addResource('l10n/registerOrReset.json');
     $viewFile = "views/registerOrReset.php";
+} elseif ($_GET['page'] === "initiate-reset") {
+    
+    $users->requestPasswordReset($_POST['username'], $_POST['user_password']);
+    // @todo
+    
+} elseif ($_GET['page'] === "reset-password") {
+    
+    if ($users->confirmPasswordReset($_GET['username'], $_GET['reset_key'])) {
+        // @todo reset succeeded
+    } else {
+        // @todo reset failed
+    }
 } else if ($_GET['page'] === "logout") {
     session_destroy();
     header('Location: https://'  . URL_ADMIN);
