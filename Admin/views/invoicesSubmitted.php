@@ -39,6 +39,7 @@
                         <th scope='col'>Notes</th>
                         <th scope='col'>Total</th>
                         <th scope='col'>Approved</th>
+                        <th scope='col'>Added</th>
                         <th scope='col'></th>
                     </tr>
                 </thead>
@@ -46,10 +47,11 @@
                     <tr>
                         <?php
                         if (empty($invoices)){
-                            echo "<tr><td colspan='9' class='empty-table-placeholder'>No finalized invoices at this time…</td></tr>";
+                            echo "<tr><td colspan='10' class='empty-table-placeholder'>No finalized invoices at this time…</td></tr>";
                         } else {
                             foreach($invoices as $i) {
                                 echo "<tr data-invoice-id='{$antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR)}'>" .
+                                     "<td>Coming soon</td>" .
                                      "<td>Coming soon</td>" .
                                      "<td>Coming soon</td>" .
                                      "<td>Coming soon</td>" .
