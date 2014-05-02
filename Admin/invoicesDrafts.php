@@ -70,7 +70,7 @@ if (!isset($_GET['page'])) {
     
     $note = array(
         'invoice_id' => $_GET['invoice_id'],
-        'note' => "Invoice finalized by {$_SESSION['first_name']} {$_SESSION['last_name']} on " . date('Y-m-d')
+        'note' => "Invoice finalized by {$_SESSION['first_name']} {$_SESSION['last_name']} on " . date('Y-m-d H:i:s')
     );
     
     $invoiceNotesModel->addNote($note);
