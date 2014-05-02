@@ -48,6 +48,13 @@ header .org-logo{
     margin-top: 6em;
     margin-bottom: 2em;
 }
+footer .dev-social{
+    color: inherit;
+    font-weight: bold;
+}
+footer .dev-logo{
+    width: 5%;
+}
 
 /**
  *Form styles
