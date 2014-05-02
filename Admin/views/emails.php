@@ -77,17 +77,29 @@
                 
                <div class="form-group">
                     <label class="control-label" for="email_subject">Subject</label>
-                    <input type="text" class="form-control" id="email_subject" name='subject'>
+                    <input type="text" class="form-control" id="email_subject" name='subject' required>
                 </div>
                 
                 <div class="form-group">
                     <label class="control-label" for="email_cc">Who gets CC'd</label>
-                    <input type="text" class="form-control" id="email_cc" name='cc'>
+                    <input type="text" class="form-control" id="email_cc" name='cc' required>
                 </div>
                 
                 <div class="form-group">
                     <label class="control-label" for="email_bcc">Who gets BCC'd</label>
-                    <input type="text" class="form-control" id="email_bcc" name='bcc'>
+                    <input type="text" class="form-control" id="email_bcc" name='bcc' required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label" for="email_placeholders">Available placeholders</label>
+                    <select class="form-control" id="email_placeholders" <?= (empty($emailPlaceholders) ? 'disabled' : null) ?> >
+                        <option value="" selected>Pick a placeholder to insert it in to this template. Placeholders are dynamically replaced when an email is sent out…</option>
+                        <?php
+                            foreach ($emailPlaceholders as $r){
+                                echo '<option value="' . $r['placeholder'] . '">' . $r['placeholder'] . ' - ' . $r['description_en'] . '</option>'; 
+                            }
+                        ?>
+                    </select>
                 </div>
                 
                 <div class="form-group">

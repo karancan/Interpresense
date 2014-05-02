@@ -27,7 +27,18 @@ $('#redirect-add-template').click(function(){
 $('[data-action="add-template"]').click(function(){
     $('.group-add-template').show();
     $('#admin-add-template-modal .modal-title').text('Add a template');
-    $('#template_name, #template_description, #template_content').val('');
+    $('#template_name, #template_description').val('');
+    $('#template_content').code('');
+});
+
+/**
+ *User has selected a placeholder while adding a template
+ */
+$('#template_placeholders').change(function(){
+    if($(this).val() !== ''){
+        $('#template_content').code($('#template_content').code() + $(this).val());
+        $('#template_placeholders').val(''); //Reset the select to go back to the first option
+    }
 });
 
 /**
