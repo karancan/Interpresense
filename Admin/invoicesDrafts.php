@@ -25,6 +25,7 @@ if (!isset($_SESSION['user_id'])) {
  * Models
  */
 $invoicesModel = new \Interpresense\ServiceProvider\Invoice($dbo);
+$invoiceNotesModel = new InvoiceNotes($dbo);
 
 /**
  * Localization
@@ -66,7 +67,13 @@ if (!isset($_GET['page'])) {
 } elseif ($_GET['page'] === "mark-invoice-as-finalized") {
 
     $invoicesModel->finalizeDraftInvoice($_GET['invoice_id']);
-    //@todo: create an invoice note indicating that the invoice was finalized, when and by who
+    
+    $note = array(
+        'invoice_id' => $_GET['invoice_id'],
+        'note' => "Invoice finalized by {$_SESSION['first_name']} {$_SESSION['last_name']} on " . date('Y-m-d')
+    );
+    
+    $invoiceNotesModel->addNote($note);
 
 } elseif ($_GET['page'] === "delete-invoice") {
 
