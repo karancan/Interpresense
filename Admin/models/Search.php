@@ -55,9 +55,9 @@ class Search extends \Interpresense\Includes\BaseModel {
         $sql = "SELECT `invoice_id`, `sp_name`, `sp_email`, `is_approved`, `client_id`
                   FROM `interpresense_service_provider_invoices`
                  WHERE `is_final` = 1
-                   AND `sp_name` LIKE :sp_name
+                   AND (`sp_name` LIKE :sp_name
                     OR `sp_email` LIKE :sp_email
-                    OR `sp_hst_number` LIKE :sp_hst_number;";
+                    OR `sp_hst_number` LIKE :sp_hst_number);";
         
         $data = array('sp_name' => '%' . $q . '%', 'sp_email' => '%' . $q . '%', 'sp_hst_number' => '%' . $q . '%');
         $types = array('sp_name' => \PDO::PARAM_STR, 'sp_email' => \PDO::PARAM_STR, 'sp_hst_number' => \PDO::PARAM_STR);
@@ -91,9 +91,9 @@ class Search extends \Interpresense\Includes\BaseModel {
         $sql = "SELECT `invoice_id`, `sp_name`, `sp_email`, `is_approved`, `client_id`
                   FROM `interpresense_service_provider_invoices`
                  WHERE `is_final` = 0
-                   AND `sp_name` LIKE :sp_name
+                   AND (`sp_name` LIKE :sp_name
                     OR `sp_email` LIKE :sp_email
-                    OR `sp_hst_number` LIKE :sp_hst_number;";
+                    OR `sp_hst_number` LIKE :sp_hst_number);";
         
         $data = array('sp_name' => '%' . $q . '%', 'sp_email' => '%' . $q . '%', 'sp_hst_number' => '%' . $q . '%');
         $types = array('sp_name' => \PDO::PARAM_STR, 'sp_email' => \PDO::PARAM_STR, 'sp_hst_number' => \PDO::PARAM_STR);
