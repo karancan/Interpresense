@@ -54,7 +54,7 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
 if (!isset($_GET['page'])) {
     
     //Does the search query match any invoices pertaining to a client
-    $finalInvoicesForClient = $model->fetchFinalizedInvoicesForClient($_GET['q']); //@todo: test the integrity of the results provided by this function
+    $finalInvoicesForClient = $model->fetchFinalizedInvoicesForClient($_GET['q']);
     if (!empty($finalInvoicesForClient)){
         foreach ($finalInvoicesForClient as &$i){
             $i['item_count'] = $invoicesItemsModel->fetchItemsCount($i['invoice_id']);
@@ -64,7 +64,7 @@ if (!isset($_GET['page'])) {
         unset($i);
     }
     
-    $draftInvoicesForClient = $model->fetchDraftInvoicesForClient($_GET['q']); //@todo: test the integrity of the results provided by this function
+    $draftInvoicesForClient = $model->fetchDraftInvoicesForClient($_GET['q']);
     if (!empty($draftInvoicesForClient)){
         foreach ($draftInvoicesForClient as &$i){
             $i['item_count'] = $invoicesItemsModel->fetchItemsCount($i['invoice_id']);
@@ -75,7 +75,7 @@ if (!isset($_GET['page'])) {
     }
     
     //Does the search query match any invoices pertaining to a service provider
-    $finalInvoicesForSP = $model->fetchFinalizedInvoicesForServiceProvider($_GET['q']); //@todo: test the integrity of the results provided by this function
+    $finalInvoicesForSP = $model->fetchFinalizedInvoicesForServiceProvider($_GET['q']);
     if (!empty($finalInvoicesForSP)){
         foreach ($finalInvoicesForSP as &$i){
             $i['item_count'] = $invoicesItemsModel->fetchItemsCount($i['invoice_id']);
@@ -85,7 +85,7 @@ if (!isset($_GET['page'])) {
         unset($i);
     }
     
-    $draftInvoicesForSP = $model->fetchDraftInvoicesForServiceProvider($_GET['q']); //@todo: test the integrity of the results provided by this function
+    $draftInvoicesForSP = $model->fetchDraftInvoicesForServiceProvider($_GET['q']);
     if (!empty($draftInvoicesForSP)){
         foreach ($draftInvoicesForSP as &$i){
             $i['item_count'] = $invoicesItemsModel->fetchItemsCount($i['invoice_id']);

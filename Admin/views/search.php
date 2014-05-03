@@ -53,7 +53,7 @@
                             foreach($finalInvoicesForClient as $i) {
                                 echo "<tr data-invoice-id='{$antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR)}'>" .
                                      "<td>" . $i['invoice_id_for_org'] . "</td>" .
-                                     "<td>" . $i['client_id'] . "</td>" .
+                                     "<td><strong>" . $i['client_id'] . "</strong></td>" .
                                      "<td>" . $i['sp_name'] . "</td>" .
                                      "<td>" . $i['item_count'] . "</td>" .
                                      "<td>" . $i['file_count'] . "</td>" .
@@ -99,7 +99,7 @@
                             foreach($draftInvoicesForClient as $i) {
                                 echo "<tr data-invoice-id='{$antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR)}'>" .
                                      "<td>" . $i['invoice_id_for_org'] . "</td>" .
-                                     "<td>" . $i['client_id'] . "</td>" .
+                                     "<td><strong>" . $i['client_id'] . "</strong></td>" .
                                      "<td>" . $i['sp_name'] . "</td>" .
                                      "<td>" . $i['item_count'] . "</td>" .
                                      "<td>" . $i['file_count'] . "</td>" .
@@ -146,7 +146,7 @@
                                 echo "<tr data-invoice-id='{$antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR)}'>" .
                                      "<td>" . $i['invoice_id_for_org'] . "</td>" .
                                      "<td>" . $i['client_id'] . "</td>" .
-                                     "<td>" . $i['sp_name'] . "</td>" .
+                                     "<td><strong>" . $i['sp_name'] . "</strong></td>" .
                                      "<td>" . $i['item_count'] . "</td>" .
                                      "<td>" . $i['file_count'] . "</td>" .
                                      "<td>" . $i['note_count'] . "</td>" .
@@ -192,7 +192,7 @@
                                 echo "<tr data-invoice-id='{$antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR)}'>" .
                                      "<td>" . $i['invoice_id_for_org'] . "</td>" .
                                      "<td>" . $i['client_id'] . "</td>" .
-                                     "<td>" . $i['sp_name'] . "</td>" .
+                                     "<td><strong>" . $i['sp_name'] . "</strong></td>" .
                                      "<td>" . $i['item_count'] . "</td>" .
                                      "<td>" . $i['file_count'] . "</td>" .
                                      "<td>" . $i['note_count'] . "</td>" .
