@@ -67,12 +67,35 @@ class InvoiceNotes extends \Interpresense\Includes\BaseModel {
         
         $sql = "SELECT `note_id`, `note`, `inserted_on`
                   FROM `interpresense_service_provider_invoices_notes`
-                 WHERE `invoice_id` = :invoice_id;";
+                 WHERE `invoice_id` = :invoice_id
+                   AND `is_deleted` = 0";
         
         $data = array('invoice_id' => $invoiceID);
         $types = array('invoice_id' => \PDO::PARAM_INT);
         
         return parent::$db->query($sql, $data, $types);
+    }
+    
+    /**
+     * Fetches the number of notes associated with an invoice
+     * @param int $invoiceID The invoice ID
+     * @return int The number of notes
+     */
+    public function fetchNotesCount($invoiceID) {
+        if(!$this->validators['invoice_id']->validate($invoiceID)) {
+            throw new \InvalidArgumentException('Invalid invoice ID.');
+        }
+        
+        $sql = "SELECT COUNT(note_id) AS count
+                  FROM `interpresense_service_provider_invoices_notes`
+                 WHERE `invoice_id` = :invoice_id
+                   AND `is_deleted` = 0;";
+        
+        $data = array('invoice_id' => $invoiceID);
+        $types = array('invoice_id' => \PDO::PARAM_INT);
+        
+        $result = parent::$db->query($sql, $data, $types);
+        return $result[0]['count'];
     }
     
     /**

@@ -59,6 +59,28 @@ class InvoiceFiles extends \Interpresense\Includes\BaseModel {
     }
     
     /**
+     * Fetches the number of files for a given invoice
+     * @param int $invoiceID The invoice ID
+     * @return int The number of files
+     */
+    public function fetchFilesCount($invoiceID) {
+        
+        if(!$this->validators['invoice_id']->validate($invoiceID)) {
+            throw new \InvalidArgumentException('Invalid invoice ID.');
+        }
+        
+        $sql = "SELECT COUNT(file_id) AS count
+                  FROM `interpresense_service_provider_invoice_files`
+                 WHERE `invoice_id` = :invoice_id";
+        
+        $data = array('invoice_id' => $invoiceID);
+        $types = array('invoice_id' => \PDO::PARAM_INT);
+        
+        $result = parent::$db->query($sql, $data, $types);
+        return $result[0]['count'];
+    }
+    
+    /**
      * Adds invoice files
      * @param int $invoiceID The invoice ID
      */

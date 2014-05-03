@@ -83,7 +83,11 @@ class Invoice extends \Interpresense\Includes\BaseModel {
      */
     public function fetchInvoice($invoiceID) {
         
-        $sql = "SELECT `invoice_uid`, `invoice_id_for_sp`, `invoice_id_for_org`, `sp_name`, `sp_address`, `sp_postal_code`, `sp_city`, `sp_province`, `sp_phone`, `sp_email`, `sp_hst_number`, `client_id`, `is_final`, `inserted_on`, `updated_on`, `is_approved, `approved_on`, `approved_by`, `admin_viewed`, `admin_last_viewed_on`, `admin_last_viewed_by`
+        $sql = "SELECT `invoice_id`, `invoice_uid`, `invoice_id_for_sp`, `invoice_id_for_org`, `sp_name`,
+                       `sp_address`, `sp_postal_code`, `sp_city`, `sp_province`, `sp_phone`, `sp_email`,
+                       `sp_hst_number`, `client_id`, `is_final`, `inserted_on`, `updated_on`, `is_approved`,
+                       `approved_on`, `approved_by`, `admin_viewed`, `admin_last_viewed_on`, `admin_last_viewed_by`,
+                       `grand_total`
                   FROM `interpresense_service_provider_invoices`
                  WHERE `invoice_id` = :invoice_id;";
         
@@ -111,7 +115,11 @@ class Invoice extends \Interpresense\Includes\BaseModel {
             return array();
         }
         
-        $sql = "SELECT `invoice_id`, `invoice_uid`, `invoice_id_for_sp`, `invoice_id_for_org`, `sp_name`, `sp_address`, `sp_postal_code`, `sp_city`, `sp_province`, `sp_phone`, `sp_email`, `sp_hst_number`, `client_id`, `is_final`, `inserted_on`, `updated_on`, `is_approved`, `approved_on`, `approved_by`, `admin_viewed`, `admin_last_viewed_on`, `admin_last_viewed_by`
+        $sql = "SELECT `invoice_id`, `invoice_uid`, `invoice_id_for_sp`, `invoice_id_for_org`, `sp_name`,
+                       `sp_address`, `sp_postal_code`, `sp_city`, `sp_province`, `sp_phone`, `sp_email`,
+                       `sp_hst_number`, `client_id`, `is_final`, `inserted_on`, `updated_on`, `is_approved`,
+                       `approved_on`, `approved_by`, `admin_viewed`, `admin_last_viewed_on`, `admin_last_viewed_by`,
+                       `grand_total`
                   FROM `interpresense_service_provider_invoices`
                  WHERE `inserted_on` BETWEEN :start AND :end";
         

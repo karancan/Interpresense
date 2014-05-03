@@ -25,7 +25,9 @@ if (!isset($_SESSION['user_id'])) {
  * Models
  */
 $invoicesModel = new \Interpresense\ServiceProvider\Invoice($dbo);
-$invoiceNotesModel = new InvoiceNotes($dbo);
+$invoicesItemsModel = new \Interpresense\ServiceProvider\InvoiceItems($dbo);
+$invoicesFilesModel = new \Interpresense\ServiceProvider\InvoiceFiles($dbo);
+$invoicesNotesModel = new InvoiceNotes($dbo);
 
 /**
  * Localization
@@ -60,20 +62,27 @@ if (!isset($_GET['page'])) {
     }
     
     $invoices = $invoicesModel->fetchInvoices($filter_start_date, $filter_end_date, 'draft');
+    foreach ($invoices as &$i){
+        $i['item_count'] = $invoicesItemsModel->fetchItemsCount($i['invoice_id']);
+        $i['file_count'] = $invoicesFilesModel->fetchFilesCount($i['invoice_id']);
+        $i['note_count'] = $invoicesNotesModel->fetchNotesCount($i['invoice_id']);
+    }
+    unset($i);
     
     $translate->addResource('l10n/invoicesDrafts.json');
     $viewFile = "views/invoicesDrafts.php"; //@todo: if no invoices to be shown, show appropriate message
     
-} elseif ($_GET['page'] === "mark-invoice-as-finalized") {
+} elseif ($_GET['page'] === "fetch-invoice-items") {
 
-    $invoicesModel->finalizeDraftInvoice($_GET['invoice_id']);
-    
-    $note = array(
-        'invoice_id' => $_GET['invoice_id'],
-        'note' => "Invoice finalized by {$_SESSION['first_name']} {$_SESSION['last_name']} on " . date('Y-m-d H:i:s')
-    );
-    
-    $invoiceNotesModel->addNote($note);
+    //@todo: fetch items and return JSON
+
+} elseif ($_GET['page'] === "fetch-invoice-files") {
+
+    //@todo: fetch files and return JSON
+
+} elseif ($_GET['page'] === "fetch-invoice-notes") {
+
+    //@todo: fetch notes and return JSON
 
 } elseif ($_GET['page'] === "delete-invoice") {
 
@@ -88,7 +97,7 @@ if (!isset($_GET['page'])) {
 /**
  * View
  */
-$actions = array('mark-invoice-as-finalized', 'delete-invoice', 'export');
+$actions = array('fetch-invoice-items', 'fetch-invoices-files', 'fetch-invoice-notes', 'delete-invoice', 'export');
 
 if (!in_array($_GET['page'], $actions, true)) {
     
