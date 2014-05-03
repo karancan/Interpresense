@@ -79,8 +79,7 @@ class InvoiceItems extends \Interpresense\Includes\BaseModel {
         $data = array('invoice_id' => $invoiceID);
         $types = array('invoice_id' => \PDO::PARAM_INT);
         
-        $result = parent::$db->query($sql, $data, $types);
-        return $result[0]['count'];
+        return parent::$db->query($sql, $data, $types, \PDO::FETCH_COLUMN);
     }
     
     /**
