@@ -86,7 +86,7 @@ class InvoiceNotes extends \Interpresense\Includes\BaseModel {
             throw new \InvalidArgumentException('Invalid invoice ID.');
         }
         
-        $sql = "SELECT COUNT(note_id) AS count
+        $sql = "SELECT COUNT(note_id)
                   FROM `interpresense_service_provider_invoices_notes`
                  WHERE `invoice_id` = :invoice_id
                    AND `is_deleted` = 0;";
@@ -94,7 +94,8 @@ class InvoiceNotes extends \Interpresense\Includes\BaseModel {
         $data = array('invoice_id' => $invoiceID);
         $types = array('invoice_id' => \PDO::PARAM_INT);
         
-        return parent::$db->query($sql, $data, $types, \PDO::FETCH_COLUMN);
+        $result = parent::$db->query($sql, $data, $types, \PDO::FETCH_COLUMN);
+        return $result[0];
     }
     
     /**
