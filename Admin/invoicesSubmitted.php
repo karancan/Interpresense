@@ -51,7 +51,9 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  * Content and actions
  */
 if (!isset($_GET['page'])) {
-
+    
+    //@todo: add ability to view approved invoices only
+    
     $filter_start_date = date("Y-m-d", strtotime('-' . $settings['admin_default_date_filter_range_days'] . ' days'));
     if (!empty($_GET['start'])){
         $filter_start_date = $_GET['start'];
