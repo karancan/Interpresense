@@ -27,6 +27,16 @@ $('[data-action="edit"]').click(function(){
 });
 
 /**
+ *User has selected a placeholder while adding a template
+ */
+$('#email_placeholders').change(function(){
+    if($(this).val() !== ''){
+        $('#email_content').code($('#email_content').code() + $(this).val());
+        $('#email_placeholders').val(''); //Reset the select to go back to the first option
+    }
+});
+
+/**
  *User has finished editing email template
  */
 $('#admin-form-update-email').submit(function(e){
