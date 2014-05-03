@@ -70,4 +70,20 @@ class Emails extends \Interpresense\Includes\BaseModel {
         parent::$db->query($sql, $data, $types);
         
     }
+    
+    /**
+     * Retrieves an email template
+     * @param int $id The ID of the email template
+     * @return array
+     */
+    public function fetchEmailTemplate($id) {
+        $sql = 'SELECT `name`, `content`, `description`, `subject`, `cc`, `bcc`
+                  FROM `interpresense_email_templates`
+                 WHERE `email_id` = :email_id;';
+        
+        $data = array('email_id' => $id);
+        $types = array('email_id' => \PDO::PARAM_INT);
+        
+        return parent::$db->query($sql, $data, $types);
+    }
 }
