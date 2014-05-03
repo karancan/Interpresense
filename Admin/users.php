@@ -60,7 +60,26 @@ if (!isset($_GET['page'])) {
     if (empty($_POST['user_id'])){
         $updated = $usersModel->createUser($_POST);
         
-        //@todo: send account creation email
+        try {
+            if (\Swift_Validate::email($_POST['user_name'])) {
+                
+                ob_start();
+                include 'views/emails/accountCreation.php';
+                $body = ob_get_flush();
+
+                $transport = \Swift_SmtpTransport::newInstance(SMTP_SERVER, SMTP_SERVER_PORT);
+
+                $email = \Swift_Message::newInstance()
+                    ->setSubject('Interpresense - Account creation')
+                    ->setFrom(EMAIL_ALIAS_NO_REPLY . EMAIL_ORG_STAFF_DOMAIN)
+                    ->setTo($_POST['user_name'] . EMAIL_ORG_STAFF_DOMAIN)
+                    ->setBody($body);
+
+                $transport->send($email);
+            }
+        } catch (\Exception $e) {
+            // Email failed
+        }
         
     } else {
         $updated = $usersModel->updateUser($_POST);
