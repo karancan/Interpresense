@@ -65,12 +65,14 @@ if (!isset($_GET['page'])) {
     }
     
     $invoices = $invoicesModel->fetchInvoices($filter_start_date, $filter_end_date, 'final');
-    foreach ($invoices as &$i){
-        $i['item_count'] = $invoicesItemsModel->fetchItemsCount($i['invoice_id']);
-        $i['file_count'] = $invoicesFilesModel->fetchFilesCount($i['invoice_id']);
-        $i['note_count'] = $invoicesNotesModel->fetchNotesCount($i['invoice_id']);
+    if (!empty($invoices)){
+        foreach ($invoices as &$i){
+            $i['item_count'] = $invoicesItemsModel->fetchItemsCount($i['invoice_id']);
+            $i['file_count'] = $invoicesFilesModel->fetchFilesCount($i['invoice_id']);
+            $i['note_count'] = $invoicesNotesModel->fetchNotesCount($i['invoice_id']);
+        }
+        unset($i);
     }
-    unset($i);
     
     $translate->addResource('l10n/invoicesSubmitted.json');
     $viewFile = "views/invoicesSubmitted.php"; //@todo: if no invoices to be shown, show appropriate message
