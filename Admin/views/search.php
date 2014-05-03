@@ -51,7 +51,7 @@
                         <tr>
                             <?php
                             foreach($finalInvoicesForClient as $i) {
-                                echo "<tr data-invoice-id='{$antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR)}'>" .
+                                echo "<tr>" .
                                      "<td>" . $i['invoice_id_for_org'] . "</td>" .
                                      "<td><strong>" . $i['client_id'] . "</strong></td>" .
                                      "<td>" . $i['sp_name'] . "</td>" .
@@ -61,7 +61,8 @@
                                      "<td>" . $i['grand_total'] . "</td>" .
                                      "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
                                      "<td>" . $dateFmt->format($r['inserted_on'], 'date_time') . "</td>" .
-                                     "<td>" . //Link to invoice on the invoices page w/ focus
+                                     "<td class='table-option-cell'>" .
+                                         '<a href="invoicesSubmitted.php?focus=' . $antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR) . '" target="_blank" class="btn btn-info"><i class="fa fa-eye"></i> View</a>' .
                                      "</td>" .
                                      "</tr>";
                             }
@@ -97,7 +98,7 @@
                         <tr>
                             <?php
                             foreach($draftInvoicesForClient as $i) {
-                                echo "<tr data-invoice-id='{$antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR)}'>" .
+                                echo "<tr>" .
                                      "<td>" . $i['invoice_id_for_org'] . "</td>" .
                                      "<td><strong>" . $i['client_id'] . "</strong></td>" .
                                      "<td>" . $i['sp_name'] . "</td>" .
@@ -107,7 +108,8 @@
                                      "<td>" . $i['grand_total'] . "</td>" .
                                      "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
                                      "<td>" . $dateFmt->format($r['inserted_on'], 'date_time') . "</td>" .
-                                     "<td>" . //Link to invoice on the invoices page w/ focus
+                                     "<td class='table-option-cell'>" .
+                                         '<a href="invoicesDrafts.php?focus=' . $antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR) . '" target="_blank" class="btn btn-info"><i class="fa fa-eye"></i> View</a>' .
                                      "</td>" .
                                      "</tr>";
                             }
@@ -143,7 +145,7 @@
                         <tr>
                             <?php
                             foreach($finalInvoicesForSP as $i) {
-                                echo "<tr data-invoice-id='{$antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR)}'>" .
+                                echo "<tr>" .
                                      "<td>" . $i['invoice_id_for_org'] . "</td>" .
                                      "<td>" . $i['client_id'] . "</td>" .
                                      "<td><strong>" . $i['sp_name'] . "</strong></td>" .
@@ -153,7 +155,8 @@
                                      "<td>" . $i['grand_total'] . "</td>" .
                                      "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
                                      "<td>" . $dateFmt->format($r['inserted_on'], 'date_time') . "</td>" .
-                                     "<td>" . //Link to invoice on the invoices page w/ focus
+                                     "<td class='table-option-cell'>" .
+                                         '<a href="invoicesSubmitted.php?focus=' . $antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR) . '" target="_blank" class="btn btn-info"><i class="fa fa-eye"></i> View</a>' .
                                      "</td>" .
                                      "</tr>";
                             }
@@ -189,7 +192,7 @@
                         <tr>
                             <?php
                             foreach($draftInvoicesForSP as $i) {
-                                echo "<tr data-invoice-id='{$antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR)}'>" .
+                                echo "<tr>" .
                                      "<td>" . $i['invoice_id_for_org'] . "</td>" .
                                      "<td>" . $i['client_id'] . "</td>" .
                                      "<td><strong>" . $i['sp_name'] . "</strong></td>" .
@@ -199,7 +202,8 @@
                                      "<td>" . $i['grand_total'] . "</td>" .
                                      "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
                                      "<td>" . $dateFmt->format($r['inserted_on'], 'date_time') . "</td>" .
-                                     "<td>" . //Link to invoice on the invoices page w/ focus
+                                     "<td class='table-option-cell'>" .
+                                         '<a href="invoicesDrafts.php?focus=' . $antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR) . '" target="_blank" class="btn btn-info"><i class="fa fa-eye"></i> View</a>' .
                                      "</td>" .
                                      "</tr>";
                             }
