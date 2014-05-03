@@ -25,9 +25,9 @@ if (!isset($_SESSION['user_id'])) {
  * Models
  */
 $invoicesModel = new \Interpresense\ServiceProvider\Invoice($dbo);
-$invoiceItems = new \Interpresense\ServiceProvider\InvoiceItems($dbo);
-$invoiceFiles = new \Interpresense\ServiceProvider\InvoiceFiles($dbo);
-$invoiceNotes = new InvoiceNotes($dbo);
+$invoicesItemsModel = new \Interpresense\ServiceProvider\InvoiceItems($dbo);
+$invoicesFilesModel = new \Interpresense\ServiceProvider\InvoiceFiles($dbo);
+$invoicesNotesModel = new InvoiceNotes($dbo);
 
 /**
  * Localization
@@ -63,25 +63,31 @@ if (!isset($_GET['page'])) {
     }
     
     $invoices = $invoicesModel->fetchInvoices($filter_start_date, $filter_end_date, 'final');
+    foreach ($invoices as &$i){
+        $i['item_count'] = $invoicesItemsModel->fetchItemsCount($i['invoice_id']);
+        $i['file_count'] = $invoicesFilesModel->fetchFilesCount($i['invoice_id']);
+        $i['note_count'] = $invoicesNotesModel->fetchNotesCount($i['invoice_id']);
+    }
+    unset($i);
     
     $translate->addResource('l10n/invoicesSubmitted.json');
     $viewFile = "views/invoicesSubmitted.php"; //@todo: if no invoices to be shown, show appropriate message
     
-} else if ($_GET['page'] === "fetch-invoice-details") {
+} else if ($_GET['page'] === "fetch-invoice-items") {
     
     $invoicesModel->markInvoiceViewed($_GET['invoice_id']);
     $invoice = $invoicesModel->fetchInvoice($_GET['invoice_id']);
-    $items = $invoiceItems->fetchItems($_GET['invoice_id']);
+    $items = $invoicesItemsModel->fetchItems($_GET['invoice_id']);
     // @todo output
     
 } else if ($_GET['page'] === "fetch-invoice-files") {
     
-    $files = $invoiceFiles->fetchFiles($_GET['invoice_id']);
+    $files = $invoicesFilesModel->fetchFiles($_GET['invoice_id']);
     // @todo output JSON encoding file content doesn't seem like a good idea
     
 } else if ($_GET['page'] === "fetch-invoice-notes") {
 
-    $notes = $invoiceNotes->fetchNotes($_GET['invoice_id']);
+    $notes = $invoicesNotesModel->fetchNotes($_GET['invoice_id']);
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode($notes);
     exit;
@@ -99,7 +105,7 @@ if (!isset($_GET['page'])) {
 /**
  * View
  */
-$actions = array('fetch-invoice-details', 'fetch-invoice-files', 'fetch-invoice-notes', 'mark-invoice-as-draft', 'export');
+$actions = array('fetch-invoice-items', 'fetch-invoice-files', 'fetch-invoice-notes', 'mark-invoice-as-draft', 'export');
 
 if (!in_array($_GET['page'], $actions, true)) {
     

@@ -61,6 +61,7 @@
                                      "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
                                      "<td>" . $dateFmt->format($r['inserted_on'], 'date_time') . "</td>" .
                                      '<td class="table-option-cell">
+                                         Coming soon
                                       </td>' .
                                      '</tr>';
                             }
