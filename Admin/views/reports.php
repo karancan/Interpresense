@@ -178,17 +178,29 @@
             <div class="modal-body">
                 
                 <div class="form-group group-add-template">
-                    <label class="control-label" for="email_subject">Name</label>
-                    <input type="text" class="form-control" id="template_name" name='name'>
+                    <label class="control-label" for="template_name">Name</label>
+                    <input type="text" class="form-control" id="template_name" name='name' required>
                 </div>
                 
                 <div class="form-group group-add-template">
-                    <label class="control-label" for="email_cc">Description</label>
-                    <input type="text" class="form-control" id="template_description" name='description'>
+                    <label class="control-label" for="template_description">Description</label>
+                    <input type="text" class="form-control" id="template_description" name='description' required>
+                </div>
+                
+                <div class="form-group group-add-template">
+                    <label class="control-label" for="template_placeholders">Available placeholders</label>
+                    <select class="form-control" id="template_placeholders" <?= (empty($reportPlaceholders) ? 'disabled' : null) ?> >
+                        <option value="" selected>Pick a placeholder to insert it in to this template. Placeholders are dynamically replaced when a report is generated…</option>
+                        <?php
+                            foreach ($reportPlaceholders as $r){
+                                echo '<option value="' . $r['placeholder'] . '">' . $r['placeholder'] . ' - ' . $r['description_en'] . '</option>'; 
+                            }
+                        ?>
+                    </select>
                 </div>
                 
                 <div class="form-group">
-                    <label class="control-label" for="email_content">Template content</label>
+                    <label class="control-label" for="template_content">Template content</label>
                     <textarea class="form-control summernote" id="template_content" name='content'></textarea>
                 </div>
                 

@@ -31,20 +31,32 @@
             <table class="table table-hover invoice-table">           
                 <thead>
                     <tr>
-                        <th scope='col'>Column</th>
-                        <th scope='col'>Column</th>
-                        <th scope='col'>Column</th>
-                        <th scope='col'>Options</th>
+                        <th scope='col'>ID</th>
+                        <th scope='col'>Client</th>
+                        <th scope='col'>Service provider</th>
+                        <th scope='col'>Items</th>
+                        <th scope='col'>Files</th>
+                        <th scope='col'>Notes</th>
+                        <th scope='col'>Total</th>
+                        <th scope='col'>Approved</th>
+                        <th scope='col'>Added</th>
+                        <th scope='col'></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <?php
                         if (empty($invoices)){
-                            echo "<tr><td colspan='4' class='empty-table-placeholder'>No draft invoices at this time…</td></tr>";
+                            echo "<tr><td colspan='10' class='empty-table-placeholder'>No draft invoices at this time…</td></tr>";
                         } else {
                             foreach($invoices as $i) {
                                 echo "<tr data-invoice-id='{$antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR)}'>" .
+                                     "<td>Coming soon</td>" .
+                                     "<td>Coming soon</td>" .
+                                     "<td>Coming soon</td>" .
+                                     "<td>Coming soon</td>" .
+                                     "<td>Coming soon</td>" .
+                                     "<td>Coming soon</td>" .
                                      "<td>Coming soon</td>" .
                                      "<td>Coming soon</td>" .
                                      "<td>Coming soon</td>" .
