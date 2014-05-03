@@ -84,11 +84,6 @@ if (!isset($_GET['page'])) {
 
     //@todo: fetch notes and return JSON
 
-} elseif ($_GET['page'] === "delete-invoice") {
-
-    $invoicesModel->deleteInvoice($_GET['invoice_id']);
-    $invoiceNotesModel->deleteInvoiceNotes($_GET['invoice_id']);
-    
 } elseif ($_GET['page'] === "export") {
     //@todo: add logic. Take in to account `start` and `end` from GET
     die();
@@ -97,7 +92,7 @@ if (!isset($_GET['page'])) {
 /**
  * View
  */
-$actions = array('fetch-invoice-items', 'fetch-invoices-files', 'fetch-invoice-notes', 'delete-invoice', 'export');
+$actions = array('fetch-invoice-items', 'fetch-invoices-files', 'fetch-invoice-notes', 'export');
 
 if (!in_array($_GET['page'], $actions, true)) {
     

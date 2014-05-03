@@ -296,9 +296,9 @@ class Invoice extends \Interpresense\Includes\BaseModel {
     }
     
     /**
-     * Deletes an invoice
+     * Deletes an invoice that's not yet finalized
      * @param int $invoiceID The invoice ID
-     * @todo
+     * @todo (note `is_final` should be 0)
      */
     public function deleteInvoice($invoiceID) {
         
