@@ -24,8 +24,8 @@ if (!isset($_SESSION['user_id'])) {
 /**
  * Models
  */
-$model = new Settings($dbo);
 $usersModel = new Users($dbo);
+$emailTemplatesModel = new Emails($dbo);
 
 /**
  * Localization
@@ -60,16 +60,59 @@ if (!isset($_GET['page'])) {
     if (empty($_POST['user_id'])){
         $updated = $usersModel->createUser($_POST);
         
-        //@todo: send account creation email
+        try {
+            $emailData = $emailTemplatesModel->fetchEmailTemplate(1);
+            
+            $transport = \Swift_SmtpTransport::newInstance(SMTP_SERVER, SMTP_SERVER_PORT);
+
+            $email = \Swift_Message::newInstance()
+                ->setSubject("Interpresense - {$emailData['subject']}")
+                ->setFrom(EMAIL_ALIAS_NO_REPLY . EMAIL_ORG_STAFF_DOMAIN)
+                ->setTo($_POST['user_name'] . EMAIL_ORG_STAFF_DOMAIN)
+                ->setBody($emailData['content']);
+                
+            if (!empty($emailData['cc'])) {
+                $email->setCc($emailData['cc']);
+            }
+            
+            if (!empty($emailData['bcc'])) {
+                $email->setBcc($emailData['bcc']);
+            }
+
+            $transport->send($email);
+        } catch (\Exception $e) {
+            // Email failed
+        }
         
     } else {
         $updated = $usersModel->updateUser($_POST);
         
-        //@todo: send account update email
+        try {
+            $emailData = $emailTemplatesModel->fetchEmailTemplate(2);
+            
+            $transport = \Swift_SmtpTransport::newInstance(SMTP_SERVER, SMTP_SERVER_PORT);
+
+            $email = \Swift_Message::newInstance()
+                ->setSubject("Interpresense - {$emailData['subject']}")
+                ->setFrom(EMAIL_ALIAS_NO_REPLY . EMAIL_ORG_STAFF_DOMAIN)
+                ->setTo($_POST['user_name'] . EMAIL_ORG_STAFF_DOMAIN)
+                ->setBody($emailData['content']);
+                
+            if (!empty($emailData['cc'])) {
+                $email->setCc($emailData['cc']);
+            }
+            
+            if (!empty($emailData['bcc'])) {
+                $email->setBcc($emailData['bcc']);
+            }
+
+            $transport->send($email);
+        } catch (\Exception $e) {
+            // Email failed
+        }
     }
     
     header('Location: users.php?focus=' . $updated);
-    
     
 } elseif ($_GET['page'] === 'export-users') {
     //@todo: add logic
