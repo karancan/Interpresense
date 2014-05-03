@@ -73,7 +73,11 @@
     
 </div>
 <script charset='utf-8' src='includes/js/admin.js'></script>
+<script charset='utf-8' src='includes/js/invoicesDrafts.js'></script>
 <script>
+    
+    'use strict';
+    var focus = '<?= $antiXSS->escape($_GET['focus'], $antiXSS::JS) ?>';
     
     //Init datepickers
     $('.datepicker').datepicker({
