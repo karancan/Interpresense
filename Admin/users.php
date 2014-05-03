@@ -72,7 +72,20 @@ if (!isset($_GET['page'])) {
     
     
 } elseif ($_GET['page'] === 'export-users') {
-    //@todo: add logic
+    
+    $data = $usersModel->fetchUsers();
+    
+    $csvConfig = new \Goodby\CSV\Export\Standard\ExporterConfig();
+    $csvConfig->setFromCharset('UTF-8')->setToCharset('UTF-8');
+    
+    $csvExporter = new \Goodby\CSV\Export\Standard\Exporter($csvConfig);
+    
+    $filename = 'Interpresense_Users_' . date('Ymd\THis') . '.csv';
+    
+    header('Content-Type: text/csv');
+    header("Content-Disposition: attachment; filename=$filename");
+    $csvExporter->export('php://output', $data);
+    
     die();
 }
 
