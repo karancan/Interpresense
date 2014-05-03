@@ -24,8 +24,8 @@ if (!isset($_SESSION['user_id'])) {
 /**
  * Models
  */
-$model = new Settings($dbo);
 $usersModel = new Users($dbo);
+$emailTemplatesModel = new Emails($dbo);
 
 /**
  * Localization
@@ -61,22 +61,25 @@ if (!isset($_GET['page'])) {
         $updated = $usersModel->createUser($_POST);
         
         try {
-            if (\Swift_Validate::email($_POST['user_name'])) {
+            $emailData = $emailTemplatesModel->fetchEmailTemplate(1);
+            
+            $transport = \Swift_SmtpTransport::newInstance(SMTP_SERVER, SMTP_SERVER_PORT);
+
+            $email = \Swift_Message::newInstance()
+                ->setSubject("Interpresense - {$emailData['subject']}")
+                ->setFrom(EMAIL_ALIAS_NO_REPLY . EMAIL_ORG_STAFF_DOMAIN)
+                ->setTo($_POST['user_name'] . EMAIL_ORG_STAFF_DOMAIN)
+                ->setBody($emailData['content']);
                 
-                ob_start();
-                include 'views/emails/accountCreation.php';
-                $body = ob_get_flush();
-
-                $transport = \Swift_SmtpTransport::newInstance(SMTP_SERVER, SMTP_SERVER_PORT);
-
-                $email = \Swift_Message::newInstance()
-                    ->setSubject('Interpresense - Account creation')
-                    ->setFrom(EMAIL_ALIAS_NO_REPLY . EMAIL_ORG_STAFF_DOMAIN)
-                    ->setTo($_POST['user_name'] . EMAIL_ORG_STAFF_DOMAIN)
-                    ->setBody($body);
-
-                $transport->send($email);
+            if (!empty($emailData['cc'])) {
+                $email->setCc($emailData['cc']);
             }
+            
+            if (!empty($emailData['bcc'])) {
+                $email->setBcc($emailData['bcc']);
+            }
+
+            $transport->send($email);
         } catch (\Exception $e) {
             // Email failed
         }
