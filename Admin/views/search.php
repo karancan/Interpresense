@@ -36,6 +36,7 @@
                     <thead>
                         <tr>
                             <th scope='col'>ID</th>
+                            <th scope='col'>Client</th>
                             <th scope='col'>Service provider</th>
                             <th scope='col'>Items</th>
                             <th scope='col'>Files</th>
@@ -51,17 +52,18 @@
                             <?php
                             foreach($finalInvoicesForClient as $i) {
                                 echo "<tr data-invoice-id='{$antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR)}'>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     '<td class="table-option-cell">
-                                      </td>' . //Just link to the actual invoice. No need to show options here
-                                     '</tr>';
+                                     "<td>" . $i['invoice_id_for_org'] . "</td>" .
+                                     "<td>" . $i['client_id'] . "</td>" .
+                                     "<td>" . $i['sp_name'] . "</td>" .
+                                     "<td>" . $i['item_count'] . "</td>" .
+                                     "<td>" . $i['file_count'] . "</td>" .
+                                     "<td>" . $i['note_count'] . "</td>" .
+                                     "<td>" . $i['grand_total'] . "</td>" .
+                                     "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
+                                     "<td>" . $dateFmt->format($r['inserted_on'], 'date_time') . "</td>" .
+                                     "<td>" . //Link to invoice on the invoices page w/ focus
+                                     "</td>" .
+                                     "</tr>";
                             }
                             ?>
                         </tr>
@@ -80,6 +82,7 @@
                     <thead>
                         <tr>
                             <th scope='col'>ID</th>
+                            <th scope='col'>Client</th>
                             <th scope='col'>Service provider</th>
                             <th scope='col'>Items</th>
                             <th scope='col'>Files</th>
@@ -95,17 +98,18 @@
                             <?php
                             foreach($draftInvoicesForClient as $i) {
                                 echo "<tr data-invoice-id='{$antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR)}'>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     '<td class="table-option-cell">
-                                      </td>' . //Just link to the actual invoice. No need to show options here
-                                     '</tr>';
+                                     "<td>" . $i['invoice_id_for_org'] . "</td>" .
+                                     "<td>" . $i['client_id'] . "</td>" .
+                                     "<td>" . $i['sp_name'] . "</td>" .
+                                     "<td>" . $i['item_count'] . "</td>" .
+                                     "<td>" . $i['file_count'] . "</td>" .
+                                     "<td>" . $i['note_count'] . "</td>" .
+                                     "<td>" . $i['grand_total'] . "</td>" .
+                                     "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
+                                     "<td>" . $dateFmt->format($r['inserted_on'], 'date_time') . "</td>" .
+                                     "<td>" . //Link to invoice on the invoices page w/ focus
+                                     "</td>" .
+                                     "</tr>";
                             }
                             ?>
                         </tr>
@@ -125,6 +129,7 @@
                         <tr>
                             <th scope='col'>ID</th>
                             <th scope='col'>Client</th>
+                            <th scope='col'>Service provider</th>
                             <th scope='col'>Items</th>
                             <th scope='col'>Files</th>
                             <th scope='col'>Notes</th>
@@ -139,17 +144,18 @@
                             <?php
                             foreach($finalInvoicesForSP as $i) {
                                 echo "<tr data-invoice-id='{$antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR)}'>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     '<td class="table-option-cell">
-                                      </td>' . //Just link to the actual invoice. No need to show options here
-                                     '</tr>';
+                                     "<td>" . $i['invoice_id_for_org'] . "</td>" .
+                                     "<td>" . $i['client_id'] . "</td>" .
+                                     "<td>" . $i['sp_name'] . "</td>" .
+                                     "<td>" . $i['item_count'] . "</td>" .
+                                     "<td>" . $i['file_count'] . "</td>" .
+                                     "<td>" . $i['note_count'] . "</td>" .
+                                     "<td>" . $i['grand_total'] . "</td>" .
+                                     "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
+                                     "<td>" . $dateFmt->format($r['inserted_on'], 'date_time') . "</td>" .
+                                     "<td>" . //Link to invoice on the invoices page w/ focus
+                                     "</td>" .
+                                     "</tr>";
                             }
                             ?>
                         </tr>
@@ -169,6 +175,7 @@
                         <tr>
                             <th scope='col'>ID</th>
                             <th scope='col'>Client</th>
+                            <th scope='col'>Service provider</th>
                             <th scope='col'>Items</th>
                             <th scope='col'>Files</th>
                             <th scope='col'>Notes</th>
@@ -183,17 +190,18 @@
                             <?php
                             foreach($draftInvoicesForSP as $i) {
                                 echo "<tr data-invoice-id='{$antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR)}'>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     '<td class="table-option-cell">
-                                      </td>' . //Just link to the actual invoice. No need to show options here
-                                     '</tr>';
+                                     "<td>" . $i['invoice_id_for_org'] . "</td>" .
+                                     "<td>" . $i['client_id'] . "</td>" .
+                                     "<td>" . $i['sp_name'] . "</td>" .
+                                     "<td>" . $i['item_count'] . "</td>" .
+                                     "<td>" . $i['file_count'] . "</td>" .
+                                     "<td>" . $i['note_count'] . "</td>" .
+                                     "<td>" . $i['grand_total'] . "</td>" .
+                                     "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
+                                     "<td>" . $dateFmt->format($r['inserted_on'], 'date_time') . "</td>" .
+                                     "<td>" . //Link to invoice on the invoices page w/ focus
+                                     "</td>" .
+                                     "</tr>";
                             }
                             ?>
                         </tr>
