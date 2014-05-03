@@ -82,12 +82,12 @@
                 
                 <div class="form-group">
                     <label class="control-label" for="email_cc">Who gets CC'd</label>
-                    <input type="text" class="form-control" id="email_cc" name='cc' required>
+                    <input type="email" class="form-control" id="email_cc" name='cc' required>
                 </div>
                 
                 <div class="form-group">
                     <label class="control-label" for="email_bcc">Who gets BCC'd</label>
-                    <input type="text" class="form-control" id="email_bcc" name='bcc' required>
+                    <input type="email" class="form-control" id="email_bcc" name='bcc' required>
                 </div>
                 
                 <div class="form-group">
