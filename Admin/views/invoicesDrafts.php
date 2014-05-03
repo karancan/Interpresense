@@ -39,8 +39,7 @@
                         <th scope='col'>Notes</th>
                         <th scope='col'>Total</th>
                         <th scope='col'>Approved</th>
-                        <th scope='col'>Added</th>
-                        <th scope='col'></th>
+                        <th scope='col'>Added on</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,10 +59,7 @@
                                      "<td>" . $i['grand_total'] . "</td>" .
                                      "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
                                      "<td>" . $dateFmt->format($r['inserted_on'], 'date_time') . "</td>" .
-                                     '<td class="table-option-cell">
-                                         Coming soon
-                                      </td>' .
-                                     '</tr>';
+                                     "</tr>";
                             }
                         }
                         ?>
