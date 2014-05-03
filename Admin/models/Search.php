@@ -35,7 +35,8 @@ class Search extends \Interpresense\Includes\BaseModel {
      * @return array
      */
     public function fetchFinalizedInvoicesForClient($q) {
-        $sql = "SELECT `invoice_id`, `sp_name`, `sp_email`, `is_approved`, `client_id`
+        $sql = "SELECT `invoice_id`, `invoice_id_for_org`, `sp_name`, `sp_email`,
+                       `is_approved`, `client_id`, `grand_total`, `is_approved`, `inserted_on`
                   FROM `interpresense_service_provider_invoices`
                  WHERE `is_final` = 1
                    AND `client_id` = :client_id;";
@@ -52,7 +53,8 @@ class Search extends \Interpresense\Includes\BaseModel {
      * @return array
      */
     public function fetchFinalizedInvoicesForServiceProvider($q) {
-        $sql = "SELECT `invoice_id`, `sp_name`, `sp_email`, `is_approved`, `client_id`
+        $sql = "SELECT `invoice_id`, `invoice_id_for_org`, `sp_name`, `sp_email`,
+                       `is_approved`, `client_id`, `grand_total`, `is_approved`, `inserted_on`
                   FROM `interpresense_service_provider_invoices`
                  WHERE `is_final` = 1
                    AND (`sp_name` LIKE :sp_name
@@ -71,7 +73,8 @@ class Search extends \Interpresense\Includes\BaseModel {
      * @return array
      */
     public function fetchDraftInvoicesForClient($q) {
-        $sql = "SELECT `invoice_id`, `sp_name`, `sp_email`, `is_approved`, `client_id`
+        $sql = "SELECT `invoice_id`, `invoice_id_for_org`, `sp_name`, `sp_email`,
+                       `is_approved`, `client_id`, `grand_total`, `is_approved`, `inserted_on`
                   FROM `interpresense_service_provider_invoices`
                  WHERE `is_final` = 0
                    AND `client_id` = :client_id;";
@@ -88,7 +91,8 @@ class Search extends \Interpresense\Includes\BaseModel {
      * @return array
      */
     public function fetchDraftInvoicesForServiceProvider($q) {
-        $sql = "SELECT `invoice_id`, `sp_name`, `sp_email`, `is_approved`, `client_id`
+        $sql = "SELECT `invoice_id`, `invoice_id_for_org`, `sp_name`, `sp_email`,
+                       `is_approved`, `client_id`, `grand_total`, `is_approved`, `inserted_on`
                   FROM `interpresense_service_provider_invoices`
                  WHERE `is_final` = 0
                    AND (`sp_name` LIKE :sp_name
