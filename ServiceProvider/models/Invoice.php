@@ -99,21 +99,12 @@ class Invoice extends \Interpresense\Includes\BaseModel {
     
     /**
      * Retrieves invoices
-     * @param string $startRange The start of the date range
-     * @param string $endRange The end of the date range
+     * @param \DateTime $startRange The start of the date range
+     * @param \DateTime $endRange The end of the date range
      * @param string $status Filters invoices by status. Default is all.
      * @return array
      */
-    public function fetchInvoices($startRange, $endRange, $status = 'all') {
-        $dateValidator = Validator::notEmpty()->date('Y-m-d');
-        
-        if (!$dateValidator->validate($startRange) || !$dateValidator->validate($endRange)) {
-            throw new \InvalidArgumentException('Invalid dates.');
-        }
-        
-        if (new \DateTime($startRange) > new \DateTime($endRange)) {
-            return array();
-        }
+    public function fetchInvoices(\DateTime $startRange, \DateTime $endRange, $status = 'all') {
         
         $sql = "SELECT `invoice_id`, `invoice_uid`, `invoice_id_for_sp`, `invoice_id_for_org`, `sp_name`,
                        `sp_address`, `sp_postal_code`, `sp_city`, `sp_province`, `sp_phone`, `sp_email`,
@@ -130,8 +121,8 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         }
         
         $data = array(
-            'start' => $startRange,
-            'end' => $endRange
+            'start' => $startRange->format('Y-m-d'),
+            'end' => $endRange->format('Y-m-d')
         );
         
         $types = array(

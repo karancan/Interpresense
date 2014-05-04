@@ -53,15 +53,25 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
 if (!isset($_GET['page'])) {
     
     //@todo: add ability to view approved invoices only
-    
-    $filter_start_date = date("Y-m-d", strtotime('-' . $settings['admin_default_date_filter_range_days'] . ' days'));
-    if (!empty($_GET['start'])){
-        $filter_start_date = $_GET['start'];
+
+    if (!empty($_GET['start'])) {
+        try {
+            $filter_start_date = new \DateTime($_GET['start']);
+        } catch (\Exception $e) {
+            $filter_start_date = new \DateTime("-{$settings['admin_default_date_filter_range_days']} days");
+        }
+    } else {
+        $filter_start_date = new \DateTime("-{$settings['admin_default_date_filter_range_days']} days");
     }
     
-    $filter_end_date = date("Y-m-d", strtotime('+' . $settings['admin_default_date_filter_range_days'] . ' days'));
-    if (!empty($_GET['end'])){
-        $filter_end_date = $_GET['end'];
+    if (!empty($_GET['end'])) {
+        try {
+            $filter_end_date = new \DateTime($_GET['end']);
+        } catch (\Exception $e) {
+            $filter_end_date = new \DateTime("+{$settings['admin_default_date_filter_range_days']} days");
+        }
+    } else {
+        $filter_end_date = new \DateTime("+{$settings['admin_default_date_filter_range_days']} days");
     }
     
     $invoices = $invoicesModel->fetchInvoices($filter_start_date, $filter_end_date, 'final');
@@ -102,7 +112,40 @@ if (!isset($_GET['page'])) {
     //@todo: create an invoice note stating that the invoice was mark as un-approved (or as a draft)
 
 } else if ($_GET['page'] === "export") {
-    //@todo: add logic. Take in to account `start` and `end` from GET
+    
+    if (!empty($_GET['start'])) {
+        try {
+            $filter_start_date = new \DateTime($_GET['start']);
+        } catch (\Exception $e) {
+            $filter_start_date = new \DateTime("-{$settings['admin_default_date_filter_range_days']} days");
+        }
+    } else {
+        $filter_start_date = new \DateTime("-{$settings['admin_default_date_filter_range_days']} days");
+    }
+    
+    if (!empty($_GET['end'])) {
+        try {
+            $filter_end_date = new \DateTime($_GET['end']);
+        } catch (\Exception $e) {
+            $filter_end_date = new \DateTime("+{$settings['admin_default_date_filter_range_days']} days");
+        }
+    } else {
+        $filter_end_date = new \DateTime("+{$settings['admin_default_date_filter_range_days']} days");
+    }
+    
+    $invoices = $invoicesModel->fetchInvoices($filter_start_date, $filter_end_date, 'final');
+    
+    $csvConfig = new \Goodby\CSV\Export\Standard\ExporterConfig();
+    $csvConfig->setFromCharset('UTF-8')->setToCharset('UTF-8');
+    
+    $csvExporter = new \Goodby\CSV\Export\Standard\Exporter($csvConfig);
+    
+    $filename = 'Invoices_submitted_' . $filter_start_date->format('Y-m-d') . '_' . $filter_end_date->format('Y-m-d') . '.csv';
+    
+    header('Content-Type: text/csv');
+    header("Content-Disposition: attachment; filename=$filename");
+    $csvExporter->export('php://output', $invoices);
+    
     die();
 }
 
