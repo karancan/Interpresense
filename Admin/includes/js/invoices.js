@@ -63,6 +63,7 @@ $('[data-action="view-notes"]').click(function(){
     
     //@todo: loader
     
+    $('#admin-invoice-notes-table tbody').html('');
     var controller = window.location.href.replace(/^.*\//, "").replace(/\?.*$/, "");
     
     $.ajax({
@@ -71,8 +72,22 @@ $('[data-action="view-notes"]').click(function(){
         data: {
             invoice_id: $(this).closest('tr').data('invoice-id')
         }
-    }).done(function() {
-        //@todo: handle response
+    }).done(function(data) {
+        
+        var markup = '';
+        
+        if (data.length < 1){
+            markup = '<tr><td colspan="3" class="empty-table-placeholder">There are no notes for this invoice…</td></tr>';
+        } else {
+            for (i=0; i<data.length; i++){
+                markup += '<tr  data-note-id="' + data[i].note_id + '">';
+                markup += '<td>' + data[i].emp_name + '</td>';
+                markup += '<td>' + data[i].note + '</td>';
+                markup += '<td>' + data[i].inserted_on + '</td>';
+                markup += '</tr>';
+            }
+        }
+        $('#admin-invoice-notes-table tbody').html(markup);
     });
 });
 

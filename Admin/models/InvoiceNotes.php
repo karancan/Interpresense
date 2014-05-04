@@ -65,10 +65,13 @@ class InvoiceNotes extends \Interpresense\Includes\BaseModel {
             throw new \InvalidArgumentException('Invalid invoice ID.');
         }
         
-        $sql = "SELECT `note_id`, `note`, `inserted_on`
-                  FROM `interpresense_service_provider_invoices_notes`
-                 WHERE `invoice_id` = :invoice_id
-                   AND `is_deleted` = 0";
+        $sql = "SELECT n.note_id, n.note, n.inserted_on, CONCAT(u.first_name, ' ', u.last_name) AS emp_name
+                  FROM `interpresense_service_provider_invoices_notes` n
+                  JOIN `interpresense_users` u
+                    ON n.user_id = u.user_id
+                 WHERE n.invoice_id = :invoice_id
+                   AND n.is_deleted = 0
+              ORDER BY n.inserted_on DESC;";
         
         $data = array('invoice_id' => $invoiceID);
         $types = array('invoice_id' => \PDO::PARAM_INT);

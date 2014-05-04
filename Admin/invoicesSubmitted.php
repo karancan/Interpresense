@@ -104,7 +104,12 @@ if (!isset($_GET['page'])) {
 } else if ($_GET['page'] === "fetch-invoice-notes") {
 
     header('Content-Type: application/json; charset=utf-8');
-    echo json_encode($invoicesNotesModel->fetchNotes($_POST['invoice_id']));
+    $notes = $invoicesNotesModel->fetchNotes($_POST['invoice_id']);
+    foreach ($notes as &$n){
+        $n['inserted_on'] = $dateFmt->format($n['inserted_on'], 'date_time');
+    }
+    unset($n);
+    echo json_encode($notes);
     exit;
     
 } else if ($_GET['page'] === "mark-invoice-as-draft") {

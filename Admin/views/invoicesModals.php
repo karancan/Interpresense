@@ -46,6 +46,18 @@
             </div>
             
             <div class="modal-body">
+                <table id="admin-invoice-notes-table" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th style='width: 15%;'>User</th>
+                            <th>Note</th>
+                            <th style='width: 20%;'>Added on</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    
+                    </tbody>
+                </table>
             </div>
             
             <div class="modal-footer">
