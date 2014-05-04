@@ -72,6 +72,7 @@
     </div>
     
 </div>
+<?php require 'views/invoiceModals.php'; ?>
 <script charset='utf-8' src='includes/js/admin.js'></script>
 <script charset='utf-8' src='includes/js/invoices.js'></script>
 <script>
