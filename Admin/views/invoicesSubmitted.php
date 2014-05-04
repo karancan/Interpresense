@@ -51,16 +51,17 @@
                         } else {
                             foreach($invoices as $i) {
                                 echo "<tr data-invoice-id='{$antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR)}'>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
-                                     "<td>Coming soon</td>" .
+                                     "<td>" . $i['invoice_id_for_org'] . "</td>" .
+                                     "<td>" . $i['client_id'] . "</td>" .
+                                     "<td>" . $i['sp_name'] . "</td>" .
+                                     "<td>" . $i['item_count'] . "</td>" .
+                                     "<td>" . $i['file_count'] . "</td>" .
+                                     "<td>" . $i['note_count'] . "</td>" .
+                                     "<td>" . $i['grand_total'] . "</td>" .
+                                     "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
+                                     "<td>" . $dateFmt->format($r['inserted_on'], 'date_time') . "</td>" .
                                      '<td class="table-option-cell">
+                                         Coming soon
                                       </td>' .
                                      '</tr>';
                             }
@@ -76,7 +77,11 @@
     
 </div>
 <script charset='utf-8' src='includes/js/admin.js'></script>
+<script charset='utf-8' src='includes/js/invoicesSubmitted.js'></script>
 <script>
+    
+    'use strict';
+    var focus = '<?= $antiXSS->escape($_GET['focus'], $antiXSS::JS) ?>';
     
     //Init datepickers
     $('.datepicker').datepicker({

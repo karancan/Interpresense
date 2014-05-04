@@ -62,6 +62,28 @@ class InvoiceItems extends \Interpresense\Includes\BaseModel {
     }
     
     /**
+     * Fetches the number of items for a given invoice
+     * @param int $invoiceID The invoice ID
+     * @return int The number of items
+     */
+    public function fetchItemsCount($invoiceID) {
+        
+        if(!$this->validators['invoice_id']->validate($invoiceID)) {
+            throw new \InvalidArgumentException('Invalid invoice ID.');
+        }
+        
+        $sql = "SELECT COUNT(item_id) AS count
+                  FROM `interpresense_service_provider_invoice_items`
+                 WHERE `invoice_id` = :invoice_id;";
+        
+        $data = array('invoice_id' => $invoiceID);
+        $types = array('invoice_id' => \PDO::PARAM_INT);
+        
+        $result = parent::$db->query($sql, $data, $types, \PDO::FETCH_COLUMN);
+        return (int)$result[0];
+    }
+    
+    /**
      * Adds or updates invoice items
      * @param int $invoiceID The invoice ID
      * @param array[] $items An array of invoice items

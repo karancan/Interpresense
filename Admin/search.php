@@ -25,6 +25,10 @@ if (!isset($_SESSION['user_id'])) {
  * Models
  */
 $model = new Search($dbo);
+$invoicesModel = new \Interpresense\ServiceProvider\Invoice($dbo);
+$invoicesItemsModel = new \Interpresense\ServiceProvider\InvoiceItems($dbo);
+$invoicesFilesModel = new \Interpresense\ServiceProvider\InvoiceFiles($dbo);
+$invoicesNotesModel = new InvoiceNotes($dbo);
 
 /**
  * Localization
@@ -50,12 +54,46 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
 if (!isset($_GET['page'])) {
     
     //Does the search query match any invoices pertaining to a client
-    $finalInvoicesForClient = $model->fetchFinalizedInvoicesForClient($_GET['q']); //@todo: test the integrity of the results provided by this function
-    $draftInvoicesForClient = $model->fetchDraftInvoicesForClient($_GET['q']); //@todo: test the integrity of the results provided by this function
+    $finalInvoicesForClient = $model->fetchFinalizedInvoicesForClient($_GET['q']);
+    if (!empty($finalInvoicesForClient)){
+        foreach ($finalInvoicesForClient as &$i){
+            $i['item_count'] = $invoicesItemsModel->fetchItemsCount($i['invoice_id']);
+            $i['file_count'] = $invoicesFilesModel->fetchFilesCount($i['invoice_id']);
+            $i['note_count'] = $invoicesNotesModel->fetchNotesCount($i['invoice_id']);
+        }
+        unset($i);
+    }
+    
+    $draftInvoicesForClient = $model->fetchDraftInvoicesForClient($_GET['q']);
+    if (!empty($draftInvoicesForClient)){
+        foreach ($draftInvoicesForClient as &$i){
+            $i['item_count'] = $invoicesItemsModel->fetchItemsCount($i['invoice_id']);
+            $i['file_count'] = $invoicesFilesModel->fetchFilesCount($i['invoice_id']);
+            $i['note_count'] = $invoicesNotesModel->fetchNotesCount($i['invoice_id']);
+        }
+        unset($i);
+    }
     
     //Does the search query match any invoices pertaining to a service provider
-    $finalInvoicesForSP = $model->fetchFinalizedInvoicesForServiceProvider($_GET['q']); //@todo: test the integrity of the results provided by this function
-    $draftInvoicesForSP = $model->fetchDraftInvoicesForServiceProvider($_GET['q']); //@todo: test the integrity of the results provided by this function
+    $finalInvoicesForSP = $model->fetchFinalizedInvoicesForServiceProvider($_GET['q']);
+    if (!empty($finalInvoicesForSP)){
+        foreach ($finalInvoicesForSP as &$i){
+            $i['item_count'] = $invoicesItemsModel->fetchItemsCount($i['invoice_id']);
+            $i['file_count'] = $invoicesFilesModel->fetchFilesCount($i['invoice_id']);
+            $i['note_count'] = $invoicesNotesModel->fetchNotesCount($i['invoice_id']);
+        }
+        unset($i);
+    }
+    
+    $draftInvoicesForSP = $model->fetchDraftInvoicesForServiceProvider($_GET['q']);
+    if (!empty($draftInvoicesForSP)){
+        foreach ($draftInvoicesForSP as &$i){
+            $i['item_count'] = $invoicesItemsModel->fetchItemsCount($i['invoice_id']);
+            $i['file_count'] = $invoicesFilesModel->fetchFilesCount($i['invoice_id']);
+            $i['note_count'] = $invoicesNotesModel->fetchNotesCount($i['invoice_id']);
+        }
+        unset($i);
+    }
     
     $translate->addResource('l10n/search.json');
     $viewFile = "views/search.php";
