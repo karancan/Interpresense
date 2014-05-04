@@ -53,10 +53,10 @@
                                 echo "<tr data-invoice-id='{$antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR)}'>" .
                                      "<td>" . $i['invoice_id_for_org'] . "</td>" .
                                      "<td>" . $i['client_id'] . "</td>" .
-                                     "<td>" . $i['sp_name'] . "</td>" .
-                                     "<td>" . $i['item_count'] . "</td>" .
-                                     "<td>" . $i['file_count'] . "</td>" .
-                                     "<td>" . $i['note_count'] . "</td>" .
+                                     "<td>" . "<a href='' data-toggle='modal' data-action='view-sp-details'>" . $i['sp_name'] . "</a>" . "</td>" .
+                                     "<td>" . "<a href='' data-toggle='modal' data-action='view-items' class='admin-count-links'>" . $i['item_count'] . "</a>" . "</td>" .
+                                     "<td>" . "<a href='' data-toggle='modal' data-action='view-files' class='admin-count-links'>" . $i['file_count'] . "</a>" . "</td>" .
+                                     "<td>" . "<a href='' data-toggle='modal' data-action='view-notes' class='admin-count-links'>" . $i['note_count'] . "</a>" . "</td>" .
                                      "<td>" . $i['grand_total'] . "</td>" .
                                      "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
                                      "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
@@ -77,7 +77,7 @@
     
 </div>
 <script charset='utf-8' src='includes/js/admin.js'></script>
-<script charset='utf-8' src='includes/js/invoicesSubmitted.js'></script>
+<script charset='utf-8' src='includes/js/invoices.js'></script>
 <script>
     
     'use strict';

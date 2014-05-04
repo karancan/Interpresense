@@ -13,3 +13,7 @@
     color: #48698a !important;
     cursor: pointer;
 }
+.admin-count-links{
+    color: blue;
+    font-weight: bold;
+}
