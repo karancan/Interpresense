@@ -86,17 +86,23 @@ if (!isset($_GET['page'])) {
     $viewFile = "views/invoicesDrafts.php"; //@todo: if no invoices to be shown, show appropriate message
     
 } elseif ($_GET['page'] === "fetch-invoice-items") {
-
-    //@todo: fetch items and return JSON
-
+    
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode($invoicesItemsModel->fetchItems($_POST['invoice_id']));
+    exit;
+    
 } elseif ($_GET['page'] === "fetch-invoice-files") {
-
-    //@todo: fetch files and return JSON
-
+    
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode($invoicesFilesModel->fetchFiles($_POST['invoice_id']));
+    exit;
+    
 } elseif ($_GET['page'] === "fetch-invoice-notes") {
-
-    //@todo: fetch notes and return JSON
-
+    
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode($invoicesNotesModel->fetchNotes($_POST['invoice_id']));
+    exit;
+    
 } elseif ($_GET['page'] === "export") {
     
     if (!empty($_GET['start'])) {
