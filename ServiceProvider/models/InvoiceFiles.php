@@ -77,7 +77,7 @@ class InvoiceFiles extends \Interpresense\Includes\BaseModel {
         $types = array('invoice_id' => \PDO::PARAM_INT);
         
         $result = parent::$db->query($sql, $data, $types, \PDO::FETCH_COLUMN);
-        return $result[0];
+        return (int)$result[0];
     }
     
     /**
