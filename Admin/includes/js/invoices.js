@@ -92,6 +92,15 @@ $('[data-action="view-notes"]').click(function(){
 });
 
 /**
+ *User wants to add a note for an invoice
+ */
+$('[data-action="add-note"]').click(function(){
+    global.highlightRow($(this).closest('tr'));
+    
+    $('#admin-invoice-add-notes-modal input[name="invoice_id"]').val($(this).closest('tr').data('invoice-id'));
+});
+
+/**
  *User wants to view invoice service provider details
  */
 $('[data-action="view-sp-details"]').click(function(){
@@ -110,6 +119,6 @@ $('[data-action="view-sp-details"]').click(function(){
 /**
  *One of the following modals has been closed: {view files, view items, view notes, view SP details}
  */
-$('#admin-invoice-items-modal, #admin-invoice-files-modal, #admin-invoice-notes-modal, #admin-invoice-sp-details-modal').on('hidden.bs.modal', function () {
+$('#admin-invoice-items-modal, #admin-invoice-files-modal, #admin-invoice-notes-modal, #admin-invoice-add-notes-modal, #admin-invoice-sp-details-modal').on('hidden.bs.modal', function () {
     global.removeRowHighlighting($('.invoice-table'));
 });

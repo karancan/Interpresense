@@ -112,6 +112,11 @@ if (!isset($_GET['page'])) {
     echo json_encode($notes);
     exit;
     
+} elseif ($_GET['page'] === "add-note"){
+    
+    $invoicesNotesModel->addNote($_POST);
+    header('Location: invoicesSubmitted.php?focus=' . $_POST['invoice_id']);
+
 } else if ($_GET['page'] === "mark-invoice-as-draft") {
     
     $invoicesModel->markInvoiceAsDraft($_GET['invoice_id']);

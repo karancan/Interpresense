@@ -40,6 +40,7 @@
                         <th scope='col'>Total ($)</th>
                         <th scope='col'>Approved</th>
                         <th scope='col'>Added on</th>
+                        <th scope='col'></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,6 +68,9 @@
                                      "<td>" . $i['grand_total'] . "</td>" .
                                      "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
                                      "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
+                                     '<td class="table-option-cell">
+                                         <button type="button" class="btn btn-info" data-toggle="modal" href="#admin-invoice-add-notes-modal" data-action="add-note"><i class="fa fa-plus"></i> Add note</button>
+                                      </td>' .
                                      "</tr>";
                             }
                         }

@@ -69,7 +69,7 @@
                                      "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
                                      "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
                                      '<td class="table-option-cell">
-                                         Coming soon
+                                         <button type="button" class="btn btn-info" data-toggle="modal" href="#admin-invoice-add-notes-modal" data-action="add-note"><i class="fa fa-plus"></i> Add note</button>
                                       </td>' .
                                      '</tr>';
                             }

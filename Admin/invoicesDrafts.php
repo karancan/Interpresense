@@ -108,6 +108,11 @@ if (!isset($_GET['page'])) {
     echo json_encode($notes);
     exit;
     
+} elseif ($_GET['page'] === "add-note"){
+
+    $invoicesNotesModel->addNote($_POST);
+    header('Location: invoicesDrafts.php?focus=' . $_POST['invoice_id']);
+
 } elseif ($_GET['page'] === "export") {
     
     if (!empty($_GET['start'])) {
