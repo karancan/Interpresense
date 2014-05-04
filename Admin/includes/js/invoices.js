@@ -17,7 +17,17 @@ $('[data-action="view-items"]').click(function(){
     
     global.highlightRow($(this).closest('tr'));
     
-    //@todo: ajax
+    var controller = window.location.href.replace(/^.*\//, "").replace(/\?.*$/, "");
+    
+    $.ajax({
+        type: 'post',
+        url: controller + '?page=fetch-invoice-items',
+        data: {
+            invoice_id: $(this).closest('tr').data('invoice-id')
+        }
+    }).done(function() {
+        //@todo: handle response
+    });
 });
 
 /**
@@ -27,7 +37,17 @@ $('[data-action="view-files"]').click(function(){
     
     global.highlightRow($(this).closest('tr'));
     
-    //@todo: ajax
+    var controller = window.location.href.replace(/^.*\//, "").replace(/\?.*$/, "");
+    
+    $.ajax({
+        type: 'post',
+        url: controller + '?page=fetch-invoice-files',
+        data: {
+            invoice_id: $(this).closest('tr').data('invoice-id')
+        }
+    }).done(function() {
+        //@todo: handle response
+    });
 });
 
 /**
@@ -37,7 +57,17 @@ $('[data-action="view-notes"]').click(function(){
     
     global.highlightRow($(this).closest('tr'));
     
-    //@todo: ajax
+    var controller = window.location.href.replace(/^.*\//, "").replace(/\?.*$/, "");
+    
+    $.ajax({
+        type: 'post',
+        url: controller + '?page=fetch-invoice-notes',
+        data: {
+            invoice_id: $(this).closest('tr').data('invoice-id')
+        }
+    }).done(function() {
+        //@todo: handle response
+    });
 });
 
 /**
@@ -47,7 +77,7 @@ $('[data-action="view-sp-details"]').click(function(){
     
     global.highlightRow($(this).closest('tr'));
     
-    //@todo: ajax
+    //@todo: ajax? or store stuff in data attributes in the row?
 });
 
 /**
