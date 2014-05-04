@@ -33,9 +33,12 @@
             <div class="col-md-5">
             
                 <h3>To</h3>
-                <h5>Fetch from DB</h5>
-                <h5>Fetch from DB</h5>
-                <h5>Fetch from DB</h5>
+                <p>
+                    <?php echo $settings['institution_dept_recipient_name']; ?><br>
+                    <?php echo $settings['institution_dept_recipient_title']; ?><br>
+                    <?php echo $settings['institution_dept_recipient_phone']; ?><br>
+                    <?php echo $settings['institution_dept_recipient_email']; ?>
+                </p>
                 
             </div>
             
@@ -49,14 +52,11 @@
             </div>
         </div>
         
-        <div class="invoice-items-container">
+        <div class="invoice-items-container row">
             
-            <h3>Timesheet for adapted measures</h3>
-        
-        </div>
-
-        <div class="row">
             <div class="col-md-12">
+                <h3>Timesheet for adapted measures</h3>
+            
                 <div class="table-responsive">
                     <table class="table table-hover invoice-table">
                         
