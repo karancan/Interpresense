@@ -1,4 +1,20 @@
 /**
+ * Change the styling of an input to a negative state
+ * @param {$} element An input element
+ */
+function showInputFailure(element) {
+    element.closest('td').removeClass('has-success').addClass('has-error');
+}
+
+/**
+ * Change the styling of an input to a positive state
+ * @param {$} element An input element
+ */
+function showInputSuccess(element) {
+    element.closest('td').removeClass('has-error').addClass('has-success');
+}
+
+/**
  *User wants to clear the form
  */
 $('#invoice-btn-clear').click(function(){
@@ -36,7 +52,7 @@ $(document).on('input focusout', '.invoice-item-input', function() {
 
     if (!$thisRow.next("tr").length) {
         //Variable determining if all the fields in a row are succesfully completed.
-        //Check to see if all the fields in the row have been completed
+        //Check to see if no fields in the row are incomplete or erroneous
         var all_complete = !$thisRow.find('.invoice-item-input').filter(function(){
             return $(this).hasClass("has-error") || !this.checkValidity();
         }).length;
@@ -61,17 +77,3 @@ $(document).on('input focusout', '.invoice-item-input', function() {
     }
 
 });
-
-/**
- *Change the styling of an input to a negative state
- */
-function showInputFailure(element) {
-    element.closest('td').removeClass('has-success').addClass('has-error');
-}
-
-/**
- *Change the styling of an input to a positive state
- */
-function showInputSuccess(element) {
-    element.closest('td').removeClass('has-error').addClass('has-success');
-}
