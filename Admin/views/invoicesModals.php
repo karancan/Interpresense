@@ -65,6 +65,47 @@
             </div>
             
             <div class="modal-body">
+            
+                <div class="form-group">
+                    <label class="control-label">Name</label>
+                    <p class="form-control" id="invoice_sp_name"></p>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label">Address</label>
+                    <p class="form-control" id="invoice_sp_address"></p>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label">Postal code</label>
+                    <p class="form-control" id="invoice_sp_postal_code"></p>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label">City</label>
+                    <p class="form-control" id="invoice_sp_city"></p>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label">Province</label>
+                    <p class="form-control" id="invoice_sp_province"></p>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label">Phone</label>
+                    <p class="form-control" id="invoice_sp_phone"></p>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label">Email</label>
+                    <p class="form-control" id="invoice_sp_email"></p>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label">HST number</label>
+                    <p class="form-control" id="invoice_sp_hst_number"></p>
+                </div>
+                
             </div>
             
             <div class="modal-footer">
