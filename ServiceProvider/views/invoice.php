@@ -80,10 +80,9 @@
                                 <td>
                                     <select class="form-control">
                                     <?php
-                                        //@todo: use hour min and max times from database
-                                        for($hours=7; $hours<=22; $hours++) {
-                                            for($mins=0; $mins<60; $mins+=30) {
-                                                echo '<option>'.str_pad($hours,2,'0',STR_PAD_LEFT).':'.str_pad($mins,2,'0',STR_PAD_LEFT).'</option>';
+                                        for ($hours = $settings['invoicing_earliest_possible_hour']; $hours <= $settings['invoicing_latest_possible_hour']; ++$hours) {
+                                            for ($mins = 0; $mins < 60; $mins += 30) {
+                                                echo '<option>' . str_pad($hours,2,'0',STR_PAD_LEFT) . ':' . str_pad($mins,2,'0',STR_PAD_LEFT) . '</option>';
                                             }
                                         }
                                     ?>
@@ -92,10 +91,9 @@
                                 <td>
                                     <select class="form-control">
                                     <?php
-                                        //@todo: use hour min and max times from database
-                                        for($hours=7; $hours<=22; $hours++) {
-                                            for($mins=0; $mins<60; $mins+=30) {
-                                                echo '<option>'.str_pad($hours,2,'0',STR_PAD_LEFT).':'.str_pad($mins,2,'0',STR_PAD_LEFT).'</option>';
+                                        for ($hours = $settings['invoicing_earliest_possible_hour']; $hours <= $settings['invoicing_latest_possible_hour']; ++$hours) {
+                                            for($mins = 0; $mins < 60; $mins += 30) {
+                                                echo '<option>' . str_pad($hours,2,'0',STR_PAD_LEFT) . ':' . str_pad($mins,2,'0',STR_PAD_LEFT) . '</option>';
                                             }
                                         }
                                     ?>
