@@ -58,7 +58,7 @@
                                      "<td>" . $i['note_count'] . "</td>" .
                                      "<td>" . $i['grand_total'] . "</td>" .
                                      "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
-                                     "<td>" . $dateFmt->format($r['inserted_on'], 'date_time') . "</td>" .
+                                     "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
                                      "</tr>";
                             }
                         }
