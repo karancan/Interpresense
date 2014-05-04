@@ -29,7 +29,7 @@
                         <form class="navbar-form navbar-left" role="search" action="search.php" method="get">
                             <div class="form-search search-only">
                                 <i class="search-icon glyphicon glyphicon-search"></i>
-                                <input id="search-input" type="text" class="form-control search-query" name="q" placeholder="Search for a client or service provider...">
+                                <input id="search-input" type="text" class="form-control search-query" name="q" placeholder="Search for a client or service provider..." rel="popover" data-content="To search for a client, enter a client ID. To search for a service provider, enter a name, HST number or email.">
                             </div>
                         </form>
                         
@@ -65,4 +65,11 @@
     if (localStorage.getItem('interpresense_admin_invoices_submitted_start_date') !== null && localStorage.getItem('interpresense_admin_invoices_submitted_end_date') != null) {
         $('#admin-nav-link-invoices-submitted').prop('href', $('#admin-nav-link-invoices-submitted').prop('href') + '?start=' + localStorage.getItem('interpresense_admin_invoices_submitted_start_date') + '&end=' + localStorage.getItem('interpresense_admin_invoices_submitted_end_date'));
     }
+    
+    //Initialize a popover on the search input box
+    $("#search-input").popover({
+        placement: 'bottom',
+        container: 'body',
+        trigger: 'focus'
+    });
 </script>
