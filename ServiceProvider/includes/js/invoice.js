@@ -28,7 +28,7 @@ $(document).on('input focusout', '.invoice-item-input', function() {
     var $thisRow = $(this).closest(".invoice-item-row");
 
     //Update the fields' UI state
-    if($(this).val() === "") {
+    if(!this.checkValidity()) {
         showInputFailure($(this));
     } else {
         showInputSuccess($(this));
@@ -36,14 +36,10 @@ $(document).on('input focusout', '.invoice-item-input', function() {
 
     if (!$thisRow.next("tr").length) {
         //Variable determining if all the fields in a row are succesfully completed.
-        var all_complete = true;
-
         //Check to see if all the fields in the row have been completed
-        $thisRow.find('.invoice-item-input').each(function(){
-            if ($(this).hasClass("has-error") || $(this).val() === ""){
-                all_complete = false;
-            }
-        });
+        var all_complete = !$thisRow.find('.invoice-item-input').filter(function(){
+            return $(this).hasClass("has-error") || !this.checkValidity();
+        }).length;
 
         //If all fields have been completed, we can add a new row
         if (all_complete) {

@@ -75,8 +75,8 @@
                         </thead>
                         <tbody>
                             <tr class="invoice-item-row">
-                                <td><input type="text" class="form-control invoice-item-input" placeholder="Description"></td>
-                                <td><input type="date" class="form-control invoice-item-input"></td>
+                                <td><input type="text" class="form-control invoice-item-input" placeholder="Description" required></td>
+                                <td><input type="date" class="form-control invoice-item-input" required></td>
                                 <td>
                                     <select class="form-control">
                                     <?php
@@ -100,7 +100,7 @@
                                     </select>
                                 </td>
                                 <td>x hours x min</td>
-                                <td><input type="number" class="form-control invoice-item-input" placeholder="Rate"></td>
+                                <td><input type="number" class="form-control invoice-item-input" placeholder="Rate" min="0" step="0.01" required></td>
                                 <td class="invoice-item-amounts">20.00</td>
                             </tr>
                         </tbody>
