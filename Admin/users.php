@@ -118,6 +118,8 @@ if (!isset($_GET['page'])) {
     
     $data = $usersModel->fetchUsers();
     
+    //@todo: exported CSV needs title row
+    
     $csvConfig = new \Goodby\CSV\Export\Standard\ExporterConfig();
     $csvConfig->setFromCharset('UTF-8')->setToCharset('UTF-8');
     

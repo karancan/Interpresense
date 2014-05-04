@@ -133,6 +133,8 @@ if (!isset($_GET['page'])) {
         $filter_end_date = new \DateTime("+{$settings['admin_default_date_filter_range_days']} days");
     }
     
+    //@todo: exported CSV needs title row
+    
     $invoices = $invoicesModel->fetchInvoices($filter_start_date, $filter_end_date, 'final');
     
     $csvConfig = new \Goodby\CSV\Export\Standard\ExporterConfig();
