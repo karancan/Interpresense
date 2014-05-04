@@ -17,6 +17,8 @@ $('[data-action="view-items"]').click(function(){
     
     global.highlightRow($(this).closest('tr'));
     
+    //@todo: loader
+    
     var controller = window.location.href.replace(/^.*\//, "").replace(/\?.*$/, "");
     
     $.ajax({
@@ -36,6 +38,8 @@ $('[data-action="view-items"]').click(function(){
 $('[data-action="view-files"]').click(function(){
     
     global.highlightRow($(this).closest('tr'));
+    
+    //@todo: loader
     
     var controller = window.location.href.replace(/^.*\//, "").replace(/\?.*$/, "");
     
@@ -57,6 +61,8 @@ $('[data-action="view-notes"]').click(function(){
     
     global.highlightRow($(this).closest('tr'));
     
+    //@todo: loader
+    
     var controller = window.location.href.replace(/^.*\//, "").replace(/\?.*$/, "");
     
     $.ajax({
@@ -77,7 +83,13 @@ $('[data-action="view-sp-details"]').click(function(){
     
     global.highlightRow($(this).closest('tr'));
     
-    //@todo: ajax? or store stuff in data attributes in the row?
+    $('#invoice_sp_name').html($(this).closest('tr').data('sp-name') + ' <a target="_blank" href="search.php?q=' + encodeURIComponent($(this).closest('tr').data('sp-name')) + '">(Search for all invoices by this service provider)</a>');
+    $('#invoice_sp_address').text($(this).closest('tr').data('sp-address'));
+    $('#invoice_sp_postal_code').text($(this).closest('tr').data('sp-postal-code'));
+    $('#invoice_sp_city_province').text($(this).closest('tr').data('sp-city') + ', ' + $(this).closest('tr').data('sp-province'));
+    $('#invoice_sp_phone').text($(this).closest('tr').data('sp-phone'));
+    $('#invoice_sp_hst_number').text($(this).closest('tr').data('sp-hst-number'));
+    $('#invoice_sp_email').html('<a href="mailto:' + $(this).closest('tr').data('sp-email') + '">' + $(this).closest('tr').data('sp-email') + '</a>');
 });
 
 /**
