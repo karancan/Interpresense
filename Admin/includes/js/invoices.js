@@ -17,7 +17,7 @@ $('[data-action="view-items"]').click(function(){
     
     global.highlightRow($(this).closest('tr'));
     
-    //@todo: loader
+    $('#admin-invoice-items-loader').show();
     
     var controller = window.location.href.replace(/^.*\//, "").replace(/\?.*$/, "");
     
@@ -29,6 +29,8 @@ $('[data-action="view-items"]').click(function(){
         }
     }).done(function() {
         //@todo: handle response
+        
+        $('#admin-invoice-items-loader').hide();
     });
 });
 
@@ -39,7 +41,7 @@ $('[data-action="view-files"]').click(function(){
     
     global.highlightRow($(this).closest('tr'));
     
-    //@todo: loader
+    $('#admin-invoice-files-loader').show();
     
     var controller = window.location.href.replace(/^.*\//, "").replace(/\?.*$/, "");
     
@@ -51,6 +53,8 @@ $('[data-action="view-files"]').click(function(){
         }
     }).done(function() {
         //@todo: handle response
+        
+        $('#admin-invoice-files-loader').hide();
     });
 });
 
@@ -61,7 +65,7 @@ $('[data-action="view-notes"]').click(function(){
     
     global.highlightRow($(this).closest('tr'));
     
-    //@todo: loader
+    $('#admin-invoice-notes-loader').show();
     
     $('#admin-invoice-notes-table tbody').html('');
     var controller = window.location.href.replace(/^.*\//, "").replace(/\?.*$/, "");
@@ -88,6 +92,8 @@ $('[data-action="view-notes"]').click(function(){
             }
         }
         $('#admin-invoice-notes-table tbody').html(markup);
+        
+        $('#admin-invoice-notes-loader').hide();
     });
 });
 

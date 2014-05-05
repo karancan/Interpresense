@@ -6,8 +6,13 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Invoice items</h4>
             </div>
-            
+
             <div class="modal-body">
+                
+                <div class="row text-center">
+                    <img id="admin-invoice-items-loader" src="//<?= URL_IMAGES ?>/loader.gif" class="center-block interpresense-loader">            
+                </div>
+                
             </div>
             
             <div class="modal-footer">
@@ -27,6 +32,11 @@
             </div>
             
             <div class="modal-body">
+            
+                <div class="row text-center">
+                    <img id="admin-invoice-files-loader" src="//<?= URL_IMAGES ?>/loader.gif" class="center-block interpresense-loader">            
+                </div>
+            
             </div>
             
             <div class="modal-footer">
@@ -46,6 +56,11 @@
             </div>
             
             <div class="modal-body">
+                
+                <div class="row text-center">
+                    <img id="admin-invoice-notes-loader" src="//<?= URL_IMAGES ?>/loader.gif" class="interpresense-loader">
+                </div>
+                
                 <table id="admin-invoice-notes-table" class="table table-hover">
                     <thead>
                         <tr>
