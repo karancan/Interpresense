@@ -99,7 +99,7 @@ class Users extends \Interpresense\Includes\BaseModel {
         
         $result = parent::$db->query($sql, $data, $types, \PDO::FETCH_COLUMN);
         
-        return $result > 0;
+        return $result[0] > 0;
     }
     
     /**

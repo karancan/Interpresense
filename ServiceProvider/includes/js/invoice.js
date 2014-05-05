@@ -1,4 +1,41 @@
 /**
+ * Change the styling of an input to a negative state
+ * @param {$} element An input element
+ */
+function showInputFailure(element) {
+    element.closest('td').removeClass('has-success').addClass('has-error');
+}
+
+/**
+ * Change the styling of an input to a positive state
+ * @param {$} element An input element
+ */
+function showInputSuccess(element) {
+    element.closest('td').removeClass('has-error').addClass('has-success');
+}
+
+$('.invoice-item-start-time, .invoice-item-end-time').change(function(){
+    var $thisRow = $(this).closest(".invoice-item-row"),
+        date = $('.invoice-item-date', $thisRow).val() || '2014-05-01',
+        startTime = new Date(date + 'T' + $('.invoice-item-start-time', $thisRow).val()),
+        endTime = new Date(date + 'T' + $('.invoice-item-end-time', $thisRow).val()),
+        diffInMinutes = (endTime.getTime() - startTime.getTime()) / 1000 / 60;
+    
+    // Verify validity
+    if(startTime > endTime) {
+        showInputFailure($('.invoice-item-start-time', $thisRow));
+        showInputFailure($('.invoice-item-end-time', $thisRow));
+    } else {
+        showInputSuccess($('.invoice-item-start-time', $thisRow));
+        showInputSuccess($('.invoice-item-end-time', $thisRow));
+    }
+    
+    // Update hours
+    $('.invoice-item-hours', $thisRow).text(Math[(diffInMinutes / 60) < 0 ? 'ceil' : 'floor'](diffInMinutes / 60));
+    $('.invoice-item-minutes', $thisRow).text(diffInMinutes % 60);
+});
+
+/**
  *User wants to clear the form
  */
 $('#invoice-btn-clear').click(function(){
@@ -28,7 +65,7 @@ $(document).on('input focusout', '.invoice-item-input', function() {
     var $thisRow = $(this).closest(".invoice-item-row");
 
     //Update the fields' UI state
-    if($(this).val() === "") {
+    if(!this.checkValidity()) {
         showInputFailure($(this));
     } else {
         showInputSuccess($(this));
@@ -36,14 +73,10 @@ $(document).on('input focusout', '.invoice-item-input', function() {
 
     if (!$thisRow.next("tr").length) {
         //Variable determining if all the fields in a row are succesfully completed.
-        var all_complete = true;
-
-        //Check to see if all the fields in the row have been completed
-        $thisRow.find('.invoice-item-input').each(function(){
-            if ($(this).hasClass("has-error") || $(this).val() === ""){
-                all_complete = false;
-            }
-        });
+        //Check to see if no fields in the row are incomplete or erroneous
+        var all_complete = !$thisRow.find('.invoice-item-input').filter(function(){
+            return $(this).hasClass("has-error") || !this.checkValidity();
+        }).length;
 
         //If all fields have been completed, we can add a new row
         if (all_complete) {
@@ -65,17 +98,3 @@ $(document).on('input focusout', '.invoice-item-input', function() {
     }
 
 });
-
-/**
- *Change the styling of an input to a negative state
- */
-function showInputFailure(element) {
-    element.closest('td').removeClass('has-success').addClass('has-error');
-}
-
-/**
- *Change the styling of an input to a positive state
- */
-function showInputSuccess(element) {
-    element.closest('td').removeClass('has-error').addClass('has-success');
-}
