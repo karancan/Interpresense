@@ -18,39 +18,6 @@
     <div class="row">
         
         <div class="col-md-12">
-        
-            <h4>Application settings</h4>
-            
-            <table id="admin-settings-table" class="table table-hover invoice-table">           
-                <thead>
-                    <tr>
-                        <th scope='col'>Setting name</th>
-                        <th scope='col'>Setting value</th>
-                        <th scope='col'></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    if (empty($appSettings)){
-                        echo "<tr><td colspan='3' class='empty-table-placeholder'>No settings to be shown at this point…</td></tr>";
-                    } else {
-                        foreach($appSettings as $s) {
-                            echo "<tr data-focus='{$antiXSS->escape($s['setting_key'], $antiXSS::HTML_ATTR)}'
-                                      data-setting-key='{$antiXSS->escape($s['setting_key'], $antiXSS::HTML_ATTR)}'
-                                      data-setting-value='{$antiXSS->escape($s['setting_value'], $antiXSS::HTML_ATTR)}'
-                                      data-setting-description='" . (empty($s['description_en']) ? 'N/A' : $antiXSS->escape($s['description_en'], $antiXSS::HTML_ATTR)). "'>" .
-                                 "<td>{$s['setting_key']}</td>" .
-                                 "<td>{$s['setting_value']}</td>" .
-                                 '<td class="table-option-cell">
-                                    <button type="button" class="btn btn-warning" data-toggle="modal" href="#admin-add-setting-modal" data-action="edit"><i class="fa fa-edit"></i> Edit</button>
-                                    <button type="button" class="btn btn-danger" data-action="delete"><i class="fa fa-minus"></i> Delete</button>
-                                  </td>' .
-                                 '</tr>';
-                        }
-                    }
-                    ?>
-                </tbody>
-            </table>
             
             <h4>Activity types</h4>
                     
@@ -77,6 +44,39 @@
                                  "<td>" . $dateFmt->format($s['inserted_on'], 'date_time') . "</td>" .
                                  '<td class="table-option-cell">
                                     <button type="button" class="btn btn-warning" data-toggle="modal" href="#admin-add-activity-modal" data-action="edit"><i class="fa fa-edit"></i> Edit</button>
+                                    <button type="button" class="btn btn-danger" data-action="delete"><i class="fa fa-minus"></i> Delete</button>
+                                  </td>' .
+                                 '</tr>';
+                        }
+                    }
+                    ?>
+                </tbody>
+            </table>
+            
+            <h4>Application settings</h4>
+            
+            <table id="admin-settings-table" class="table table-hover invoice-table">           
+                <thead>
+                    <tr>
+                        <th scope='col'>Setting name</th>
+                        <th scope='col'>Setting value</th>
+                        <th scope='col'></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if (empty($appSettings)){
+                        echo "<tr><td colspan='3' class='empty-table-placeholder'>No settings to be shown at this point…</td></tr>";
+                    } else {
+                        foreach($appSettings as $s) {
+                            echo "<tr data-focus='{$antiXSS->escape($s['setting_key'], $antiXSS::HTML_ATTR)}'
+                                      data-setting-key='{$antiXSS->escape($s['setting_key'], $antiXSS::HTML_ATTR)}'
+                                      data-setting-value='{$antiXSS->escape($s['setting_value'], $antiXSS::HTML_ATTR)}'
+                                      data-setting-description='" . (empty($s['description_en']) ? 'N/A' : $antiXSS->escape($s['description_en'], $antiXSS::HTML_ATTR)). "'>" .
+                                 "<td>{$s['setting_key']}</td>" .
+                                 "<td>{$s['setting_value']}</td>" .
+                                 '<td class="table-option-cell">
+                                    <button type="button" class="btn btn-warning" data-toggle="modal" href="#admin-add-setting-modal" data-action="edit"><i class="fa fa-edit"></i> Edit</button>
                                     <button type="button" class="btn btn-danger" data-action="delete"><i class="fa fa-minus"></i> Delete</button>
                                   </td>' .
                                  '</tr>';
