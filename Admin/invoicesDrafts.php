@@ -94,7 +94,12 @@ if (!isset($_GET['page'])) {
 } elseif ($_GET['page'] === "fetch-invoice-files") {
     
     header('Content-Type: application/json; charset=utf-8');
-    echo json_encode($invoicesFilesModel->fetchFiles($_POST['invoice_id']));
+    $files = $invoicesFilesModel->fetchFiles($_POST['invoice_id']);
+    foreach ($files as &$f){
+        $f['inserted_on'] = $dateFmt->format($f['inserted_on'], 'date_time');
+    }
+    unset($f);
+    echo json_encode($files);
     exit;
     
 } elseif ($_GET['page'] === "fetch-invoice-notes") {

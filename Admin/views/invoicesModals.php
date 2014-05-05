@@ -36,7 +36,20 @@
                 <div class="row text-center">
                     <img id="admin-invoice-files-loader" src="//<?= URL_IMAGES ?>/loader.gif" class="center-block interpresense-loader">            
                 </div>
-            
+                
+                <table id="admin-invoice-files-table" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope='col'>File</th>
+                            <th scope='col'>Added on</th>
+                            <th scope='col'></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    
+                    </tbody>
+                </table>
+                
             </div>
             
             <div class="modal-footer">
@@ -64,15 +77,16 @@
                 <table id="admin-invoice-notes-table" class="table table-hover">
                     <thead>
                         <tr>
-                            <th style='width: 20%;'>User</th>
-                            <th>Note</th>
-                            <th style='width: 20%;'>Added on</th>
+                            <th scope='col' style='width: 20%;'>User</th>
+                            <th scope='col'>Note</th>
+                            <th scope='col' style='width: 20%;'>Added on</th>
                         </tr>
                     </thead>
                     <tbody>
                     
                     </tbody>
                 </table>
+                
             </div>
             
             <div class="modal-footer">

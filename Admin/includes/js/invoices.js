@@ -51,8 +51,22 @@ $('[data-action="view-files"]').click(function(){
         data: {
             invoice_id: $(this).closest('tr').data('invoice-id')
         }
-    }).done(function() {
-        //@todo: handle response
+    }).done(function(data) {
+        
+        var markup = '';
+        
+        if (data.length < 1){
+            markup = '<tr><td colspan="3" class="empty-table-placeholder">There are no files for this invoice…</td></tr>';
+        } else {
+            for (i=0; i<data.length; i++){
+                markup += '<tr  data-file-id="' + data[i].file_id + '">';
+                markup += '<td>' + data[i].file_name + '</td>';
+                markup += '<td>' + data[i].inserted_on + '</td>';
+                markup += '<td>Coming soon</td>'; //@todo
+                markup += '</tr>';
+            }
+        }
+        $('#admin-invoice-files-table tbody').html(markup);
         
         $('#admin-invoice-files-loader').hide();
     });
