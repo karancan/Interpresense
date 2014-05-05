@@ -86,16 +86,41 @@ if (!isset($_GET['page'])) {
     $viewFile = "views/invoicesDrafts.php"; //@todo: if no invoices to be shown, show appropriate message
     
 } elseif ($_GET['page'] === "fetch-invoice-items") {
-
-    //@todo: fetch items and return JSON
-
+    
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode($invoicesItemsModel->fetchItems($_POST['invoice_id']));
+    exit;
+    
 } elseif ($_GET['page'] === "fetch-invoice-files") {
-
-    //@todo: fetch files and return JSON
-
+    
+    header('Content-Type: application/json; charset=utf-8');
+    $files = $invoicesFilesModel->fetchFiles($_POST['invoice_id']);
+    foreach ($files as &$f){
+        $f['inserted_on'] = $dateFmt->format($f['inserted_on'], 'date_time');
+    }
+    unset($f);
+    echo json_encode($files);
+    exit;
+    
+} elseif ($_GET['page'] === "view-file") {
+    
+    //@todo: spit out file
+    
 } elseif ($_GET['page'] === "fetch-invoice-notes") {
+    
+    header('Content-Type: application/json; charset=utf-8');
+    $notes = $invoicesNotesModel->fetchNotes($_POST['invoice_id']);
+    foreach ($notes as &$n){
+        $n['inserted_on'] = $dateFmt->format($n['inserted_on'], 'date_time');
+    }
+    unset($n);
+    echo json_encode($notes);
+    exit;
+    
+} elseif ($_GET['page'] === "add-note"){
 
-    //@todo: fetch notes and return JSON
+    $invoicesNotesModel->addNote($_POST);
+    header('Location: invoicesDrafts.php?focus=' . $_POST['invoice_id']);
 
 } elseif ($_GET['page'] === "export") {
     
@@ -118,6 +143,8 @@ if (!isset($_GET['page'])) {
     } else {
         $filter_end_date = new \DateTime("+{$settings['admin_default_date_filter_range_days']} days");
     }
+    
+    //@todo: exported CSV needs title row
     
     $invoices = $invoicesModel->fetchInvoices($filter_start_date, $filter_end_date, 'draft');
     

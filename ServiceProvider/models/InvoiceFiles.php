@@ -34,23 +34,24 @@ class InvoiceFiles extends \Interpresense\Includes\BaseModel {
     /**
      * Fetches files for a given invoice
      * @param int $invoiceID The invoice ID
-     * @param boolean $idsOnly Fetch file IDs only. Default is FALSE
+     * @param boolean $content Fetches file content. Default is FALSE
      * @return array
      */
-    public function fetchFiles($invoiceID, $idsOnly = false) {
+    public function fetchFiles($invoiceID, $content = false) {
         
         if(!$this->validators['invoice_id']->validate($invoiceID)) {
             throw new \InvalidArgumentException('Invalid invoice ID.');
         }
         
-        $sql = "SELECT `file_id`";
+        $sql = "SELECT `file_id`, `file_name`, `file_type`, `file_size`, `inserted_on`";
         
-        if(!$idsOnly) {
-            $sql .= ", `file_name`, `file_content`, `file_type`, `file_size`, `inserted_on`";
+        if($content) {
+            $sql .= ", `file_content`";
         }
         
         $sql .= " FROM `interpresense_service_provider_invoice_files`
-                 WHERE `invoice_id` = :invoice_id";
+                 WHERE `invoice_id` = :invoice_id
+              ORDER BY `inserted_on` DESC;";
         
         $data = array('invoice_id' => $invoiceID);
         $types = array('invoice_id' => \PDO::PARAM_INT);

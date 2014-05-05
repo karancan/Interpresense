@@ -13,3 +13,6 @@
     color: #48698a !important;
     cursor: pointer;
 }
+.admin-modal-links{
+    font-weight: bold;
+}

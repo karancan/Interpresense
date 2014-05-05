@@ -61,7 +61,7 @@
                                      "<td>" . $i['note_count'] . "</td>" .
                                      "<td>" . $i['grand_total'] . "</td>" .
                                      "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
-                                     "<td>" . $dateFmt->format($r['inserted_on'], 'date_time') . "</td>" .
+                                     "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
                                      "<td class='table-option-cell'>" .
                                          '<a href="invoicesSubmitted.php?focus=' . $antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR) . '&start=' . $invoiceDate . '&end=' . $invoiceDate . '" target="_blank" class="btn btn-info"><i class="fa fa-eye"></i> View</a>' .
                                      "</td>" .
@@ -109,7 +109,7 @@
                                      "<td>" . $i['note_count'] . "</td>" .
                                      "<td>" . $i['grand_total'] . "</td>" .
                                      "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
-                                     "<td>" . $dateFmt->format($r['inserted_on'], 'date_time') . "</td>" .
+                                     "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
                                      "<td class='table-option-cell'>" .
                                          '<a href="invoicesDrafts.php?focus=' . $antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR) . '&start=' . $invoiceDate . '&end=' . $invoiceDate . '" target="_blank" class="btn btn-info"><i class="fa fa-eye"></i> View</a>' .
                                      "</td>" .
@@ -157,7 +157,7 @@
                                      "<td>" . $i['note_count'] . "</td>" .
                                      "<td>" . $i['grand_total'] . "</td>" .
                                      "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
-                                     "<td>" . $dateFmt->format($r['inserted_on'], 'date_time') . "</td>" .
+                                     "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
                                      "<td class='table-option-cell'>" .
                                          '<a href="invoicesSubmitted.php?focus=' . $antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR) . '&start=' . $invoiceDate . '&end=' . $invoiceDate . '" target="_blank" class="btn btn-info"><i class="fa fa-eye"></i> View</a>' .
                                      "</td>" .
@@ -205,7 +205,7 @@
                                      "<td>" . $i['note_count'] . "</td>" .
                                      "<td>" . $i['grand_total'] . "</td>" .
                                      "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
-                                     "<td>" . $dateFmt->format($r['inserted_on'], 'date_time') . "</td>" .
+                                     "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
                                      "<td class='table-option-cell'>" .
                                          '<a href="invoicesDrafts.php?focus=' . $antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR) . '&start=' . $invoiceDate . '&end=' . $invoiceDate . '" target="_blank" class="btn btn-info"><i class="fa fa-eye"></i> View</a>' .
                                      "</td>" .

@@ -59,10 +59,11 @@ class Search extends \Interpresense\Includes\BaseModel {
                  WHERE `is_final` = 1
                    AND (`sp_name` LIKE :sp_name
                     OR `sp_email` LIKE :sp_email
-                    OR `sp_hst_number` LIKE :sp_hst_number);";
+                    OR `sp_hst_number` LIKE :sp_hst_number
+                    OR `sp_phone` LIKE :sp_phone);";
         
-        $data = array('sp_name' => '%' . $q . '%', 'sp_email' => '%' . $q . '%', 'sp_hst_number' => '%' . $q . '%');
-        $types = array('sp_name' => \PDO::PARAM_STR, 'sp_email' => \PDO::PARAM_STR, 'sp_hst_number' => \PDO::PARAM_STR);
+        $data = array('sp_name' => '%' . $q . '%', 'sp_email' => '%' . $q . '%', 'sp_hst_number' => '%' . $q . '%', 'sp_phone' => '%' . $q . '%');
+        $types = array('sp_name' => \PDO::PARAM_STR, 'sp_email' => \PDO::PARAM_STR, 'sp_hst_number' => \PDO::PARAM_STR, 'sp_phone' => \PDO::PARAM_STR);
         
         return parent::$db->query($sql, $data, $types);
     }
@@ -97,10 +98,11 @@ class Search extends \Interpresense\Includes\BaseModel {
                  WHERE `is_final` = 0
                    AND (`sp_name` LIKE :sp_name
                     OR `sp_email` LIKE :sp_email
-                    OR `sp_hst_number` LIKE :sp_hst_number);";
+                    OR `sp_hst_number` LIKE :sp_hst_number
+                    OR `sp_phone` LIKE :sp_phone);";
         
-        $data = array('sp_name' => '%' . $q . '%', 'sp_email' => '%' . $q . '%', 'sp_hst_number' => '%' . $q . '%');
-        $types = array('sp_name' => \PDO::PARAM_STR, 'sp_email' => \PDO::PARAM_STR, 'sp_hst_number' => \PDO::PARAM_STR);
+        $data = array('sp_name' => '%' . $q . '%', 'sp_email' => '%' . $q . '%', 'sp_hst_number' => '%' . $q . '%', 'sp_phone' => '%' . $q . '%');
+        $types = array('sp_name' => \PDO::PARAM_STR, 'sp_email' => \PDO::PARAM_STR, 'sp_hst_number' => \PDO::PARAM_STR, 'sp_phone' => \PDO::PARAM_STR);
         
         return parent::$db->query($sql, $data, $types);
     }

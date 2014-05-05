@@ -37,9 +37,10 @@
                         <th scope='col'>Items</th>
                         <th scope='col'>Files</th>
                         <th scope='col'>Notes</th>
-                        <th scope='col'>Total</th>
+                        <th scope='col'>Total ($)</th>
                         <th scope='col'>Approved</th>
                         <th scope='col'>Added on</th>
+                        <th scope='col'></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,16 +50,27 @@
                             echo "<tr><td colspan='10' class='empty-table-placeholder'>No draft invoices at this time…</td></tr>";
                         } else {
                             foreach($invoices as $i) {
-                                echo "<tr data-invoice-id='{$antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR)}'>" .
+                                echo "<tr data-invoice-id='{$antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR)}'
+                                          data-sp-name='{$antiXSS->escape($i['sp_name'], $antiXSS::HTML_ATTR)}'
+                                          data-sp-address='{$antiXSS->escape($i['sp_address'], $antiXSS::HTML_ATTR)}'
+                                          data-sp-postal-code='{$antiXSS->escape($i['sp_postal_code'], $antiXSS::HTML_ATTR)}'
+                                          data-sp-city='{$antiXSS->escape($i['sp_city'], $antiXSS::HTML_ATTR)}'
+                                          data-sp-province='{$antiXSS->escape($i['sp_province'], $antiXSS::HTML_ATTR)}'
+                                          data-sp-phone='{$antiXSS->escape($i['sp_phone'], $antiXSS::HTML_ATTR)}'
+                                          data-sp-email='{$antiXSS->escape($i['sp_email'], $antiXSS::HTML_ATTR)}'
+                                          data-sp-hst-number='{$antiXSS->escape($i['sp_hst_number'], $antiXSS::HTML_ATTR)}'>" .
                                      "<td>" . $i['invoice_id_for_org'] . "</td>" .
                                      "<td>" . $i['client_id'] . "</td>" .
-                                     "<td>" . $i['sp_name'] . "</td>" .
-                                     "<td>" . $i['item_count'] . "</td>" .
-                                     "<td>" . $i['file_count'] . "</td>" .
-                                     "<td>" . $i['note_count'] . "</td>" .
+                                     "<td>" . "<a href='#admin-invoice-sp-details-modal' data-toggle='modal' data-action='view-sp-details' class='admin-modal-links'>" . $i['sp_name'] . "</a>" . "</td>" .
+                                     "<td>" . "<a href='#admin-invoice-items-modal' data-toggle='modal' data-action='view-items' class='admin-modal-links'>" . $i['item_count'] . "</a>" . "</td>" .
+                                     "<td>" . "<a href='#admin-invoice-files-modal' data-toggle='modal' data-action='view-files' class='admin-modal-links'>" . $i['file_count'] . "</a>" . "</td>" .
+                                     "<td>" . "<a href='#admin-invoice-notes-modal' data-toggle='modal' data-action='view-notes' class='admin-modal-links'>" . $i['note_count'] . "</a>" . "</td>" .
                                      "<td>" . $i['grand_total'] . "</td>" .
                                      "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
-                                     "<td>" . $dateFmt->format($r['inserted_on'], 'date_time') . "</td>" .
+                                     "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
+                                     '<td class="table-option-cell">
+                                         <button type="button" class="btn btn-info" data-toggle="modal" href="#admin-invoice-add-notes-modal" data-action="add-note"><i class="fa fa-plus"></i> Add note</button>
+                                      </td>' .
                                      "</tr>";
                             }
                         }
@@ -72,8 +84,9 @@
     </div>
     
 </div>
+<?php require FS_ADMIN . '/views/invoicesModals.php'; ?>
 <script charset='utf-8' src='includes/js/admin.js'></script>
-<script charset='utf-8' src='includes/js/invoicesDrafts.js'></script>
+<script charset='utf-8' src='includes/js/invoices.js'></script>
 <script>
     
     'use strict';

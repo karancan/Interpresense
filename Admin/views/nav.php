@@ -29,7 +29,7 @@
                         <form class="navbar-form navbar-left" role="search" action="search.php" method="get">
                             <div class="form-search search-only">
                                 <i class="search-icon glyphicon glyphicon-search"></i>
-                                <input id="search-input" type="text" class="form-control search-query" name="q" placeholder="Search for a client or service provider..." rel="popover" data-content="To search for a client, enter a client ID. To search for a service provider, enter a name, HST number or email.">
+                                <input id="search-input" type="text" class="form-control search-query" name="q" placeholder="Search for a client or service provider..." rel="popover" data-content="To search for a client, enter a client ID. To search for a service provider, enter a name, HST number, phone number or email.">
                             </div>
                         </form>
                         
@@ -72,4 +72,5 @@
         container: 'body',
         trigger: 'focus'
     });
+    
 </script>

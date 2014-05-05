@@ -89,27 +89,48 @@ if (!isset($_GET['page'])) {
     
 } else if ($_GET['page'] === "fetch-invoice-items") {
     
-    $invoicesModel->markInvoiceViewed($_GET['invoice_id']);
-    $invoice = $invoicesModel->fetchInvoice($_GET['invoice_id']);
-    $items = $invoicesItemsModel->fetchItems($_GET['invoice_id']);
-    // @todo output
+    $invoicesModel->markInvoiceViewed($_POST['invoice_id']);
+    
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode($invoicesItemsModel->fetchItems($_POST['invoice_id']));
+    exit;
     
 } else if ($_GET['page'] === "fetch-invoice-files") {
     
-    $files = $invoicesFilesModel->fetchFiles($_GET['invoice_id']);
-    // @todo output JSON encoding file content doesn't seem like a good idea
+    header('Content-Type: application/json; charset=utf-8');
+    $files = $invoicesFilesModel->fetchFiles($_POST['invoice_id']);
+    foreach ($files as &$f){
+        $f['inserted_on'] = $dateFmt->format($f['inserted_on'], 'date_time');
+    }
+    unset($f);
+    echo json_encode($files);
+    exit;
+    
+} elseif ($_GET['page'] === "view-file") {
+    
+    //@todo: spit out file
     
 } else if ($_GET['page'] === "fetch-invoice-notes") {
 
-    $notes = $invoicesNotesModel->fetchNotes($_GET['invoice_id']);
     header('Content-Type: application/json; charset=utf-8');
+    $notes = $invoicesNotesModel->fetchNotes($_POST['invoice_id']);
+    foreach ($notes as &$n){
+        $n['inserted_on'] = $dateFmt->format($n['inserted_on'], 'date_time');
+    }
+    unset($n);
     echo json_encode($notes);
     exit;
     
+} elseif ($_GET['page'] === "add-note"){
+    
+    $invoicesNotesModel->addNote($_POST);
+    header('Location: invoicesSubmitted.php?focus=' . $_POST['invoice_id']);
+
 } else if ($_GET['page'] === "mark-invoice-as-draft") {
     
     $invoicesModel->markInvoiceAsDraft($_GET['invoice_id']);
     //@todo: create an invoice note stating that the invoice was mark as un-approved (or as a draft)
+    //@todo: send email to service provider telling them the invoice was marked as a draft with the note attached
 
 } else if ($_GET['page'] === "export") {
     
@@ -132,6 +153,8 @@ if (!isset($_GET['page'])) {
     } else {
         $filter_end_date = new \DateTime("+{$settings['admin_default_date_filter_range_days']} days");
     }
+    
+    //@todo: exported CSV needs title row
     
     $invoices = $invoicesModel->fetchInvoices($filter_start_date, $filter_end_date, 'final');
     
