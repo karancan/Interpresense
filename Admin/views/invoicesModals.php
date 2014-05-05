@@ -13,6 +13,24 @@
                     <img id="admin-invoice-items-loader" src="//<?= URL_IMAGES ?>/loader.gif" class="center-block interpresense-loader">            
                 </div>
                 
+                <table id="admin-invoice-items-table" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope='col'>Activity</th>
+                            <th scope='col'>Description</th>
+                            <th scope='col'>Course</th>
+                            <th scope='col'>Date</th>
+                            <th scope='col'>Start time</th>
+                            <th scope='col'>End time</th>
+                            <th scope='col'>Rate</th>
+                            <th scope='col'>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    
+                    </tbody>
+                </table>
+                
             </div>
             
             <div class="modal-footer">

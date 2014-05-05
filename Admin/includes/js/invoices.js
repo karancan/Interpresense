@@ -27,8 +27,28 @@ $('[data-action="view-items"]').click(function(){
         data: {
             invoice_id: $(this).closest('tr').data('invoice-id')
         }
-    }).done(function() {
+    }).done(function(data) {
         //@todo: handle response
+        
+        var markup = '';
+        
+        if (data.length < 1){
+            markup = '<tr><td colspan="8" class="empty-table-placeholder">There are no items for this invoice…</td></tr>';
+        } else {
+            for (i=0; i<data.length; i++){
+                markup += '<tr>';
+                markup += '<td>' + 'Test' + '</td>';
+                markup += '<td>' + 'Test' + '</td>';
+                markup += '<td>' + 'Test' + '</td>';
+                markup += '<td>' + 'Test' + '</td>';
+                markup += '<td>' + 'Test' + '</td>';
+                markup += '<td>' + 'Test' + '</td>';
+                markup += '<td>' + 'Test' + '</td>';
+                markup += '<td>' + 'Test' + '</td>';
+                markup += '</tr>';
+            }
+        }
+        $('#admin-invoice-items-table tbody').html(markup);
         
         $('#admin-invoice-items-loader').hide();
     });
@@ -60,7 +80,7 @@ $('[data-action="view-files"]').click(function(){
             markup = '<tr><td colspan="3" class="empty-table-placeholder">There are no files for this invoice…</td></tr>';
         } else {
             for (i=0; i<data.length; i++){
-                markup += '<tr  data-file-id="' + data[i].file_id + '">';
+                markup += '<tr data-file-id="' + data[i].file_id + '">';
                 markup += '<td>' + data[i].file_name + '</td>';
                 markup += '<td>' + data[i].inserted_on + '</td>';
                 markup += '<td class="table-option-cell"><a href="' + controller + '?page=view-file&file_id=' + data[i].file_id + '" target="_blank" class="btn btn-info"><i class="fa fa-eye"></i> View file</button></td>';
