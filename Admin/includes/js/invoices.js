@@ -34,7 +34,7 @@ $('[data-action="view-items"]').click(function(){
         var markup = '';
         
         if (data.length < 1){
-            markup = '<tr><td colspan="8" class="empty-table-placeholder">There are no items for this invoice…</td></tr>';
+            markup = '<tr><td colspan="9" class="empty-table-placeholder">There are no items for this invoice…</td></tr>';
         } else {
             for (i=0; i<data.length; i++){
                 markup += '<tr>';

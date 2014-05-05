@@ -24,6 +24,7 @@
                             <th scope='col'>End time</th>
                             <th scope='col'>Rate</th>
                             <th scope='col'>Total</th>
+                            <th scope='col'>Added on</th>
                         </tr>
                     </thead>
                     <tbody>
