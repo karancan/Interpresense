@@ -91,6 +91,8 @@ if (!isset($_GET['page'])) {
     
 } else if ($_GET['page'] === "fetch-invoice-items") {
     
+    //@todo: give the user the ability to mark an invoice as read/unread
+    
     $invoicesModel->markInvoiceViewed($_POST['invoice_id']);
     
     header('Content-Type: application/json; charset=utf-8');
