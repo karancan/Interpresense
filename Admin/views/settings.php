@@ -27,7 +27,7 @@
                         <th scope='col'>Name</th>
                         <th scope='col'>Nom</th>
                         <th scope='col'>Added on</th>
-                        <th scope='col'></th>
+                        <th scope='col' style='width: 17%;'></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,9 +58,9 @@
             <table id="admin-settings-table" class="table table-hover invoice-table">           
                 <thead>
                     <tr>
-                        <th scope='col'>Setting name</th>
-                        <th scope='col'>Setting value</th>
-                        <th scope='col'></th>
+                        <th scope='col'>Name</th>
+                        <th scope='col'>Value</th>
+                        <th scope='col' style='width: 17%;'></th>
                     </tr>
                 </thead>
                 <tbody>
