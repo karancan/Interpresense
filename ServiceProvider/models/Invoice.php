@@ -316,4 +316,19 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         
         return reset($result) === '0';
     }
+    
+    /**
+     * Fetches the number of invoices that are finalized and unread
+     * @return int The number of finalized and unread invoices
+     */
+    public function fetchUnreadFinalizedInvoiceCount() {
+        
+        $sql = "SELECT COUNT(invoice_id) AS count
+                  FROM `interpresense_service_provider_invoices`
+                 WHERE `is_final` = 1
+                   AND `admin_viewed` = 0;";
+
+        $result = parent::$db->query($sql, array(), array(), \PDO::FETCH_COLUMN);
+        return (int)$result[0];
+    }
 }
