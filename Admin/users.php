@@ -26,6 +26,7 @@ if (!isset($_SESSION['user_id'])) {
  */
 $usersModel = new Users($dbo);
 $emailTemplatesModel = new Emails($dbo);
+$invoicesModel = new \Interpresense\ServiceProvider\Invoice($dbo);
 
 /**
  * Localization
@@ -49,7 +50,9 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  * Content and actions
  */
 if (!isset($_GET['page'])) {
-
+    
+    $unreadInvoiceCount = $invoicesModel->fetchUnreadFinalizedInvoiceCount();
+    
     $users = $usersModel->fetchUsers();
     
     $translate->addResource('l10n/settings.json');

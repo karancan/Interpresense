@@ -26,6 +26,7 @@ if (!isset($_SESSION['user_id'])) {
  */
 $model = new Settings($dbo);
 $activitiesModel = new Activities($dbo);
+$invoicesModel = new \Interpresense\ServiceProvider\Invoice($dbo);
 
 /**
  * Localization
@@ -49,7 +50,9 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  * Content and actions
  */
 if (!isset($_GET['page'])) {
-
+    
+    $unreadInvoiceCount = $invoicesModel->fetchUnreadFinalizedInvoiceCount();
+    
     $activities = $activitiesModel->fetchActivities();
     $appSettings = $model->fetchSettings();
     
