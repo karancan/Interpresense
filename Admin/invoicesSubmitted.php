@@ -106,6 +106,10 @@ if (!isset($_GET['page'])) {
     echo json_encode($files);
     exit;
     
+} elseif ($_GET['page'] === "view-file") {
+    
+    //@todo: spit out file
+    
 } else if ($_GET['page'] === "fetch-invoice-notes") {
 
     header('Content-Type: application/json; charset=utf-8');

@@ -23,7 +23,7 @@
 </div>
 
 <div class="modal fade" id="admin-invoice-files-modal" tabindex="-1" role="dialog" aria-labelledby="admin-invoice-files-modal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-vertical-center modal-wide">
+    <div class="modal-dialog modal-dialog-vertical-center">
         <div class="modal-content">
         
             <div class="modal-header">

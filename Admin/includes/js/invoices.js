@@ -62,7 +62,7 @@ $('[data-action="view-files"]').click(function(){
                 markup += '<tr  data-file-id="' + data[i].file_id + '">';
                 markup += '<td>' + data[i].file_name + '</td>';
                 markup += '<td>' + data[i].inserted_on + '</td>';
-                markup += '<td>Coming soon</td>'; //@todo
+                markup += '<td class="table-option-cell"><a href="' + controller + '?page=view-file&file_id=' + data[i].file_id + '" target="_blank" class="btn btn-info"><i class="fa fa-eye"></i> View file</button></td>'; //@todo
                 markup += '</tr>';
             }
         }

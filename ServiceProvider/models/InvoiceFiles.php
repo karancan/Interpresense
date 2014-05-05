@@ -50,7 +50,8 @@ class InvoiceFiles extends \Interpresense\Includes\BaseModel {
         }
         
         $sql .= " FROM `interpresense_service_provider_invoice_files`
-                 WHERE `invoice_id` = :invoice_id";
+                 WHERE `invoice_id` = :invoice_id
+              ORDER BY `inserted_on` DESC;";
         
         $data = array('invoice_id' => $invoiceID);
         $types = array('invoice_id' => \PDO::PARAM_INT);
