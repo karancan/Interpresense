@@ -76,9 +76,9 @@
                         <tbody>
                             <tr class="invoice-item-row">
                                 <td><input type="text" class="form-control invoice-item-input" placeholder="Description" required></td>
-                                <td><input type="date" class="form-control invoice-item-input" required></td>
+                                <td><input type="date" class="form-control invoice-item-input invoice-item-date" required></td>
                                 <td>
-                                    <select class="form-control">
+                                    <select class="form-control invoice-item-start-time">
                                     <?php
                                         for ($hours = $settings['invoicing_earliest_possible_hour']; $hours <= $settings['invoicing_latest_possible_hour']; ++$hours) {
                                             for ($mins = 0; $mins < 60; $mins += 30) {
@@ -89,7 +89,7 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <select class="form-control">
+                                    <select class="form-control invoice-item-end-time">
                                     <?php
                                         for ($hours = $settings['invoicing_earliest_possible_hour']; $hours <= $settings['invoicing_latest_possible_hour']; ++$hours) {
                                             for($mins = 0; $mins < 60; $mins += 30) {
@@ -99,7 +99,10 @@
                                     ?>
                                     </select>
                                 </td>
-                                <td>x hours x min</td>
+                                <td>
+                                    <span class="invoice-item-hours">0</span> hours
+                                    <span class="invoice-item-minutes">0</span> min
+                                </td>
                                 <td><input type="number" class="form-control invoice-item-input" placeholder="Rate" min="0" step="0.01" required></td>
                                 <td class="invoice-item-amounts">20.00</td>
                             </tr>
