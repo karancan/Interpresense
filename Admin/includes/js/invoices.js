@@ -19,6 +19,7 @@ $('[data-action="view-items"]').click(function(){
     
     $('#admin-invoice-items-loader').show();
     
+    $('#admin-invoice-items-table tbody').html('');
     var controller = window.location.pathname.replace(/^.*\//, '');
     
     $.ajax({
