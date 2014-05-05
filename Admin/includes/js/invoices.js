@@ -19,7 +19,7 @@ $('[data-action="view-items"]').click(function(){
     
     $('#admin-invoice-items-loader').show();
     
-    var controller = window.location.href.replace(/^.*\//, "").replace(/\?.*$/, "");
+    var controller = window.location.pathname.replace(/^.*\//, '');
     
     $.ajax({
         type: 'post',
@@ -43,7 +43,8 @@ $('[data-action="view-files"]').click(function(){
     
     $('#admin-invoice-files-loader').show();
     
-    var controller = window.location.href.replace(/^.*\//, "").replace(/\?.*$/, "");
+    $('#admin-invoice-files-table tbody').html('');
+    var controller = window.location.pathname.replace(/^.*\//, '');
     
     $.ajax({
         type: 'post',
@@ -82,7 +83,7 @@ $('[data-action="view-notes"]').click(function(){
     $('#admin-invoice-notes-loader').show();
     
     $('#admin-invoice-notes-table tbody').html('');
-    var controller = window.location.href.replace(/^.*\//, "").replace(/\?.*$/, "");
+    var controller = window.location.pathname.replace(/^.*\//, '');
     
     $.ajax({
         type: 'post',
