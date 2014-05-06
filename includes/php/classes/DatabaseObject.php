@@ -188,8 +188,8 @@ class DatabaseObject {
         $mailer = new \Swift_Mailer($transport);
 
         $message = new \Swift_Message('Interpresense query error [reason: no result] [source: ' . URL_INTERPRESENSE . ']');
-        $message->setFrom(array(EMAIL_ALIAS_NO_REPLY . EMAIL_ORG_STAFF_DOMAIN => EMAIL_ALIAS_NO_REPLY . EMAIL_ORG_STAFF_DOMAIN))
-            ->setTo(EMAIL_ALIAS_INTERPRETER_COORDINATOR . EMAIL_ORG_STAFF_DOMAIN)
+        $message->setFrom(EMAIL_ALIAS_NO_REPLY . EMAIL_ORG_STAFF_DOMAIN)
+            ->setTo(EMAIL_ALIAS_INTERPRESENSE_BULK_MAIL . EMAIL_ORG_STAFF_DOMAIN)
             ->setBody($body, 'text/html', 'utf-8');
 
         $mailer->send($message);

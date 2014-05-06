@@ -48,8 +48,8 @@ if ($_GET['mode'] === 'unconfirmed-user'){
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a href="mailto:<?= EMAIL_ALIAS_INTERPRETER_COORDINATOR . EMAIL_ORG_STAFF_DOMAIN ?>?subject=Interpresense:%20New%20account%20request"><i class="fa fa-plus"></i> &nbsp; Add new user</a></li>
-                                <li><a href="mailto:<?= EMAIL_ALIAS_INTERPRETER_COORDINATOR . EMAIL_ORG_STAFF_DOMAIN ?>?subject=Interpresense:%20Forgot%20username"><i class="fa fa-refresh"></i> &nbsp; Forgot username</a></li>
+                                <li><a href="mailto:<?= EMAIL_ALIAS_INTERPRESENSE_COORDINATOR . EMAIL_ORG_STAFF_DOMAIN ?>?subject=Interpresense:%20New%20account%20request"><i class="fa fa-plus"></i> &nbsp; Add new user</a></li>
+                                <li><a href="mailto:<?= EMAIL_ALIAS_INTERPRESENSE_COORDINATOR . EMAIL_ORG_STAFF_DOMAIN ?>?subject=Interpresense:%20Forgot%20username"><i class="fa fa-refresh"></i> &nbsp; Forgot username</a></li>
                             </ul>
                         </div>
                     </div>
