@@ -52,6 +52,8 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  */
 if (!isset($_GET['page'])) {
     
+    $unreadInvoiceCount = $invoicesModel->fetchUnreadFinalizedInvoiceCount();
+    
     //@todo: add ability to view approved invoices only
 
     if (!empty($_GET['start'])) {
@@ -89,6 +91,7 @@ if (!isset($_GET['page'])) {
     
 } else if ($_GET['page'] === "fetch-invoice-items") {
     
+    //@todo: give the user the ability to mark an invoice as read/unread
     //@todo: fetch the details of who viewed invoice last and when
     
     $invoicesModel->markInvoiceViewed($_POST['invoice_id']);

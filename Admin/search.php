@@ -53,6 +53,8 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  */
 if (!isset($_GET['page'])) {
     
+    $unreadInvoiceCount = $invoicesModel->fetchUnreadFinalizedInvoiceCount();
+    
     //Does the search query match any invoices pertaining to a client
     $finalInvoicesForClient = $model->fetchFinalizedInvoicesForClient($_GET['q']);
     if (!empty($finalInvoicesForClient)){

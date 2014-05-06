@@ -21,15 +21,27 @@
                     
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li <?= ($current_view === "admin-submitted" ? 'class="active"' : null) ?>><a id="admin-nav-link-invoices-submitted" href="invoicesSubmitted.php"><i class="fa fa-file-text"></i> Invoices Submitted</a></li>
-                            <li <?= ($current_view === "admin-drafts" ? 'class="active"' : null) ?>><a id="admin-nav-link-invoices-drafts" href="invoicesDrafts.php"><i class="fa fa-file-text"></i> Invoice Drafts</a></li>
-                            <li <?= ($current_view === "admin-reports" ? 'class="active"' : null) ?>><a id="admin-nav-link-reports" href="reports.php"><i class="fa fa-bar-chart-o"></i> Reports</a></li>
+                            <li <?= ($current_view === "admin-submitted" ? 'class="active"' : null) ?>>
+                                <a id="admin-nav-link-invoices-submitted" href="invoicesSubmitted.php" <?= (!empty($unreadInvoiceCount) ? 'data-popover="true" rel="popover" data-content="You have ' . $unreadInvoiceCount . ' unread invoice(s)…"' : null) ?>>
+                                    <i class="fa fa-file-text"></i> Invoices Submitted <?= (empty($unreadInvoiceCount) ? null : '<strong>(' . $unreadInvoiceCount . ')</strong>') ?>
+                                </a>
+                            </li>
+                            <li <?= ($current_view === "admin-drafts" ? 'class="active"' : null) ?>>
+                                <a id="admin-nav-link-invoices-drafts" href="invoicesDrafts.php">
+                                    <i class="fa fa-file-text"></i> Invoice Drafts
+                                </a>
+                            </li>
+                            <li <?= ($current_view === "admin-reports" ? 'class="active"' : null) ?>>
+                                <a id="admin-nav-link-reports" href="reports.php">
+                                    <i class="fa fa-bar-chart-o"></i> Reports
+                                </a>
+                            </li>
                         </ul>
                         
                         <form class="navbar-form navbar-left" role="search" action="search.php" method="get">
                             <div class="form-search search-only">
                                 <i class="search-icon glyphicon glyphicon-search"></i>
-                                <input id="search-input" type="text" class="form-control search-query" name="q" placeholder="Search for a client or service provider..." rel="popover" data-content="To search for a client, enter a client ID. To search for a service provider, enter a name, HST number, phone number or email.">
+                                <input id="search-input" type="text" class="form-control search-query" name="q" placeholder="Search for a client or service provider…" rel="popover" data-content="To search for a client, enter a client ID. To search for a service provider, enter a name, HST number, phone number or email">
                             </div>
                         </form>
                         
@@ -71,6 +83,13 @@
         placement: 'bottom',
         container: 'body',
         trigger: 'focus'
+    });
+    
+    //Initialize a popover on the invoicesSubmitted menu option only if the count is > 0
+    $("[data-popover='true']").popover({
+        placement: 'bottom',
+        container: 'body',
+        trigger: 'hover'
     });
     
 </script>
