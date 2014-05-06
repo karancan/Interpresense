@@ -29,27 +29,32 @@ $('[data-action="view-items"]').click(function(){
             invoice_id: $(this).closest('tr').data('invoice-id')
         }
     }).done(function(data) {
-    
+        
+        var items = data.items;
+        var grand_total = data.grand_total;
+        
         var markup = '';
         
-        if (data.length < 1){
+        if (items.length < 1){
             markup = '<tr><td colspan="9" class="empty-table-placeholder">There are no items for this invoice…</td></tr>';
         } else {
-            for (i=0; i<data.length; i++){
+            for (i=0; i<items.length; i++){
                 markup += '<tr>';
-                markup += '<td>' + data[i].activity_name_en + '</td>';
-                markup += '<td>' + data[i].description + '</td>';
-                markup += '<td>' + data[i].course_code + '</td>';
-                markup += '<td>' + data[i].service_date + '</td>';
-                markup += '<td>' + data[i].start_time + '</td>';
-                markup += '<td>' + data[i].end_time + '</td>';
-                markup += '<td>' + data[i].rate + '</td>';
-                markup += '<td>' + data[i].item_total + '</td>';
-                markup += '<td>' + data[i].inserted_on + '</td>';
+                markup += '<td>' + items[i].activity_name_en + '</td>';
+                markup += '<td>' + items[i].description + '</td>';
+                markup += '<td>' + items[i].course_code + '</td>';
+                markup += '<td>' + items[i].service_date + '</td>';
+                markup += '<td>' + items[i].start_time + '</td>';
+                markup += '<td>' + items[i].end_time + '</td>';
+                markup += '<td>' + items[i].rate + '</td>';
+                markup += '<td><strong>' + items[i].item_total + '<strong></td>';
+                markup += '<td>' + items[i].inserted_on + '</td>';
                 markup += '</tr>';
             }
         }
         $('#admin-invoice-items-table tbody').html(markup);
+        
+        //@todo: show grand total
         
         $('#admin-invoice-items-loader').hide();
     });
