@@ -99,7 +99,7 @@ if (!isset($_GET['page'])) {
         $i['inserted_on'] = $dateFmt->format($i['inserted_on'], 'date_time');
         $i['start_time'] = $dateFmt->format($i['start_time'], 'time');
         $i['end_time'] = $dateFmt->format($i['end_time'], 'time');
-        $i['item_total'] = "20.00";
+        $i['item_total'] = "20.00"; //@todo
     }
     unset($i);
     echo json_encode($items);

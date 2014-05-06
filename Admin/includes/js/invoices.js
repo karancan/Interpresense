@@ -29,8 +29,7 @@ $('[data-action="view-items"]').click(function(){
             invoice_id: $(this).closest('tr').data('invoice-id')
         }
     }).done(function(data) {
-        //@todo: handle response
-        
+    
         var markup = '';
         
         if (data.length < 1){
