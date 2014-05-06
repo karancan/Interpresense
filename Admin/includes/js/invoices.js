@@ -38,14 +38,15 @@ $('[data-action="view-items"]').click(function(){
         } else {
             for (i=0; i<data.length; i++){
                 markup += '<tr>';
-                markup += '<td>' + 'Test' + '</td>';
-                markup += '<td>' + 'Test' + '</td>';
-                markup += '<td>' + 'Test' + '</td>';
-                markup += '<td>' + 'Test' + '</td>';
-                markup += '<td>' + 'Test' + '</td>';
-                markup += '<td>' + 'Test' + '</td>';
-                markup += '<td>' + 'Test' + '</td>';
-                markup += '<td>' + 'Test' + '</td>';
+                markup += '<td>' + data[i].activity_name_en + '</td>';
+                markup += '<td>' + data[i].description + '</td>';
+                markup += '<td>' + data[i].course_code + '</td>';
+                markup += '<td>' + data[i].service_date + '</td>';
+                markup += '<td>' + data[i].start_time + '</td>';
+                markup += '<td>' + data[i].end_time + '</td>';
+                markup += '<td>' + data[i].rate + '</td>';
+                markup += '<td>' + data[i].item_total + '</td>';
+                markup += '<td>' + data[i].inserted_on + '</td>';
                 markup += '</tr>';
             }
         }

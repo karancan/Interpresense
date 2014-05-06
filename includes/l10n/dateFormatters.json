@@ -12,6 +12,9 @@
             },
             "day": {
                 "pattern": "cccc"
+            },
+            "time": {
+                "pattern": "HH:mm"
             }
         },
         "fr-CA": {
@@ -26,6 +29,9 @@
             },
             "day": {
                 "pattern": "cccc"
+            },
+            "time": {
+                "pattern": "HH:mm"
             }
         }
     }

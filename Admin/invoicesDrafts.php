@@ -83,12 +83,22 @@ if (!isset($_GET['page'])) {
     }
     
     $translate->addResource('l10n/invoicesDrafts.json');
-    $viewFile = "views/invoicesDrafts.php"; //@todo: if no invoices to be shown, show appropriate message
+    $viewFile = "views/invoicesDrafts.php";
     
 } elseif ($_GET['page'] === "fetch-invoice-items") {
     
+    //@todo: fetch the details of who viewed invoice last and when
+    
     header('Content-Type: application/json; charset=utf-8');
-    echo json_encode($invoicesItemsModel->fetchItems($_POST['invoice_id']));
+    $items = $invoicesItemsModel->fetchItems($_POST['invoice_id']);
+    foreach ($items as &$i){
+        $i['inserted_on'] = $dateFmt->format($i['inserted_on'], 'date_time');
+        $i['start_time'] = $dateFmt->format($i['start_time'], 'time');
+        $i['end_time'] = $dateFmt->format($i['end_time'], 'time');
+        $i['item_total'] = "20.00";
+    }
+    unset($i);
+    echo json_encode($items);
     exit;
     
 } elseif ($_GET['page'] === "fetch-invoice-files") {
