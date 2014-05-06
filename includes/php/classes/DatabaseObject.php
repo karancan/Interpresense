@@ -68,7 +68,7 @@ class DatabaseObject {
         try {
             return $this->db->exec($sql);
         } catch (\PDOException $e) {
-            // @todo: trigger email to admin (as specified in config)
+            $this->queryErrorHandler($e, $sql);
         }
     }
 
@@ -113,8 +113,7 @@ class DatabaseObject {
             return $q->rowCount();
             
         } catch (\PDOException $e) {
-            echo $e->getMessage();
-            // @todo: trigger email to admin (as specified in config)
+            $this->queryErrorHandler($e, $sql);
         }
     }
     
@@ -170,11 +169,30 @@ class DatabaseObject {
             try {
                 $this->db->rollBack();
             } catch (\PDOException $e2) {
-                
+                $this->queryErrorHandler($e2, $sql);
             }
-            
-            // @todo: trigger email to admin (as specified in config)
         }
+    }
+    
+    /**
+     * Query error handler
+     * @param \PDOException $e The exception object
+     * @param string $sql The query, if available
+     */
+    protected function queryErrorHandler(\PDOException $e, $sql = 'Query unavailable') {
+        require_once FS_VENDOR_BACKEND . '/swiftmailer/lib/swift_required.php';
+        
+        $body = $e->getMessage() . "<hr>$sql<hr><small>For internal use: " . base64_encode("SENT " . date(DATETIME_MYSQL) . " SCRIPT {$_SERVER['PHP_SELF']}")  . "</small>";
+        
+        $transport = new \Swift_SmtpTransport(SMTP_SERVER, SMTP_SERVER_PORT);
+        $mailer = new \Swift_Mailer($transport);
+
+        $message = new \Swift_Message('Interpresense query error [reason: no result] [source: ' . URL_INTERPRESENSE . ']');
+        $message->setFrom(array(EMAIL_ALIAS_NO_REPLY . EMAIL_ORG_STAFF_DOMAIN => EMAIL_ALIAS_NO_REPLY . EMAIL_ORG_STAFF_DOMAIN))
+            ->setTo(EMAIL_ALIAS_INTERPRETER_COORDINATOR . EMAIL_ORG_STAFF_DOMAIN)
+            ->setBody($body, 'text/html', 'utf-8');
+
+        $mailer->send($message);
     }
 
 }

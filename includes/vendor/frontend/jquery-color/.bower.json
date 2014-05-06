@@ -9,7 +9,6 @@
     "commit": "9e5e04c1c4ee66427fbe04cfce8155b76748ca64"
   },
   "_source": "git://github.com/jquery/jquery-color.git",
-  "_target": "~2.1.2",
-  "_originalSource": "jquery-color",
-  "_direct": true
+  "_target": "2.1.2",
+  "_originalSource": "jquery-color"
 }
