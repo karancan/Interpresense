@@ -108,8 +108,9 @@ if (!isset($_GET['page'])) {
         $endTime = new \DateTime($i['end_time']);
         $endTime = $endTime->getTimestamp();
         $hours = ($endTime-$startTime) / 3600;
-        $i['item_total'] = number_format((float)$hours * $i['rate'], 2, '.', '');
-        $grandTotal += $i['item_total'];
+        $rate = $hours * $i['rate'];
+        $i['item_total'] = number_format((float)$rate, 2);
+        $grandTotal += $rate;
     }
     unset($i);
     echo json_encode(array('items' => $items, 'grand_total' => $grandTotal));

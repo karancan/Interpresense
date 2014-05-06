@@ -35,7 +35,7 @@
             </div>
             
             <div class="modal-footer">
-                <p id="admin-invoice-grand-total"></p>
+                <p id="admin-invoice-grand-total-container">Grand total <span id="admin-invoice-grand-total"></span></p>
             </div>
             
         </div>
