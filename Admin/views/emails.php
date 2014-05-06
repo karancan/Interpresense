@@ -62,7 +62,7 @@
     
 </div>
 
-<div class="modal fade" id="admin-edit-email-modal" tabindex="-1" role="dialog" aria-labelledby="admin-edit-email-modal" aria-hidden="true">
+<div class="modal" id="admin-edit-email-modal" tabindex="-1" role="dialog" aria-labelledby="admin-edit-email-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-vertical-center modal-wide">
         <form id="admin-form-update-email" action='emails.php?page=update-email' method='POST' class="modal-content">
             
@@ -117,7 +117,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="admin-view-email-modal" tabindex="-1" role="dialog" aria-labelledby="admin-view-email-modal" aria-hidden="true">
+<div class="modal" id="admin-view-email-modal" tabindex="-1" role="dialog" aria-labelledby="admin-view-email-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-vertical-center modal-wide">
         
         <div class="modal-content">

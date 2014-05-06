@@ -109,7 +109,7 @@
     
 </div>
 
-<div class="modal fade" id="admin-add-modal" tabindex="-1" role="dialog" aria-labelledby="admin-add-modal" aria-hidden="true">
+<div class="modal" id="admin-add-modal" tabindex="-1" role="dialog" aria-labelledby="admin-add-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-vertical-center">
         <form method="POST" action="reports.php?page=generate-new-report" class="modal-content">
             
@@ -166,7 +166,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="admin-add-template-modal" tabindex="-1" role="dialog" aria-labelledby="admin-add-template-modal" aria-hidden="true">
+<div class="modal" id="admin-add-template-modal" tabindex="-1" role="dialog" aria-labelledby="admin-add-template-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-vertical-center modal-wide">
         <form id="admin-form-add-template" action='reports.php?page=add-template' method='POST' class="modal-content">
             
