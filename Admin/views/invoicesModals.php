@@ -16,6 +16,7 @@
                 <table id="admin-invoice-items-table" class="table table-hover">
                     <thead>
                         <tr>
+                            <th scope='col'>Added on</th>
                             <th scope='col'>Activity</th>
                             <th scope='col'>Description</th>
                             <th scope='col'>Course</th>
@@ -24,7 +25,6 @@
                             <th scope='col'>End time</th>
                             <th scope='col'>Rate ($/h)</th>
                             <th scope='col'><strong>Total ($)</strong></th>
-                            <th scope='col'>Added on</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,6 +35,7 @@
             </div>
             
             <div class="modal-footer">
+                <p id="admin-invoice-grand-total"></p>
             </div>
             
         </div>

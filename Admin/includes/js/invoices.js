@@ -19,7 +19,7 @@ $('[data-action="view-items"]').click(function(){
     
     $('#admin-invoice-items-loader').show();
     
-    $('#admin-invoice-items-table tbody').html('');
+    $('#admin-invoice-items-table tbody, #admin-invoice-grand-total').html('');
     var controller = window.location.pathname.replace(/^.*\//, '');
     
     $.ajax({
@@ -40,6 +40,7 @@ $('[data-action="view-items"]').click(function(){
         } else {
             for (i=0; i<items.length; i++){
                 markup += '<tr>';
+                markup += '<td>' + items[i].inserted_on + '</td>';
                 markup += '<td>' + items[i].activity_name_en + '</td>';
                 markup += '<td>' + items[i].description + '</td>';
                 markup += '<td>' + items[i].course_code + '</td>';
@@ -48,13 +49,11 @@ $('[data-action="view-items"]').click(function(){
                 markup += '<td>' + items[i].end_time + '</td>';
                 markup += '<td>' + items[i].rate + '</td>';
                 markup += '<td><strong>' + items[i].item_total + '<strong></td>';
-                markup += '<td>' + items[i].inserted_on + '</td>';
                 markup += '</tr>';
             }
         }
         $('#admin-invoice-items-table tbody').html(markup);
-        
-        //@todo: show grand total
+        $('#admin-invoice-grand-total').html('Grand total <strong>$' + grand_total.toFixed(2) + ' </strong>');
         
         $('#admin-invoice-items-loader').hide();
     });

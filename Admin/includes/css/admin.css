@@ -16,3 +16,7 @@
 .admin-modal-links{
     font-weight: bold;
 }
+#admin-invoice-grand-total{
+    font-size: larger;
+    padding-right: 2%;
+}
