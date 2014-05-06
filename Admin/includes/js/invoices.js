@@ -53,7 +53,7 @@ $('[data-action="view-items"]').click(function(){
             }
         }
         $('#admin-invoice-items-table tbody').html(markup);
-        $('#admin-invoice-grand-total').html('<strong>$' + grand_total.toFixed(2) + ' </strong>');
+        $('#admin-invoice-grand-total').html(grand_total.toFixed(2));
         
         $('#admin-invoice-items-loader').hide();
     });
