@@ -19,6 +19,7 @@ $('[data-action="view-items"]').click(function(){
     
     $('#admin-invoice-items-loader').show();
     
+    $('#admin-invoice-items-table tbody, #admin-invoice-grand-total').html('');
     var controller = window.location.pathname.replace(/^.*\//, '');
     
     $.ajax({
@@ -27,8 +28,32 @@ $('[data-action="view-items"]').click(function(){
         data: {
             invoice_id: $(this).closest('tr').data('invoice-id')
         }
-    }).done(function() {
-        //@todo: handle response
+    }).done(function(data) {
+        
+        var items = data.items;
+        var grand_total = data.grand_total;
+        
+        var markup = '';
+        
+        if (items.length < 1){
+            markup = '<tr><td colspan="9" class="empty-table-placeholder">There are no items for this invoice…</td></tr>';
+        } else {
+            for (var i=0; i<items.length; i++){
+                markup += '<tr>';
+                markup += '<td>' + items[i].inserted_on + '</td>';
+                markup += '<td>' + items[i].activity_name_en + '</td>';
+                markup += '<td>' + items[i].description + '</td>';
+                markup += '<td>' + items[i].course_code + '</td>';
+                markup += '<td>' + items[i].service_date + '</td>';
+                markup += '<td>' + items[i].start_time + '</td>';
+                markup += '<td>' + items[i].end_time + '</td>';
+                markup += '<td>' + items[i].rate + '</td>';
+                markup += '<td><strong>' + items[i].item_total + '<strong></td>';
+                markup += '</tr>';
+            }
+        }
+        $('#admin-invoice-items-table tbody').html(markup);
+        $('#admin-invoice-grand-total').html(grand_total.toFixed(2));
         
         $('#admin-invoice-items-loader').hide();
     });
@@ -59,8 +84,8 @@ $('[data-action="view-files"]').click(function(){
         if (data.length < 1){
             markup = '<tr><td colspan="3" class="empty-table-placeholder">There are no files for this invoice…</td></tr>';
         } else {
-            for (i=0; i<data.length; i++){
-                markup += '<tr  data-file-id="' + data[i].file_id + '">';
+            for (var i=0; i<data.length; i++){
+                markup += '<tr data-file-id="' + data[i].file_id + '">';
                 markup += '<td>' + data[i].file_name + '</td>';
                 markup += '<td>' + data[i].inserted_on + '</td>';
                 markup += '<td class="table-option-cell"><a href="' + controller + '?page=view-file&file_id=' + data[i].file_id + '" target="_blank" class="btn btn-info"><i class="fa fa-eye"></i> View file</button></td>';
@@ -98,7 +123,7 @@ $('[data-action="view-notes"]').click(function(){
         if (data.length < 1){
             markup = '<tr><td colspan="3" class="empty-table-placeholder">There are no notes for this invoice…</td></tr>';
         } else {
-            for (i=0; i<data.length; i++){
+            for (var i=0; i<data.length; i++){
                 markup += '<tr  data-note-id="' + data[i].note_id + '">';
                 markup += '<td>' + data[i].emp_name + '</td>';
                 markup += '<td>' + data[i].note + '</td>';

@@ -27,7 +27,7 @@
                         <th scope='col'>Name</th>
                         <th scope='col'>Nom</th>
                         <th scope='col'>Added on</th>
-                        <th scope='col'></th>
+                        <th scope='col' style='width: 17%;'></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,9 +58,9 @@
             <table id="admin-settings-table" class="table table-hover invoice-table">           
                 <thead>
                     <tr>
-                        <th scope='col'>Setting name</th>
-                        <th scope='col'>Setting value</th>
-                        <th scope='col'></th>
+                        <th scope='col'>Name</th>
+                        <th scope='col'>Value</th>
+                        <th scope='col' style='width: 17%;'></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -92,7 +92,7 @@
     
 </div>
 
-<div class="modal fade" id="admin-add-setting-modal" tabindex="-1" role="dialog" aria-labelledby="admin-add-setting-modal" aria-hidden="true">
+<div class="modal" id="admin-add-setting-modal" tabindex="-1" role="dialog" aria-labelledby="admin-add-setting-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-vertical-center">
         <form action='settings.php?page=change-setting' method='POST' class="modal-content">
             
@@ -128,7 +128,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="admin-add-activity-modal" tabindex="-1" role="dialog" aria-labelledby="admin-add-setting-modal" aria-hidden="true">
+<div class="modal" id="admin-add-activity-modal" tabindex="-1" role="dialog" aria-labelledby="admin-add-setting-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-vertical-center">
         <form action='settings.php?page=change-activity' method='POST' class="modal-content">
             

@@ -68,7 +68,7 @@
     
 </div>
 
-<div class="modal fade" id="admin-add-modal" tabindex="-1" role="dialog" aria-labelledby="admin-add-modal" aria-hidden="true">
+<div class="modal" id="admin-add-modal" tabindex="-1" role="dialog" aria-labelledby="admin-add-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-vertical-center">
         <form action='users.php?page=change-user' method='POST' class="modal-content">
             

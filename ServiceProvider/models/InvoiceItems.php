@@ -46,13 +46,16 @@ class InvoiceItems extends \Interpresense\Includes\BaseModel {
             throw new \InvalidArgumentException('Invalid invoice ID.');
         }
         
-        $sql = "SELECT `item_id`";
+        $sql = "SELECT i.item_id";
         
         if(!$idsOnly) {
-            $sql .= ", `description`, `course_code`, `activity_id`, `service_date`, `start_time`, `end_time`, `rate`, `inserted_on`";
+            $sql .= ", i.description, i.course_code, i.activity_id, i.service_date, i.start_time, i.end_time, i.rate, i.inserted_on,
+                       a.activity_name_en, a.activity_name_fr";
         }
         
-        $sql .= " FROM `interpresense_service_provider_invoice_items`
+        $sql .= " FROM `interpresense_service_provider_invoice_items` i
+                  JOIN `interpresense_service_provider_activities` a
+                    ON i.activity_id = a.activity_id
                  WHERE `invoice_id` = :invoice_id;";
         
         $data = array('invoice_id' => $invoiceID);

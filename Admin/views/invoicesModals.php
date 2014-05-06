@@ -1,4 +1,4 @@
-<div class="modal fade" id="admin-invoice-items-modal" tabindex="-1" role="dialog" aria-labelledby="admin-invoice-items-modal" aria-hidden="true">
+<div class="modal" id="admin-invoice-items-modal" tabindex="-1" role="dialog" aria-labelledby="admin-invoice-items-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-vertical-center modal-wide">
         <div class="modal-content">
         
@@ -13,16 +13,36 @@
                     <img id="admin-invoice-items-loader" src="//<?= URL_IMAGES ?>/loader.gif" class="center-block interpresense-loader">            
                 </div>
                 
+                <table id="admin-invoice-items-table" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope='col'>Added on</th>
+                            <th scope='col'>Activity</th>
+                            <th scope='col'>Description</th>
+                            <th scope='col'>Course</th>
+                            <th scope='col'>Date</th>
+                            <th scope='col'>Start time</th>
+                            <th scope='col'>End time</th>
+                            <th scope='col'>Rate ($/h)</th>
+                            <th scope='col'><strong>Total ($)</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    
+                    </tbody>
+                </table>
+                
             </div>
             
             <div class="modal-footer">
+                <p id="admin-invoice-grand-total-container">Grand total <strong>$<span id="admin-invoice-grand-total"></span></strong></p>
             </div>
             
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="admin-invoice-files-modal" tabindex="-1" role="dialog" aria-labelledby="admin-invoice-files-modal" aria-hidden="true">
+<div class="modal" id="admin-invoice-files-modal" tabindex="-1" role="dialog" aria-labelledby="admin-invoice-files-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-vertical-center">
         <div class="modal-content">
         
@@ -59,7 +79,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="admin-invoice-notes-modal" tabindex="-1" role="dialog" aria-labelledby="admin-invoice-notes-modal" aria-hidden="true">
+<div class="modal" id="admin-invoice-notes-modal" tabindex="-1" role="dialog" aria-labelledby="admin-invoice-notes-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-vertical-center modal-wide">
         <div class="modal-content">
         
@@ -96,7 +116,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="admin-invoice-add-notes-modal" tabindex="-1" role="dialog" aria-labelledby="admin-invoice-add-notes-modal" aria-hidden="true">
+<div class="modal" id="admin-invoice-add-notes-modal" tabindex="-1" role="dialog" aria-labelledby="admin-invoice-add-notes-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-vertical-center">
         <form action="<?= basename($_SERVER["SCRIPT_FILENAME"]) ?>?page=add-note" method="POST" class="modal-content">
             
@@ -124,7 +144,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="admin-invoice-sp-details-modal" tabindex="-1" role="dialog" aria-labelledby="admin-invoice-sp-details-modal" aria-hidden="true">
+<div class="modal" id="admin-invoice-sp-details-modal" tabindex="-1" role="dialog" aria-labelledby="admin-invoice-sp-details-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-vertical-center">
         <div class="modal-content">
         

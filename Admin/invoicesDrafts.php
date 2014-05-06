@@ -85,12 +85,33 @@ if (!isset($_GET['page'])) {
     }
     
     $translate->addResource('l10n/invoicesDrafts.json');
-    $viewFile = "views/invoicesDrafts.php"; //@todo: if no invoices to be shown, show appropriate message
+    $viewFile = "views/invoicesDrafts.php";
     
 } elseif ($_GET['page'] === "fetch-invoice-items") {
     
+    //@todo: fetch the details of who viewed invoice last and when
+    
     header('Content-Type: application/json; charset=utf-8');
-    echo json_encode($invoicesItemsModel->fetchItems($_POST['invoice_id']));
+    $items = $invoicesItemsModel->fetchItems($_POST['invoice_id']);
+    
+    $grandTotal = 0;
+    
+    foreach ($items as &$i){
+        $i['inserted_on'] = $dateFmt->format($i['inserted_on'], 'date_time');
+        $i['start_time'] = $dateFmt->format($i['start_time'], 'time');
+        $i['end_time'] = $dateFmt->format($i['end_time'], 'time');
+        
+        $startTime = new \DateTime($i['start_time']);
+        $startTime = $startTime->getTimestamp();
+        $endTime = new \DateTime($i['end_time']);
+        $endTime = $endTime->getTimestamp();
+        $hours = ($endTime-$startTime) / 3600;
+        $rate = $hours * $i['rate'];
+        $i['item_total'] = number_format((float)$rate, 2);
+        $grandTotal += $rate;
+    }
+    unset($i);
+    echo json_encode(array('items' => $items, 'grand_total' => $grandTotal));
     exit;
     
 } elseif ($_GET['page'] === "fetch-invoice-files") {

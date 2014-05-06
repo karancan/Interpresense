@@ -24,7 +24,8 @@ class Settings extends \Interpresense\Includes\BaseModel {
      */
     public function fetchSettings() {
         $sql = 'SELECT `setting_key`, `setting_value`, `description_en`, `description_fr`
-                  FROM `interpresense_settings`;';
+                  FROM `interpresense_settings`
+                 WHERE `internal_use` = 0;';
         
         return parent::$db->query($sql);
     }
@@ -70,6 +71,6 @@ class Settings extends \Interpresense\Includes\BaseModel {
         
         $key = parent::$db->db->quote($key);
         
-        parent::$db->delete('interpresense_settings', "`setting_key` = $key");
+        parent::$db->delete('interpresense_settings', "`setting_key` = $key AND `internal_use` = 0");
     }
 }
