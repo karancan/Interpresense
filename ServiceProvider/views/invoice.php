@@ -76,7 +76,7 @@
                         <tbody>
                             <tr class="invoice-item-row">
                                 <td><input type="text" class="form-control invoice-item-input" placeholder="Description" required></td>
-                                <td><input type="date" class="form-control invoice-item-input invoice-item-date" required></td>
+                                <td><input type="text" class="form-control invoice-item-input invoice-item-date" placeholder="Date" required></td>
                                 <td>
                                     <select class="form-control invoice-item-start-time">
                                     <?php

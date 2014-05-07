@@ -14,6 +14,10 @@ function showInputSuccess(element) {
     element.closest('td').removeClass('has-error').addClass('has-success');
 }
 
+$('.invoice-item-date').datepicker({
+    format: 'yyyy-mm-dd'
+});
+
 $('.invoice-item-start-time, .invoice-item-end-time').change(function(){
     var $thisRow = $(this).closest(".invoice-item-row"),
         date = $('.invoice-item-date', $thisRow).val() || '2014-05-01',
