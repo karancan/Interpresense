@@ -29,6 +29,17 @@ function calculateAmount($row) {
     }
     
     $('.invoice-item-amounts', $row).text(amount);
+    
+    totalAmounts();
+}
+
+function totalAmounts() {
+    //Update the total of all invoice items
+    var total_amount = $('.invoice-item-amounts').toArray().reduce(function(p, v) {
+        return p += Number(v.textContent);
+    }, 0);
+
+    $('#invoice-total-dollar-amount').text('$' + total_amount.toFixed(2));
 }
 
 $('.invoice-item-date').datepicker({
@@ -120,13 +131,6 @@ $(document).on('input focusout', '.invoice-item-input', function() {
             $thisRow.after($clone);
         }
 
-        //Update the total of all invoice items
-        var total_amount = 0;
-        $('.invoice-item-amounts').each(function() {
-            total_amount += parseInt($(this).text(), 10);
-        });
-
-        $('#invoice-total-dollar-amount').text('$' + total_amount.toFixed(2));
     }
 
 });
