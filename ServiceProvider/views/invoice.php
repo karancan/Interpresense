@@ -103,7 +103,7 @@
                                     <span class="invoice-item-hours">0</span> hours
                                     <span class="invoice-item-minutes">0</span> min
                                 </td>
-                                <td><input type="number" class="form-control invoice-item-input" placeholder="Rate" min="0" step="0.01" required></td>
+                                <td><input type="number" class="form-control invoice-item-input invoice-item-rate" placeholder="Rate" min="0" step="0.01" required></td>
                                 <td class="invoice-item-amounts">20.00</td>
                             </tr>
                         </tbody>

@@ -14,6 +14,23 @@ function showInputSuccess(element) {
     element.closest('td').removeClass('has-error').addClass('has-success');
 }
 
+/**
+ * Calculates the amount based on hours and rate
+ * @param {$} $row The input item row
+ */
+function calculateAmount($row) {
+    var hours, amount;
+            
+    hours = (parseInt($('.invoice-item-hours', $row).text(), 10) + parseInt($('.invoice-item-minutes', $row).text(), 10)/60),
+    amount = (hours * parseInt($('.invoice-item-rate', $row).val(), 10)).toFixed(2);
+    
+    if(isNaN(amount)) {
+        amount = '0.00';
+    }
+    
+    $('.invoice-item-amounts', $row).text(amount);
+}
+
 $('.invoice-item-date').datepicker({
     format: 'yyyy-mm-dd'
 });
@@ -37,6 +54,17 @@ $('.invoice-item-start-time, .invoice-item-end-time').change(function(){
     // Update hours
     $('.invoice-item-hours', $thisRow).text(Math[(diffInMinutes / 60) < 0 ? 'ceil' : 'floor'](diffInMinutes / 60));
     $('.invoice-item-minutes', $thisRow).text(diffInMinutes % 60);
+    
+    // Calculate amount
+    calculateAmount($thisRow);
+});
+
+$('.invoice-item-rate').change(function(){
+    'use strict';
+    var $thisRow = $(this).closest(".invoice-item-row");
+    if(this.checkValidity()) {
+        calculateAmount($thisRow);
+    }
 });
 
 /**
