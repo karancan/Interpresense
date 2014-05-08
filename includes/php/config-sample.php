@@ -99,8 +99,8 @@ define('EMAIL_ORG_STAFF_DOMAIN', '@uottawa.ca');
 
 //Use the definitions below to define the aliases for the different departments
 define('EMAIL_ALIAS_NO_REPLY', 'no-reply');
-define('EMAIL_ALIAS_INTERPRETER_COORDINATOR', '');
-define('EMAIL_ALIAS_INTERPRETER_BULK_MAIL', '');
+define('EMAIL_ALIAS_INTERPRESENSE_COORDINATOR', '');
+define('EMAIL_ALIAS_INTERPRESENSE_BULK_MAIL', '');
 
 //============================================================================================
 // File attachment definitions
