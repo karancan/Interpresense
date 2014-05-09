@@ -77,8 +77,10 @@ if (!isset($_GET['page'])) {
 
 } elseif ($_GET['page'] === 'add-template') {
 
-    //@todo: Add a new report template
-    //@todo: Focus on `template-[templateID]`
+    $templateID = $model->addReportTemplate($_POST);
+    
+    header("Location: reports.php?focus=$templateID");
+    exit;
 
 } elseif ($_GET['page'] === 'mark-template-as-deleted') {
 
@@ -89,7 +91,7 @@ if (!isset($_GET['page'])) {
 /**
  * View
  */
-$actions = array();
+$actions = array('generate-new-report', 'view-generated-report', 'mark-report-as-deleted', 'add-template', 'mark-template-as-deleted');
 
 if (!in_array($_GET['page'], $actions, true)) {
     

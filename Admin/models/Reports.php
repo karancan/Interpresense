@@ -23,7 +23,10 @@ class Reports extends \Interpresense\Includes\BaseModel {
     public function __construct(\Interpresense\Includes\DatabaseObject $db) {
         parent::__construct($db);
         
-        //@todo: add validators
+        $this->validators['user_id'] = Validator::notEmpty()->noWhitespace()->digit()->positive();
+        $this->validators['name'] = Validator::notEmpty();
+        $this->validators['content'] = Validator::notEmpty();
+        $this->validators['description'] = Validator::notEmpty();
     }
     
     /**
@@ -88,6 +91,35 @@ class Reports extends \Interpresense\Includes\BaseModel {
         $types = array('report_id' => \PDO::PARAM_INT);
         
         parent::$db->query($sql, $data, $types);
+    }
+    
+    /**
+     * Creates a report template
+     * @param array $data The POST data
+     */
+    public function addReportTemplate(array $data) {
+        $sql = "INSERT INTO `interpresense_admin_report_templates` (`user_id`, `name`, `content`, `description`, `inserted_on`)
+                     VALUES (:user_id, :name, :content, :description, NOW());";
+        
+        if(!Validator::key('name', $this->validators['name'])
+                ->key('content', $this->validators['content'])
+                ->key('description', $this->validators['description'])
+                ->validate($data)) {
+            throw new \InvalidArgumentException('Required data invalid or missing');
+        }
+        
+        $types = array(
+            'user_id' => \PDO::PARAM_INT,
+            'name' => \PDO::PARAM_STR,
+            'content' => \PDO::PARAM_STR,
+            'description' => \PDO::PARAM_STR
+        );
+        
+        $data = parent::$db->pick(array_keys($types), $data);
+        $data['user_id'] = $_SESSION['user_id'];
+        
+        parent::$db->query($sql, $data, $types);
+        return parent::$db->db->lastInsertId();
     }
     
 }
