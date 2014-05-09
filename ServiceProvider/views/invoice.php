@@ -24,10 +24,45 @@
             <div class="col-md-3">
                 
                 <h3>From</h3>
-                <input type="text" class="form-control input-top" placeholder="Your name">
-                <input type="text" class="form-control input-center" placeholder="Your phone number">
-                <input type="text" class="form-control input-center" placeholder="Your email">
-                <input type="text" class="form-control input-bottom" placeholder="Your address">
+                
+                <label for="sp_name" class="sr-only">Name</label>
+                <input type="text" class="form-control input-top" placeholder="Name" name="sp_name" id="sp_name" required maxlength="255">
+                
+                <label for="sp_address" class="sr-only">Address</label>
+                <input type="text" class="form-control input-center" placeholder="Address" name="sp_address" id="sp_address" maxlength="255">
+                
+                <label for="sp_city" class="sr-only">City</label>
+                <input type="text" class="form-control input-center" placeholder="City" name="sp_city" id="sp_city" required maxlength="255">
+                
+                <label for="sp_province" class="sr-only">Province</label>
+                <select class="form-control input-center" name="sp_province" id="sp_province" required>
+                    <option value="">Province</option>
+                    <option value="AB">Alberta</option>
+                    <option value="BC">British Columbia</option>
+                    <option value="MB">Manitoba</option>
+                    <option value="NB">New Bruswick</option>
+                    <option value="NL">Newfoundland and Labrador</option>
+                    <option value="NT">Northwest Territories</option>
+                    <option value="NS">Nova Scotia</option>
+                    <option value="NU">Nunavut</option>
+                    <option value="ON">Ontario</option>
+                    <option value="PE">Prince Edward Island</option>
+                    <option value="PQ">Québec</option>
+                    <option value="SK">Saskatchewan</option>
+                    <option value="YT">Yukon Territory</option>
+                </select>
+                
+                <label for="sp_postal_code" class="sr-only">Postal code</label>
+                <input type="text" class="form-control input-center" placeholder="Postal code" name="sp_postal_code" id="sp_postal_code" required pattern="^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ]\d[ABCEGHJKLMNPRSTVWXYZ]\d$" maxlength="6">
+                
+                <label for="sp_phone" class="sr-only">Phone number</label>
+                <input type="tel" class="form-control input-center" placeholder="Phone number" name="sp_phone" id="sp_phone" required maxlength="10">
+                
+                <label for="sp_email" class="sr-only">Email</label>
+                <input type="email" class="form-control input-center" placeholder="Email" name="sp_email" id="sp_email" required maxlength="255">
+                
+                <label for="sp_hst_number" class="sr-only">HST number</label>
+                <input type="text" class="form-control input-bottom" placeholder="HST number" name="sp_hst_number" id="sp_hst_number" pattern="[A-Za-z\d]*" maxlength="255">
             </div>
             
             <div class="col-md-5">
@@ -46,8 +81,7 @@
                 
                 <h2>INVOICE</h2>
                 
-                <input type="text" class="form-control input-top" placeholder="Client ID number">
-                <input type="text" class="form-control input-bottom" placeholder="Client name" readonly title="Enter a client ID to see a name appear here...">
+                <input type="text" class="form-control" placeholder="Client ID number">
                 
             </div>
         </div>
@@ -66,17 +100,15 @@
                                 <th scope='col'>Date</th>
                                 <th scope='col'>Start time</th>
                                 <th scope='col'>End time</th>
-                                <!-- TODO: don't know how to get tooltips working -->
-                                <th scope='col' style='width: 10%;' data-toggle='tooltip' data-placement='top' title='= end time - start time'>Hour(s) <i class="fa fa-info-circle"></i></th>
+                                <th scope='col' style='width: 10%;' data-popover="true" data-placement='top' data-content='= end time - start time'>Hour(s) <i class="fa fa-info-circle"></i></th>
                                 <th scope='col'>Rate/hour ($)</th>
-                                <!-- TODO: don't know how to get tooltips working -->
-                                <th scope='col' style='width: 12%;' data-toggle='tooltip' data-placement='top' title='= rate * hours'>Amount ($) <i class="fa fa-info-circle"></i></th>
+                                <th scope='col' style='width: 12%;' data-popover="true" data-placement='top' data-content='= rate * hours'>Amount ($) <i class="fa fa-info-circle"></i></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="invoice-item-row">
                                 <td><input type="text" class="form-control invoice-item-input" placeholder="Description" required></td>
-                                <td><input type="date" class="form-control invoice-item-input invoice-item-date" required></td>
+                                <td><input type="text" class="form-control invoice-item-input invoice-item-date" placeholder="Date" required></td>
                                 <td>
                                     <select class="form-control invoice-item-start-time">
                                     <?php
@@ -103,8 +135,8 @@
                                     <span class="invoice-item-hours">0</span> hours
                                     <span class="invoice-item-minutes">0</span> min
                                 </td>
-                                <td><input type="number" class="form-control invoice-item-input" placeholder="Rate" min="0" step="0.01" required></td>
-                                <td class="invoice-item-amounts">20.00</td>
+                                <td><input type="number" class="form-control invoice-item-input invoice-item-rate" placeholder="Rate" min="0" step="0.01" required></td>
+                                <td class="invoice-item-amounts">0.00</td>
                             </tr>
                         </tbody>
                     </table>

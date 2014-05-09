@@ -14,6 +14,41 @@ function showInputSuccess(element) {
     element.closest('td').removeClass('has-error').addClass('has-success');
 }
 
+/**
+ * Calculates the amount based on hours and rate
+ * @param {$} $row The input item row
+ */
+function calculateAmount($row) {
+    var hours, amount;
+            
+    hours = (parseInt($('.invoice-item-hours', $row).text(), 10) + parseInt($('.invoice-item-minutes', $row).text(), 10)/60),
+    amount = (hours * parseInt($('.invoice-item-rate', $row).val(), 10)).toFixed(2);
+    
+    if(isNaN(amount)) {
+        amount = '0.00';
+    }
+    
+    $('.invoice-item-amounts', $row).text(amount);
+    
+    totalAmounts();
+}
+
+/**
+ * Calculates the total amount of the invoice
+ */
+function totalAmounts() {
+    //Update the total of all invoice items
+    var total_amount = $('.invoice-item-amounts').toArray().reduce(function(p, v) {
+        return p += Number(v.textContent);
+    }, 0);
+
+    $('#invoice-total-dollar-amount').text('$' + total_amount.toFixed(2));
+}
+
+$('.invoice-item-date').datepicker({
+    format: 'yyyy-mm-dd'
+});
+
 $('.invoice-item-start-time, .invoice-item-end-time').change(function(){
     var $thisRow = $(this).closest(".invoice-item-row"),
         date = $('.invoice-item-date', $thisRow).val() || '2014-05-01',
@@ -33,6 +68,23 @@ $('.invoice-item-start-time, .invoice-item-end-time').change(function(){
     // Update hours
     $('.invoice-item-hours', $thisRow).text(Math[(diffInMinutes / 60) < 0 ? 'ceil' : 'floor'](diffInMinutes / 60));
     $('.invoice-item-minutes', $thisRow).text(diffInMinutes % 60);
+    
+    // Calculate amount
+    calculateAmount($thisRow);
+});
+
+$('.invoice-item-rate').change(function(){
+    'use strict';
+    var $thisRow = $(this).closest(".invoice-item-row");
+    if(this.checkValidity()) {
+        calculateAmount($thisRow);
+    }
+});
+
+// Invoke tooltip popovers
+$("[data-popover='true']").popover({
+    container: 'body',
+    trigger: 'hover'
 });
 
 /**
@@ -88,13 +140,6 @@ $(document).on('input focusout', '.invoice-item-input', function() {
             $thisRow.after($clone);
         }
 
-        //Update the total of all invoice items
-        var total_amount = 0;
-        $('.invoice-item-amounts').each(function() {
-            total_amount += parseInt($(this).text(), 10);
-        });
-
-        $('#invoice-total-dollar-amount').text('$' + total_amount.toFixed(2));
     }
 
 });
