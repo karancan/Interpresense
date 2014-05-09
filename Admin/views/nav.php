@@ -80,7 +80,7 @@
     
     //Initialize a popover on the search input box
     $("#search-input").popover({
-        placement: 'bottom',
+        placement: 'right',
         container: 'body',
         trigger: 'focus'
     });
