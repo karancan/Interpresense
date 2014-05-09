@@ -33,6 +33,9 @@ function calculateAmount($row) {
     totalAmounts();
 }
 
+/**
+ * Calculates the total amount of the invoice
+ */
 function totalAmounts() {
     //Update the total of all invoice items
     var total_amount = $('.invoice-item-amounts').toArray().reduce(function(p, v) {
