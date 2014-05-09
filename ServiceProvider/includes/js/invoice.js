@@ -3,7 +3,7 @@
  * @param {$} element An input element
  */
 function showInputFailure(element) {
-    element.closest('td').removeClass('has-success').addClass('has-error');
+    element.parent().removeClass('has-success').addClass('has-error');
 }
 
 /**
@@ -11,7 +11,7 @@ function showInputFailure(element) {
  * @param {$} element An input element
  */
 function showInputSuccess(element) {
-    element.closest('td').removeClass('has-error').addClass('has-success');
+    element.parent().removeClass('has-error').addClass('has-success');
 }
 
 /**
@@ -100,28 +100,41 @@ $('#invoice-btn-clear').click(function(){
  *User wants to save a draft
  */
 $('#invoice-btn-draft').click(function(){
+    $('#mode').val('draft');
     alert("Draft will be saved...you will receive an email");
 });
 
 /**
  *User wants to submit the invoice
  */
-$('#invoice-btn-submit').click(function(){
-    alert("Invoice will be submitted...you will receive an email");
+$('#invoice_form').submit(function(){
+    $('#mode').val('final');
+    
+    if (this.checkValidity()) {
+        alert("Invoice will be submitted...you will receive an email");
+    }
 });
 
 /**
- *User is entering information in to the input fields in invoice rows
+ * User is entering information into the form
  */
-$(document).on('input focusout', '.invoice-item-input', function() {
-    var $thisRow = $(this).closest(".invoice-item-row");
-
+$('input, select', '#invoice_form').change(function() {
+    'use strict';
+    
     //Update the fields' UI state
     if(!this.checkValidity()) {
         showInputFailure($(this));
     } else {
         showInputSuccess($(this));
     }
+});
+
+/**
+ *User is entering information in to the input fields in invoice rows
+ */
+$(document).on('input focusout', '.invoice-item-input', function() {
+    'use strict';
+    var $thisRow = $(this).closest(".invoice-item-row");
 
     if (!$thisRow.next("tr").length) {
         //Variable determining if all the fields in a row are succesfully completed.

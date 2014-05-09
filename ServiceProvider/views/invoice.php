@@ -18,54 +18,70 @@
         
     </div>
     
-    <form method="post" action="#">
+    <form method="post" action="index.php?page=invoice-submission" id='invoice_form'>
         
         <div class="row">
-            <div class="col-md-3">
+            <section class="col-md-3" id='invoice_from'>
                 
                 <h3>From</h3>
                 
-                <label for="sp_name" class="sr-only">Name</label>
-                <input type="text" class="form-control input-top" placeholder="Name" name="sp_name" id="sp_name" required maxlength="255">
+                <div class='form-group'>
+                    <label for="sp_name" class="sr-only">Name</label>
+                    <input type="text" class="form-control input-top" placeholder="Name" name="sp_name" id="sp_name" required maxlength="255">
+                </div>
                 
-                <label for="sp_address" class="sr-only">Address</label>
-                <input type="text" class="form-control input-center" placeholder="Address" name="sp_address" id="sp_address" maxlength="255">
+                <div class='form-group'>
+                    <label for="sp_address" class="sr-only">Address</label>
+                    <input type="text" class="form-control input-center" placeholder="Address" name="sp_address" id="sp_address" maxlength="255">
+                </div>
                 
-                <label for="sp_city" class="sr-only">City</label>
-                <input type="text" class="form-control input-center" placeholder="City" name="sp_city" id="sp_city" required maxlength="255">
+                <div class='form-group'>
+                    <label for="sp_city" class="sr-only">City</label>
+                    <input type="text" class="form-control input-center" placeholder="City" name="sp_city" id="sp_city" required maxlength="255">
+                </div>
                 
-                <label for="sp_province" class="sr-only">Province</label>
-                <select class="form-control input-center" name="sp_province" id="sp_province" required>
-                    <option value="">Province</option>
-                    <option value="AB">Alberta</option>
-                    <option value="BC">British Columbia</option>
-                    <option value="MB">Manitoba</option>
-                    <option value="NB">New Bruswick</option>
-                    <option value="NL">Newfoundland and Labrador</option>
-                    <option value="NT">Northwest Territories</option>
-                    <option value="NS">Nova Scotia</option>
-                    <option value="NU">Nunavut</option>
-                    <option value="ON">Ontario</option>
-                    <option value="PE">Prince Edward Island</option>
-                    <option value="PQ">Québec</option>
-                    <option value="SK">Saskatchewan</option>
-                    <option value="YT">Yukon Territory</option>
-                </select>
+                <div class='form-group'>
+                    <label for="sp_province" class="sr-only">Province</label>
+                    <select class="form-control input-center" name="sp_province" id="sp_province" required>
+                        <option value="">Province</option>
+                        <option value="AB">Alberta</option>
+                        <option value="BC">British Columbia</option>
+                        <option value="MB">Manitoba</option>
+                        <option value="NB">New Bruswick</option>
+                        <option value="NL">Newfoundland and Labrador</option>
+                        <option value="NT">Northwest Territories</option>
+                        <option value="NS">Nova Scotia</option>
+                        <option value="NU">Nunavut</option>
+                        <option value="ON">Ontario</option>
+                        <option value="PE">Prince Edward Island</option>
+                        <option value="PQ">Québec</option>
+                        <option value="SK">Saskatchewan</option>
+                        <option value="YT">Yukon Territory</option>
+                    </select>
+                </div>
                 
-                <label for="sp_postal_code" class="sr-only">Postal code</label>
-                <input type="text" class="form-control input-center" placeholder="Postal code" name="sp_postal_code" id="sp_postal_code" required pattern="^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ]\d[ABCEGHJKLMNPRSTVWXYZ]\d$" maxlength="6">
+                <div class='form-group'>
+                    <label for="sp_postal_code" class="sr-only">Postal code</label>
+                    <input type="text" class="form-control input-center" placeholder="Postal code" name="sp_postal_code" id="sp_postal_code" required pattern="^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ]\d[ABCEGHJKLMNPRSTVWXYZ]\d$" maxlength="6">
+                </div>
                 
-                <label for="sp_phone" class="sr-only">Phone number</label>
-                <input type="tel" class="form-control input-center" placeholder="Phone number" name="sp_phone" id="sp_phone" required maxlength="10">
+                <div class='form-group'>
+                    <label for="sp_phone" class="sr-only">Phone number</label>
+                    <input type="tel" class="form-control input-center" placeholder="Phone number" name="sp_phone" id="sp_phone" required pattern='\d+' maxlength="10">
+                </div>
                 
-                <label for="sp_email" class="sr-only">Email</label>
-                <input type="email" class="form-control input-center" placeholder="Email" name="sp_email" id="sp_email" required maxlength="255">
+                <div class='form-group'>
+                    <label for="sp_email" class="sr-only">Email</label>
+                    <input type="email" class="form-control input-center" placeholder="Email" name="sp_email" id="sp_email" required maxlength="255">
+                </div>
                 
-                <label for="sp_hst_number" class="sr-only">HST number</label>
-                <input type="text" class="form-control input-bottom" placeholder="HST number" name="sp_hst_number" id="sp_hst_number" pattern="[A-Za-z\d]*" maxlength="255">
-            </div>
+                <div class='form-group'>
+                    <label for="sp_hst_number" class="sr-only">HST number</label>
+                    <input type="text" class="form-control input-bottom" placeholder="HST number" name="sp_hst_number" id="sp_hst_number" pattern="[A-Za-z\d]*" maxlength="255">
+                </div>
+            </section>
             
-            <div class="col-md-5">
+            <section class="col-md-5" id='invoice_to'>
             
                 <h3>To</h3>
                 <p>
@@ -75,7 +91,7 @@
                     <?php echo $settings['institution_dept_recipient_email']; ?>
                 </p>
                 
-            </div>
+            </section>
             
             <div class="col-md-3 col-md-offset-1 invoice-for">
                 
@@ -148,7 +164,7 @@
             <div class="col-md-2 col-md-offset-10 invoice-total">
                 <h3>Total <span id="invoice-total-dollar-amount">N/A</span></h3>
             </div>
-        <div>
+        </div>
         
         <div class="row">
             <div class="col-md-12">
@@ -173,7 +189,8 @@
             </div>
         
         </div>
-
+        
+        <input type='hidden' name='mode' id='mode'>
     </form>
 
 </div>

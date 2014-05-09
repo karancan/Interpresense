@@ -56,8 +56,8 @@ if (!isset($_GET['page'])) {
     $viewFile = "views/invoice.php";
 } elseif ($_GET['page'] === 'invoice-submission') {
     
-    //@todo: distinguish between submitting a draft vs a final invoice
-    $invoiceID = $invoice->addInvoice($_POST, false);
+    $final = isset($_POST['mode']) && $_POST['mode'] === 'final';
+    $invoiceID = $invoice->addInvoice($_POST, $final);
     
     $item_keys = array('item_id', 'description', 'course_code', 'activity_id', 'service_date', 'start_time', 'end_time', 'rate');
     

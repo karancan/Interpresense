@@ -1,6 +1,9 @@
 h3{
     font-weight: normal;
 }
+#invoice_from .form-group {
+    margin-bottom: 0;
+}
 .invoice-total{
     text-align: center;
 }
