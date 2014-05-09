@@ -111,7 +111,8 @@ class Reports extends \Interpresense\Includes\BaseModel {
         
         $sql = "SELECT `content`
                   FROM `interpresense_admin_report_templates`
-                 WHERE `template_id` = :template_id;";
+                 WHERE `template_id` = :template_id
+                   AND `is_deleted` = 0;";
         
         $data = array('template_id' => $templateID);
         $types = array('template_id' => \PDO::PARAM_INT);
