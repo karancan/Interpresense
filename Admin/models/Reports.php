@@ -23,6 +23,7 @@ class Reports extends \Interpresense\Includes\BaseModel {
     public function __construct(\Interpresense\Includes\DatabaseObject $db) {
         parent::__construct($db);
         
+        $this->validators['template_id'] = Validator::notEmpty()->noWhitespace()->digit()->positive();
         $this->validators['user_id'] = Validator::notEmpty()->noWhitespace()->digit()->positive();
         $this->validators['name'] = Validator::notEmpty();
         $this->validators['content'] = Validator::notEmpty();
@@ -120,6 +121,26 @@ class Reports extends \Interpresense\Includes\BaseModel {
         
         parent::$db->query($sql, $data, $types);
         return parent::$db->db->lastInsertId();
+    }
+    
+    /**
+     * Marks a template as deleted
+     * @param int $templateID The template ID
+     */
+    public function deleteReportTemplate($templateID) {
+        
+        if (!$this->validators['template_id']->validate($templateID)) {
+            throw new \InvalidArgumentException('Invalid template ID.');
+        }
+        
+        $sql = "UPDATE `interpresense_admin_report_templates`
+                   SET `is_deleted` = 1
+                 WHERE `template_id` = :template_id;";
+        
+        $data = array('template_id' => $templateID);
+        $types = array('template_id' => \PDO::PARAM_INT);
+        
+        parent::$db->query($sql, $data, $types);
     }
     
 }

@@ -84,7 +84,7 @@ if (!isset($_GET['page'])) {
 
 } elseif ($_GET['page'] === 'mark-template-as-deleted') {
 
-    //@todo: Given a template ID, mark it as deleted
+    $model->deleteReportTemplate($_GET['template_id']);
 
 }
 
