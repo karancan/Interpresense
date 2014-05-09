@@ -81,6 +81,12 @@ $('.invoice-item-rate').change(function(){
     }
 });
 
+// Invoke tooltip popovers
+$("[data-popover='true']").popover({
+    container: 'body',
+    trigger: 'hover'
+});
+
 /**
  *User wants to clear the form
  */

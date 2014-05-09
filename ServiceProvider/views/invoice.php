@@ -100,11 +100,9 @@
                                 <th scope='col'>Date</th>
                                 <th scope='col'>Start time</th>
                                 <th scope='col'>End time</th>
-                                <!-- TODO: don't know how to get tooltips working -->
-                                <th scope='col' style='width: 10%;' data-toggle='tooltip' data-placement='top' title='= end time - start time'>Hour(s) <i class="fa fa-info-circle"></i></th>
+                                <th scope='col' style='width: 10%;' data-popover="true" data-placement='top' data-content='= end time - start time'>Hour(s) <i class="fa fa-info-circle"></i></th>
                                 <th scope='col'>Rate/hour ($)</th>
-                                <!-- TODO: don't know how to get tooltips working -->
-                                <th scope='col' style='width: 12%;' data-toggle='tooltip' data-placement='top' title='= rate * hours'>Amount ($) <i class="fa fa-info-circle"></i></th>
+                                <th scope='col' style='width: 12%;' data-popover="true" data-placement='top' data-content='= rate * hours'>Amount ($) <i class="fa fa-info-circle"></i></th>
                             </tr>
                         </thead>
                         <tbody>
