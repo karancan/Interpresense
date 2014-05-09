@@ -61,8 +61,8 @@ if (!isset($_GET['page'])) {
     $viewFile = "views/reports.php";
 } elseif ($_GET['page'] === 'generate-new-report') {
 
-    //@todo: Add a newly generated report to the database
-    //@todo: Focus on `report-[reportID]`
+    $reportID = $model->generateReport($_POST['template_id'], $_POST['report_name']);
+    header("Location: reports.php?focus=$reportID");
 
 } elseif ($_GET['page'] === 'view-generated-report') {
     

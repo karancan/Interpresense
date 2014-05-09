@@ -23,6 +23,9 @@ class Reports extends \Interpresense\Includes\BaseModel {
     public function __construct(\Interpresense\Includes\DatabaseObject $db) {
         parent::__construct($db);
         
+        $this->validators['report_id'] = Validator::notEmpty()->noWhitespace()->digit()->positive();
+        $this->validators['report_name'] = Validator::notEmpty();
+        
         $this->validators['template_id'] = Validator::notEmpty()->noWhitespace()->digit()->positive();
         $this->validators['user_id'] = Validator::notEmpty()->noWhitespace()->digit()->positive();
         $this->validators['name'] = Validator::notEmpty();
@@ -141,6 +144,22 @@ class Reports extends \Interpresense\Includes\BaseModel {
         $types = array('template_id' => \PDO::PARAM_INT);
         
         parent::$db->query($sql, $data, $types);
+    }
+    
+    /**
+     * Generates a new report
+     * @param int $templateID The template to use
+     * @param string $name The name of the report
+     * @todo
+     */
+    public function generateReport($templateID, $name) {
+        
+        if (!$this->validators['template_id']->validate($templateID) || !$this->validators['report_name']->validate($name)) {
+            throw new \InvalidArgumentException('Template ID or report name invalid.');
+        }
+        
+        
+        
     }
     
 }
