@@ -7,6 +7,7 @@ use Respect\Validation\Validator;
 /**
  * Class for handling reports generated and report templates templates in Interpresense
  * @author Karan Khiani
+ * @author Vincent Diep
  */
 class Reports extends \Interpresense\Includes\BaseModel {
     
@@ -98,6 +99,28 @@ class Reports extends \Interpresense\Includes\BaseModel {
     }
     
     /**
+     * Retrieves the content of a report template
+     * @param int $templateID The template ID
+     * @return string
+     */
+    protected function fetchReportTemplate($templateID) {
+        
+        if (!$this->validators['template_id']->validate($templateID)) {
+            throw new \InvalidArgumentException('Invalid template ID.');
+        }
+        
+        $sql = "SELECT `content`
+                  FROM `interpresense_admin_report_templates`
+                 WHERE `template_id` = :template_id;";
+        
+        $data = array('template_id' => $templateID);
+        $types = array('template_id' => \PDO::PARAM_INT);
+        
+        $result = parent::$db->query($sql, $data, $types, \PDO::FETCH_COLUMN);
+        return $result[0];
+    }
+    
+    /**
      * Creates a report template
      * @param array $data The POST data
      */
@@ -158,8 +181,40 @@ class Reports extends \Interpresense\Includes\BaseModel {
             throw new \InvalidArgumentException('Template ID or report name invalid.');
         }
         
+        // Fetch template placeholders
+        $placeholdersModel = new Placeholders(parent::$db);
+        $placeholders = $placeholdersModel->fetchPlaceholders(0, 1);
         
+        // Fetch template content
+        $template = $this->fetchReportTemplate($templateID);
         
+        // @todo a bunch of string replacing
+        
+        $sql = "INSERT INTO `interpresense_admin_reports` (`template_id`, `generated_by`, `report_name`, `report_content`, `report_file_type`, `report_file_size`, `inserted_on`, `updated_on`)
+                     VALUES (:template_id, :generated_by, :report_name, :report_content, :report_file_type, :report_file_size, NOW(), NOW());";
+        
+        $data = array(
+            'template_id' => $templateID,
+            'generated_by' => $_SESSION['user_id'],
+            'report_name' => $name,
+            'report_content' => $template,
+            'report_file_type' => '', // @todo
+            'report_file_size' => '' // @todo
+        );
+        
+        $types = array(
+            'template_id' => \PDO::PARAM_INT,
+            'generated_by' => \PDO::PARAM_INT,
+            'report_name' => \PDO::PARAM_STR,
+            'report_content' => \PDO::PARAM_STR,
+            'report_file_type' => \PDO::PARAM_STR,
+            'report_file_size' => \PDO::PARAM_INT
+        );
+        
+        // @todo Uncomment after this implementation is done
+        // parent::$db->query($sql, $data, $types);
+        
+        return parent::$db->db->lastInsertId();
     }
     
 }
