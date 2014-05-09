@@ -62,7 +62,7 @@ if (!isset($_GET['page'])) {
 } elseif ($_GET['page'] === 'generate-new-report') {
 
     $reportID = $model->generateReport($_POST['template_id'], $_POST['report_name']);
-    header("Location: reports.php?focus=$reportID");
+    header("Location: reports.php?focus=report-$reportID");
 
 } elseif ($_GET['page'] === 'view-generated-report') {
     
@@ -79,7 +79,7 @@ if (!isset($_GET['page'])) {
 
     $templateID = $model->addReportTemplate($_POST);
     
-    header("Location: reports.php?focus=$templateID");
+    header("Location: reports.php?focus=template-$templateID");
     exit;
 
 } elseif ($_GET['page'] === 'mark-template-as-deleted') {
