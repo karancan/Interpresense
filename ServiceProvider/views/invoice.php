@@ -116,6 +116,7 @@
                             <tr>
                                 <th scope='col'></th>
                                 <th scope='col'>Description</th>
+                                <th scope='col'>Course code</th>
                                 <th scope='col' style='width: 10em;'>Date</th>
                                 <th scope='col'>Start time</th>
                                 <th scope='col'>End time</th>
@@ -128,6 +129,7 @@
                             <tr class="invoice-item-row">
                                 <td></td>
                                 <td><input type="text" class="form-control invoice-item-input" name='description[]' placeholder="Description" required></td>
+                                <td><input type="text" class="form-control invoice-item-input" name='course_code[]' placeholder="Course code" required></td>
                                 <td><input type="text" class="form-control invoice-item-input invoice-item-date" placeholder="Date" name='service_date[]' required></td>
                                 <td>
                                     <select class="form-control invoice-item-start-time" name='start_time[]'>
