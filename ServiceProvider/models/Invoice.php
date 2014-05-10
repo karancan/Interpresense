@@ -25,13 +25,21 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         
         // @todo Validation rules
         $this->validators['invoice_uid'] = Validator::xdigit()->length(128, 128);
+        $this->validators['sp_name'] = Validator::notEmpty();
+        $this->validators['sp_address'] = Validator::string();
+        $this->validators['sp_postal_code'] = Validator::notEmpty()->length(6, 6)->regex('/^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ]\d[ABCEGHJKLMNPRSTVWXYZ]\d$/');
+        $this->validators['sp_city'] = Validator::notEmpty();
+        $this->validators['sp_province'] = Validator::notEmpty()->in(array('AB', 'BC', 'ON', 'MB', 'NB', 'NF', 'NL', 'NU', 'ON', 'PE', 'PQ', 'SK', 'YT'), true);
+        $this->validators['sp_phone'] = Validator::notEmpty()->noWhitespace()->digit();
+        $this->validators['sp_email'] = Validator::notEmpty()->email();
+        $this->validators['sp_hst_number'] = Validator::alnum();
     }
     
     /**
      * Adds an invoice
      * @param array $data The POST data
      * @param boolean $final Whether the new invoice is a draft or is a final copy
-     * @return int The newly created invoice ID
+     * @return string The newly created invoice ID
      */
     public function addInvoice(array $data, $final = true) {
         
@@ -46,30 +54,39 @@ class Invoice extends \Interpresense\Includes\BaseModel {
             'sp_province' => \PDO::PARAM_STR,
             'sp_phone' => \PDO::PARAM_STR,
             'sp_email' => \PDO::PARAM_STR,
+            'sp_hst_number' => \PDO::PARAM_STR,
             'client_id' => \PDO::PARAM_STR,
             'is_final' => \PDO::PARAM_INT,
             'grand_total' => \PDO::PARAM_STR
         );
         
+        // Janitization
+        $data['sp_phone'] = preg_replace('/[[:^digit:]]/i', '', $data['sp_phone']);
+        
         // Validation
-        if(!Validator::key('sp_name')
-               ->key('sp_phone')
-               ->key('sp_email')
+        if(!Validator::key('sp_name', $this->validators['sp_name'])
+               ->key('sp_address', $this->validators['sp_address'])
+               ->key('sp_postal_code', $this->validators['sp_postal_code'])
+               ->key('sp_city', $this->validators['sp_city'])
+               ->key('sp_province', $this->validators['sp_province'])
+               ->key('sp_phone', $this->validators['sp_phone'])
+               ->key('sp_email', $this->validators['sp_email'])
+               ->key('sp_hst_number', $this->validators['sp_hst_number'])
                ->key('client_id')
                ->validate($data) || !Validator::bool()->validate($final)) {
             throw new \InvalidArgumentException('Required data invalid or missing');
         }
         
+        $data['invoice_uid'] = hash('sha512', microtime(true) . mt_rand());
+        $data['invoice_id_for_sp'] = ''; // @todo
+        $data['invoice_id_for_org'] = ''; // @todo
+        $data['is_final'] = (int)$final;
+        $data['grand_total'] = $this->calculateGrandTotal($data['invoice_items']);
+        
         $data = parent::$db->pick(array_keys($types), $data);
         
-        // Janitization
-        $data['sp_phone'] = preg_replace('/[[:^digit:]]/i', '', $data['sp_phone']);
-        
-        $data['invoice_uid'] = hash('sha512', microtime(true) . mt_rand());
-        $data['is_final'] = (int)$final;
-        
-        $sql = "INSERT INTO `interpresense_service_provider_invoices` (`invoice_uid`, `invoice_id_for_sp`, `invoice_id_for_org`, `sp_name`, `sp_address`, `sp_postal_code`, `sp_city`, `sp_province`, `sp_phone`, `sp_email`, `client_id`, `is_final`, `grand_total`, `inserted_on`, `updated_on`)
-                     VALUES (:invoice_uid, :invoice_id_for_sp, :invoice_id_for_org, :sp_name, :sp_address, :sp_postal_code, :sp_city, :sp_province, :sp_phone, :sp_email, :client_id, :is_final, :grand_total, NOW(), NOW());";
+        $sql = "INSERT INTO `interpresense_service_provider_invoices` (`invoice_uid`, `invoice_id_for_sp`, `invoice_id_for_org`, `sp_name`, `sp_address`, `sp_postal_code`, `sp_city`, `sp_province`, `sp_phone`, `sp_email`, `sp_hst_number`, `client_id`, `is_final`, `grand_total`, `inserted_on`, `updated_on`)
+                     VALUES (:invoice_uid, :invoice_id_for_sp, :invoice_id_for_org, :sp_name, :sp_address, :sp_postal_code, :sp_city, :sp_province, :sp_phone, :sp_email, :sp_hst_number, :client_id, :is_final, :grand_total, NOW(), NOW());";
         
         parent::$db->query($sql, $data, $types);
         
@@ -315,6 +332,26 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         }
         
         return reset($result) === '0';
+    }
+    
+    /**
+     * Calculates the grand total of an invoice
+     * @param array $items An array of invoice items
+     * @return float
+     * @todo
+     */
+    private function calculateGrandTotal(array $items) {
+        $total = 0.0;
+        
+        foreach ($items as $item) {
+            $start = \DateTime::createFromFormat('Y-m-d H:i', "{$item['service_date']} {$item['start_time']}");
+            $end = \DateTime::createFromFormat('Y-m-d H:i', "{$item['service_date']} {$item['end_time']}");
+            $time = $start->diff($end);
+            
+            $total += ($time->h + $time->i / 60) * (float)$item['rate'];
+        }
+        
+        return round($total, 2, PHP_ROUND_HALF_UP);
     }
     
     /**

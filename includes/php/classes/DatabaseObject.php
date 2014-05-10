@@ -122,9 +122,10 @@ class DatabaseObject {
      * @param string $sql A parameterized SQL query with named parameters
      * @param array $data An array of data sets to bind
      * @param array $types The types of data
+     * @param boolean $commit Whether to commit the transaction at tne end of execution. Defaults to TRUE.
      * @return array|void Returns the results of a SELECT query.
      */
-    public function batchManipulationQuery($sql, array $data = array(), array $types = array()) {        
+    public function batchManipulationQuery($sql, array $data = array(), array $types = array(), $commit = true) {        
         
         if (!is_string($sql) || empty($sql)) {
             throw new \InvalidArgumentException('Invalid SQL query');
@@ -143,7 +144,9 @@ class DatabaseObject {
             }
             
             // Start transaction
-            $this->db->beginTransaction();
+            if (!$this->db->inTransaction()) {
+                $this->db->beginTransaction();
+            }
             
             // Loop through set of data sets
             $numTypes = sizeof($types);
@@ -162,7 +165,9 @@ class DatabaseObject {
             }
             
             // Commit
-            $this->db->commit();
+            if ($commit) {
+                $this->db->commit();
+            }
             
         } catch (\PDOException $e) {
             // If we are in a transaction, roll it back
