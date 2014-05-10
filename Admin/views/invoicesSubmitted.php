@@ -19,7 +19,6 @@
         
         <div class="col-md-12">
             
-            <!-- @todo: add datepickers to form inputs -->
             <form method="get" action="invoicesSubmitted.php">
                 <h4>Finalized invoices added between 
                     <input id="interpresense_admin_invoices_submitted_start_date" name="start" class="admin-page-filter-input datepicker" type="text" value="<?= $filter_start_date->format('Y-m-d'); ?>"> and 
