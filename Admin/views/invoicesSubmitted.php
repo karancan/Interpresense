@@ -87,6 +87,7 @@
 <?php require FS_ADMIN . '/views/invoicesModals.php'; ?>
 <script charset='utf-8' src='includes/js/admin.js'></script>
 <script charset='utf-8' src='includes/js/invoices.js'></script>
+<script charset='utf-8' src='includes/js/dateRangeQuickPicks.js'></script>
 <script>
     
     'use strict';
