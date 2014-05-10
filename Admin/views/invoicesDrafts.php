@@ -19,15 +19,15 @@
         
         <div class="col-md-12">
             
-            <!-- @todo: add datepickers to form inputs -->
             <form method="get" action="invoicesDrafts.php">
                 <h4>Draft invoices added between 
                     <input id="interpresense_admin_invoices_drafts_start_date" name="start" class="admin-page-filter-input datepicker" type="text" value="<?= $filter_start_date->format('Y-m-d'); ?>"> and 
                     <input id="interpresense_admin_invoices_drafts_end_date" name="end" class="admin-page-filter-input datepicker" type="text" value="<?= $filter_end_date->format('Y-m-d'); ?>">
+                    <?php include 'views/dateRangeQuickPicks.php'; ?>
                     <img src="//<?= URL_IMAGES ?>/loader.gif" class="interpresense-loader">
                 </h4>
             </form>
-            
+
             <table class="table table-hover invoice-table">           
                 <thead>
                     <tr>
@@ -87,6 +87,7 @@
 <?php require FS_ADMIN . '/views/invoicesModals.php'; ?>
 <script charset='utf-8' src='includes/js/admin.js'></script>
 <script charset='utf-8' src='includes/js/invoices.js'></script>
+<script charset='utf-8' src='includes/js/dateRangeQuickPicks.js'></script>
 <script>
     
     'use strict';
