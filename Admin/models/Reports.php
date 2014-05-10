@@ -144,7 +144,7 @@ class Reports extends \Interpresense\Includes\BaseModel {
         );
         
         $data = parent::$db->pick(array_keys($types), $data);
-        $data['user_id'] = $_SESSION['user_id'];
+        $data['user_id'] = $_SESSION['admin']['user_id'];
         
         parent::$db->query($sql, $data, $types);
         return parent::$db->db->lastInsertId();
@@ -190,17 +190,18 @@ class Reports extends \Interpresense\Includes\BaseModel {
         $template = $this->fetchReportTemplate($templateID);
         
         // @todo a bunch of string replacing
+        // @todo convert to PDF
         
         $sql = "INSERT INTO `interpresense_admin_reports` (`template_id`, `generated_by`, `report_name`, `report_content`, `report_file_type`, `report_file_size`, `inserted_on`, `updated_on`)
                      VALUES (:template_id, :generated_by, :report_name, :report_content, :report_file_type, :report_file_size, NOW(), NOW());";
         
         $data = array(
             'template_id' => $templateID,
-            'generated_by' => $_SESSION['user_id'],
+            'generated_by' => $_SESSION['admin']['user_id'],
             'report_name' => $name,
             'report_content' => $template,
-            'report_file_type' => '', // @todo
-            'report_file_size' => '' // @todo
+            'report_file_type' => '', // @todo...tcPdf
+            'report_file_size' => '' // @todo...size of PDF
         );
         
         $types = array(
@@ -212,8 +213,7 @@ class Reports extends \Interpresense\Includes\BaseModel {
             'report_file_size' => \PDO::PARAM_INT
         );
         
-        // @todo Uncomment after this implementation is done
-        // parent::$db->query($sql, $data, $types);
+        parent::$db->query($sql, $data, $types);
         
         return parent::$db->db->lastInsertId();
     }

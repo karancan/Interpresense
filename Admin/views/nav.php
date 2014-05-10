@@ -47,9 +47,9 @@
                         
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?= $antiXSS->escape("{$_SESSION['first_name']} {$_SESSION['last_name']}"); ?><b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?= $antiXSS->escape("{$_SESSION['admin']['first_name']} {$_SESSION['admin']['last_name']}"); ?><b class="caret"></b></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Last log in <?= $dateFmt->format($_SESSION['last_log_in'], 'date_time') ?></a></li>
+                                    <li><a href="#">Last log in <?= $dateFmt->format($_SESSION['admin']['last_log_in'], 'date_time') ?></a></li>
                                     <li class="divider"></li>
                                     <li><a href="settings.php"><i class="fa fa-gears fa-fw"></i> Settings</a></li>
                                     <li><a href="emails.php"><i class="fa fa-envelope fa-fw"></i> Emails</a></li>
@@ -80,7 +80,7 @@
     
     //Initialize a popover on the search input box
     $("#search-input").popover({
-        placement: 'bottom',
+        placement: 'right',
         container: 'body',
         trigger: 'focus'
     });

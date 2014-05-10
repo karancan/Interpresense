@@ -16,7 +16,7 @@ $antiXSS = new AntiXss();
  * Session
  */
 session_start();
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['admin']['user_id'])) {
     header('location: https://' . URL_ADMIN . '/index.php?next=' . $_SERVER['PHP_SELF'] . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : null) );
     die();
 }
