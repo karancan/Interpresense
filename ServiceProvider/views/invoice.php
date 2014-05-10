@@ -112,8 +112,9 @@
                         
                         <thead>
                             <tr>
+                                <th scope='col'></th>
                                 <th scope='col'>Description</th>
-                                <th scope='col'>Date</th>
+                                <th scope='col' style='width: 10em;'>Date</th>
                                 <th scope='col'>Start time</th>
                                 <th scope='col'>End time</th>
                                 <th scope='col' style='width: 10%;' data-popover="true" data-placement='top' data-content='= end time - start time'>Hour(s) <i class="fa fa-info-circle"></i></th>
@@ -123,6 +124,7 @@
                         </thead>
                         <tbody>
                             <tr class="invoice-item-row">
+                                <td></td>
                                 <td><input type="text" class="form-control invoice-item-input" placeholder="Description" required></td>
                                 <td><input type="text" class="form-control invoice-item-input invoice-item-date" placeholder="Date" required></td>
                                 <td>

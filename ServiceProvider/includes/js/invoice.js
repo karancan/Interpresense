@@ -1,4 +1,33 @@
 (function(){
+    
+    // Store a blank row with a remove button to instantiate new rows
+    var $itemRow = (function() {
+        var $row = $('.invoice-item-row').first().clone();
+        
+        $row.addClass('inert').children('td:first-child').html('<button type="button" class="btn btn-default btn-sm remove-invoice-item"><span class="glyphicon glyphicon-remove"></span> <span class="sr-only">Remove item</span></button>');
+        
+        return $row;
+    }());
+    
+    function generateItemRow($row) {
+        var $newRow = $row.clone();
+        
+        // Init datepicker on cloned row
+        $('.invoice-item-date', $newRow).datepicker({
+            format: 'yyyy-mm-dd'
+        });
+        
+        return $newRow;
+    }
+    
+    /**
+     * Activates inert rows
+     * @param {$} $el A jQuery collection of elements
+     */
+    function activateElement($el) {
+        $el.removeClass('inert');
+    }
+    
     /**
      * Change the styling of an input to a negative state
      * @param {$} element An input element
@@ -110,6 +139,9 @@
      */
     $('#invoice_form').submit(function(){
         $('#mode').val('final');
+        
+        // Remove inert rows to prevent validating fields in blank rows
+        $('.inert', this).remove();
 
         if (this.checkValidity()) {
             alert("Invoice will be submitted...you will receive an email");
@@ -119,7 +151,7 @@
     /**
      * User is entering information into the form
      */
-    $('input, select', '#invoice_form').change(function() {
+    $('#invoice_form').on('change', 'input, select', function() {
         'use strict';
 
         //Update the fields' UI state
@@ -133,9 +165,13 @@
     /**
      *User is entering information in to the input fields in invoice rows
      */
-    $(document).on('input focusout', '.invoice-item-input', function() {
+    $('.invoice-table').on('input', '.invoice-item-input', function() {
         'use strict';
         var $thisRow = $(this).closest(".invoice-item-row");
+        
+        if ($thisRow.hasClass('inert')) {
+            activateElement($thisRow);
+        }
 
         if (!$thisRow.next("tr").length) {
             //Variable determining if all the fields in a row are succesfully completed.
@@ -146,12 +182,7 @@
 
             //If all fields have been completed, we can add a new row
             if (all_complete) {
-                var $clone = $thisRow.clone();
-                $clone.find('.invoice-item-input').val('');
-                $clone.find('.has-success').each(function() {
-                    $(this).removeClass("has-success");
-                });
-                $thisRow.after($clone);
+                $thisRow.after(generateItemRow($itemRow));
             }
 
         }
