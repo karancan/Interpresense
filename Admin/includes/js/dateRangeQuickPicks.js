@@ -21,15 +21,11 @@ function determineDate(date, step, pos) {
 $('.admin-date-range-quick-picks').change(function(){
     
     'use strict';
-    
-    //@todo: plugin or custom JS?
-    
+
     if ($(this).val() === ""){
         return;
     }
-    
-    $(this).siblings('.interpresense-loader').show();
-    
+
     var y_m_d_start, y_m_d_end, date_time_this_week_start, date_time_this_week_end;
     
     var milliseconds_one_day = 86400000;
@@ -86,10 +82,10 @@ $('.admin-date-range-quick-picks').change(function(){
         y_m_d_end = buildYMDString(date_time_last_month_end.getFullYear(), date_time_last_month_end.getMonth(), date_time_last_month_end.getDate());
     }
     
-    //Insert the values in to the start and end date pickers and submit the fork
+    //Insert the values in to the start and end date pickers and submit the form
     $(this).siblings('[name="start"]').val(y_m_d_start);
     $(this).siblings('[name="end"]').val(y_m_d_end);
-    $(this).closest('form').submit();
+    $('.admin-page-filter-input').trigger('change');
     
 });
 
