@@ -10,7 +10,6 @@
      * @returns {String} A date string in ISO8601 (YYYY-mm-dd) format 
      */
     function buildYMDString(year, month, day){
-        'use strict';
         return year + '-' + String('0' + (month + 1)).slice(-2) + '-' + String('0' + day).slice(-2);
     }
 
@@ -29,14 +28,12 @@
      * User changes the quick pick select
      */
     $('.admin-date-range-quick-picks').change(function(){
-        
-        'use strict';
 
         if ($(this).val() === ""){
             return;
         }
 
-         var y_m_d_start, y_m_d_end, date_time_this_week_start, date_time_this_week_end;
+        var y_m_d_start, y_m_d_end, date_time_this_week_start, date_time_this_week_end;
 
         var milliseconds_one_day = 86400000;
         var milliseconds_one_week = 604800000;
