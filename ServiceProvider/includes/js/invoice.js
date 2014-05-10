@@ -55,7 +55,7 @@
         var hours, amount;
 
         hours = (parseInt($('.invoice-item-hours', $row).text(), 10) + parseInt($('.invoice-item-minutes', $row).text(), 10)/60),
-        amount = (hours * parseInt($('.invoice-item-rate', $row).val(), 10)).toFixed(2);
+        amount = (hours * parseFloat($('.invoice-item-rate', $row).val())).toFixed(2);
 
         if(isNaN(amount)) {
             amount = '0.00';
@@ -72,7 +72,7 @@
     function totalAmounts() {
         //Update the total of all invoice items
         var total_amount = $('.invoice-item-amounts').toArray().reduce(function(p, v) {
-            return p += Number(v.textContent);
+            return p += parseFloat(v.textContent);
         }, 0);
 
         $('#invoice-total-dollar-amount').text('$' + total_amount.toFixed(2));

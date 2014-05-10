@@ -118,8 +118,8 @@
                                 <th scope='col'>Description</th>
                                 <th scope='col'>Course code</th>
                                 <th scope='col' style='width: 10em;'>Date</th>
-                                <th scope='col'>Start time</th>
-                                <th scope='col'>End time</th>
+                                <th scope='col' style='min-width: 8em;'>Start time</th>
+                                <th scope='col' style='min-width: 8em;'>End time</th>
                                 <th scope='col' style='width: 10%;' data-popover="true" data-placement='top' data-content='= end time - start time'>Hour(s) <i class="fa fa-info-circle"></i></th>
                                 <th scope='col'>Rate/hour ($)</th>
                                 <th scope='col' style='width: 12%;' data-popover="true" data-placement='top' data-content='= rate * hours'>Amount ($) <i class="fa fa-info-circle"></i></th>
