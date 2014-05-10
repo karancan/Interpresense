@@ -132,7 +132,17 @@ if (!isset($_GET['page'])) {
     
 } elseif ($_GET['page'] === "view-file") {
     
-    //@todo: spit out file
+    $invoiceFile = $invoicesFilesModel->fetchFile($_GET['file_id']);
+    if (!empty($invoiceFile)) {
+        header("Content-Type: " . $invoiceFile[0]['file_type']);
+        header("Content-Disposition:attachment; filename=" . str_replace(',', '', $invoiceFile[0]['file_name']) . "");
+        header('Content-Length: ' . $invoiceFile[0]['file_size']);
+        echo $invoiceFile[0]['file_content'];
+        exit;
+    } else {
+        //No file found. An error page is shown
+        $viewFile = '';
+    }
     
 } else if ($_GET['page'] === "fetch-invoice-notes") {
 
