@@ -160,6 +160,10 @@
                                 <td><input type="number" class="form-control invoice-item-input invoice-item-rate" name='rate[]' placeholder="Rate" min="0" step="0.01" required></td>
                                 <td class="invoice-item-amounts">0.00</td>
                             </tr>
+                            <tr>
+                                <td></td>
+                                <td colspan='8'><button type='button' class='btn btn-link add-invoice-item'><i class="fa fa-plus-square"></i> Add another item</button></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

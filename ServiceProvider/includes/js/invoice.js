@@ -5,7 +5,7 @@
         var $row = $('.invoice-item-row').first().clone();
         
         // Add a remove button
-        $row.addClass('inert').children('td:first-child').html('<button type="button" class="btn btn-link btn-sm remove-invoice-item"><span class="glyphicon glyphicon-remove"></span> <span class="sr-only">Remove item</span></button>');
+        $row.children('td:first-child').html('<button type="button" class="btn btn-link btn-sm remove-invoice-item"><i class="fa fa-minus-square"></i> <span class="sr-only">Remove item</span></button>');
         
         return $row;
     }());
@@ -19,16 +19,6 @@
         });
         
         return $newRow;
-    }
-    
-    /**
-     * Activates inert rows
-     * @param {$} $el A jQuery collection of elements
-     */
-    function activateElement($el) {
-        if ($el.hasClass('inert')) {
-            $el.removeClass('inert');
-        }
     }
     
     /**
@@ -121,6 +111,10 @@
         container: 'body',
         trigger: 'hover'
     });
+    
+    $('.add-invoice-item').click(function() {
+        $('.invoice-item-row').last().after(generateItemRow($itemRow));
+    });
 
     /**
      * Delete a row
@@ -151,9 +145,6 @@
      */
     $('#invoice_form').submit(function(){
         $('#mode').val('final');
-        
-        // Remove inert rows to prevent validating fields in blank rows
-        $('.inert', this).remove();
 
         if (this.checkValidity()) {
             alert("Invoice will be submitted...you will receive an email");
@@ -172,30 +163,5 @@
         } else {
             showInputSuccess($(this));
         }
-    });
-
-    /**
-     *User is entering information in to the input fields in invoice rows
-     */
-    $('.invoice-table').on('input', '.invoice-item-input', function() {
-        'use strict';
-        var $thisRow = $(this).closest(".invoice-item-row");
-        
-        activateElement($thisRow);
-
-        if (!$thisRow.next("tr").length) {
-            //Variable determining if all the fields in a row are succesfully completed.
-            //Check to see if no fields in the row are incomplete or erroneous
-            var all_complete = !$thisRow.find('.invoice-item-input').filter(function(){
-                return $(this).hasClass("has-error") || !this.checkValidity();
-            }).length;
-
-            //If all fields have been completed, we can add a new row
-            if (all_complete) {
-                $thisRow.after(generateItemRow($itemRow));
-            }
-
-        }
-
     });
 }());
