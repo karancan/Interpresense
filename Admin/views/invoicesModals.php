@@ -13,6 +13,8 @@
                     <img id="admin-invoice-items-loader" src="//<?= URL_IMAGES ?>/loader.gif" class="center-block interpresense-loader">            
                 </div>
                 
+                <p id="admin-invoice-last-viewed"></p>
+                
                 <table id="admin-invoice-items-table" class="table table-hover">
                     <thead>
                         <tr>

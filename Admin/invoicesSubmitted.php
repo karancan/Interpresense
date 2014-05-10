@@ -92,11 +92,17 @@ if (!isset($_GET['page'])) {
 } else if ($_GET['page'] === "fetch-invoice-items") {
     
     //@todo: give the user the ability to mark an invoice as read/unread
-    //@todo: fetch the details of who viewed invoice last and when
     
+    //Was this invoice viewed previously?
+    $invoiceViewed = $invoicesModel->fetchInvoiceViewedDetails($_POST['invoice_id']);
+    if (!empty($invoiceViewed)) {
+        $invoiceViewed[0]['admin_last_viewed_on'] = $dateFmt->format($invoiceViewed[0]['admin_last_viewed_on'], 'date_time');
+    }
+    
+    //Mark the invoice as viewed
     $invoicesModel->markInvoiceViewed($_POST['invoice_id']);
     
-    header('Content-Type: application/json; charset=utf-8');
+    //Invoice items
     $items = $invoicesItemsModel->fetchItems($_POST['invoice_id']);
     
     $grandTotal = 0;
@@ -116,7 +122,9 @@ if (!isset($_GET['page'])) {
         $grandTotal += $rate;
     }
     unset($i);
-    echo json_encode(array('items' => $items, 'grand_total' => $grandTotal));
+    
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode(array('items' => $items, 'grand_total' => $grandTotal, 'viewed' => $invoiceViewed[0]));
     exit;
     
 } else if ($_GET['page'] === "fetch-invoice-files") {
