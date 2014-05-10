@@ -101,8 +101,12 @@ if (!isset($_GET['page'])) {
     $viewFile = "views/registerOrReset.php";
 } elseif ($_GET['page'] === "initiate-reset") {
     
-    $users->requestPasswordReset($_POST['username'], $_POST['user_password']);
-    // @todo
+    $resetHash = $users->requestPasswordReset($_POST['username'], $_POST['user_password']);
+    if (!empty($resetHash)) {
+        //@todo: send the password reset email
+    } else {
+        //@todo: go back to the view with an error tooltip
+    }
     
 } elseif ($_GET['page'] === "reset-password") {
     
