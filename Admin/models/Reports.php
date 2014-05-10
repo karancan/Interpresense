@@ -144,7 +144,7 @@ class Reports extends \Interpresense\Includes\BaseModel {
         );
         
         $data = parent::$db->pick(array_keys($types), $data);
-        $data['user_id'] = $_SESSION['user_id'];
+        $data['user_id'] = $_SESSION['admin']['user_id'];
         
         parent::$db->query($sql, $data, $types);
         return parent::$db->db->lastInsertId();
@@ -197,7 +197,7 @@ class Reports extends \Interpresense\Includes\BaseModel {
         
         $data = array(
             'template_id' => $templateID,
-            'generated_by' => $_SESSION['user_id'],
+            'generated_by' => $_SESSION['admin']['user_id'],
             'report_name' => $name,
             'report_content' => $template,
             'report_file_type' => '', // @todo...tcPdf

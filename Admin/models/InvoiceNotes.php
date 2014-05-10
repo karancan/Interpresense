@@ -50,7 +50,7 @@ class InvoiceNotes extends \Interpresense\Includes\BaseModel {
         );
         
         $data = parent::$db->pick(array_keys($types), $data);
-        $data['user_id'] = $_SESSION['user_id'];
+        $data['user_id'] = $_SESSION['admin']['user_id'];
         
         parent::$db->query($sql, $data, $types);
     }
@@ -125,7 +125,7 @@ class InvoiceNotes extends \Interpresense\Includes\BaseModel {
         );
         
         $data = parent::$db->pick(array_keys($types), $data);
-        $data['user_id'] = $_SESSION['user_id'];
+        $data['user_id'] = $_SESSION['admin']['user_id'];
         
         parent::$db->query($sql, $data, $types);
     }

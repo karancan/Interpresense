@@ -47,7 +47,7 @@ if (!isset($_GET['page'])) {
     
     //@todo: first we need to check if installation is complete. If yes, continue, If not, go to setup module
     
-    if (isset($_SESSION['user_id'])){
+    if (isset($_SESSION['admin']['user_id'])){
         
         if (!empty($_GET['next'])) {
             header("Location: {$_GET['next']}");
@@ -78,10 +78,10 @@ if (!isset($_GET['page'])) {
             
         } else {
             session_regenerate_id(true);
-            $_SESSION['user_id'] = $user['user_id'];
-            $_SESSION['first_name'] = $user['first_name'];
-            $_SESSION['last_name'] = $user['last_name'];
-            $_SESSION['last_log_in'] = $user['last_log_in'];
+            $_SESSION['admin']['user_id'] = $user['user_id'];
+            $_SESSION['admin']['first_name'] = $user['first_name'];
+            $_SESSION['admin']['last_name'] = $user['last_name'];
+            $_SESSION['admin']['last_log_in'] = $user['last_log_in'];
 
             if (!empty($_GET['next'])) {
                 header("Location: {$_GET['next']}");
@@ -112,7 +112,7 @@ if (!isset($_GET['page'])) {
         // @todo reset failed
     }
 } else if ($_GET['page'] === "logout") {
-    session_destroy();
+    unset($_SESSION['admin']);
     header('Location: https://'  . URL_ADMIN);
     exit;
 }
