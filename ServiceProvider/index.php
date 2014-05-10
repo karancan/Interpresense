@@ -57,11 +57,6 @@ if (!isset($_GET['page'])) {
 } elseif ($_GET['page'] === 'invoice-submission') {
     
     $final = isset($_POST['mode']) && $_POST['mode'] === 'final';
-    $invoiceID = $invoice->addInvoice($_POST, $final);
-    
-    $item_keys = array('item_id', 'description', 'course_code', 'activity_id', 'service_date', 'start_time', 'end_time', 'rate');
-    
-    \Interpresense\Includes\DatabaseObject::pick($item_keys, $_POST);
     
     // Flip keys so that items are in rows not columns
     foreach ($_POST['description'] as $key => $val) {
@@ -77,6 +72,7 @@ if (!isset($_GET['page'])) {
     }
     unset($_POST['description'], $_POST['course_code'], $_POST['activity_id'], $_POST['service_date'], $_POST['start_time'], $_POST['end_time'], $_POST['rate']);
     
+    $invoiceID = $invoice->addInvoice($_POST, $final);
     $invoiceItems->changeItems($invoiceID, $_POST['invoice_items']);
     
     //@todo: trigger emails

@@ -77,18 +77,11 @@ class Invoice extends \Interpresense\Includes\BaseModel {
             throw new \InvalidArgumentException('Required data invalid or missing');
         }
         
-        // Extract data for grand total calculation
-        $items = array(
-            'start_time' => $data['start_time'],
-            'end_time' => $data['end_time'],
-            'rate' => $data['rate']
-        );
-        
         $data['invoice_uid'] = hash('sha512', microtime(true) . mt_rand());
         $data['invoice_id_for_sp'] = ''; // @todo
         $data['invoice_id_for_org'] = ''; // @todo
         $data['is_final'] = (int)$final;
-        $data['grand_total'] = $this->calculateGrandTotalColumnal($items);
+        $data['grand_total'] = $this->calculateGrandTotal($data['invoice_items']);
         
         $data = parent::$db->pick(array_keys($types), $data);
         
@@ -343,24 +336,16 @@ class Invoice extends \Interpresense\Includes\BaseModel {
     
     /**
      * Calculates the grand total of an invoice
-     * @param array $items An array of invoice items. Required properties: start/end time, rate
+     * @param array $items An array of invoice items
      * @return float
      * @todo
      */
-    private function calculateGrandTotalColumnal(array $items) {
+    private function calculateGrandTotal(array $items) {
         $total = 0.0;
         
-        // Flip the columns to rows
-        $data = array();
-        foreach ($items as $rk => $r) {
-            foreach($r as $ck => $c){
-                $data[$ck][$rk] = $c;
-            }
-        }
-        
-        foreach ($data as $item) {
-            $start = \DateTime::createFromFormat('H:i', $item['start_time']);
-            $end = \DateTime::createFromFormat('H:i', $item['end_time']);
+        foreach ($items as $item) {
+            $start = \DateTime::createFromFormat('Y-m-d H:i', "{$item['service_date']} {$item['start_time']}");
+            $end = \DateTime::createFromFormat('Y-m-d H:i', "{$item['service_date']} {$item['end_time']}");
             $time = $start->diff($end);
             
             $total += ($time->h + $time->i / 60) * (float)$item['rate'];
