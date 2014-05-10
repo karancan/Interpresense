@@ -4,7 +4,8 @@
     var $itemRow = (function() {
         var $row = $('.invoice-item-row').first().clone();
         
-        $row.addClass('inert').children('td:first-child').html('<button type="button" class="btn btn-default btn-sm remove-invoice-item"><span class="glyphicon glyphicon-remove"></span> <span class="sr-only">Remove item</span></button>');
+        // Add a remove button
+        $row.addClass('inert').children('td:first-child').html('<button type="button" class="btn btn-link btn-sm remove-invoice-item"><span class="glyphicon glyphicon-remove"></span> <span class="sr-only">Remove item</span></button>');
         
         return $row;
     }());
@@ -25,7 +26,9 @@
      * @param {$} $el A jQuery collection of elements
      */
     function activateElement($el) {
-        $el.removeClass('inert');
+        if ($el.hasClass('inert')) {
+            $el.removeClass('inert');
+        }
     }
     
     /**
@@ -111,10 +114,19 @@
         }
     });
 
-    // Invoke tooltip popovers
+    /**
+     * Invoke tooltip popovers
+     */
     $("[data-popover='true']").popover({
         container: 'body',
         trigger: 'hover'
+    });
+
+    /**
+     * Delete a row
+     */
+    $('.invoice-table').on('click', '.remove-invoice-item', function() {
+        $(this).closest('tr').remove();
     });
 
     /**
@@ -151,7 +163,7 @@
     /**
      * User is entering information into the form
      */
-    $('#invoice_form').on('change', 'input, select', function() {
+    $('#invoice_form').on('blur change', 'input, select', function() {
         'use strict';
 
         //Update the fields' UI state
@@ -169,9 +181,7 @@
         'use strict';
         var $thisRow = $(this).closest(".invoice-item-row");
         
-        if ($thisRow.hasClass('inert')) {
-            activateElement($thisRow);
-        }
+        activateElement($thisRow);
 
         if (!$thisRow.next("tr").length) {
             //Variable determining if all the fields in a row are succesfully completed.

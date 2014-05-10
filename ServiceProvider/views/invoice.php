@@ -97,8 +97,10 @@
                 
                 <h2>INVOICE</h2>
                 
-                <input type="text" class="form-control" placeholder="Client ID number">
-                
+                <div class='form-group'>
+                    <label for='client_id' class='sr-only'>Client ID number</label>
+                    <input type="text" id='client_id' name='client_id' class="form-control" placeholder="Client ID number">
+                </div>
             </div>
         </div>
         
@@ -125,10 +127,10 @@
                         <tbody>
                             <tr class="invoice-item-row">
                                 <td></td>
-                                <td><input type="text" class="form-control invoice-item-input" placeholder="Description" required></td>
-                                <td><input type="text" class="form-control invoice-item-input invoice-item-date" placeholder="Date" required></td>
+                                <td><input type="text" class="form-control invoice-item-input" name='description[]' placeholder="Description" required></td>
+                                <td><input type="text" class="form-control invoice-item-input invoice-item-date" placeholder="Date" name='service_date[]' required></td>
                                 <td>
-                                    <select class="form-control invoice-item-start-time">
+                                    <select class="form-control invoice-item-start-time" name='start_time[]'>
                                     <?php
                                         for ($hours = $settings['invoicing_earliest_possible_hour']; $hours <= $settings['invoicing_latest_possible_hour']; ++$hours) {
                                             for ($mins = 0; $mins < 60; $mins += 30) {
@@ -139,7 +141,7 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <select class="form-control invoice-item-end-time">
+                                    <select class="form-control invoice-item-end-time" name='end_time[]'>
                                     <?php
                                         for ($hours = $settings['invoicing_earliest_possible_hour']; $hours <= $settings['invoicing_latest_possible_hour']; ++$hours) {
                                             for($mins = 0; $mins < 60; $mins += 30) {
@@ -153,7 +155,7 @@
                                     <span class="invoice-item-hours">0</span> hours
                                     <span class="invoice-item-minutes">0</span> min
                                 </td>
-                                <td><input type="number" class="form-control invoice-item-input invoice-item-rate" placeholder="Rate" min="0" step="0.01" required></td>
+                                <td><input type="number" class="form-control invoice-item-input invoice-item-rate" name='rate[]' placeholder="Rate" min="0" step="0.01" required></td>
                                 <td class="invoice-item-amounts">0.00</td>
                             </tr>
                         </tbody>
