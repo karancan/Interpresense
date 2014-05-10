@@ -138,7 +138,7 @@ class InvoiceItems extends \Interpresense\Includes\BaseModel {
             'rate' => \PDO::PARAM_STR
         );
         
-        parent::$db->batchManipulationQuery($sql, $items, $types);
+        parent::$db->batchManipulationQuery($sql, $items, $types, false);
     }
     
     /**

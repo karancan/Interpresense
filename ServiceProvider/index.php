@@ -72,8 +72,10 @@ if (!isset($_GET['page'])) {
     }
     unset($_POST['description'], $_POST['course_code'], $_POST['activity_id'], $_POST['service_date'], $_POST['start_time'], $_POST['end_time'], $_POST['rate']);
     
+    $dbo->db->beginTransaction();
     $invoiceID = $invoice->addInvoice($_POST, $final);
     $invoiceItems->changeItems($invoiceID, $_POST['invoice_items']);
+    $dbo->db->commit();
     
     //@todo: trigger emails
     
