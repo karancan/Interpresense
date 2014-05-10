@@ -61,9 +61,23 @@ if (!isset($_GET['page'])) {
     
     $item_keys = array('item_id', 'description', 'course_code', 'activity_id', 'service_date', 'start_time', 'end_time', 'rate');
     
-    \Interpresense\Includes\DatabaseObject::pick($keys, $_POST);
+    \Interpresense\Includes\DatabaseObject::pick($item_keys, $_POST);
     
-    $invoiceItems->changeItems($invoiceID, $item);
+    // Flip keys so that items are in rows not columns
+    foreach ($_POST['description'] as $key => $val) {
+        $_POST['invoice_items'][$key] = array(
+            'description' => $_POST['description'][$key],
+            'course_code' => $_POST['course_code'][$key],
+            'activity_id' => $_POST['activity_id'][$key],
+            'service_date' => $_POST['service_date'][$key],
+            'start_time' => $_POST['start_time'][$key],
+            'end_time' => $_POST['end_time'][$key],
+            'rate' => $_POST['rate'][$key]
+        );
+    }
+    unset($_POST['description'], $_POST['course_code'], $_POST['activity_id'], $_POST['service_date'], $_POST['start_time'], $_POST['end_time'], $_POST['rate']);
+    
+    $invoiceItems->changeItems($invoiceID, $_POST['invoice_items']);
     
     //@todo: trigger emails
     
