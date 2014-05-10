@@ -39,7 +39,7 @@ class Invoice extends \Interpresense\Includes\BaseModel {
      * Adds an invoice
      * @param array $data The POST data
      * @param boolean $final Whether the new invoice is a draft or is a final copy
-     * @return int The newly created invoice ID
+     * @return string The newly created invoice ID
      */
     public function addInvoice(array $data, $final = true) {
         
@@ -77,11 +77,20 @@ class Invoice extends \Interpresense\Includes\BaseModel {
             throw new \InvalidArgumentException('Required data invalid or missing');
         }
         
-        $data = parent::$db->pick(array_keys($types), $data);
+        // Extract data for grand total calculation
+        $items = array(
+            'start_time' => $data['start_time'],
+            'end_time' => $data['end_time'],
+            'rate' => $data['rate']
+        );
         
         $data['invoice_uid'] = hash('sha512', microtime(true) . mt_rand());
+        $data['invoice_id_for_sp'] = ''; // @todo
+        $data['invoice_id_for_org'] = ''; // @todo
         $data['is_final'] = (int)$final;
-        $data['grand_total'] = 0.00; // @todo
+        $data['grand_total'] = $this->calculateGrandTotalColumnal($items);
+        
+        $data = parent::$db->pick(array_keys($types), $data);
         
         $sql = "INSERT INTO `interpresense_service_provider_invoices` (`invoice_uid`, `invoice_id_for_sp`, `invoice_id_for_org`, `sp_name`, `sp_address`, `sp_postal_code`, `sp_city`, `sp_province`, `sp_phone`, `sp_email`, `sp_hst_number`, `client_id`, `is_final`, `grand_total`, `inserted_on`, `updated_on`)
                      VALUES (:invoice_uid, :invoice_id_for_sp, :invoice_id_for_org, :sp_name, :sp_address, :sp_postal_code, :sp_city, :sp_province, :sp_phone, :sp_email, :sp_hst_number, :client_id, :is_final, :grand_total, NOW(), NOW());";
@@ -335,10 +344,29 @@ class Invoice extends \Interpresense\Includes\BaseModel {
     /**
      * Calculates the grand total of an invoice
      * @param array $items An array of invoice items. Required properties: start/end time, rate
+     * @return float
      * @todo
      */
-    private function calculateGrandTotal(array $items) {
+    private function calculateGrandTotalColumnal(array $items) {
+        $total = 0.0;
         
+        // Flip the columns to rows
+        $data = array();
+        foreach ($items as $rk => $r) {
+            foreach($r as $ck => $c){
+                $data[$ck][$rk] = $c;
+            }
+        }
+        
+        foreach ($data as $item) {
+            $start = \DateTime::createFromFormat('H:i', $item['start_time']);
+            $end = \DateTime::createFromFormat('H:i', $item['end_time']);
+            $time = $start->diff($end);
+            
+            $total += ($time->h + $time->i / 60) * (float)$item['rate'];
+        }
+        
+        return round($total, 2, PHP_ROUND_HALF_UP);
     }
     
     /**
