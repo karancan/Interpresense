@@ -24,6 +24,7 @@ $antiXSS = new AntiXss();
  */
 $invoice = new Invoice($dbo);
 $invoiceItems = new InvoiceItems($dbo);
+$activitiesModel = new \Interpresense\Admin\Activities($dbo);
 
 /**
  * Localization
@@ -51,6 +52,8 @@ if (!isset($_GET['page'])) {
     if (!$settings['installation_complete']) {
         header('Location: https://'  . URL_SETUP . '/');
     }
+    
+    $activities = $activitiesModel->fetchActivities();
 
     $translate->addResource('l10n/invoice.json');
     $viewFile = "views/invoice.php";

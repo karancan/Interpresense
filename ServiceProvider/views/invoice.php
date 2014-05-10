@@ -117,6 +117,7 @@
                                 <th scope='col'></th>
                                 <th scope='col'>Description</th>
                                 <th scope='col'>Course code</th>
+                                <th scope='col'>Activity</th>
                                 <th scope='col' style='width: 10em;'>Date</th>
                                 <th scope='col' style='min-width: 8em;'>Start time</th>
                                 <th scope='col' style='min-width: 8em;'>End time</th>
@@ -130,6 +131,16 @@
                                 <td></td>
                                 <td><input type="text" class="form-control invoice-item-input" name='description[]' placeholder="Description" required></td>
                                 <td><input type="text" class="form-control invoice-item-input" name='course_code[]' placeholder="Course code" required></td>
+                                <td>
+                                    <select class='form-control' name='activity_id[]' required>
+                                        <option value=''>Activity…</option>
+                                        <?php
+                                        foreach ($activities as $a) {
+                                            echo "<option value='{$a['activity_id']}'>{$a['activity_name_en']}</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </td>
                                 <td><input type="text" class="form-control invoice-item-input invoice-item-date" placeholder="Date" name='service_date[]' required></td>
                                 <td>
                                     <select class="form-control invoice-item-start-time" name='start_time[]'>
@@ -162,7 +173,7 @@
                             </tr>
                             <tr>
                                 <td></td>
-                                <td colspan='8'><button type='button' class='btn btn-link add-invoice-item'><i class="fa fa-plus-square"></i> Add another item</button></td>
+                                <td colspan='9'><button type='button' class='btn btn-link add-invoice-item'><i class="fa fa-plus-square"></i> Add another item</button></td>
                             </tr>
                         </tbody>
                     </table>
