@@ -151,13 +151,14 @@ class Invoice extends \Interpresense\Includes\BaseModel {
     }
     
     /**
-     * Marks an invoice as a draft
+     * Marks a non-approved invoice as a draft
      * @param int $invoiceID The invoice ID
      */
     public function markInvoiceAsDraft($invoiceID) {
         $sql = "UPDATE `interpresense_service_provider_invoices`
-                   SET `is_final` = 0, `is_approved` = 0, `approved_by` = NULL, `updated_on` = NOW()
-                 WHERE `invoice_id` = :invoice_id;";
+                   SET `is_final` = 0, `updated_on` = NOW()
+                 WHERE `invoice_id` = :invoice_id
+                   AND `is_approved` = 0;";
         
         $data = array('invoice_id' => $invoiceID);
         $types = array('invoice_id' => \PDO::PARAM_INT);
@@ -166,7 +167,7 @@ class Invoice extends \Interpresense\Includes\BaseModel {
     }
     
     /**
-     * Marks a finalized invoice as approved
+     * Marks a finalized (non-draft) invoice as approved
      * @param int $invoiceID The invoice ID
      */
     public function markInvoiceAsApproved($invoiceID) {

@@ -56,6 +56,7 @@ if (!isset($_GET['page'])) {
     
     //@todo: add ability to view approved invoices only
     //@todo: show tooltip if invoice is approved
+    //@todo: add datatables to view
 
     if (!empty($_GET['start'])) {
         try {
@@ -92,7 +93,7 @@ if (!isset($_GET['page'])) {
     
 } else if ($_GET['page'] === "fetch-invoice-items") {
     
-    //@todo: give the user the ability to mark an invoice as read/unread
+    //@todo: give the user the ability to mark an invoice as viewed/not viewed
     
     //Was this invoice viewed previously?
     $invoiceViewed = $invoicesModel->fetchInvoiceViewedDetails($_POST['invoice_id']);
@@ -167,24 +168,32 @@ if (!isset($_GET['page'])) {
 } elseif ($_GET['page'] === "add-note"){
     
     $invoicesNotesModel->addNote($_POST);
-    header('Location: invoicesSubmitted.php?focus=' . $_POST['invoice_id']);
+    header('Location: invoicesSubmitted.php?focus=' . $_POST['invoice_id']); //@todo: respect start, end, approved
 
 } else if ($_GET['page'] === "mark-invoice-as-draft") {
     
-    $invoicesModel->markInvoiceAsDraft($_GET['invoice_id']);
-    //@todo: create an invoice note stating that the invoice was changed to draft status
-    //@todo: send email to service provider telling them the invoice was marked as a draft with the note attached
+    if (!empty($_GET['invoice_id'])) {
+        $invoicesModel->markInvoiceAsDraft($_GET['invoice_id']);
+        
+        //@todo: create an invoice note stating that the invoice was changed to draft status
+        //@todo: send email to service provider telling them the invoice was marked as a draft with the note attached
+    
+        header('Location: invoicesSubmitted.php?focus=' . $_GET['invoice_id']); //@todo: respect start, end, approved
+    } else {
+        $viewFile = ''; //Show error page
+    }
 
 } else if ($_GET['page'] === "mark-invoice-as-approved") {
     
     if (!empty($_GET['invoice_id'])) {
         $invoicesModel->markInvoiceAsApproved($_GET['invoice_id']);
-        header('Location: invoicesSubmitted.php?focus=' . $_GET['invoice_id']); //@todo: start, end, approved
         
         //@todo: create an invoice note stating that the invoice was marked approved
         //@todo: send email to service provider telling them the invoice was approved
+        
+        header('Location: invoicesSubmitted.php?focus=' . $_GET['invoice_id']); //@todo: respect start, end, approved
     } else {
-        $viewFile = ''; //Go to error page
+        $viewFile = ''; //Show error page
     }
     
 } else if ($_GET['page'] === "export") {

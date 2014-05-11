@@ -130,11 +130,10 @@
             </div>
             
             <div class="modal-body">
-            
-                <div class="form-group">
-                    <label class="control-label" for="invoice_note">This note will not be shown to the service provider</label>
-                    <textarea class="form-control" id="invoice_note" name="note" rows="10" required></textarea>
-                </div>
+                
+                <p>This note will not be shown to the service provider</p>
+                
+                <textarea class="form-control" id="invoice_note" name="note" rows="10" required></textarea>
                 
             </div>
             
