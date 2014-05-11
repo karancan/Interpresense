@@ -170,6 +170,8 @@ class DatabaseObject {
             }
             
         } catch (\PDOException $e) {
+            $this->queryErrorHandler($e, $sql);
+                
             // If we are in a transaction, roll it back
             try {
                 $this->db->rollBack();

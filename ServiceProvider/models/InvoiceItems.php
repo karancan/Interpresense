@@ -97,7 +97,7 @@ class InvoiceItems extends \Interpresense\Includes\BaseModel {
             throw new \InvalidArgumentException('Invalid invoice ID.');
         }
         
-        $sql = "INSERT INTO `interpresense_service_provider_invoice_items` (`item_id`, `invoice_id`, `description`, `course_code`, `activity_id` `service_date`, `start_time`, `end_time`, `rate`, `inserted_on`, `updated_on`)
+        $sql = "INSERT INTO `interpresense_service_provider_invoice_items` (`item_id`, `invoice_id`, `description`, `course_code`, `activity_id`, `service_date`, `start_time`, `end_time`, `rate`, `inserted_on`, `updated_on`)
                      VALUES (:item_id, :invoice_id, :description, :course_code, :activity_id, :service_date, :start_time, :end_time, :rate, NOW(), NOW())
     ON DUPLICATE KEY UPDATE `description` = VALUES(`description`),
                             `course_code` = VALUES(`course_code`),
@@ -132,6 +132,8 @@ class InvoiceItems extends \Interpresense\Includes\BaseModel {
             'item_id' => \PDO::PARAM_INT,
             'invoice_id' => \PDO::PARAM_INT,
             'description' => \PDO::PARAM_STR,
+            'course_code' => \PDO::PARAM_STR,
+            'activity_id' => \PDO::PARAM_INT,
             'service_date' => \PDO::PARAM_STR,
             'start_time' => \PDO::PARAM_STR,
             'end_time' => \PDO::PARAM_STR,
