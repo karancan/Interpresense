@@ -239,7 +239,7 @@ if (!isset($_GET['page'])) {
 /**
  * View
  */
-$actions = array('fetch-invoice-items', 'fetch-invoice-files', 'fetch-invoice-notes', 'mark-invoice-as-draft', 'export');
+$actions = array('fetch-invoice-items', 'fetch-invoice-files', 'fetch-invoice-notes', 'export');
 
 if (!in_array($_GET['page'], $actions, true)) {
     
