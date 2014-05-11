@@ -24,6 +24,7 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         parent::__construct($db);
         
         // @todo Validation rules
+        $this->validators['invoice_id'] = Validator::notEmpty()->noWhitespace()->digit()->positive();
         $this->validators['invoice_uid'] = Validator::xdigit()->length(128, 128);
         $this->validators['sp_name'] = Validator::notEmpty();
         $this->validators['sp_address'] = Validator::string();
@@ -286,6 +287,11 @@ class Invoice extends \Interpresense\Includes\BaseModel {
      * @param int $invoiceID The invoice ID
      */
     public function markInvoiceViewed($invoiceID) {
+    
+        if(!$this->validators['invoice_id']->validate($invoiceID)) {
+            throw new \InvalidArgumentException('Invalid invoice ID.');
+        }
+        
         $sql = "UPDATE `interpresense_service_provider_invoices`
                    SET `admin_viewed` = 1, `admin_last_viewed_on` = NOW(), `admin_last_viewed_by` = :user_id, `updated_on` = NOW()
                  WHERE `invoice_id` = :invoice_id;";
@@ -301,6 +307,34 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         );
         
         parent::$db->query($sql, $data, $types);
+    }
+    
+    /**
+     * Fetches if, who and when an invoice was last viewed
+     * @param int $invoiceID The invoice ID
+     */
+    public function fetchInvoiceViewedDetails($invoiceID) {
+    
+        if(!$this->validators['invoice_id']->validate($invoiceID)) {
+            throw new \InvalidArgumentException('Invalid invoice ID.');
+        }
+        
+        $sql = "SELECT i.admin_last_viewed_on, CONCAT(u.first_name, ' ', u.last_name) AS name
+                  FROM `interpresense_service_provider_invoices` i
+                  JOIN `interpresense_users` u
+                    ON i.admin_last_viewed_by = u.user_id
+                 WHERE i.invoice_id = :invoice_id
+                   AND i.admin_viewed = 1;";
+        
+        $data = array(
+            'invoice_id' => $invoiceID
+        );
+        
+        $types = array(
+            'invoice_id' => \PDO::PARAM_INT
+        );
+        
+        return parent::$db->query($sql, $data, $types);
     }
     
     /**

@@ -106,6 +106,7 @@ if (!isset($_GET['page'])) {
         //@todo: send the password reset email
     } else {
         //@todo: go back to the view with an error tooltip
+        header('Location: index.php?page=register-or-reset&mode=initiate-reset-fail');
     }
     
 } elseif ($_GET['page'] === "reset-password") {

@@ -19,7 +19,7 @@ $('[data-action="view-items"]').click(function(){
     
     $('#admin-invoice-items-loader').show();
     
-    $('#admin-invoice-items-table tbody, #admin-invoice-grand-total').html('');
+    $('#admin-invoice-items-table tbody, #admin-invoice-grand-total, #admin-invoice-last-viewed').html('');
     var controller = window.location.pathname.replace(/^.*\//, '');
     
     $.ajax({
@@ -32,6 +32,7 @@ $('[data-action="view-items"]').click(function(){
         
         var items = data.items;
         var grand_total = data.grand_total;
+        var viewed = data.viewed;
         
         var markup = '';
         
@@ -54,6 +55,12 @@ $('[data-action="view-items"]').click(function(){
         }
         $('#admin-invoice-items-table tbody').html(markup);
         $('#admin-invoice-grand-total').html(grand_total.toFixed(2));
+        
+        if (viewed){
+            $('#admin-invoice-last-viewed').html('Last viewed by ' + viewed.name + ' on ' + viewed.admin_last_viewed_on).show();
+        } else {
+            $('#admin-invoice-last-viewed').hide();
+        }
         
         $('#admin-invoice-items-loader').hide();
     });

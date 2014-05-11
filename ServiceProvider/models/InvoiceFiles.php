@@ -97,7 +97,27 @@ class InvoiceFiles extends \Interpresense\Includes\BaseModel {
     }
     
     /**
-     * Deletes a file
+     * Fetches an invoice file
+     * @param int $fileID The file ID
+     */
+    public function fetchFile($fileID) {
+        
+        if(!$this->validators['file_id']->validate($fileID)) {
+            throw new \InvalidArgumentException('Invalid file ID.');
+        }
+        
+        $sql .= "SELECT `file_name`, `file_type`, `file_size`, `file_content`
+                   FROM `interpresense_service_provider_invoice_files`
+                  WHERE `file_id` = :file_id;";
+        
+        $data = array('file_id' => $fileID);
+        $types = array('file_id' => \PDO::PARAM_INT);
+        
+        return parent::$db->query($sql, $data, $types);
+    }
+    
+    /**
+     * Deletes an invoice file
      * @param int $fileID The file ID
      */
     public function deleteFile($fileID) {
