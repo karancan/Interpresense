@@ -200,8 +200,8 @@ class Reports extends \Interpresense\Includes\BaseModel {
             'generated_by' => $_SESSION['admin']['user_id'],
             'report_name' => $name,
             'report_content' => $template,
-            'report_file_type' => '', // @todo...tcPdf
-            'report_file_size' => '' // @todo...size of PDF
+            'report_file_type' => 'application/pdf',
+            'report_file_size' => '' // @todo...use filesize($report)
         );
         
         $types = array(

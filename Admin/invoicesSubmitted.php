@@ -55,6 +55,7 @@ if (!isset($_GET['page'])) {
     $unreadInvoiceCount = $invoicesModel->fetchUnreadFinalizedInvoiceCount();
     
     //@todo: add ability to view approved invoices only
+    //@todo: show tooltip if invoice is approved
 
     if (!empty($_GET['start'])) {
         try {
@@ -171,9 +172,21 @@ if (!isset($_GET['page'])) {
 } else if ($_GET['page'] === "mark-invoice-as-draft") {
     
     $invoicesModel->markInvoiceAsDraft($_GET['invoice_id']);
-    //@todo: create an invoice note stating that the invoice was mark as un-approved (or as a draft)
+    //@todo: create an invoice note stating that the invoice was changed to draft status
     //@todo: send email to service provider telling them the invoice was marked as a draft with the note attached
 
+} else if ($_GET['page'] === "mark-invoice-as-approved") {
+    
+    if (!empty($_GET['invoice_id'])) {
+        $invoicesModel->markInvoiceAsApproved($_GET['invoice_id']);
+        header('Location: invoicesSubmitted.php?focus=' . $_GET['invoice_id']); //@todo: start, end, approved
+        
+        //@todo: create an invoice note stating that the invoice was marked approved
+        //@todo: send email to service provider telling them the invoice was approved
+    } else {
+        $viewFile = ''; //Go to error page
+    }
+    
 } else if ($_GET['page'] === "export") {
     
     if (!empty($_GET['start'])) {

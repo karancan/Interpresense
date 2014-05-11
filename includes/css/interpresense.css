@@ -81,6 +81,9 @@ footer .dev-logo{
 .table-option-cell{
     text-align: right;
 }
+.table-option-cell .btn{
+    margin: 0 .2em;
+}
 .highlighted-row, .highlighted-row:hover {
     background-color: #b8e6f6;
 }

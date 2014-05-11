@@ -166,6 +166,34 @@ class Invoice extends \Interpresense\Includes\BaseModel {
     }
     
     /**
+     * Marks a finalized invoice as approved
+     * @param int $invoiceID The invoice ID
+     */
+    public function markInvoiceAsApproved($invoiceID) {
+    
+        if(!$this->validators['invoice_id']->validate($invoiceID)) {
+            throw new \InvalidArgumentException('Invalid invoice ID.');
+        }
+        
+        $sql = "UPDATE `interpresense_service_provider_invoices`
+                   SET `is_approved` = 1, `approved_by` = :approved_by, `approved_on` = NOW(), `updated_on` = NOW()
+                 WHERE `invoice_id` = :invoice_id
+                   AND `is_final` = 1;";
+        
+        $types = array(
+            'invoice_id' => \PDO::PARAM_INT,
+            'approved_by' => \PDO::PARAM_INT
+        );
+        
+        $data = array(
+            'invoice_id' => $invoiceID,
+            'approved_by' => $_SESSION['admin']['user_id']
+        );
+        
+        parent::$db->query($sql, $data, $types);
+    }
+    
+    /**
      * Retrieves an invoice ID given an invoice UID
      * @param string $invoiceUID The invoice UID
      * @return null|int The ID of the invoice, or NULL if it does not exist.
