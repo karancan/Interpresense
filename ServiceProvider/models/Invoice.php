@@ -23,7 +23,6 @@ class Invoice extends \Interpresense\Includes\BaseModel {
     public function __construct(\Interpresense\Includes\DatabaseObject $db) {
         parent::__construct($db);
         
-        // @todo Validation rules
         $this->validators['invoice_id'] = Validator::notEmpty()->noWhitespace()->digit()->positive();
         $this->validators['invoice_uid'] = Validator::xdigit()->length(128, 128);
         $this->validators['sp_name'] = Validator::notEmpty();
@@ -244,17 +243,36 @@ class Invoice extends \Interpresense\Includes\BaseModel {
             'invoice_uid' => \PDO::PARAM_STR,
             'sp_name' => \PDO::PARAM_STR,
             'sp_address' => \PDO::PARAM_STR,
+            'sp_postal_code' => \PDO::PARAM_STR,
+            'sp_city' => \PDO::PARAM_STR,
+            'sp_province' => \PDO::PARAM_STR,
             'sp_phone' => \PDO::PARAM_STR,
             'sp_email' => \PDO::PARAM_STR,
+            'sp_hst_number' => \PDO::PARAM_STR,
             'client_id' => \PDO::PARAM_STR,
             'is_final' => \PDO::PARAM_INT,
             'grand_total' => \PDO::PARAM_STR
         );
         
-        // @todo Add validation
+        // Validation
+        if(!Validator::key('invoice_uid', $this->validators['invoice_uid'])
+                ->key('sp_name', $this->validators['sp_name'])
+               ->key('sp_address', $this->validators['sp_address'])
+               ->key('sp_postal_code', $this->validators['sp_postal_code'])
+               ->key('sp_city', $this->validators['sp_city'])
+               ->key('sp_province', $this->validators['sp_province'])
+               ->key('sp_phone', $this->validators['sp_phone'])
+               ->key('sp_email', $this->validators['sp_email'])
+               ->key('sp_hst_number', $this->validators['sp_hst_number'])
+               ->key('client_id')
+               ->validate($data)) {
+            throw new \InvalidArgumentException('Required data invalid or missing');
+        }
+        
+        $data['grand_total'] = $this->calculateGrandTotal($data['invoice_items']);
         
         $sql = "UPDATE `interpresense_service_provider_invoices`
-                   SET `sp_name` = :sp_name, `sp_address` = :sp_address, `sp_phone` = :sp_phone, `sp_email` = :sp_email, `client_id` = :client_id, `grand_total` = :grand_total, `updated_on` = NOW()
+                   SET `sp_name` = :sp_name, `sp_address` = :sp_address, `sp_postal_code` = :sp_postal_code, `sp_city` = :sp_city, `sp_province` = :sp_province, `sp_phone` = :sp_phone, `sp_email` = :sp_email, `sp_hst_number` = :sp_hst_number, `client_id` = :client_id, `grand_total` = :grand_total, `updated_on` = NOW()
                  WHERE `invoice_uid` = :invoice_uid;";
         
         parent::$db->query($sql, $data, $types);
@@ -338,12 +356,23 @@ class Invoice extends \Interpresense\Includes\BaseModel {
     }
     
     /**
-     * Deletes an invoice that's not yet finalized
+     * Deletes a draft invoice
      * @param int $invoiceID The invoice ID
-     * @todo (note `is_final` should be 0)
      */
     public function deleteInvoice($invoiceID) {
         
+        if (!$this->validators['invoice_id']->validate($invoiceID)) {
+            throw new \InvalidArgumentException('Invalid invoice ID.');
+        }
+        
+        $sql = "DELETE FROM `interpresense_service_provider_invoices`
+                      WHERE `invoice_id` = :invoice_id
+                        AND `is_final` = 0;";
+        
+        $data = array('invoice_id' => $invoiceID);
+        $types = array('invoice_id' => \PDO::PARAM_INT);
+        
+        parent::$db->query($sql, $data, $types);
     }
     
     /**
@@ -372,7 +401,6 @@ class Invoice extends \Interpresense\Includes\BaseModel {
      * Calculates the grand total of an invoice
      * @param array $items An array of invoice items
      * @return float
-     * @todo
      */
     private function calculateGrandTotal(array $items) {
         $total = 0.0;
