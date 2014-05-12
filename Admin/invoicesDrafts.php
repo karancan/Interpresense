@@ -52,6 +52,8 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  */
 if (!isset($_GET['page'])) {
     
+    //@todo: add datatables to view
+    
     $unreadInvoiceCount = $invoicesModel->fetchUnreadFinalizedInvoiceCount();
     
     if (!empty($_GET['start'])) {
@@ -122,12 +124,12 @@ if (!isset($_GET['page'])) {
     
 } elseif ($_GET['page'] === "fetch-invoice-files") {
     
-    header('Content-Type: application/json; charset=utf-8');
     $files = $invoicesFilesModel->fetchFiles($_POST['invoice_id']);
     foreach ($files as &$f){
         $f['inserted_on'] = $dateFmt->format($f['inserted_on'], 'date_time');
     }
     unset($f);
+    header('Content-Type: application/json; charset=utf-8');
     echo json_encode($files);
     exit;
     
@@ -147,19 +149,20 @@ if (!isset($_GET['page'])) {
     
 } elseif ($_GET['page'] === "fetch-invoice-notes") {
     
-    header('Content-Type: application/json; charset=utf-8');
     $notes = $invoicesNotesModel->fetchNotes($_POST['invoice_id']);
     foreach ($notes as &$n){
         $n['inserted_on'] = $dateFmt->format($n['inserted_on'], 'date_time');
     }
     unset($n);
+    header('Content-Type: application/json; charset=utf-8');
     echo json_encode($notes);
     exit;
     
 } elseif ($_GET['page'] === "add-note"){
 
     $invoicesNotesModel->addNote($_POST);
-    header('Location: invoicesDrafts.php?focus=' . $_POST['invoice_id']);
+    header('Location: invoicesDrafts.php?focus=' . $_POST['invoice_id']); //@todo: respect start, end
+    exit;
 
 } elseif ($_GET['page'] === "export") {
     

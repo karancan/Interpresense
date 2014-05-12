@@ -38,7 +38,6 @@
                         <th scope='col'>Files</th>
                         <th scope='col'>Notes</th>
                         <th scope='col'>Total ($)</th>
-                        <th scope='col'>Approved</th>
                         <th scope='col'>Added on</th>
                         <th scope='col'></th>
                     </tr>
@@ -47,7 +46,7 @@
                     <tr>
                         <?php
                         if (empty($invoices)){
-                            echo "<tr><td colspan='10' class='empty-table-placeholder'>No draft invoices at this time…</td></tr>";
+                            echo "<tr><td colspan='9' class='empty-table-placeholder'>No draft invoices at this time…</td></tr>";
                         } else {
                             foreach($invoices as $i) {
                                 echo "<tr data-invoice-id='{$antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR)}'
@@ -66,7 +65,6 @@
                                      "<td>" . "<a href='#admin-invoice-files-modal' data-toggle='modal' data-action='view-files' class='admin-modal-links'>" . $i['file_count'] . "</a>" . "</td>" .
                                      "<td>" . "<a href='#admin-invoice-notes-modal' data-toggle='modal' data-action='view-notes' class='admin-modal-links'>" . $i['note_count'] . "</a>" . "</td>" .
                                      "<td>" . $i['grand_total'] . "</td>" .
-                                     "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
                                      "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
                                      '<td class="table-option-cell">
                                          <button type="button" class="btn btn-info" data-toggle="modal" href="#admin-invoice-add-notes-modal" data-action="add-note"><i class="fa fa-plus"></i> Add note</button>

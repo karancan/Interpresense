@@ -68,8 +68,9 @@
                                      "<td>" . $i['grand_total'] . "</td>" .
                                      "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
                                      "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
-                                     '<td class="table-option-cell">
-                                         <button type="button" class="btn btn-info" data-toggle="modal" href="#admin-invoice-add-notes-modal" data-action="add-note"><i class="fa fa-plus"></i> Add note</button>
+                                     '<td class="table-option-cell">' .
+                                         (!$i['is_approved'] ? '<button type="button" data-href="invoicesSubmitted.php?page=mark-invoice-as-approved&invoice_id=' . $antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR) . '" class="btn btn-success" data-action="approve-invoice"><i class="fa fa-check-square-o"></i> Approve</a>' : null) .
+                                         '<button type="button" class="btn btn-info" data-toggle="modal" href="#admin-invoice-add-notes-modal" data-action="add-note"><i class="fa fa-plus"></i> Add note</button>
                                       </td>' .
                                      '</tr>';
                             }
@@ -87,6 +88,7 @@
 <?php require FS_ADMIN . '/views/invoicesModals.php'; ?>
 <script charset='utf-8' src='includes/js/admin.js'></script>
 <script charset='utf-8' src='includes/js/invoices.js'></script>
+<script charset='utf-8' src='includes/js/invoicesSubmitted.js'></script>
 <script charset='utf-8' src='includes/js/dateRangeQuickPicks.js'></script>
 <script>
     

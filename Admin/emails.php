@@ -62,7 +62,8 @@ if (!isset($_GET['page'])) {
 } elseif ($_GET['page'] === 'update-email') {
     
     $model->updateEmailTemplate($_POST);
-    header('Location: emails.php?focus=' . $_POST['email_id']);    
+    header('Location: emails.php?focus=' . $_POST['email_id']);   
+    exit;
 }
 
 /**

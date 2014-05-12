@@ -151,16 +151,45 @@ class Invoice extends \Interpresense\Includes\BaseModel {
     }
     
     /**
-     * Marks an invoice as a draft
+     * Marks a non-approved invoice as a draft
      * @param int $invoiceID The invoice ID
      */
     public function markInvoiceAsDraft($invoiceID) {
         $sql = "UPDATE `interpresense_service_provider_invoices`
-                   SET `is_final` = 0, `is_approved` = 0, `approved_by` = NULL, `updated_on` = NOW()
-                 WHERE `invoice_id` = :invoice_id;";
+                   SET `is_final` = 0, `updated_on` = NOW()
+                 WHERE `invoice_id` = :invoice_id
+                   AND `is_approved` = 0;";
         
         $data = array('invoice_id' => $invoiceID);
         $types = array('invoice_id' => \PDO::PARAM_INT);
+        
+        parent::$db->query($sql, $data, $types);
+    }
+    
+    /**
+     * Marks a finalized (non-draft) invoice as approved
+     * @param int $invoiceID The invoice ID
+     */
+    public function markInvoiceAsApproved($invoiceID) {
+    
+        if(!$this->validators['invoice_id']->validate($invoiceID)) {
+            throw new \InvalidArgumentException('Invalid invoice ID.');
+        }
+        
+        $sql = "UPDATE `interpresense_service_provider_invoices`
+                   SET `is_approved` = 1, `approved_by` = :approved_by, `approved_on` = NOW(), `updated_on` = NOW()
+                 WHERE `invoice_id` = :invoice_id
+                   AND `is_final` = 1;";
+        
+        $types = array(
+            'invoice_id' => \PDO::PARAM_INT,
+            'approved_by' => \PDO::PARAM_INT
+        );
+        
+        $data = array(
+            'invoice_id' => $invoiceID,
+            'approved_by' => $_SESSION['admin']['user_id']
+        );
         
         parent::$db->query($sql, $data, $types);
     }

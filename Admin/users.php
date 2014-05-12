@@ -50,6 +50,8 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  * Content and actions
  */
 if (!isset($_GET['page'])) {
+
+    //@todo: add datatables to view
     
     $unreadInvoiceCount = $invoicesModel->fetchUnreadFinalizedInvoiceCount();
     
@@ -116,6 +118,7 @@ if (!isset($_GET['page'])) {
     }
     
     header('Location: users.php?focus=' . $updated);
+    exit;
     
 } elseif ($_GET['page'] === 'export-users') {
     

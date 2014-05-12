@@ -107,6 +107,7 @@ if (!isset($_GET['page'])) {
     } else {
         //@todo: go back to the view with an error tooltip
         header('Location: index.php?page=register-or-reset&mode=initiate-reset-fail');
+        exit;
     }
     
 } elseif ($_GET['page'] === "reset-password") {

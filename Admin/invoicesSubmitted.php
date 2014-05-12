@@ -55,6 +55,8 @@ if (!isset($_GET['page'])) {
     $unreadInvoiceCount = $invoicesModel->fetchUnreadFinalizedInvoiceCount();
     
     //@todo: add ability to view approved invoices only
+    //@todo: show tooltip if invoice is approved
+    //@todo: add datatables to view
 
     if (!empty($_GET['start'])) {
         try {
@@ -91,7 +93,7 @@ if (!isset($_GET['page'])) {
     
 } else if ($_GET['page'] === "fetch-invoice-items") {
     
-    //@todo: give the user the ability to mark an invoice as read/unread
+    //@todo: give the user the ability to mark an invoice as viewed/not viewed
     
     //Was this invoice viewed previously?
     $invoiceViewed = $invoicesModel->fetchInvoiceViewedDetails($_POST['invoice_id']);
@@ -129,12 +131,12 @@ if (!isset($_GET['page'])) {
     
 } else if ($_GET['page'] === "fetch-invoice-files") {
     
-    header('Content-Type: application/json; charset=utf-8');
     $files = $invoicesFilesModel->fetchFiles($_POST['invoice_id']);
     foreach ($files as &$f){
         $f['inserted_on'] = $dateFmt->format($f['inserted_on'], 'date_time');
     }
     unset($f);
+    header('Content-Type: application/json; charset=utf-8');
     echo json_encode($files);
     exit;
     
@@ -154,26 +156,48 @@ if (!isset($_GET['page'])) {
     
 } else if ($_GET['page'] === "fetch-invoice-notes") {
 
-    header('Content-Type: application/json; charset=utf-8');
     $notes = $invoicesNotesModel->fetchNotes($_POST['invoice_id']);
     foreach ($notes as &$n){
         $n['inserted_on'] = $dateFmt->format($n['inserted_on'], 'date_time');
     }
     unset($n);
+    header('Content-Type: application/json; charset=utf-8');
     echo json_encode($notes);
     exit;
     
 } elseif ($_GET['page'] === "add-note"){
     
     $invoicesNotesModel->addNote($_POST);
-    header('Location: invoicesSubmitted.php?focus=' . $_POST['invoice_id']);
+    header('Location: invoicesSubmitted.php?focus=' . $_POST['invoice_id']); //@todo: respect start, end, approved
 
 } else if ($_GET['page'] === "mark-invoice-as-draft") {
     
-    $invoicesModel->markInvoiceAsDraft($_GET['invoice_id']);
-    //@todo: create an invoice note stating that the invoice was mark as un-approved (or as a draft)
-    //@todo: send email to service provider telling them the invoice was marked as a draft with the note attached
+    if (!empty($_GET['invoice_id'])) {
+        $invoicesModel->markInvoiceAsDraft($_GET['invoice_id']);
+        
+        //@todo: create an invoice note stating that the invoice was changed to draft status
+        //@todo: send email to service provider telling them the invoice was marked as a draft with the note attached
+    
+        header('Location: invoicesSubmitted.php?focus=' . $_GET['invoice_id']); //@todo: respect start, end, approved
+        exit;
+    } else {
+        $viewFile = ''; //Show error page
+    }
 
+} else if ($_GET['page'] === "mark-invoice-as-approved") {
+    
+    if (!empty($_GET['invoice_id'])) {
+        $invoicesModel->markInvoiceAsApproved($_GET['invoice_id']);
+        
+        //@todo: create an invoice note stating that the invoice was marked approved
+        //@todo: send email to service provider telling them the invoice was approved
+        
+        header('Location: invoicesSubmitted.php?focus=' . $_GET['invoice_id']); //@todo: respect start, end, approved
+        exit;
+    } else {
+        $viewFile = ''; //Show error page
+    }
+    
 } else if ($_GET['page'] === "export") {
     
     if (!empty($_GET['start'])) {
@@ -217,7 +241,7 @@ if (!isset($_GET['page'])) {
 /**
  * View
  */
-$actions = array('fetch-invoice-items', 'fetch-invoice-files', 'fetch-invoice-notes', 'mark-invoice-as-draft', 'export');
+$actions = array('fetch-invoice-items', 'fetch-invoice-files', 'fetch-invoice-notes', 'export');
 
 if (!in_array($_GET['page'], $actions, true)) {
     
