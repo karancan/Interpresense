@@ -26,7 +26,7 @@ class InvoiceFiles extends \Interpresense\Includes\BaseModel {
         $this->validators['file_id'] = Validator::noWhitespace()->digit()->positive();
         $this->validators['invoice_id'] = Validator::notEmpty()->noWhitespace()->digit()->positive();
         $this->validators['file_name'] = Validator::notEmpty()->string();
-        $this->validators['file_content'] = Validator::notEmpty()->string(); //@todo: not sure about this one
+        $this->validators['file_content'] = Validator::notEmpty()->string();
         $this->validators['file_type'] = Validator::notEmpty()->string();
         $this->validators['file_size'] = Validator::notEmpty()->int();
     }
@@ -84,16 +84,30 @@ class InvoiceFiles extends \Interpresense\Includes\BaseModel {
     /**
      * Adds invoice files
      * @param int $invoiceID The invoice ID
+     * @param array $files The file data
      */
-    public function addFiles($invoiceID) {
+    public function addFiles($invoiceID, array $files) {
         
         if(!$this->validators['invoice_id']->validate($invoiceID)) {
             throw new \InvalidArgumentException('Invalid invoice ID.');
         }
         
-        $sql = "";
+        $sql = "INSERT INTO `interpresense_service_provider_invoice_files` (`invoice_id`, `file_name`, `file_content`, `file_type`, `file_size`, `inserted_on`, `updated_on`)
+                     VALUES (:invoice_id, :file_name, :file_content, :file_type, :file_size, NOW(), NOW());";
         
-        //@todo
+        foreach ($files as $f) {
+            //@todo
+        }
+        
+        $types = array(
+            'invoice_id' => \PDO::PARAM_INT,
+            'file_name' => \PDO::PARAM_STR,
+            'file_content' => \PDO::PARAM_STR,
+            'file_type' => \PDO::PARAM_STR,
+            'file_size' => \PDO::PARAM_INT
+        );
+        
+        parent::$db->batchManipulationQuery($sql, $files, $types);
     }
     
     /**

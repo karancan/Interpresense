@@ -171,11 +171,13 @@
                                 <td><input type="number" class="form-control invoice-item-input invoice-item-rate" name='rate[]' placeholder="Rate" min="0" step="0.01" required></td>
                                 <td class="invoice-item-amounts">0.00</td>
                             </tr>
+                        </tbody>
+                        <tfoot>
                             <tr>
                                 <td></td>
                                 <td colspan='9'><button type='button' class='btn btn-link add-invoice-item'><i class="fa fa-plus-square"></i> Add another item</button></td>
                             </tr>
-                        </tbody>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -187,13 +189,32 @@
             </div>
         </div>
         
-        <div class="row">
+        <div class="invoice-files-container row">
             <div class="col-md-12">
                 <h3><i class="fa fa-files-o"></i> Attachments</h3>
+                
+                <div class="table-responsive">
+                    <table class="table table-hover invoice-files-table">
+                        <tbody>
+                            <tr class='invoice-file-row'>
+                                <td></td>
+                                <td>
+                                    <input type="file" name="attachment[]">
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <button type='button' class='btn btn-link add-invoice-file'><i class='fa fa-plus-square'></i> Add another attachment</button>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
         </div>
-        
-        <!-- @todo: add table for potential attachments -->
         
         <div class="row invoice-button-container">
             
