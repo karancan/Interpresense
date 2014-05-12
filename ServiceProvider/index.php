@@ -51,6 +51,7 @@ if (!isset($_GET['page'])) {
 
     if (!$settings['installation_complete']) {
         header('Location: https://'  . URL_SETUP . '/');
+        exit;
     }
     
     $activities = $activitiesModel->fetchActivities();

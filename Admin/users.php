@@ -118,6 +118,7 @@ if (!isset($_GET['page'])) {
     }
     
     header('Location: users.php?focus=' . $updated);
+    exit;
     
 } elseif ($_GET['page'] === 'export-users') {
     

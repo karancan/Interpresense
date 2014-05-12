@@ -62,6 +62,7 @@ if (!isset($_GET['page'])) {
 } elseif ($_GET['page'] === 'change-setting') {
     $model->changeSetting($_POST['key'], $_POST['value']);
     header('location: settings.php?focus=' . $_POST['key']);
+    exit;
 } elseif ($_GET['page'] === 'delete-setting') {
     $model->deleteSetting($_POST['key']);
 } elseif ($_GET['page'] === 'change-activity') {
@@ -73,6 +74,7 @@ if (!isset($_GET['page'])) {
     }
     
     header('location: settings.php?focus=' . $updated);
+    exit;
 } elseif ($_GET['page'] === 'delete-activity') {
     $activitiesModel->deleteActivity($_POST['activity_id']);
 }

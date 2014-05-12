@@ -63,13 +63,20 @@ if (!isset($_GET['page'])) {
 
     $reportID = $model->generateReport($_POST['template_id'], $_POST['report_name']);
     header("Location: reports.php?focus=report-$reportID");
+    exit;
 
 } elseif ($_GET['page'] === 'view-generated-report') {
     
     $report = $model->fetchReport($_GET['report_id']);
-    
-    header("Content-Type: {$report['report_file_type']}");
-    echo $report;
+    if (!empty($report)) {
+        header("Content-Type: " . $report[0]['report_file_type']);
+        header("Content-Disposition:attachment; filename=" . str_replace(',', '', $report[0]['report_name']) . "");
+        header('Content-Length: ' . $report[0]['report_file_size']);
+        echo $report[0]['report_content'];
+        exit;
+    } else {
+        $viewFile = ''; //Show error
+    }
     
 } elseif ($_GET['page'] === 'mark-report-as-deleted') {
 

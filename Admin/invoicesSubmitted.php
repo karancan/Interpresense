@@ -131,12 +131,12 @@ if (!isset($_GET['page'])) {
     
 } else if ($_GET['page'] === "fetch-invoice-files") {
     
-    header('Content-Type: application/json; charset=utf-8');
     $files = $invoicesFilesModel->fetchFiles($_POST['invoice_id']);
     foreach ($files as &$f){
         $f['inserted_on'] = $dateFmt->format($f['inserted_on'], 'date_time');
     }
     unset($f);
+    header('Content-Type: application/json; charset=utf-8');
     echo json_encode($files);
     exit;
     
@@ -156,12 +156,12 @@ if (!isset($_GET['page'])) {
     
 } else if ($_GET['page'] === "fetch-invoice-notes") {
 
-    header('Content-Type: application/json; charset=utf-8');
     $notes = $invoicesNotesModel->fetchNotes($_POST['invoice_id']);
     foreach ($notes as &$n){
         $n['inserted_on'] = $dateFmt->format($n['inserted_on'], 'date_time');
     }
     unset($n);
+    header('Content-Type: application/json; charset=utf-8');
     echo json_encode($notes);
     exit;
     
@@ -179,6 +179,7 @@ if (!isset($_GET['page'])) {
         //@todo: send email to service provider telling them the invoice was marked as a draft with the note attached
     
         header('Location: invoicesSubmitted.php?focus=' . $_GET['invoice_id']); //@todo: respect start, end, approved
+        exit;
     } else {
         $viewFile = ''; //Show error page
     }
@@ -192,6 +193,7 @@ if (!isset($_GET['page'])) {
         //@todo: send email to service provider telling them the invoice was approved
         
         header('Location: invoicesSubmitted.php?focus=' . $_GET['invoice_id']); //@todo: respect start, end, approved
+        exit;
     } else {
         $viewFile = ''; //Show error page
     }
