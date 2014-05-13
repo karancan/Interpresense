@@ -93,13 +93,18 @@
                 
             </section>
             
-            <div class="col-md-3 col-md-offset-1 invoice-for">
+            <div class="col-md-3 col-md-offset-1 text-right" id='invoice_for'>
                 
                 <h2>INVOICE</h2>
                 
                 <div class='form-group'>
+                    <label for='invoice_id_for_sp' class='sr-only'>Invoice ID number</label>
+                    <input type="text" id='invoice_id_for_sp' name='invoice_id_for_sp' class="form-control input-top" placeholder="Invoice ID number">
+                </div>
+                
+                <div class='form-group'>
                     <label for='client_id' class='sr-only'>Client ID number</label>
-                    <input type="text" id='client_id' name='client_id' class="form-control" placeholder="Client ID number">
+                    <input type="text" id='client_id' name='client_id' class="form-control input-bottom" placeholder="Client ID number">
                 </div>
             </div>
         </div>
@@ -184,7 +189,7 @@
         </div>
         
         <div class="row">
-            <div class="col-md-2 col-md-offset-10 invoice-total">
+            <div class="col-md-2 col-md-offset-10 text-center invoice-total">
                 <h3>Total <span id="invoice-total-dollar-amount">N/A</span></h3>
             </div>
         </div>
