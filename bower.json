@@ -18,7 +18,8 @@
     "Bootflat": "v2.0.1",
     "fontawesome": "4.0.3",
     "summernote": "0.5.1",
-    "jquery-color": "2.1.2"
+    "jquery-color": "2.1.2",
+    "sprintf": "~1.0.0"
   },
   "resolutions": {
     "jquery": "~2.1"
