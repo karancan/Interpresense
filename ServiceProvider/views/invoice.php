@@ -18,7 +18,7 @@
         
     </div>
     
-    <form method="post" action="index.php?page=invoice-submission" id='invoice_form'>
+    <form method="post" action="index.php?page=invoice-submission" id='invoice_form' enctype='multipart/form-data'>
         
         <div class="row">
             <section class="col-md-3" id='invoice_from'>

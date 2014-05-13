@@ -24,6 +24,7 @@ $antiXSS = new AntiXss();
  */
 $invoice = new Invoice($dbo);
 $invoiceItems = new InvoiceItems($dbo);
+$invoiceFilesModel = new InvoiceFiles($dbo);
 $activitiesModel = new \Interpresense\Admin\Activities($dbo);
 
 /**
@@ -62,7 +63,7 @@ if (!isset($_GET['page'])) {
     
     $final = isset($_POST['mode']) && $_POST['mode'] === 'final';
     
-    // Flip keys so that items are in rows not columns
+    // Flip items keys so that items are in rows not columns
     foreach ($_POST['description'] as $key => $val) {
         $_POST['invoice_items'][$key] = array(
             'description' => $_POST['description'][$key],
@@ -76,9 +77,27 @@ if (!isset($_GET['page'])) {
     }
     unset($_POST['description'], $_POST['course_code'], $_POST['activity_id'], $_POST['service_date'], $_POST['start_time'], $_POST['end_time'], $_POST['rate']);
     
+    // Flip files keys so that files are in rows not columns
+    $files = array_map(function ($name, $type, $tmp_name, $error, $size) {
+            return array(
+                'name' => $name,
+                'type' => $type,
+                'tmp_name' => $tmp_name,
+                'error' => $error,
+                'size' => $size,
+            );
+        },
+        (array) $_FILES['attachment']['name'],
+        (array) $_FILES['attachment']['type'],
+        (array) $_FILES['attachment']['tmp_name'],
+        (array) $_FILES['attachment']['error'],
+        (array) $_FILES['attachment']['size']
+    );
+    
     $dbo->db->beginTransaction();
     $invoiceID = $invoice->addInvoice($_POST, $final);
     $invoiceItems->changeItems($invoiceID, $_POST['invoice_items']);
+    $invoiceFilesModel->addFiles($invoiceID, $files);
     $dbo->db->commit();
     
     //@todo: trigger emails

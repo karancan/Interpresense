@@ -93,21 +93,31 @@ class InvoiceFiles extends \Interpresense\Includes\BaseModel {
         }
         
         $sql = "INSERT INTO `interpresense_service_provider_invoice_files` (`invoice_id`, `file_name`, `file_content`, `file_type`, `file_size`, `inserted_on`, `updated_on`)
-                     VALUES (:invoice_id, :file_name, :file_content, :file_type, :file_size, NOW(), NOW());";
-        
-        foreach ($files as $f) {
-            //@todo
-        }
+                     VALUES (:invoice_id, :name, :content, :type, :size, NOW(), NOW());";
         
         $types = array(
             'invoice_id' => \PDO::PARAM_INT,
-            'file_name' => \PDO::PARAM_STR,
-            'file_content' => \PDO::PARAM_STR,
-            'file_type' => \PDO::PARAM_STR,
-            'file_size' => \PDO::PARAM_INT
+            'name' => \PDO::PARAM_STR,
+            'content' => \PDO::PARAM_STR,
+            'type' => \PDO::PARAM_STR,
+            'size' => \PDO::PARAM_INT
         );
         
-        parent::$db->batchManipulationQuery($sql, $files, $types);
+        // Remove disallowed files and set up array
+        $files = array_map(function($f) use ($invoiceID, $types) {
+            $f['invoice_id'] = $invoiceID;
+            
+            $tmp = fopen($f['tmp_name'], 'rb');
+            $f['content'] = fread($tmp, $f['size']);
+            fclose($tmp);
+            
+            return \Interpresense\Includes\DatabaseObject::pick(array_keys($types), $f);
+        }, array_filter($files, function($f) {
+            // @todo: Erroneous uploads are silently discarded individually. Should this be handled differently?
+            return $f['error'] === UPLOAD_ERR_OK && in_array($f['type'], unserialize(FILE_TYPES_ALLOWED), true);
+        }));
+        
+        parent::$db->batchManipulationQuery($sql, $files, $types, false);
     }
     
     /**
