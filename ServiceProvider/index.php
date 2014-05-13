@@ -97,6 +97,12 @@ if (!isset($_GET['page'])) {
     $dbo->db->beginTransaction();
     $invoiceID = $invoice->addInvoice($_POST, $final);
     $invoiceItems->changeItems($invoiceID, $_POST['invoice_items']);
+    
+    // Remove disallowed files and erroneous uploads
+    $files = array_filter($files, function($f) {
+        // @todo: Erroneous uploads are silently discarded individually. Should this be handled differently?
+        return $f['error'] === UPLOAD_ERR_OK && in_array($f['type'], unserialize(FILE_TYPES_ALLOWED), true);
+    });
     $invoiceFilesModel->addFiles($invoiceID, $files);
     $dbo->db->commit();
     

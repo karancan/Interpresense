@@ -103,7 +103,7 @@ class InvoiceFiles extends \Interpresense\Includes\BaseModel {
             'size' => \PDO::PARAM_INT
         );
         
-        // Remove disallowed files and set up array
+        // Set up array
         $files = array_map(function($f) use ($invoiceID, $types) {
             $f['invoice_id'] = $invoiceID;
             
@@ -112,10 +112,7 @@ class InvoiceFiles extends \Interpresense\Includes\BaseModel {
             fclose($tmp);
             
             return \Interpresense\Includes\DatabaseObject::pick(array_keys($types), $f);
-        }, array_filter($files, function($f) {
-            // @todo: Erroneous uploads are silently discarded individually. Should this be handled differently?
-            return $f['error'] === UPLOAD_ERR_OK && in_array($f['type'], unserialize(FILE_TYPES_ALLOWED), true);
-        }));
+        }, $files);
         
         parent::$db->batchManipulationQuery($sql, $files, $types, false);
     }
