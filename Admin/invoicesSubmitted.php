@@ -54,6 +54,7 @@ if (!isset($_GET['page'])) {
     
     $unreadInvoiceCount = $invoicesModel->fetchUnreadFinalizedInvoiceCount();
     
+    //@todo: allow editing of org invoice id
     //@todo: show tooltip if invoice is approved
 
     if (!empty($_GET['start'])) {
