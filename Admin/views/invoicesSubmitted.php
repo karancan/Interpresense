@@ -1,4 +1,5 @@
 <style>
+    @import url('//<?= URL_VENDOR_FRONTEND ?>/DataTables/media/css/jquery.dataTables.css');
     @import url('includes/css/admin.css');
 </style>
 <div class="container">
@@ -28,7 +29,7 @@
                 </h4>
             </form>
             
-            <table class="table table-hover invoice-table">           
+            <table id="admin-invoices-submitted-table" class="table table-hover invoice-table">           
                 <thead>
                     <tr>
                         <th scope='col'>ID</th>
@@ -44,39 +45,35 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <?php
-                        if (empty($invoices)){
-                            echo "<tr><td colspan='10' class='empty-table-placeholder'>No finalized invoices at this time…</td></tr>";
-                        } else {
-                            foreach($invoices as $i) {
-                                echo "<tr data-invoice-id='{$antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR)}'
-                                          data-sp-name='{$antiXSS->escape($i['sp_name'], $antiXSS::HTML_ATTR)}'
-                                          data-sp-address='{$antiXSS->escape($i['sp_address'], $antiXSS::HTML_ATTR)}'
-                                          data-sp-postal-code='{$antiXSS->escape($i['sp_postal_code'], $antiXSS::HTML_ATTR)}'
-                                          data-sp-city='{$antiXSS->escape($i['sp_city'], $antiXSS::HTML_ATTR)}'
-                                          data-sp-province='{$antiXSS->escape($i['sp_province'], $antiXSS::HTML_ATTR)}'
-                                          data-sp-phone='{$antiXSS->escape($i['sp_phone'], $antiXSS::HTML_ATTR)}'
-                                          data-sp-email='{$antiXSS->escape($i['sp_email'], $antiXSS::HTML_ATTR)}'
-                                          data-sp-hst-number='{$antiXSS->escape($i['sp_hst_number'], $antiXSS::HTML_ATTR)}'>" .
-                                     "<td>" . $i['invoice_id_for_org'] . "</td>" .
-                                     "<td>" . $i['client_id'] . "</td>" .
-                                     "<td>" . "<a href='#admin-invoice-sp-details-modal' data-toggle='modal' data-action='view-sp-details' class='admin-modal-links'>" . $i['sp_name'] . "</a>" . "</td>" .
-                                     "<td>" . "<a href='#admin-invoice-items-modal' data-toggle='modal' data-action='view-items' class='admin-modal-links'>" . $i['item_count'] . "</a>" . "</td>" .
-                                     "<td>" . "<a href='#admin-invoice-files-modal' data-toggle='modal' data-action='view-files' class='admin-modal-links'>" . $i['file_count'] . "</a>" . "</td>" .
-                                     "<td>" . "<a href='#admin-invoice-notes-modal' data-toggle='modal' data-action='view-notes' class='admin-modal-links'>" . $i['note_count'] . "</a>" . "</td>" .
-                                     "<td>" . $i['grand_total'] . "</td>" .
-                                     "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
-                                     "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
-                                     '<td class="table-option-cell">' .
-                                         (!$i['is_approved'] ? '<button type="button" data-href="invoicesSubmitted.php?page=mark-invoice-as-approved&invoice_id=' . $antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR) . '" class="btn btn-success" data-action="approve-invoice"><i class="fa fa-check-square-o"></i> Approve</a>' : null) .
-                                         '<button type="button" class="btn btn-info" data-toggle="modal" href="#admin-invoice-add-notes-modal" data-action="add-note"><i class="fa fa-plus"></i> Add note</button>
-                                      </td>' .
-                                     '</tr>';
-                            }
+                    <?php
+                    if (!empty($invoices)){
+                        foreach($invoices as $i) {
+                            echo "<tr data-invoice-id='{$antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR)}'
+                                      data-sp-name='{$antiXSS->escape($i['sp_name'], $antiXSS::HTML_ATTR)}'
+                                      data-sp-address='{$antiXSS->escape($i['sp_address'], $antiXSS::HTML_ATTR)}'
+                                      data-sp-postal-code='{$antiXSS->escape($i['sp_postal_code'], $antiXSS::HTML_ATTR)}'
+                                      data-sp-city='{$antiXSS->escape($i['sp_city'], $antiXSS::HTML_ATTR)}'
+                                      data-sp-province='{$antiXSS->escape($i['sp_province'], $antiXSS::HTML_ATTR)}'
+                                      data-sp-phone='{$antiXSS->escape($i['sp_phone'], $antiXSS::HTML_ATTR)}'
+                                      data-sp-email='{$antiXSS->escape($i['sp_email'], $antiXSS::HTML_ATTR)}'
+                                      data-sp-hst-number='{$antiXSS->escape($i['sp_hst_number'], $antiXSS::HTML_ATTR)}'>" .
+                                 "<td>" . $i['invoice_id_for_org'] . "</td>" .
+                                 "<td>" . $i['client_id'] . "</td>" .
+                                 "<td>" . "<a href='#admin-invoice-sp-details-modal' data-toggle='modal' data-action='view-sp-details' class='admin-modal-links'>" . $i['sp_name'] . "</a>" . "</td>" .
+                                 "<td>" . "<a href='#admin-invoice-items-modal' data-toggle='modal' data-action='view-items' class='admin-modal-links'>" . $i['item_count'] . "</a>" . "</td>" .
+                                 "<td>" . "<a href='#admin-invoice-files-modal' data-toggle='modal' data-action='view-files' class='admin-modal-links'>" . $i['file_count'] . "</a>" . "</td>" .
+                                 "<td>" . "<a href='#admin-invoice-notes-modal' data-toggle='modal' data-action='view-notes' class='admin-modal-links'>" . $i['note_count'] . "</a>" . "</td>" .
+                                 "<td>" . $i['grand_total'] . "</td>" .
+                                 "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
+                                 "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
+                                 '<td class="table-option-cell">' .
+                                     (!$i['is_approved'] ? '<button type="button" data-href="invoicesSubmitted.php?page=mark-invoice-as-approved&invoice_id=' . $antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR) . '" class="btn btn-success" data-action="approve-invoice"><i class="fa fa-check-square-o"></i> Approve</a>' : null) .
+                                     '<button type="button" class="btn btn-info" data-toggle="modal" href="#admin-invoice-add-notes-modal" data-action="add-note"><i class="fa fa-plus"></i> Add note</button>
+                                  </td>' .
+                                 '</tr>';
                         }
-                        ?>
-                    </tr>
+                    }
+                    ?>
                 </tbody>
             </table>
         
@@ -86,18 +83,12 @@
     
 </div>
 <?php require FS_ADMIN . '/views/invoicesModals.php'; ?>
+<script charset='utf-8' src='//<?= URL_VENDOR_FRONTEND ?>/DataTables/media/js/jquery.dataTables.js'></script>
 <script charset='utf-8' src='includes/js/admin.js'></script>
 <script charset='utf-8' src='includes/js/invoices.js'></script>
 <script charset='utf-8' src='includes/js/invoicesSubmitted.js'></script>
 <script charset='utf-8' src='includes/js/dateRangeQuickPicks.js'></script>
 <script>
-    
     'use strict';
     var focus = '<?= $antiXSS->escape($_GET['focus'], $antiXSS::JS) ?>';
-    
-    //Init datepickers
-    $('.datepicker').datepicker({
-      format: 'yyyy-mm-dd'
-    });
-    
 </script>

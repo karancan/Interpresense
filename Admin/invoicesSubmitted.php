@@ -56,7 +56,6 @@ if (!isset($_GET['page'])) {
     
     //@todo: add ability to view approved invoices only
     //@todo: show tooltip if invoice is approved
-    //@todo: add datatables to view
 
     if (!empty($_GET['start'])) {
         try {
