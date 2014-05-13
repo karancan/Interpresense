@@ -54,7 +54,6 @@ if (!isset($_GET['page'])) {
     
     $unreadInvoiceCount = $invoicesModel->fetchUnreadFinalizedInvoiceCount();
     
-    //@todo: add ability to view approved invoices only
     //@todo: show tooltip if invoice is approved
 
     if (!empty($_GET['start'])) {

@@ -21,6 +21,11 @@ $('#admin-invoices-submitted-table').dataTable({
 });
 
 /**
+ *User checks/unchecks the option to view approved invoices only
+ */
+//@todo
+
+/**
  *User wants to mark an invoice as approved
  */
 $('[data-action="approve-invoice"]').click(function(){
