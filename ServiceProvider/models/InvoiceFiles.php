@@ -26,7 +26,7 @@ class InvoiceFiles extends \Interpresense\Includes\BaseModel {
         $this->validators['file_id'] = Validator::noWhitespace()->digit()->positive();
         $this->validators['invoice_id'] = Validator::notEmpty()->noWhitespace()->digit()->positive();
         $this->validators['file_name'] = Validator::notEmpty()->string();
-        $this->validators['file_content'] = Validator::notEmpty()->string(); //@todo: not sure about this one
+        $this->validators['file_content'] = Validator::notEmpty()->string();
         $this->validators['file_type'] = Validator::notEmpty()->string();
         $this->validators['file_size'] = Validator::notEmpty()->int();
     }
@@ -84,16 +84,37 @@ class InvoiceFiles extends \Interpresense\Includes\BaseModel {
     /**
      * Adds invoice files
      * @param int $invoiceID The invoice ID
+     * @param array $files The file data
      */
-    public function addFiles($invoiceID) {
+    public function addFiles($invoiceID, array $files) {
         
         if(!$this->validators['invoice_id']->validate($invoiceID)) {
             throw new \InvalidArgumentException('Invalid invoice ID.');
         }
         
-        $sql = "";
+        $sql = "INSERT INTO `interpresense_service_provider_invoice_files` (`invoice_id`, `file_name`, `file_content`, `file_type`, `file_size`, `inserted_on`, `updated_on`)
+                     VALUES (:invoice_id, :name, :content, :type, :size, NOW(), NOW());";
         
-        //@todo
+        $types = array(
+            'invoice_id' => \PDO::PARAM_INT,
+            'name' => \PDO::PARAM_STR,
+            'content' => \PDO::PARAM_STR,
+            'type' => \PDO::PARAM_STR,
+            'size' => \PDO::PARAM_INT
+        );
+        
+        // Set up array
+        $files = array_map(function($f) use ($invoiceID, $types) {
+            $f['invoice_id'] = $invoiceID;
+            
+            $tmp = fopen($f['tmp_name'], 'rb');
+            $f['content'] = fread($tmp, $f['size']);
+            fclose($tmp);
+            
+            return \Interpresense\Includes\DatabaseObject::pick(array_keys($types), $f);
+        }, $files);
+        
+        parent::$db->batchManipulationQuery($sql, $files, $types, false);
     }
     
     /**

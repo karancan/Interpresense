@@ -10,6 +10,15 @@
         return $row;
     }());
     
+    var $fileRow = (function() {
+        var $row = $('.invoice-file-row').first().clone();
+        
+        // Add a remove button
+        $row.children('td:first-child').html('<button type="button" class="btn btn-link btn-sm remove-invoice-file"><i class="fa fa-minus-square"></i> <span class="sr-only">Remove file</span></button>');
+        
+        return $row;
+    }());
+    
     function generateItemRow($row) {
         var $newRow = $row.clone();
         
@@ -115,11 +124,19 @@
     $('.add-invoice-item').click(function() {
         $('.invoice-item-row').last().after(generateItemRow($itemRow));
     });
+    
+    $('.add-invoice-file').click(function() {
+        $('.invoice-file-row').last().after($fileRow.clone());
+    });
 
     /**
      * Delete a row
      */
     $('.invoice-table').on('click', '.remove-invoice-item', function() {
+        $(this).closest('tr').remove();
+    });
+    
+    $('.invoice-files-table').on('click', '.remove-invoice-file', function() {
         $(this).closest('tr').remove();
     });
 
