@@ -167,7 +167,7 @@ if (!isset($_GET['page'])) {
 } elseif ($_GET['page'] === "add-note"){
     
     $invoicesNotesModel->addNote($_POST);
-    header('Location: invoicesSubmitted.php?focus=' . $_POST['invoice_id']); //@todo: respect start, end, approved
+    header('Location: invoicesSubmitted.php?start=' . $_GET['start'] . '&end=' . $_GET['end'] . '&focus=' . $_POST['invoice_id']); //@todo: respect approved
 
 } else if ($_GET['page'] === "mark-invoice-as-draft") {
     

@@ -1,13 +1,18 @@
 /**
- *If a row needs to be focussed on, we highlight it
+ *Actions that take place after page load
  */
 $(document).ready(function(){
+
+    //If a row needs to be focussed on, we highlight it
     if (focus !== ''){
         global.highlightRow($('[data-invoice-id="' + focus + '"]'), 15000);
         $('html, body').animate({
             scrollTop: $('[data-invoice-id="' + focus + '"]').offset().top
         }, 1000);
     }
+    
+    //Apend `start` and `end` paramters to add invoice notes form
+    $('#admin-invoice-add-notes-form').attr('action', $('#admin-invoice-add-notes-form').attr('action') + '&start=' + $('.admin-page-filter-input[name="start"]').val() + '&end=' + $('.admin-page-filter-input[name="end"]').val());
 });
 
 /**
