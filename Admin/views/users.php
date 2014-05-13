@@ -34,31 +34,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <?php
-                        if (empty($users)){
-                            echo "<tr><td colspan='7' class='empty-table-placeholder'>No administrative users exist at this point…</td></tr>";
-                        } else {
-                            foreach($users as $u) {
-                                echo "<tr data-user-id='{$antiXSS->escape($u['user_id'], $antiXSS::HTML_ATTR)}'
-                                          data-user-username='{$antiXSS->escape($u['user_name'], $antiXSS::HTML_ATTR)}'
-                                          data-user-first-name='{$antiXSS->escape($u['first_name'], $antiXSS::HTML_ATTR)}'
-                                          data-user-last-name='{$antiXSS->escape($u['last_name'], $antiXSS::HTML_ATTR)}'
-                                          data-user-expires-on='{$antiXSS->escape($u['expires_on'], $antiXSS::HTML_ATTR)}'>" .
-                                     "<td>" . $u['user_name'] . "</td>" .
-                                     "<td>" . $u['first_name'] . " " . $u['last_name'] . "</td>" .
-                                     "<td>" . $dateFmt->format($u['created_on'], 'date_time') . "</td>" .
-                                     "<td>" . $dateFmt->format($u['expires_on'], 'date_time') . "</td>" .
-                                     "<td>" . (empty($u['is_confirmed']) ? 'No' : 'Yes') . "</td>" .
-                                     "<td>" . $dateFmt->format($u['last_log_in'], 'date_time') . "</td>" .
-                                     '<td class="table-option-cell">
-                                         <button type="button" class="btn btn-warning" data-toggle="modal" href="#admin-add-modal" data-action="edit"><i class="fa fa-edit"></i> Edit</button>
-                                      </td>' .
-                                     '</tr>';
-                            }
+                    <?php
+                    if (empty($users)){
+                        echo "<tr><td colspan='7' class='empty-table-placeholder'>No administrative users exist at this point…</td></tr>";
+                    } else {
+                        foreach($users as $u) {
+                            echo "<tr data-user-id='{$antiXSS->escape($u['user_id'], $antiXSS::HTML_ATTR)}'
+                                      data-user-username='{$antiXSS->escape($u['user_name'], $antiXSS::HTML_ATTR)}'
+                                      data-user-first-name='{$antiXSS->escape($u['first_name'], $antiXSS::HTML_ATTR)}'
+                                      data-user-last-name='{$antiXSS->escape($u['last_name'], $antiXSS::HTML_ATTR)}'
+                                      data-user-expires-on='{$antiXSS->escape($u['expires_on'], $antiXSS::HTML_ATTR)}'>" .
+                                 "<td>" . $u['user_name'] . "</td>" .
+                                 "<td>" . $u['first_name'] . " " . $u['last_name'] . "</td>" .
+                                 "<td>" . $dateFmt->format($u['created_on'], 'date_time') . "</td>" .
+                                 "<td>" . $dateFmt->format($u['expires_on'], 'date_time') . "</td>" .
+                                 "<td>" . (empty($u['is_confirmed']) ? 'No' : 'Yes') . "</td>" .
+                                 "<td>" . $dateFmt->format($u['last_log_in'], 'date_time') . "</td>" .
+                                 '<td class="table-option-cell">
+                                     <button type="button" class="btn btn-warning" data-toggle="modal" href="#admin-add-modal" data-action="edit"><i class="fa fa-edit"></i> Edit</button>
+                                  </td>' .
+                                 '</tr>';
                         }
-                        ?>
-                    </tr>
+                    }
+                    ?>
                 </tbody>
             </table>
         

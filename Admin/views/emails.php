@@ -28,31 +28,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <?php
-                        if (empty($emailTemplates)){
-                            echo "<tr><td colspan='6' class='empty-table-placeholder'>No email templates at this time…</td></tr>";
-                        } else {
-                            foreach($emailTemplates as $e) {
-                                echo "<tr data-email-id='{$antiXSS->escape($e['email_id'], $antiXSS::HTML_ATTR)}'
-                                          data-email-subject='{$antiXSS->escape($e['subject'], $antiXSS::HTML_ATTR)}'
-                                          data-email-cc='{$antiXSS->escape($e['cc'], $antiXSS::HTML_ATTR)}'
-                                          data-email-bcc='{$antiXSS->escape($e['bcc'], $antiXSS::HTML_ATTR)}'
-                                          data-email-content='{$antiXSS->escape($e['content'], $antiXSS::HTML_ATTR)}'>" .
-                                     "<td>{$e['name']}</td>" .
-                                     "<td>{$e['description']}</td>" .
-                                     "<td>{$antiXSS->escape($e['subject'])}</td>" .
-                                     "<td>{$antiXSS->escape($e['cc'])}</td>" .
-                                     "<td>{$antiXSS->escape($e['bcc'])}</td>" .
-                                     '<td class="table-option-cell">
-                                          <button type="button" class="btn btn-info" data-toggle="modal" href="#admin-view-email-modal" data-action="view"><i class="fa fa-eye"></i> View content</button>
-                                          <button type="button" class="btn btn-warning" data-toggle="modal" href="#admin-edit-email-modal" data-action="edit"><i class="fa fa-edit"></i> Edit template</button>
-                                      </td>' .
-                                     '</tr>';
-                            }
+                    <?php
+                    if (empty($emailTemplates)){
+                        echo "<tr><td colspan='6' class='empty-table-placeholder'>No email templates at this time…</td></tr>";
+                    } else {
+                        foreach($emailTemplates as $e) {
+                            echo "<tr data-email-id='{$antiXSS->escape($e['email_id'], $antiXSS::HTML_ATTR)}'
+                                      data-email-subject='{$antiXSS->escape($e['subject'], $antiXSS::HTML_ATTR)}'
+                                      data-email-cc='{$antiXSS->escape($e['cc'], $antiXSS::HTML_ATTR)}'
+                                      data-email-bcc='{$antiXSS->escape($e['bcc'], $antiXSS::HTML_ATTR)}'
+                                      data-email-content='{$antiXSS->escape($e['content'], $antiXSS::HTML_ATTR)}'>" .
+                                 "<td>{$e['name']}</td>" .
+                                 "<td>{$e['description']}</td>" .
+                                 "<td>{$antiXSS->escape($e['subject'])}</td>" .
+                                 "<td>{$antiXSS->escape($e['cc'])}</td>" .
+                                 "<td>{$antiXSS->escape($e['bcc'])}</td>" .
+                                 '<td class="table-option-cell">
+                                      <button type="button" class="btn btn-info" data-toggle="modal" href="#admin-view-email-modal" data-action="view"><i class="fa fa-eye"></i> View content</button>
+                                      <button type="button" class="btn btn-warning" data-toggle="modal" href="#admin-edit-email-modal" data-action="edit"><i class="fa fa-edit"></i> Edit template</button>
+                                  </td>' .
+                                 '</tr>';
                         }
-                        ?>
-                    </tr>
+                    }
+                    ?>
                 </tbody>
             </table>
         

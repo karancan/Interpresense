@@ -120,9 +120,11 @@
 
 <div class="modal" id="admin-invoice-add-notes-modal" tabindex="-1" role="dialog" aria-labelledby="admin-invoice-add-notes-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-vertical-center">
-        <form action="<?= basename($_SERVER["SCRIPT_FILENAME"]) ?>?page=add-note" method="POST" class="modal-content">
+        <form id="admin-invoice-add-notes-form" action="<?= basename($_SERVER["SCRIPT_FILENAME"]) ?>?page=add-note" method="POST" class="modal-content">
             
             <input type="hidden" name="invoice_id" value="">
+            <input type="hidden" name="date-filter-start" value="">
+            <input type="hidden" name="date-filter-end" value="">
             
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

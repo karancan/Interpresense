@@ -48,27 +48,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <?php
-                            foreach($finalInvoicesForClient as $i) {
-                                $invoiceDate = date('Y-m-d', strtotime($i['inserted_on']));
-                                echo "<tr>" .
-                                     "<td>" . $i['invoice_id_for_org'] . "</td>" .
-                                     "<td><strong>" . $i['client_id'] . "</strong></td>" .
-                                     "<td>" . $i['sp_name'] . "</td>" .
-                                     "<td>" . $i['item_count'] . "</td>" .
-                                     "<td>" . $i['file_count'] . "</td>" .
-                                     "<td>" . $i['note_count'] . "</td>" .
-                                     "<td>" . $i['grand_total'] . "</td>" .
-                                     "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
-                                     "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
-                                     "<td class='table-option-cell'>" .
-                                         '<a href="invoicesSubmitted.php?focus=' . $antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR) . '&start=' . $invoiceDate . '&end=' . $invoiceDate . '" target="_blank" class="btn btn-info"><i class="fa fa-eye"></i> View</a>' .
-                                     "</td>" .
-                                     "</tr>";
-                            }
-                            ?>
-                        </tr>
+                        <?php
+                        foreach($finalInvoicesForClient as $i) {
+                            $invoiceDate = date('Y-m-d', strtotime($i['inserted_on']));
+                            echo "<tr>" .
+                                 "<td>" . $i['invoice_id_for_org'] . "</td>" .
+                                 "<td><strong>" . $i['client_id'] . "</strong></td>" .
+                                 "<td>" . $i['sp_name'] . "</td>" .
+                                 "<td>" . $i['item_count'] . "</td>" .
+                                 "<td>" . $i['file_count'] . "</td>" .
+                                 "<td>" . $i['note_count'] . "</td>" .
+                                 "<td>" . $i['grand_total'] . "</td>" .
+                                 "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
+                                 "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
+                                 "<td class='table-option-cell'>" .
+                                     '<a href="invoicesSubmitted.php?focus=' . $antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR) . '&start=' . $invoiceDate . '&end=' . $invoiceDate . '" target="_blank" class="btn btn-info"><i class="fa fa-eye"></i> View</a>' .
+                                 "</td>" .
+                                 "</tr>";
+                        }
+                        ?>
                     </tbody>
                 </table>
                 
@@ -96,27 +94,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <?php
-                            foreach($draftInvoicesForClient as $i) {
-                                $invoiceDate = date('Y-m-d', strtotime($i['inserted_on']));
-                                echo "<tr>" .
-                                     "<td>" . $i['invoice_id_for_org'] . "</td>" .
-                                     "<td><strong>" . $i['client_id'] . "</strong></td>" .
-                                     "<td>" . $i['sp_name'] . "</td>" .
-                                     "<td>" . $i['item_count'] . "</td>" .
-                                     "<td>" . $i['file_count'] . "</td>" .
-                                     "<td>" . $i['note_count'] . "</td>" .
-                                     "<td>" . $i['grand_total'] . "</td>" .
-                                     "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
-                                     "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
-                                     "<td class='table-option-cell'>" .
-                                         '<a href="invoicesDrafts.php?focus=' . $antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR) . '&start=' . $invoiceDate . '&end=' . $invoiceDate . '" target="_blank" class="btn btn-info"><i class="fa fa-eye"></i> View</a>' .
-                                     "</td>" .
-                                     "</tr>";
-                            }
-                            ?>
-                        </tr>
+                        <?php
+                        foreach($draftInvoicesForClient as $i) {
+                            $invoiceDate = date('Y-m-d', strtotime($i['inserted_on']));
+                            echo "<tr>" .
+                                 "<td>" . $i['invoice_id_for_org'] . "</td>" .
+                                 "<td><strong>" . $i['client_id'] . "</strong></td>" .
+                                 "<td>" . $i['sp_name'] . "</td>" .
+                                 "<td>" . $i['item_count'] . "</td>" .
+                                 "<td>" . $i['file_count'] . "</td>" .
+                                 "<td>" . $i['note_count'] . "</td>" .
+                                 "<td>" . $i['grand_total'] . "</td>" .
+                                 "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
+                                 "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
+                                 "<td class='table-option-cell'>" .
+                                     '<a href="invoicesDrafts.php?focus=' . $antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR) . '&start=' . $invoiceDate . '&end=' . $invoiceDate . '" target="_blank" class="btn btn-info"><i class="fa fa-eye"></i> View</a>' .
+                                 "</td>" .
+                                 "</tr>";
+                        }
+                        ?>
                     </tbody>
                 </table>
                 
@@ -144,27 +140,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <?php
-                            foreach($finalInvoicesForSP as $i) {
-                                $invoiceDate = date('Y-m-d', strtotime($i['inserted_on']));
-                                echo "<tr>" .
-                                     "<td>" . $i['invoice_id_for_org'] . "</td>" .
-                                     "<td>" . $i['client_id'] . "</td>" .
-                                     "<td><strong>" . $i['sp_name'] . "</strong></td>" .
-                                     "<td>" . $i['item_count'] . "</td>" .
-                                     "<td>" . $i['file_count'] . "</td>" .
-                                     "<td>" . $i['note_count'] . "</td>" .
-                                     "<td>" . $i['grand_total'] . "</td>" .
-                                     "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
-                                     "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
-                                     "<td class='table-option-cell'>" .
-                                         '<a href="invoicesSubmitted.php?focus=' . $antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR) . '&start=' . $invoiceDate . '&end=' . $invoiceDate . '" target="_blank" class="btn btn-info"><i class="fa fa-eye"></i> View</a>' .
-                                     "</td>" .
-                                     "</tr>";
-                            }
-                            ?>
-                        </tr>
+                        <?php
+                        foreach($finalInvoicesForSP as $i) {
+                            $invoiceDate = date('Y-m-d', strtotime($i['inserted_on']));
+                            echo "<tr>" .
+                                 "<td>" . $i['invoice_id_for_org'] . "</td>" .
+                                 "<td>" . $i['client_id'] . "</td>" .
+                                 "<td><strong>" . $i['sp_name'] . "</strong></td>" .
+                                 "<td>" . $i['item_count'] . "</td>" .
+                                 "<td>" . $i['file_count'] . "</td>" .
+                                 "<td>" . $i['note_count'] . "</td>" .
+                                 "<td>" . $i['grand_total'] . "</td>" .
+                                 "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
+                                 "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
+                                 "<td class='table-option-cell'>" .
+                                     '<a href="invoicesSubmitted.php?focus=' . $antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR) . '&start=' . $invoiceDate . '&end=' . $invoiceDate . '" target="_blank" class="btn btn-info"><i class="fa fa-eye"></i> View</a>' .
+                                 "</td>" .
+                                 "</tr>";
+                        }
+                        ?>
                     </tbody>
                 </table>
                 
@@ -192,27 +186,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <?php
-                            foreach($draftInvoicesForSP as $i) {
-                                $invoiceDate = date('Y-m-d', strtotime($i['inserted_on']));
-                                echo "<tr>" .
-                                     "<td>" . $i['invoice_id_for_org'] . "</td>" .
-                                     "<td>" . $i['client_id'] . "</td>" .
-                                     "<td><strong>" . $i['sp_name'] . "</strong></td>" .
-                                     "<td>" . $i['item_count'] . "</td>" .
-                                     "<td>" . $i['file_count'] . "</td>" .
-                                     "<td>" . $i['note_count'] . "</td>" .
-                                     "<td>" . $i['grand_total'] . "</td>" .
-                                     "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
-                                     "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
-                                     "<td class='table-option-cell'>" .
-                                         '<a href="invoicesDrafts.php?focus=' . $antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR) . '&start=' . $invoiceDate . '&end=' . $invoiceDate . '" target="_blank" class="btn btn-info"><i class="fa fa-eye"></i> View</a>' .
-                                     "</td>" .
-                                     "</tr>";
-                            }
-                            ?>
-                        </tr>
+                        <?php
+                        foreach($draftInvoicesForSP as $i) {
+                            $invoiceDate = date('Y-m-d', strtotime($i['inserted_on']));
+                            echo "<tr>" .
+                                 "<td>" . $i['invoice_id_for_org'] . "</td>" .
+                                 "<td>" . $i['client_id'] . "</td>" .
+                                 "<td><strong>" . $i['sp_name'] . "</strong></td>" .
+                                 "<td>" . $i['item_count'] . "</td>" .
+                                 "<td>" . $i['file_count'] . "</td>" .
+                                 "<td>" . $i['note_count'] . "</td>" .
+                                 "<td>" . $i['grand_total'] . "</td>" .
+                                 "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
+                                 "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
+                                 "<td class='table-option-cell'>" .
+                                     '<a href="invoicesDrafts.php?focus=' . $antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR) . '&start=' . $invoiceDate . '&end=' . $invoiceDate . '" target="_blank" class="btn btn-info"><i class="fa fa-eye"></i> View</a>' .
+                                 "</td>" .
+                                 "</tr>";
+                        }
+                        ?>
                     </tbody>
                 </table>
                 

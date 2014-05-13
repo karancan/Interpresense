@@ -33,27 +33,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <?php
-                        if (empty($reportsGenerated)){
-                            echo "<tr><td colspan='5' class='empty-table-placeholder'>No reports have been generated at this point…</td></tr>";
-                        } else {
-                            foreach($reportsGenerated as $r) {
-                                echo "<tr data-focus='report-{$antiXSS->escape($r['report_id'], $antiXSS::HTML_ATTR)}'
-                                          data-report-id='{$antiXSS->escape($r['report_id'], $antiXSS::HTML_ATTR)}'>" .
-                                     "<td>" . $r['report_name'] . "</td>" .
-                                     "<td>" . $r['template_name'] . "</td>" .
-                                     "<td>" . $r['emp_name'] . "</td>" .
-                                     "<td>" . $dateFmt->format($r['inserted_on'], 'date_time') . "</td>" .
-                                     '<td class="table-option-cell">
-                                         <a class="btn btn-info" href="reports.php?page=view-generated-report&report_id=' . $antiXSS->escape($r['report_id'], $antiXSS::HTML_ATTR) . '"><i class="fa fa-eye"></i> View</a>
-                                         <button type="button" class="btn btn-danger" data-action="delete"><i class="fa fa-minus"></i> Delete</button>
-                                      </td>' .
-                                     '</tr>';
-                            }
+                    <?php
+                    if (empty($reportsGenerated)){
+                        echo "<tr><td colspan='5' class='empty-table-placeholder'>No reports have been generated at this point…</td></tr>";
+                    } else {
+                        foreach($reportsGenerated as $r) {
+                            echo "<tr data-focus='report-{$antiXSS->escape($r['report_id'], $antiXSS::HTML_ATTR)}'
+                                      data-report-id='{$antiXSS->escape($r['report_id'], $antiXSS::HTML_ATTR)}'>" .
+                                 "<td>" . $r['report_name'] . "</td>" .
+                                 "<td>" . $r['template_name'] . "</td>" .
+                                 "<td>" . $r['emp_name'] . "</td>" .
+                                 "<td>" . $dateFmt->format($r['inserted_on'], 'date_time') . "</td>" .
+                                 '<td class="table-option-cell">
+                                     <a class="btn btn-info" href="reports.php?page=view-generated-report&report_id=' . $antiXSS->escape($r['report_id'], $antiXSS::HTML_ATTR) . '"><i class="fa fa-eye"></i> View</a>
+                                     <button type="button" class="btn btn-danger" data-action="delete"><i class="fa fa-minus"></i> Delete</button>
+                                  </td>' .
+                                 '</tr>';
                         }
-                        ?>
-                    </tr>
+                    }
+                    ?>
                 </tbody>
             </table>
         
