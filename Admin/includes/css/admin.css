@@ -30,3 +30,10 @@
     color: #949eac;
     font-style: italic;
 }
+.admin-filter-approved-invoices-container{
+    margin: 1em 0;
+    font-size: larger;
+}
+.admin-filter-approved-invoices-container label{
+    font-weight: normal;
+}

@@ -52,8 +52,6 @@ $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
  */
 if (!isset($_GET['page'])) {
     
-    //@todo: add datatables to view
-    
     $unreadInvoiceCount = $invoicesModel->fetchUnreadFinalizedInvoiceCount();
     
     if (!empty($_GET['start'])) {
@@ -161,7 +159,7 @@ if (!isset($_GET['page'])) {
 } elseif ($_GET['page'] === "add-note"){
 
     $invoicesNotesModel->addNote($_POST);
-    header('Location: invoicesDrafts.php?focus=' . $_POST['invoice_id']); //@todo: respect start, end
+    header('Location: invoicesDrafts.php?start=' . $_GET['start'] . '&end=' . $_GET['end'] . '&focus=' . $_POST['invoice_id']);
     exit;
 
 } elseif ($_GET['page'] === "export") {
