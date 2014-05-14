@@ -44,7 +44,8 @@ $dateFmt = new \JsonI18n\DateFormat(\Locale::getDefault());
 $dateFmt->addResource(FS_L10N . '/dateFormatters.json');
 
 // Number formatting
-// @todo Figure this out
+$numFmt = new \JsonI18n\NumberFormat(\Locale::getDefault());
+$numFmt->addResource(FS_L10N . '/numberFormatters.json');
 
 /**
  * Content and actions
