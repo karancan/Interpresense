@@ -85,10 +85,10 @@
             
                 <h3>To</h3>
                 <p>
-                    <?php echo $settings['institution_dept_recipient_name']; ?><br>
-                    <?php echo $settings['institution_dept_recipient_title']; ?><br>
-                    <?php echo $settings['institution_dept_recipient_phone']; ?><br>
-                    <?php echo $settings['institution_dept_recipient_email']; ?>
+                    <?php echo $antiXSS->escape($settings['institution_dept_recipient_name']); ?><br>
+                    <?php echo $antiXSS->escape($settings['institution_dept_recipient_title']); ?><br>
+                    <?php echo $antiXSS->escape($settings['institution_dept_recipient_phone']); ?><br>
+                    <?php echo $antiXSS->escape($settings['institution_dept_recipient_email']); ?>
                 </p>
                 
             </section>
@@ -141,7 +141,7 @@
                                         <option value=''>Activity…</option>
                                         <?php
                                         foreach ($activities as $a) {
-                                            echo "<option value='{$a['activity_id']}'>{$a['activity_name_en']}</option>";
+                                            echo "<option value='{$antiXSS->escape($a['activity_id'], $antiXSS::HTML_ATTR)}'>{$antiXSS->escape($a['activity_name_en'])}</option>";
                                         }
                                         ?>
                                     </select>
