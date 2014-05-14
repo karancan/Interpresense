@@ -30,8 +30,10 @@
             </form>
             
             <div class="admin-filter-approved-invoices-container">
-                <input type="checkbox" id="admin-filter-approved-invoices" <?= ($_GET['approved_only'] === "1" ? 'checked' : null) ?>>
-                <label for="admin-filter-approved-invoices">View approved invoices only</label>
+                <label for="admin-filter-approved-invoices">
+                    <input type="checkbox" id="admin-filter-approved-invoices" <?= ($_GET['approved_only'] === "1" ? 'checked' : null) ?>>
+                    View approved invoices only
+                </label>
             </div>
                 
             <table id="admin-invoices-submitted-table" class="table table-hover invoice-table">           
