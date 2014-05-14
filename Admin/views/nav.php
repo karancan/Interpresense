@@ -41,7 +41,7 @@
                         <form class="navbar-form navbar-left" role="search" action="search.php" method="get">
                             <div class="form-search search-only">
                                 <i class="search-icon glyphicon glyphicon-search"></i>
-                                <input id="search-input" type="text" class="form-control search-query" name="q" placeholder="Search for a client or service provider…" rel="popover" data-content="To search for a client, enter a client ID. To search for a service provider, enter a name, HST number, phone number or email">
+                                <input id="search-input" type="text" class="form-control search-query" name="q" placeholder="Search for a client or service provider…" data-content="To search for a client, enter a client ID. To search for a service provider, enter a name, HST number, phone number or email">
                             </div>
                         </form>
                         
@@ -69,12 +69,12 @@
 <script>
     
     //If we have localStorage values for draft invoices, we inject them in to `href` attribute
-    if (localStorage.getItem('interpresense_admin_invoices_drafts_start_date') !== null && localStorage.getItem('interpresense_admin_invoices_drafts_end_date') != null) {
+    if (localStorage.getItem('interpresense_admin_invoices_drafts_start_date') !== null && localStorage.getItem('interpresense_admin_invoices_drafts_end_date') !== null) {
         $('#admin-nav-link-invoices-drafts').prop('href', $('#admin-nav-link-invoices-drafts').prop('href') + '?start=' + localStorage.getItem('interpresense_admin_invoices_drafts_start_date') + '&end=' + localStorage.getItem('interpresense_admin_invoices_drafts_end_date'));
     }
     
     //If we have localStorage values for finalized invoices, we inject them in to `href` attribute
-    if (localStorage.getItem('interpresense_admin_invoices_submitted_start_date') !== null && localStorage.getItem('interpresense_admin_invoices_submitted_end_date') != null) {
+    if (localStorage.getItem('interpresense_admin_invoices_submitted_start_date') !== null && localStorage.getItem('interpresense_admin_invoices_submitted_end_date') !== null) {
         $('#admin-nav-link-invoices-submitted').prop('href', $('#admin-nav-link-invoices-submitted').prop('href') + '?start=' + localStorage.getItem('interpresense_admin_invoices_submitted_start_date') + '&end=' + localStorage.getItem('interpresense_admin_invoices_submitted_end_date'));
     }
     
