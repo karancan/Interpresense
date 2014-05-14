@@ -74,7 +74,7 @@
                                  "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
                                  "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
                                  '<td class="table-option-cell">' .
-                                     (!$i['is_approved'] ? '<button type="button" data-href="invoicesSubmitted.php?page=mark-invoice-as-approved&invoice_id=' . $antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR) . '" class="btn btn-success" data-action="approve-invoice"><i class="fa fa-check-square-o"></i> Approve</a>' : null) .
+                                     (!$i['is_approved'] ? '<button type="button" data-href="invoicesSubmitted.php?page=mark-invoice-as-approved&amp;invoice_id=' . $antiXSS->escape($i['invoice_id'], $antiXSS::URL_PARAM) . '" class="btn btn-success" data-action="approve-invoice"><i class="fa fa-check-square-o"></i> Approve</button>' : null) .
                                      '<button type="button" class="btn btn-info" data-toggle="modal" href="#admin-invoice-add-notes-modal" data-action="add-note"><i class="fa fa-plus"></i> Add note</button>
                                   </td>' .
                                  '</tr>';
