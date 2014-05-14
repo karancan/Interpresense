@@ -72,13 +72,13 @@ class Invoice extends \Interpresense\Includes\BaseModel {
                ->key('sp_phone', $this->validators['sp_phone'])
                ->key('sp_email', $this->validators['sp_email'])
                ->key('sp_hst_number', $this->validators['sp_hst_number'])
+               ->key('invoice_id_for_sp')
                ->key('client_id')
                ->validate($data) || !Validator::bool()->validate($final)) {
             throw new \InvalidArgumentException('Required data invalid or missing');
         }
         
         $data['invoice_uid'] = hash('sha512', microtime(true) . mt_rand());
-        $data['invoice_id_for_sp'] = ''; // @todo
         $data['invoice_id_for_org'] = ''; // @todo
         $data['is_final'] = (int)$final;
         $data['grand_total'] = $this->calculateGrandTotal($data['invoice_items']);

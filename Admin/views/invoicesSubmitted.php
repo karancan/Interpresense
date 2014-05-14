@@ -31,7 +31,7 @@
             
             <div class="admin-filter-approved-invoices-container">
                 <label for="admin-filter-approved-invoices">
-                    <input type="checkbox" id="admin-filter-approved-invoices" <?= ($_GET['approved_only'] === "1" ? 'checked' : null) ?>>                
+                    <input type="checkbox" id="admin-filter-approved-invoices" <?= ($_GET['approved_only'] === "1" ? 'checked' : null) ?>>
                     View approved invoices only
                 </label>
             </div>
@@ -67,14 +67,14 @@
                                  "<td>" . $i['invoice_id_for_org'] . "</td>" .
                                  "<td>" . $i['client_id'] . "</td>" .
                                  "<td>" . "<a href='#admin-invoice-sp-details-modal' data-toggle='modal' data-action='view-sp-details' class='admin-modal-links'>" . $i['sp_name'] . "</a>" . "</td>" .
-                                 "<td>" . "<a href='#admin-invoice-items-modal' data-toggle='modal' data-action='view-items' class='admin-modal-links'>" . $i['item_count'] . "</a>" . "</td>" .
-                                 "<td>" . "<a href='#admin-invoice-files-modal' data-toggle='modal' data-action='view-files' class='admin-modal-links'>" . $i['file_count'] . "</a>" . "</td>" .
-                                 "<td>" . "<a href='#admin-invoice-notes-modal' data-toggle='modal' data-action='view-notes' class='admin-modal-links'>" . $i['note_count'] . "</a>" . "</td>" .
-                                 "<td>" . $i['grand_total'] . "</td>" .
+                                 "<td>" . "<a href='#admin-invoice-items-modal' data-toggle='modal' data-action='view-items' class='admin-modal-links'>" . $numFmt->format($i['item_count'], 'decimal') . "</a>" . "</td>" .
+                                 "<td>" . "<a href='#admin-invoice-files-modal' data-toggle='modal' data-action='view-files' class='admin-modal-links'>" . $numFmt->format($i['file_count'], 'decimal') . "</a>" . "</td>" .
+                                 "<td>" . "<a href='#admin-invoice-notes-modal' data-toggle='modal' data-action='view-notes' class='admin-modal-links'>" . $numFmt->format($i['note_count'], 'decimal') . "</a>" . "</td>" .
+                                 "<td>" . $numFmt->format($i['grand_total'], 'currency') . "</td>" .
                                  "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
                                  "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
                                  '<td class="table-option-cell">' .
-                                     (!$i['is_approved'] ? '<button type="button" data-href="invoicesSubmitted.php?page=mark-invoice-as-approved&invoice_id=' . $antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR) . '" class="btn btn-success" data-action="approve-invoice"><i class="fa fa-check-square-o"></i> Approve</a>' : null) .
+                                     (!$i['is_approved'] ? '<button type="button" data-href="invoicesSubmitted.php?page=mark-invoice-as-approved&amp;invoice_id=' . $antiXSS->escape($i['invoice_id'], $antiXSS::URL_PARAM) . '" class="btn btn-success" data-action="approve-invoice"><i class="fa fa-check-square-o"></i> Approve</button>' : null) .
                                      '<button type="button" class="btn btn-info" data-toggle="modal" href="#admin-invoice-add-notes-modal" data-action="add-note"><i class="fa fa-plus"></i> Add note</button>
                                   </td>' .
                                  '</tr>';

@@ -7,7 +7,7 @@ if ($_GET['mode'] === 'login-failed'){
 ?>
 <div class="col-md-4 col-md-offset-4 alert alert-danger alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-    <strong>Unsuccessful!</strong> That user name and password combination is invalid...
+    <strong>Unsuccessful!</strong> That user name and password combination is invalid…
 </div>
 <?php } ?>
 
@@ -16,14 +16,14 @@ if ($_GET['mode'] === 'unconfirmed-user'){
 ?>
 <div class="col-md-4 col-md-offset-4 alert alert-warning alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-    <strong>Unsuccessful!</strong> Your account has not been activated yet...
+    <strong>Unsuccessful!</strong> Your account has not been activated yet…
 </div>
 
 <?php } elseif ($_GET['mode'] === 'expired-user') { ?>
 
 <div class="col-md-4 col-md-offset-4 alert alert-warning alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-    <strong>Unsuccessful!</strong> Your account has been expired...
+    <strong>Unsuccessful!</strong> Your account has been expired…
 </div>
 <?php } ?>
 
@@ -36,7 +36,7 @@ if ($_GET['mode'] === 'unconfirmed-user'){
             <div class="col-md-6 col-md-offset-3 admin-login-form-inputs">
                 
                 <div class="row">
-                    <h4><i class="fa fa-lock"></i> &nbsp;Please log in to continue...</h4>
+                    <h4><i class="fa fa-lock"></i> &nbsp;Please log in to continue…</h4>
                 </div>
                 
                 <div class="row">
