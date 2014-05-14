@@ -1,5 +1,5 @@
 <style>
-    @import url('//<?= URL_VENDOR_FRONTEND ?>/DataTables/media/css/jquery.dataTables.css');
+    @import url('//<?= URL_VENDOR_FRONTEND ?>/datatables-bootstrap3/BS3/assets/css/datatables.css');
     @import url('includes/css/admin.css');
 </style>
 <div class="container">
@@ -91,6 +91,7 @@
 </div>
 <?php require FS_ADMIN . '/views/invoicesModals.php'; ?>
 <script charset='utf-8' src='//<?= URL_VENDOR_FRONTEND ?>/DataTables/media/js/jquery.dataTables.js'></script>
+<script charset='utf-8' src='//<?= URL_VENDOR_FRONTEND ?>/datatables-bootstrap3/BS3/assets/js/datatables.js'></script>
 <script charset='utf-8' src='includes/js/admin.js'></script>
 <script charset='utf-8' src='includes/js/invoices.js'></script>
 <script charset='utf-8' src='includes/js/invoicesSubmitted.js'></script>
