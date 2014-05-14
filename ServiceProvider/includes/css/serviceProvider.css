@@ -1,11 +1,8 @@
 h3{
     font-weight: normal;
 }
-#invoice_from .form-group {
+#invoice_from .form-group, #invoice_for .form-group {
     margin-bottom: 0;
-}
-.invoice-total{
-    text-align: center;
 }
 .invoice-total h3{
     font-size: 1.4em;
@@ -13,9 +10,6 @@ h3{
 #invoice-total-dollar-amount{
     font-size: 1.6em !important;
     font-weight: bold;
-}
-.invoice-for{
-    text-align: right;
 }
 .invoice-items-container{
     margin-top: 1em;

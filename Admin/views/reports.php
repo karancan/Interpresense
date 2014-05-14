@@ -45,7 +45,7 @@
                                  "<td>" . $r['emp_name'] . "</td>" .
                                  "<td>" . $dateFmt->format($r['inserted_on'], 'date_time') . "</td>" .
                                  '<td class="table-option-cell">
-                                     <a class="btn btn-info" href="reports.php?page=view-generated-report&report_id=' . $antiXSS->escape($r['report_id'], $antiXSS::HTML_ATTR) . '"><i class="fa fa-eye"></i> View</a>
+                                     <a class="btn btn-info" href="reports.php?page=view-generated-report&amp;report_id=' . $antiXSS->escape($r['report_id'], $antiXSS::URL_PARAM) . '"><i class="fa fa-eye"></i> View</a>
                                      <button type="button" class="btn btn-danger" data-action="delete"><i class="fa fa-minus"></i> Delete</button>
                                   </td>' .
                                  '</tr>';

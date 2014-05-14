@@ -4,7 +4,7 @@
         <option value="today">Today</option>
         <option value="tomorrow">Tomorrow</option>
         <option value="yesterday">Yesterday</option>
-        <option value="plus-minus-1-day">+- 1 day</option>
+        <option value="plus-minus-1-day">± 1 day</option>
     </optgroup>
     <optgroup label="Week">
         <option value="this-week">This week</option>
