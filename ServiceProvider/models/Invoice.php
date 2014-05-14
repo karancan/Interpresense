@@ -79,18 +79,45 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         }
         
         $data['invoice_uid'] = hash('sha512', microtime(true) . mt_rand());
-        $data['invoice_id_for_org'] = ''; // @todo
         $data['is_final'] = (int)$final;
         $data['grand_total'] = $this->calculateGrandTotal($data['invoice_items']);
         
         $data = parent::$db->pick(array_keys($types), $data);
         
-        $sql = "INSERT INTO `interpresense_service_provider_invoices` (`invoice_uid`, `invoice_id_for_sp`, `invoice_id_for_org`, `sp_name`, `sp_address`, `sp_postal_code`, `sp_city`, `sp_province`, `sp_phone`, `sp_email`, `sp_hst_number`, `client_id`, `is_final`, `grand_total`, `inserted_on`, `updated_on`)
-                     VALUES (:invoice_uid, :invoice_id_for_sp, :invoice_id_for_org, :sp_name, :sp_address, :sp_postal_code, :sp_city, :sp_province, :sp_phone, :sp_email, :sp_hst_number, :client_id, :is_final, :grand_total, NOW(), NOW());";
+        $sql = "INSERT INTO `interpresense_service_provider_invoices` (`invoice_uid`, `invoice_id_for_sp`, `sp_name`, `sp_address`, `sp_postal_code`, `sp_city`, `sp_province`, `sp_phone`, `sp_email`, `sp_hst_number`, `client_id`, `is_final`, `grand_total`, `inserted_on`, `updated_on`)
+                     VALUES (:invoice_uid, :invoice_id_for_sp, :sp_name, :sp_address, :sp_postal_code, :sp_city, :sp_province, :sp_phone, :sp_email, :sp_hst_number, :client_id, :is_final, :grand_total, NOW(), NOW());";
         
         parent::$db->query($sql, $data, $types);
         
         return parent::$db->db->lastInsertId();
+    }
+    
+    /**
+     * Updates the organization's invoice ID
+     * @param int $invoiceID The invoice ID
+     * @param mixed $orgInvoiceID The organization's invoice ID
+     */
+    public function updateOrgInvoiceId($invoiceID, $orgInvoiceID) {
+        
+        if (!$this->validators['invoice_id']->validate($invoiceID)) {
+            throw new \InvalidArgumentException('Invalid invoice ID.');
+        }
+        
+        $sql = "UPDATE `interpresense_service_provider_invoices`
+                   SET `invoice_id_for_org` = :invoice_id_for_org, `updated_on` = NOW()
+                 WHERE `invoice_id` = :invoice_id;";
+        
+        $data = array(
+            'invoice_id_for_org' => $orgInvoiceID,
+            'invoice_id' => $invoiceID
+        );
+        
+        $types = array(
+            'invoice_id_for_org' => \PDO::PARAM_STR,
+            'invoice_id' => \PDO::PARAM_INT
+        );
+        
+        parent::$db->query($sql, $data, $types);
     }
     
     /**
