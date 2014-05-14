@@ -8,10 +8,13 @@ if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROT
 }
 session_start();
 
+header('X-Frame-Options: SAMEORIGIN');
+header('X-XSS-Protection: 1; mode=block');
 header('Content-Type: text/html; charset=utf-8');
+header("Content-Language: {$_SESSION['lang']}");
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="<?= $_SESSION['lang']; ?>">
     <meta charset="utf-8">
     <meta name='viewport' content='width=device-width,initial-scale=1.0'>
 
