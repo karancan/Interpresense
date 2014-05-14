@@ -67,10 +67,10 @@
                                  "<td>" . $i['invoice_id_for_org'] . "</td>" .
                                  "<td>" . $i['client_id'] . "</td>" .
                                  "<td>" . "<a href='#admin-invoice-sp-details-modal' data-toggle='modal' data-action='view-sp-details' class='admin-modal-links'>" . $i['sp_name'] . "</a>" . "</td>" .
-                                 "<td>" . "<a href='#admin-invoice-items-modal' data-toggle='modal' data-action='view-items' class='admin-modal-links'>" . $i['item_count'] . "</a>" . "</td>" .
-                                 "<td>" . "<a href='#admin-invoice-files-modal' data-toggle='modal' data-action='view-files' class='admin-modal-links'>" . $i['file_count'] . "</a>" . "</td>" .
-                                 "<td>" . "<a href='#admin-invoice-notes-modal' data-toggle='modal' data-action='view-notes' class='admin-modal-links'>" . $i['note_count'] . "</a>" . "</td>" .
-                                 "<td>" . $i['grand_total'] . "</td>" .
+                                 "<td>" . "<a href='#admin-invoice-items-modal' data-toggle='modal' data-action='view-items' class='admin-modal-links'>" . $numFmt->format($i['item_count'], 'decimal') . "</a>" . "</td>" .
+                                 "<td>" . "<a href='#admin-invoice-files-modal' data-toggle='modal' data-action='view-files' class='admin-modal-links'>" . $numFmt->format($i['file_count'], 'decimal') . "</a>" . "</td>" .
+                                 "<td>" . "<a href='#admin-invoice-notes-modal' data-toggle='modal' data-action='view-notes' class='admin-modal-links'>" . $numFmt->format($i['note_count'], 'decimal') . "</a>" . "</td>" .
+                                 "<td>" . $numFmt->format($i['grand_total'], 'currency') . "</td>" .
                                  "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
                                  "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
                                  '<td class="table-option-cell">' .

@@ -22,8 +22,8 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li <?= ($current_view === "admin-submitted" ? 'class="active"' : null) ?>>
-                                <a id="admin-nav-link-invoices-submitted" href="invoicesSubmitted.php" <?= (!empty($unreadInvoiceCount) ? 'data-popover="true" rel="popover" data-content="You have ' . $unreadInvoiceCount . ' unread invoice(s)…"' : null) ?>>
-                                    <i class="fa fa-file-text"></i> Invoices Submitted <?= (empty($unreadInvoiceCount) ? null : '<strong>(' . $unreadInvoiceCount . ')</strong>') ?>
+                                <a id="admin-nav-link-invoices-submitted" href="invoicesSubmitted.php" <?= (!empty($unreadInvoiceCount) ? 'data-popover="true" data-content="You have ' . $numFmt->format($unreadInvoiceCount, 'decimal') . ' unread invoice(s)…"' : null) ?>>
+                                    <i class="fa fa-file-text"></i> Invoices Submitted <?= (empty($unreadInvoiceCount) ? null : '<strong>(' . $numFmt->format($unreadInvoiceCount, 'decimal') . ')</strong>') ?>
                                 </a>
                             </li>
                             <li <?= ($current_view === "admin-drafts" ? 'class="active"' : null) ?>>

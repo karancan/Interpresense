@@ -55,10 +55,10 @@
                                  "<td>" . $i['invoice_id_for_org'] . "</td>" .
                                  "<td><strong>" . $i['client_id'] . "</strong></td>" .
                                  "<td>" . $i['sp_name'] . "</td>" .
-                                 "<td>" . $i['item_count'] . "</td>" .
-                                 "<td>" . $i['file_count'] . "</td>" .
-                                 "<td>" . $i['note_count'] . "</td>" .
-                                 "<td>" . $i['grand_total'] . "</td>" .
+                                 "<td>" . $numFmt->format($i['item_count'], 'decimal') . "</td>" .
+                                 "<td>" . $numFmt->format($i['file_count'], 'decimal') . "</td>" .
+                                 "<td>" . $numFmt->format($i['note_count'], 'decimal') . "</td>" .
+                                 "<td>" . $numFmt->format($i['grand_total'], 'currency') . "</td>" .
                                  "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
                                  "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
                                  "<td class='table-option-cell'>" .
@@ -101,10 +101,10 @@
                                  "<td>" . $i['invoice_id_for_org'] . "</td>" .
                                  "<td><strong>" . $i['client_id'] . "</strong></td>" .
                                  "<td>" . $i['sp_name'] . "</td>" .
-                                 "<td>" . $i['item_count'] . "</td>" .
-                                 "<td>" . $i['file_count'] . "</td>" .
-                                 "<td>" . $i['note_count'] . "</td>" .
-                                 "<td>" . $i['grand_total'] . "</td>" .
+                                 "<td>" . $numFmt->format($i['item_count'], 'decimal') . "</td>" .
+                                 "<td>" . $numFmt->format($i['file_count'], 'decimal') . "</td>" .
+                                 "<td>" . $numFmt->format($i['note_count'], 'decimal') . "</td>" .
+                                 "<td>" . $numFmt->format($i['grand_total'], 'currency') . "</td>" .
                                  "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
                                  "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
                                  "<td class='table-option-cell'>" .
@@ -147,10 +147,10 @@
                                  "<td>" . $i['invoice_id_for_org'] . "</td>" .
                                  "<td>" . $i['client_id'] . "</td>" .
                                  "<td><strong>" . $i['sp_name'] . "</strong></td>" .
-                                 "<td>" . $i['item_count'] . "</td>" .
-                                 "<td>" . $i['file_count'] . "</td>" .
-                                 "<td>" . $i['note_count'] . "</td>" .
-                                 "<td>" . $i['grand_total'] . "</td>" .
+                                 "<td>" . $numFmt->format($i['item_count'], 'decimal') . "</td>" .
+                                 "<td>" . $numFmt->format($i['file_count'], 'decimal') . "</td>" .
+                                 "<td>" . $numFmt->format($i['note_count'], 'decimal') . "</td>" .
+                                 "<td>" . $numFmt->format($i['grand_total'], 'currency') . "</td>" .
                                  "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
                                  "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
                                  "<td class='table-option-cell'>" .
@@ -193,10 +193,10 @@
                                  "<td>" . $i['invoice_id_for_org'] . "</td>" .
                                  "<td>" . $i['client_id'] . "</td>" .
                                  "<td><strong>" . $i['sp_name'] . "</strong></td>" .
-                                 "<td>" . $i['item_count'] . "</td>" .
-                                 "<td>" . $i['file_count'] . "</td>" .
-                                 "<td>" . $i['note_count'] . "</td>" .
-                                 "<td>" . $i['grand_total'] . "</td>" .
+                                 "<td>" . $numFmt->format($i['item_count'], 'decimal') . "</td>" .
+                                 "<td>" . $numFmt->format($i['file_count'], 'decimal') . "</td>" .
+                                 "<td>" . $numFmt->format($i['note_count'], 'decimal') . "</td>" .
+                                 "<td>" . $numFmt->format($i['grand_total'], 'currency') . "</td>" .
                                  "<td>" . ($i['is_approved'] ? 'Yes' : 'No') . "</td>" .
                                  "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
                                  "<td class='table-option-cell'>" .
