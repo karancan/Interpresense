@@ -22,12 +22,12 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li <?= ($current_view === "admin-submitted" ? 'class="active"' : null) ?>>
-                                <a id="admin-nav-link-invoices-submitted" href="invoicesSubmitted.php" <?= (!empty($unreadInvoiceCount) ? 'data-popover="true" data-content="' . sprintf('You have %d unread invoice(s)…', $numFmt->format($unreadInvoiceCount, 'decimal')) . '"' : null) ?>>
+                                <a id="admin-nav-link-invoices-submitted" href="invoicesSubmitted.php?" <?= (!empty($unreadInvoiceCount) ? 'data-popover="true" data-content="' . sprintf('You have %d unread invoice(s)…', $numFmt->format($unreadInvoiceCount, 'decimal')) . '"' : null) ?>>
                                     <i class="fa fa-file-text"></i> Invoices Submitted <?= (empty($unreadInvoiceCount) ? null : '<strong>(' . $numFmt->format($unreadInvoiceCount, 'decimal') . ')</strong>') ?>
                                 </a>
                             </li>
                             <li <?= ($current_view === "admin-drafts" ? 'class="active"' : null) ?>>
-                                <a id="admin-nav-link-invoices-drafts" href="invoicesDrafts.php">
+                                <a id="admin-nav-link-invoices-drafts" href="invoicesDrafts.php?">
                                     <i class="fa fa-file-text"></i> Invoice Drafts
                                 </a>
                             </li>
@@ -68,14 +68,19 @@
 </div>
 <script>
     
-    //If we have localStorage values for draft invoices, we inject them in to `href` attribute
+    //If we have localStorage values for the date range of draft invoices, inject them in to `href` attribute
     if (localStorage.getItem('interpresense_admin_invoices_drafts_start_date') !== null && localStorage.getItem('interpresense_admin_invoices_drafts_end_date') !== null) {
-        $('#admin-nav-link-invoices-drafts').prop('href', $('#admin-nav-link-invoices-drafts').prop('href') + '?start=' + localStorage.getItem('interpresense_admin_invoices_drafts_start_date') + '&end=' + localStorage.getItem('interpresense_admin_invoices_drafts_end_date'));
+        $('#admin-nav-link-invoices-drafts').prop('href', $('#admin-nav-link-invoices-drafts').prop('href') + '&start=' + localStorage.getItem('interpresense_admin_invoices_drafts_start_date') + '&end=' + localStorage.getItem('interpresense_admin_invoices_drafts_end_date'));
     }
     
-    //If we have localStorage values for finalized invoices, we inject them in to `href` attribute
+    //If we have localStorage values for the date range of finalized invoices, inject them in to `href` attribute
     if (localStorage.getItem('interpresense_admin_invoices_submitted_start_date') !== null && localStorage.getItem('interpresense_admin_invoices_submitted_end_date') !== null) {
-        $('#admin-nav-link-invoices-submitted').prop('href', $('#admin-nav-link-invoices-submitted').prop('href') + '?start=' + localStorage.getItem('interpresense_admin_invoices_submitted_start_date') + '&end=' + localStorage.getItem('interpresense_admin_invoices_submitted_end_date'));
+        $('#admin-nav-link-invoices-submitted').prop('href', $('#admin-nav-link-invoices-submitted').prop('href') + '&start=' + localStorage.getItem('interpresense_admin_invoices_submitted_start_date') + '&end=' + localStorage.getItem('interpresense_admin_invoices_submitted_end_date'));
+    }
+    
+    //If we have a localStorage value for the approved only checkbox of finalized invoices, inject them in to `href`
+    if (localStorage.getItem('interpresense_admin_invoices_submitted_approved_only') !== null && localStorage.getItem('interpresense_admin_invoices_submitted_approved_only') !== '0') {
+        $('#admin-nav-link-invoices-submitted').prop('href', $('#admin-nav-link-invoices-submitted').prop('href') + '&approved_only=' + localStorage.getItem('interpresense_admin_invoices_submitted_approved_only'));
     }
     
     //Initialize a popover on the search input box

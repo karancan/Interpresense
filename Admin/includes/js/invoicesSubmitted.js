@@ -23,7 +23,15 @@ $('#admin-invoices-submitted-table').dataTable({
 /**
  *User checks/unchecks the option to view approved invoices only
  */
-//@todo
+$('#admin-filter-approved-invoices').change(function(){
+    if ($(this).is(':checked')) {
+        localStorage.setItem('interpresense_admin_invoices_submitted_approved_only', 1);
+        window.location.href = 'invoicesSubmitted.php?start=' + $('.admin-page-filter-input[name="start"]').val() + '&end=' + $('.admin-page-filter-input[name="end"]').val() + '&approved_only=1';
+    } else {
+        localStorage.setItem('interpresense_admin_invoices_submitted_approved_only', 0);
+        window.location.href = 'invoicesSubmitted.php?start=' + $('.admin-page-filter-input[name="start"]').val() + '&end=' + $('.admin-page-filter-input[name="end"]').val();
+    }
+});
 
 /**
  *User wants to mark an invoice as approved

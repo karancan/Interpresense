@@ -78,7 +78,8 @@ if (!isset($_GET['page'])) {
         $filter_end_date = new \DateTime("+{$settings['admin_default_date_filter_range_days']} days");
     }
     
-    $invoices = $invoicesModel->fetchInvoices($filter_start_date, $filter_end_date, 'final');
+    $invoices = $invoicesModel->fetchInvoices($filter_start_date, $filter_end_date, 'final', ($_GET['approved_only'] === '1' ? true : false));
+    
     if (!empty($invoices)){
         foreach ($invoices as &$i){
             $i['item_count'] = $invoicesItemsModel->fetchItemsCount($i['invoice_id']);
