@@ -193,7 +193,7 @@ if (!isset($_GET['page'])) {
         //@todo: create an invoice note stating that the invoice was marked approved
         //@todo: send email to service provider telling them the invoice was approved
         
-        header('Location: invoicesSubmitted.php?focus=' . $_GET['invoice_id']); //@todo: respect start, end, approved
+        header('Location: invoicesSubmitted.php?focus=' . $_GET['invoice_id'] . '&start=' . $_GET['start'] . '&end=' . $_GET['end'] . '&approved_only=' . $_GET['approved_only']);
         exit;
     } else {
         $viewFile = ''; //Show error page
