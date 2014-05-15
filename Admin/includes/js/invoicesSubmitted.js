@@ -23,7 +23,15 @@ $('#admin-invoices-submitted-table').dataTable({
 /**
  *User checks/unchecks the option to view approved invoices only
  */
-//@todo
+$('#admin-filter-approved-invoices').change(function(){
+    if (this.checked) {
+        localStorage.setItem('interpresense_admin_invoices_submitted_approved_only', 1);
+        window.location.href = 'invoicesSubmitted.php?start=' + $('.admin-page-filter-input[name="start"]').val() + '&end=' + $('.admin-page-filter-input[name="end"]').val() + '&approved_only=1';
+    } else {
+        localStorage.setItem('interpresense_admin_invoices_submitted_approved_only', 0);
+        window.location.href = 'invoicesSubmitted.php?start=' + $('.admin-page-filter-input[name="start"]').val() + '&end=' + $('.admin-page-filter-input[name="end"]').val();
+    }
+});
 
 /**
  *User wants to mark an invoice as approved
@@ -33,7 +41,10 @@ $('[data-action="approve-invoice"]').click(function(){
     global.highlightRow($(this).closest('tr'));
     
     if(confirm("Are you sure you want to mark this invoice as approved? This action cannot be undone.")){
-        window.location.href = $(this).data('href');
+        window.location.href = 'invoicesSubmitted.php?page=mark-invoice-as-approved&invoice_id=' + $(this).closest('tr').data('invoice-id') +
+                                                                                  '&start=' + $('.admin-page-filter-input[name="start"]').val() +
+                                                                                  '&end' + $('.admin-page-filter-input[name="end"]').val() +
+                                                                                  '&approved_only=' + localStorage.getItem('interpresense_admin_invoices_submitted_approved_only');
     } else {
         global.removeRowHighlighting($(this).closest('table'));
     }

@@ -52,8 +52,6 @@ $numFmt->addResource(FS_L10N . '/numberFormatters.json');
  */
 if (!isset($_GET['page'])) {
 
-    //@todo: add datatables to view
-    
     $unreadInvoiceCount = $invoicesModel->fetchUnreadFinalizedInvoiceCount();
     
     $users = $usersModel->fetchUsers();

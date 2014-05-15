@@ -55,6 +55,7 @@ if (!isset($_GET['page'])) {
     
     $unreadInvoiceCount = $invoicesModel->fetchUnreadFinalizedInvoiceCount();
     
+    //@todo: allow editing of org invoice id
     //@todo: show tooltip if invoice is approved
 
     if (!empty($_GET['start'])) {
@@ -77,7 +78,8 @@ if (!isset($_GET['page'])) {
         $filter_end_date = new \DateTime("+{$settings['admin_default_date_filter_range_days']} days");
     }
     
-    $invoices = $invoicesModel->fetchInvoices($filter_start_date, $filter_end_date, 'final');
+    $invoices = $invoicesModel->fetchInvoices($filter_start_date, $filter_end_date, 'final', ($_GET['approved_only'] === '1' ? true : false));
+    
     if (!empty($invoices)){
         foreach ($invoices as &$i){
             $i['item_count'] = $invoicesItemsModel->fetchItemsCount($i['invoice_id']);
@@ -191,7 +193,7 @@ if (!isset($_GET['page'])) {
         //@todo: create an invoice note stating that the invoice was marked approved
         //@todo: send email to service provider telling them the invoice was approved
         
-        header('Location: invoicesSubmitted.php?focus=' . $_GET['invoice_id']); //@todo: respect start, end, approved
+        header('Location: invoicesSubmitted.php?focus=' . $_GET['invoice_id'] . '&start=' . $_GET['start'] . '&end=' . $_GET['end'] . '&approved_only=' . $_GET['approved_only']);
         exit;
     } else {
         $viewFile = ''; //Show error page

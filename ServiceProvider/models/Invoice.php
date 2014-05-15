@@ -150,7 +150,7 @@ class Invoice extends \Interpresense\Includes\BaseModel {
      * @param string $status Filters invoices by status. Default is all.
      * @return array
      */
-    public function fetchInvoices(\DateTime $startRange, \DateTime $endRange, $status = 'all') {
+    public function fetchInvoices(\DateTime $startRange, \DateTime $endRange, $status = 'all', $approvedOnly = false) {
         
         $sql = "SELECT `invoice_id`, `invoice_uid`, `invoice_id_for_sp`, `invoice_id_for_org`, `sp_name`,
                        `sp_address`, `sp_postal_code`, `sp_city`, `sp_province`, `sp_phone`, `sp_email`,
@@ -162,9 +162,13 @@ class Invoice extends \Interpresense\Includes\BaseModel {
                    AND `is_confirmed` = 1";
         
         if ($status === 'final') {
-            $sql .= ' AND `is_final` = 1;';
+            $sql .= ' AND `is_final` = 1';
         } elseif ($status === 'draft') {
-            $sql .= ' AND `is_final` = 0;';
+            $sql .= ' AND `is_final` = 0';
+        }
+        
+        if ($approvedOnly) {
+            $sql .= ' AND `is_approved` = 1;';
         }
         
         $data = array(

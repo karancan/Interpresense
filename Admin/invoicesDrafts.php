@@ -53,6 +53,8 @@ $numFmt->addResource(FS_L10N . '/numberFormatters.json');
  */
 if (!isset($_GET['page'])) {
     
+    //@todo: allow editing of org invoice id
+    
     $unreadInvoiceCount = $invoicesModel->fetchUnreadFinalizedInvoiceCount();
     
     if (!empty($_GET['start'])) {
