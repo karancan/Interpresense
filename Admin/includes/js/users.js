@@ -1,13 +1,35 @@
 /**
- *If a row needs to be focussed on, we highlight it
+ *Actions to be run when page is done loading
  */
 $(document).ready(function(){
+    
+    //Focus on a specific row (if applicable)
     if (focus !== ''){
         global.highlightRow($('[data-user-id="' + focus + '"]'), 15000);
         $('html, body').animate({
             scrollTop: $('[data-user-id="' + focus + '"]').offset().top
         }, 1000);
     }
+    
+    //Init datatable
+    $('#admin-users-table').dataTable({
+        "aLengthMenu": [
+            [25, 50, 100, 200, -1],
+            [25, 50, 100, 200, 'All']
+        ],
+        "aoColumnDefs": [{
+            "bSortable": false,
+            "aTargets": [-1]
+        }],
+        "iDisplayLength": -1
+    });
+    
+    //Init datepickers
+    $('.datepicker').datepicker({
+        format: 'yyyy-mm-dd',
+        startDate: '+1d'
+    });
+    
 });
 
 /**

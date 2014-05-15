@@ -1,4 +1,5 @@
 <style>
+    @import url('//<?= URL_VENDOR_FRONTEND ?>/DataTables/media/css/jquery.dataTables.css');
     @import url('includes/css/admin.css');
 </style>
 <div class="container">
@@ -35,9 +36,7 @@
                 </thead>
                 <tbody>
                     <?php
-                    if (empty($users)){
-                        echo "<tr><td colspan='7' class='empty-table-placeholder'>No administrative users exist at this point…</td></tr>";
-                    } else {
+                    if (!empty($users)){
                         foreach($users as $u) {
                             echo "<tr data-user-id='{$antiXSS->escape($u['user_id'], $antiXSS::HTML_ATTR)}'
                                       data-user-username='{$antiXSS->escape($u['user_name'], $antiXSS::HTML_ATTR)}'
@@ -113,16 +112,9 @@
         </form>
     </div>
 </div>
+<script charset='utf-8' src='//<?= URL_VENDOR_FRONTEND ?>/DataTables/media/js/jquery.dataTables.js'></script>
 <script charset='utf-8' src='includes/js/users.js'></script>
 <script>
-    
     'use strict';
     var focus = '<?= $antiXSS->escape($_GET['focus'], $antiXSS::JS) ?>';
-    
-    //Init datepickers
-    $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd',
-        startDate: '+1d'
-    });
-    
 </script>
