@@ -109,11 +109,6 @@ footer .dev-logo{
 }
 
 /**
- *DataTables over-ride styles
- */
-/* @todo: remove ugly datatables row colors (row highlighting broken until this is done) */
-
-/**
  *External and error pages
  */
 header.external-page-header{

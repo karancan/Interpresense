@@ -39,6 +39,7 @@ class Search extends \Interpresense\Includes\BaseModel {
                        `is_approved`, `client_id`, `grand_total`, `is_approved`, `inserted_on`
                   FROM `interpresense_service_provider_invoices`
                  WHERE `is_final` = 1
+                   AND `is_confirmed` = 1
                    AND `client_id` LIKE :client_id;";
         
         $data = array('client_id' => $q . '%');
@@ -57,6 +58,7 @@ class Search extends \Interpresense\Includes\BaseModel {
                        `is_approved`, `client_id`, `grand_total`, `is_approved`, `inserted_on`
                   FROM `interpresense_service_provider_invoices`
                  WHERE `is_final` = 1
+                   AND `is_confirmed` = 1
                    AND (`sp_name` LIKE :sp_name
                     OR `sp_email` LIKE :sp_email
                     OR `sp_hst_number` LIKE :sp_hst_number
@@ -78,6 +80,7 @@ class Search extends \Interpresense\Includes\BaseModel {
                        `is_approved`, `client_id`, `grand_total`, `is_approved`, `inserted_on`
                   FROM `interpresense_service_provider_invoices`
                  WHERE `is_final` = 0
+                   AND `is_confirmed` = 1
                    AND `client_id` LIKE :client_id;";
         
         $data = array('client_id' => $q . '%');
@@ -96,6 +99,7 @@ class Search extends \Interpresense\Includes\BaseModel {
                        `is_approved`, `client_id`, `grand_total`, `is_approved`, `inserted_on`
                   FROM `interpresense_service_provider_invoices`
                  WHERE `is_final` = 0
+                   AND `is_confirmed` = 1
                    AND (`sp_name` LIKE :sp_name
                     OR `sp_email` LIKE :sp_email
                     OR `sp_hst_number` LIKE :sp_hst_number
