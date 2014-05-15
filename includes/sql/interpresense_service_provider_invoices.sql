@@ -23,6 +23,7 @@ CREATE TABLE `interpresense_service_provider_invoices` (
   `grand_total` decimal(6,2) DEFAULT NULL,
   `inserted_on` datetime NOT NULL,
   `updated_on` datetime NOT NULL,
+  `is_confirmed` tinyint(1) NOT NULL DEFAULT '0',
   `is_approved` tinyint(1) NOT NULL DEFAULT '0',
   `approved_on` datetime DEFAULT NULL,
   `approved_by` int(11) unsigned DEFAULT NULL,

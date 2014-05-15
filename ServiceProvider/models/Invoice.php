@@ -79,18 +79,46 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         }
         
         $data['invoice_uid'] = hash('sha512', microtime(true) . mt_rand());
-        $data['invoice_id_for_org'] = ''; // @todo
         $data['is_final'] = (int)$final;
         $data['grand_total'] = $this->calculateGrandTotal($data['invoice_items']);
         
         $data = parent::$db->pick(array_keys($types), $data);
         
-        $sql = "INSERT INTO `interpresense_service_provider_invoices` (`invoice_uid`, `invoice_id_for_sp`, `invoice_id_for_org`, `sp_name`, `sp_address`, `sp_postal_code`, `sp_city`, `sp_province`, `sp_phone`, `sp_email`, `sp_hst_number`, `client_id`, `is_final`, `grand_total`, `inserted_on`, `updated_on`)
-                     VALUES (:invoice_uid, :invoice_id_for_sp, :invoice_id_for_org, :sp_name, :sp_address, :sp_postal_code, :sp_city, :sp_province, :sp_phone, :sp_email, :sp_hst_number, :client_id, :is_final, :grand_total, NOW(), NOW());";
+        $sql = "INSERT INTO `interpresense_service_provider_invoices` (`invoice_uid`, `invoice_id_for_sp`, `sp_name`, `sp_address`, `sp_postal_code`, `sp_city`, `sp_province`, `sp_phone`, `sp_email`, `sp_hst_number`, `client_id`, `is_final`, `grand_total`, `inserted_on`, `updated_on`)
+                     VALUES (:invoice_uid, :invoice_id_for_sp, :sp_name, :sp_address, :sp_postal_code, :sp_city, :sp_province, :sp_phone, :sp_email, :sp_hst_number, :client_id, :is_final, :grand_total, NOW(), NOW());";
         
         parent::$db->query($sql, $data, $types);
         
         return parent::$db->db->lastInsertId();
+    }
+    
+    /**
+     * Updates the organization's invoice ID
+     * @param int $invoiceID The invoice ID
+     * @param mixed $orgInvoiceID The organization's invoice ID
+     */
+    public function updateOrgInvoiceId($invoiceID, $orgInvoiceID) {
+        
+        if (!$this->validators['invoice_id']->validate($invoiceID)) {
+            throw new \InvalidArgumentException('Invalid invoice ID.');
+        }
+        
+        $sql = "UPDATE `interpresense_service_provider_invoices`
+                   SET `invoice_id_for_org` = :invoice_id_for_org, `updated_on` = NOW()
+                 WHERE `invoice_id` = :invoice_id
+                   AND `is_confirmed` = 1;";
+        
+        $data = array(
+            'invoice_id_for_org' => $orgInvoiceID,
+            'invoice_id' => $invoiceID
+        );
+        
+        $types = array(
+            'invoice_id_for_org' => \PDO::PARAM_STR,
+            'invoice_id' => \PDO::PARAM_INT
+        );
+        
+        parent::$db->query($sql, $data, $types);
     }
     
     /**
@@ -106,7 +134,8 @@ class Invoice extends \Interpresense\Includes\BaseModel {
                        `approved_on`, `approved_by`, `admin_viewed`, `admin_last_viewed_on`, `admin_last_viewed_by`,
                        `grand_total`
                   FROM `interpresense_service_provider_invoices`
-                 WHERE `invoice_id` = :invoice_id;";
+                 WHERE `invoice_id` = :invoice_id
+                   AND `is_confirmed` = 1;";
         
         $data = array('invoice_id' => $invoiceID);
         $types = array('invoice_id' => \PDO::PARAM_INT);
@@ -129,7 +158,8 @@ class Invoice extends \Interpresense\Includes\BaseModel {
                        `approved_on`, `approved_by`, `admin_viewed`, `admin_last_viewed_on`, `admin_last_viewed_by`,
                        `grand_total`
                   FROM `interpresense_service_provider_invoices`
-                 WHERE `inserted_on` BETWEEN :start AND :end";
+                 WHERE `inserted_on` BETWEEN :start AND :end
+                   AND `is_confirmed` = 1";
         
         if ($status === 'final') {
             $sql .= ' AND `is_final` = 1;';
@@ -179,7 +209,8 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         $sql = "UPDATE `interpresense_service_provider_invoices`
                    SET `is_approved` = 1, `approved_by` = :approved_by, `approved_on` = NOW(), `updated_on` = NOW()
                  WHERE `invoice_id` = :invoice_id
-                   AND `is_final` = 1;";
+                   AND `is_final` = 1
+                   AND `is_confirmed` = 1;";
         
         $types = array(
             'invoice_id' => \PDO::PARAM_INT,
@@ -207,7 +238,8 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         
         $sql = "SELECT `invoice_id`
                   FROM `interpresense_service_provider_invoices`
-                 WHERE `invoice_uid` = :invoice_uid;";
+                 WHERE `invoice_uid` = :invoice_uid
+                   AND `is_confirmed` = 1;";
         
         $data = array('invoice_uid' => $invoiceUID);
         $types = array('invoice_uid' => \PDO::PARAM_STR);
@@ -229,7 +261,8 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         
         $sql = "UPDATE `interpresense_service_provider_invoices`
                    SET `is_final` = 1, `updated_on` = NOW()
-                 WHERE `invoice_id` = :invoice_id;";
+                 WHERE `invoice_id` = :invoice_id
+                   AND `is_confirmed` = 1;";
         
         $data = array('invoice_id' => $invoiceID);
         $types = array('invoice_id' => \PDO::PARAM_INT);
@@ -254,7 +287,8 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         
         $sql = "SELECT `invoice_id`, `sp_name`, `sp_address`, `sp_email`, `client_id`
                   FROM `interpresense_service_provider_invoices`
-                 WHERE `invoice_uid` = :invoice_uid;";
+                 WHERE `invoice_uid` = :invoice_uid
+                   AND `is_confirmed` = 1;";
         
         $data = array('invoice_uid' => $invoiceUID);
         $types = array('invoice_uid' => \PDO::PARAM_STR);
@@ -302,7 +336,8 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         
         $sql = "UPDATE `interpresense_service_provider_invoices`
                    SET `sp_name` = :sp_name, `sp_address` = :sp_address, `sp_postal_code` = :sp_postal_code, `sp_city` = :sp_city, `sp_province` = :sp_province, `sp_phone` = :sp_phone, `sp_email` = :sp_email, `sp_hst_number` = :sp_hst_number, `client_id` = :client_id, `grand_total` = :grand_total, `updated_on` = NOW()
-                 WHERE `invoice_uid` = :invoice_uid;";
+                 WHERE `invoice_uid` = :invoice_uid
+                   AND `is_confirmed` = 1;";
         
         parent::$db->query($sql, $data, $types);
     }
@@ -314,7 +349,8 @@ class Invoice extends \Interpresense\Includes\BaseModel {
     public function approveInvoice($invoiceID) {
         $sql = "UPDATE `interpresense_service_provider_invoices`
                    SET `is_approved` = 1, `approved_by` = :user_id, `approved_on` = NOW(), `updated_on` = NOW()
-                 WHERE `invoice_id` = :invoice_id;";
+                 WHERE `invoice_id` = :invoice_id
+                   AND `is_confirmed` = 1;";
         
         $data = array(
             'invoice_id' => $invoiceID,
@@ -341,7 +377,8 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         
         $sql = "UPDATE `interpresense_service_provider_invoices`
                    SET `admin_viewed` = 1, `admin_last_viewed_on` = NOW(), `admin_last_viewed_by` = :user_id, `updated_on` = NOW()
-                 WHERE `invoice_id` = :invoice_id;";
+                 WHERE `invoice_id` = :invoice_id
+                   AND `is_confirmed` = 1;";
         
         $data = array(
             'invoice_id' => $invoiceID,
@@ -371,7 +408,8 @@ class Invoice extends \Interpresense\Includes\BaseModel {
                   JOIN `interpresense_users` u
                     ON i.admin_last_viewed_by = u.user_id
                  WHERE i.invoice_id = :invoice_id
-                   AND i.admin_viewed = 1;";
+                   AND i.admin_viewed = 1
+                   AND i.is_confirmed = 1;";
         
         $data = array(
             'invoice_id' => $invoiceID
@@ -396,7 +434,8 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         
         $sql = "DELETE FROM `interpresense_service_provider_invoices`
                       WHERE `invoice_id` = :invoice_id
-                        AND `is_final` = 0;";
+                        AND `is_final` = 0
+                        AND `is_approved` = 0;";
         
         $data = array('invoice_id' => $invoiceID);
         $types = array('invoice_id' => \PDO::PARAM_INT);
@@ -412,7 +451,8 @@ class Invoice extends \Interpresense\Includes\BaseModel {
     private function getInvoiceDraftStatus($invoiceUID) {
         $sql = "SELECT `is_final`
                   FROM `interpresense_service_provider_invoices`
-                 WHERE `invoice_uid` = :invoice_uid;";
+                 WHERE `invoice_uid` = :invoice_uid
+                   AND `is_confirmed` = 1;";
         
         $data = array('invoice_uid' => $invoiceUID);
         $types = array('invoice_uid' => \PDO::PARAM_STR);
@@ -454,7 +494,8 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         $sql = "SELECT COUNT(invoice_id) AS count
                   FROM `interpresense_service_provider_invoices`
                  WHERE `is_final` = 1
-                   AND `admin_viewed` = 0;";
+                   AND `admin_viewed` = 0
+                   AND `is_confirmed` = 1;";
 
         $result = parent::$db->query($sql, array(), array(), \PDO::FETCH_COLUMN);
         return (int)$result[0];

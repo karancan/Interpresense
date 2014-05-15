@@ -103,8 +103,6 @@ if (!isset($_GET['page'])) {
 
 } elseif ($_GET['page'] === 'go-to-step-4') {
     
-    $usersModel->createUser($_POST);
-    
     if ($settings['installation_complete']) {
         header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-5');
         exit;
@@ -114,6 +112,8 @@ if (!isset($_GET['page'])) {
         header('Location: https://'  . URL_SETUP . '/index.php?page=go-to-step-2');
         exit;
     }
+    
+    $usersModel->createUser($_POST);
     
     $settingsModel = new \Interpresense\Admin\Settings($dbo);
     $settings = $settingsModel->fetchSettings();
