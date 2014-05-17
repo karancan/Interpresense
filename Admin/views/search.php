@@ -81,7 +81,6 @@
                 <table class="table table-hover">           
                     <thead>
                         <tr>
-                            <th scope='col'>ID</th>
                             <th scope='col'>Client</th>
                             <th scope='col'>Service provider</th>
                             <th scope='col'>Items</th>
@@ -98,7 +97,6 @@
                         foreach($draftInvoicesForClient as $i) {
                             $invoiceDate = date('Y-m-d', strtotime($i['inserted_on']));
                             echo "<tr>" .
-                                 "<td>" . $i['invoice_id_for_org'] . "</td>" .
                                  "<td><strong>" . $i['client_id'] . "</strong></td>" .
                                  "<td>" . $i['sp_name'] . "</td>" .
                                  "<td>" . $numFmt->format($i['item_count'], 'decimal') . "</td>" .
@@ -173,7 +171,6 @@
                 <table class="table table-hover">           
                     <thead>
                         <tr>
-                            <th scope='col'>ID</th>
                             <th scope='col'>Client</th>
                             <th scope='col'>Service provider</th>
                             <th scope='col'>Items</th>
@@ -190,7 +187,6 @@
                         foreach($draftInvoicesForSP as $i) {
                             $invoiceDate = date('Y-m-d', strtotime($i['inserted_on']));
                             echo "<tr>" .
-                                 "<td>" . $i['invoice_id_for_org'] . "</td>" .
                                  "<td>" . $i['client_id'] . "</td>" .
                                  "<td><strong>" . $i['sp_name'] . "</strong></td>" .
                                  "<td>" . $numFmt->format($i['item_count'], 'decimal') . "</td>" .
