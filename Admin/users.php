@@ -123,8 +123,6 @@ if (!isset($_GET['page'])) {
     
     $data = $usersModel->fetchUsers();
     
-    //@todo: exported CSV needs title row
-    
     $csvConfig = new \Goodby\CSV\Export\Standard\ExporterConfig();
     $csvConfig->setFromCharset('UTF-8')->setToCharset('UTF-8');
     
@@ -134,9 +132,12 @@ if (!isset($_GET['page'])) {
     
     header('Content-Type: text/csv');
     header("Content-Disposition: attachment; filename=$filename");
-    $csvExporter->export('php://output', $data);
     
-    die();
+    if (sizeof($data) > 0) {
+        array_unshift($data, array_keys($data[0]));
+    }
+    $csvExporter->export('php://output', $data);
+    exit;
 }
 
 /**
