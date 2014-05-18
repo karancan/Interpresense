@@ -1,4 +1,5 @@
 <style>
+    @import url('//<?= URL_VENDOR_FRONTEND ?>/datatables-bootstrap3/BS3/assets/css/datatables.css');
     @import url('includes/css/admin.css');
 </style>
 <div class="container">
@@ -32,7 +33,7 @@
                 
                 <h4>Finalized invoices for client <code><?= $antiXSS->escape($_GET['q']) ?></code></h4>
                 
-                <table class="table table-hover">           
+                <table class="table table-hover admin-search-table">           
                     <thead>
                         <tr>
                             <th scope='col'>ID</th>
@@ -78,7 +79,7 @@
                 
                 <h4>Draft invoices for client <code><?= $antiXSS->escape($_GET['q']) ?></code></h4>
                 
-                <table class="table table-hover">           
+                <table class="table table-hover admin-search-table">           
                     <thead>
                         <tr>
                             <th scope='col'>Client</th>
@@ -122,7 +123,7 @@
                 
                 <h4>Finalized invoices for service provider <code><?= $antiXSS->escape($_GET['q']) ?></code></h4>
                 
-                <table class="table table-hover">           
+                <table class="table table-hover admin-search-table">           
                     <thead>
                         <tr>
                             <th scope='col'>ID</th>
@@ -168,7 +169,7 @@
                 
                 <h4>Draft invoices for service provider <code><?= $antiXSS->escape($_GET['q']) ?></code></h4>
                 
-                <table class="table table-hover">           
+                <table class="table table-hover admin-search-table">           
                     <thead>
                         <tr>
                             <th scope='col'>Client</th>
@@ -214,3 +215,4 @@
     </div>
     
 </div>
+<script charset='utf-8' src='includes/js/search.js'></script>
