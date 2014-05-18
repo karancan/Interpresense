@@ -1,6 +1,14 @@
 {
-    "formatters": {
-        "en-CA": {},
-        "fr-CA": {}
+    "fileNames": {
+        "en-CA": {
+            "invoicesDrafts": "",
+            "invoicesSubmitted": "",
+            "administrativeUsers": ""
+        },
+        "fr-CA": {
+            "invoicesDrafts": "",
+            "invoicesSubmitted": "",
+            "administrativeUsers": ""
+        }
     }
 }
