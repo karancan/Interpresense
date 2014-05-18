@@ -55,7 +55,6 @@ if (!isset($_GET['page'])) {
     
     $unreadInvoiceCount = $invoicesModel->fetchUnreadFinalizedInvoiceCount();
     
-    //@todo: allow editing of org invoice id
     //@todo: show tooltip if invoice is approved
 
     if (!empty($_GET['start'])) {
@@ -199,6 +198,10 @@ if (!isset($_GET['page'])) {
         $viewFile = ''; //Show error page
     }
     
+} else if ($_GET['page'] === "update-invoice-id-for-org") {
+    
+    $invoicesModel->updateOrgInvoiceId($_POST['invoice_id'], (empty($_POST['invoice_id_for_org']) ? null : $_POST['invoice_id_for_org']));
+    
 } else if ($_GET['page'] === "export") {
     
     if (!empty($_GET['start'])) {
@@ -242,7 +245,7 @@ if (!isset($_GET['page'])) {
 /**
  * View
  */
-$actions = array('fetch-invoice-items', 'fetch-invoice-files', 'fetch-invoice-notes', 'export');
+$actions = array('fetch-invoice-items', 'fetch-invoice-files', 'fetch-invoice-notes', 'update-invoice-id-for-org', 'export');
 
 if (!in_array($_GET['page'], $actions, true)) {
     

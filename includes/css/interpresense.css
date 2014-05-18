@@ -109,6 +109,13 @@ footer .dev-logo{
 }
 
 /**
+ *DataTables over-ride styles
+ */
+.dataTables_empty{
+    text-align: center;
+}
+ 
+/**
  *External and error pages
  */
 header.external-page-header{

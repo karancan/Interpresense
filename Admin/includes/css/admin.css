@@ -37,3 +37,11 @@
 .admin-filter-approved-invoices-container label{
     font-weight: normal;
 }
+[data-action="edit-invoice-id-for-org"]{
+    color: #bfbfbf;
+    margin-left: 1em;
+    cursor: pointer;
+}
+[data-action="edit-invoice-id-for-org"]:hover{
+    color: black;
+}
