@@ -179,8 +179,6 @@ $('[data-action="view-sp-details"]').click(function(){
  */
 $('#admin-invoice-mark-as-unread').click(function(){
     
-    console.log($(this).data('invoice-id'));
-    
     $.ajax({
         type: 'post',
         url: 'invoicesSubmitted.php?page=mark-invoice-as-unread',
