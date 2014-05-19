@@ -55,8 +55,6 @@ if (!isset($_GET['page'])) {
     
     $unreadInvoiceCount = $invoicesModel->fetchUnreadFinalizedInvoiceCount();
     
-    //@todo: show tooltip if invoice is approved
-
     if (!empty($_GET['start'])) {
         try {
             $filter_start_date = new \DateTime($_GET['start']);

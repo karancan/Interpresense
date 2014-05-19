@@ -45,3 +45,6 @@
 [data-action="edit-invoice-id-for-org"]:hover{
     color: black;
 }
+.admin-invoice-approved-details{
+    cursor: help;
+}

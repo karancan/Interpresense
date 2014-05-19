@@ -21,6 +21,15 @@ $('#admin-invoices-submitted-table').dataTable({
 });
 
 /**
+ * Initialize popover that tells the user when the invoice was approved and by who
+ */
+$(".admin-invoice-approved-details").popover({
+    placement: 'right',
+    container: 'body',
+    trigger: 'hover'
+});
+
+/**
  *User checks/unchecks the option to view approved invoices only
  */
 $('#admin-filter-approved-invoices').change(function(){
