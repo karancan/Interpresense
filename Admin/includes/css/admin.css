@@ -26,9 +26,12 @@
     margin-right: .75em;
     font-size: 0.9em;
 }
-#admin-invoice-last-viewed{
+#admin-invoice-viewed-container{
     color: #949eac;
-    font-style: italic;
+}
+#admin-invoice-viewed-container a{
+    font-weight: bold;
+    cursor: pointer;
 }
 .admin-filter-approved-invoices-container{
     margin: 1em 0;

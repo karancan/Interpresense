@@ -25,6 +25,7 @@ $('[data-action="view-items"]').click(function(){
     $('#admin-invoice-items-loader').show();
     
     $('#admin-invoice-items-table tbody, #admin-invoice-grand-total, #admin-invoice-last-viewed').html('');
+    $('#admin-invoice-mark-as-unread').hide();
     var controller = window.location.pathname.replace(/^.*\//, '');
     
     $.ajax({
@@ -63,6 +64,7 @@ $('[data-action="view-items"]').click(function(){
         
         if (viewed){
             $('#admin-invoice-last-viewed').html('Last viewed by ' + viewed.name + ' on ' + viewed.admin_last_viewed_on).show();
+            $('#admin-invoice-mark-as-unread').show();
         } else {
             $('#admin-invoice-last-viewed').hide();
         }
@@ -172,6 +174,13 @@ $('[data-action="view-sp-details"]').click(function(){
     $('#invoice_sp_phone').text($(this).closest('tr').data('sp-phone'));
     $('#invoice_sp_hst_number').text($(this).closest('tr').data('sp-hst-number'));
     $('#invoice_sp_email').html('<a href="mailto:' + $(this).closest('tr').data('sp-email') + '">' + $(this).closest('tr').data('sp-email') + '</a>');
+});
+
+/**
+ *User wants to mark an invoice as unread
+ */
+$('#admin-invoice-mark-as-unread').click(function(){
+    //@todo
 });
 
 /**

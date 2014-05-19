@@ -91,8 +91,6 @@ if (!isset($_GET['page'])) {
     
 } else if ($_GET['page'] === "fetch-invoice-items") {
     
-    //@todo: give the user the ability to mark an invoice as viewed/not viewed
-    
     //Was this invoice viewed previously?
     $invoiceViewed = $invoicesModel->fetchInvoiceViewedDetails($_POST['invoice_id']);
     if (!empty($invoiceViewed)) {
@@ -200,6 +198,10 @@ if (!isset($_GET['page'])) {
     
     $invoicesModel->updateOrgInvoiceId($_POST['invoice_id'], (empty($_POST['invoice_id_for_org']) ? null : $_POST['invoice_id_for_org']));
     
+} else if ($_GET['page'] === "mark-invoice-as-unread") {
+    
+    //@todo: add model function
+    
 } else if ($_GET['page'] === "export") {
     
     if (!empty($_GET['start'])) {
@@ -243,7 +245,7 @@ if (!isset($_GET['page'])) {
 /**
  * View
  */
-$actions = array('fetch-invoice-items', 'fetch-invoice-files', 'fetch-invoice-notes', 'update-invoice-id-for-org', 'export');
+$actions = array('fetch-invoice-items', 'fetch-invoice-files', 'fetch-invoice-notes', 'update-invoice-id-for-org', 'mark-invoice-as-unread', 'export');
 
 if (!in_array($_GET['page'], $actions, true)) {
     
