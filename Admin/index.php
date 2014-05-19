@@ -97,28 +97,44 @@ if (!isset($_GET['page'])) {
         exit;
     }
     
-} else if ($_GET['page'] === "register-or-reset") {
-    $translate->addResource('l10n/registerOrReset.json');
-    $viewFile = "views/registerOrReset.php";
-} elseif ($_GET['page'] === "initiate-reset") {
+} elseif ($_GET['page'] === "confirm-registration") {
     
-    $resetHash = $users->requestPasswordReset($_POST['username'], $_POST['user_password']);
-    if (!empty($resetHash)) {
-        //@todo: send the password reset email
-    } else {
-        //@todo: go back to the view with an error tooltip
-        header('Location: index.php?page=register-or-reset&mode=initiate-reset-fail');
-        exit;
-    }
+    $translate->addResource('l10n/register.json');
+    $viewFile = "views/register.php";
     
 } elseif ($_GET['page'] === "reset-password") {
     
-    if ($users->confirmPasswordReset($_GET['username'], $_GET['reset_key'])) {
-        // @todo reset succeeded
-    } else {
-        // @todo reset failed
+    $translate->addResource('l10n/resetPassword.json');
+    $viewFile = "views/resetPassword.php";
+    
+} elseif ($_GET['page'] === "initiate-reset") {
+    
+    $resetHash = $users->requestPasswordReset($_POST['username'], $_POST['user_password']);
+    if (empty($resetHash)) {
+        header('Location: index.php?page=reset-password&mode=initiate-reset-fail');
+        exit;
     }
-} else if ($_GET['page'] === "logout") {
+    
+    $state = 'pending';
+    $translate->addResource('l10n/confirmReset.json');
+    $viewFile = "views/confirmReset.php";
+    
+} elseif ($_GET['page'] === "confirm-reset") {
+    
+    try {
+        if ($users->confirmPasswordReset($_GET['username'], $_GET['reset_key'])) {
+            $state = 'success';
+        } else {
+            $state = 'fail';
+        }
+    } catch (\Exception $e) {
+        $state = 'fail';
+    }
+    
+    $translate->addResource('l10n/confirmReset.json');
+    $viewFile = "views/confirmReset.php";
+    
+} elseif ($_GET['page'] === "logout") {
     unset($_SESSION['admin']);
     header('Location: https://'  . URL_ADMIN);
     exit;
