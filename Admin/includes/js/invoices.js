@@ -194,6 +194,19 @@ $('#admin-invoice-mark-as-unread').click(function(){
 });
 
 /**
+ *User is in the view notes model and clicks the add a note button within that modal
+ */
+$('#redirect-add-note').click(function(){
+    
+    var highlighted_row = $('.highlighted-row');
+    
+    //Close the view notes modal and open the add a new note modal
+    $('#admin-invoice-notes-modal').modal('hide');
+    highlighted_row.find('[data-action="add-note"]').trigger('click');
+    
+});
+ 
+/**
  *One of the following modals has been closed: {view files, view items, view notes, view SP details}
  */
 $('#admin-invoice-items-modal, #admin-invoice-files-modal, #admin-invoice-notes-modal, #admin-invoice-add-notes-modal, #admin-invoice-sp-details-modal').on('hidden.bs.modal', function () {

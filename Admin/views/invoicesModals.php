@@ -115,6 +115,7 @@
             </div>
             
             <div class="modal-footer">
+                <button id="redirect-add-note" type="button" class="btn btn-info pull-left"><i class="fa fa-plus"></i> Add a note</button>            
             </div>
             
         </div>
