@@ -185,6 +185,11 @@ if (!isset($_GET['page'])) {
     if (!empty($_GET['invoice_id'])) {
         $invoicesModel->markInvoiceAsApproved($_GET['invoice_id']);
         
+        $invoiceDetails = $invoicesModel->fetchInvoice($_GET['invoice_id']);
+        if (!empty($invoiceDetails[0]['invoice_id_for_org'])) {
+            //@todo: an approved invoice may need to have `invoice_id_for_org` automatically assigned
+        }
+        
         //@todo: create an invoice note stating that the invoice was marked approved
         //@todo: send email to service provider telling them the invoice was approved
         
