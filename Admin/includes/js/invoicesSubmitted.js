@@ -69,7 +69,7 @@ $('[data-action="edit-invoice-id-for-org"]').click(function(){
             invoice_id_for_org: invoice_id_for_org
         }
     }).done(function() {
-        $('#admin-invoice-id-for-org-' + invoice_id).text(invoice_id_for_org);
+        $('#admin-invoice-id-for-org-' + invoice_id).text((invoice_id_for_org === '' ? 'N/A' : invoice_id_for_org));
         global.removeRowHighlighting($('#admin-invoices-submitted-table'));
     });
 });

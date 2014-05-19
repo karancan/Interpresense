@@ -64,7 +64,7 @@
                                       data-sp-phone='{$antiXSS->escape($i['sp_phone'], $antiXSS::HTML_ATTR)}'
                                       data-sp-email='{$antiXSS->escape($i['sp_email'], $antiXSS::HTML_ATTR)}'
                                       data-sp-hst-number='{$antiXSS->escape($i['sp_hst_number'], $antiXSS::HTML_ATTR)}'>" .
-                                 "<td>" . "<span id='admin-invoice-id-for-org-" . $antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR) . "'>" . (empty($i['invoice_id_for_org']) ? null : $i['invoice_id_for_org']) . "</span>" . "<i class='fa fa-edit' data-action='edit-invoice-id-for-org'></i>" . "</td>" .
+                                 "<td>" . "<i class='fa fa-edit' data-action='edit-invoice-id-for-org'></i>" . "<span id='admin-invoice-id-for-org-" . $antiXSS->escape($i['invoice_id'], $antiXSS::HTML_ATTR) . "'>" . (empty($i['invoice_id_for_org']) ? null : $i['invoice_id_for_org']) . "</span>" . "</td>" .
                                  "<td>" . $i['client_id'] . "</td>" .
                                  "<td>" . "<a href='#admin-invoice-sp-details-modal' data-toggle='modal' data-action='view-sp-details' class='admin-modal-links'>" . $i['sp_name'] . "</a>" . "</td>" .
                                  "<td>" . "<a href='#admin-invoice-items-modal' data-toggle='modal' data-action='view-items' class='admin-modal-links'>" . $numFmt->format($i['item_count'], 'decimal') . "</a>" . "</td>" .

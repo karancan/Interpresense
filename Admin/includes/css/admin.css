@@ -39,7 +39,7 @@
 }
 [data-action="edit-invoice-id-for-org"]{
     color: #bfbfbf;
-    margin-left: 1em;
+    margin-right: 1em;
     cursor: pointer;
 }
 [data-action="edit-invoice-id-for-org"]:hover{
