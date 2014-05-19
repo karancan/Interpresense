@@ -400,6 +400,32 @@ class Invoice extends \Interpresense\Includes\BaseModel {
     }
     
     /**
+     * Marks an invoice as unread
+     * @param int $invoiceID The invoice ID
+     */
+    public function markInvoiceAsUnread($invoiceID) {
+    
+        if(!$this->validators['invoice_id']->validate($invoiceID)) {
+            throw new \InvalidArgumentException('Invalid invoice ID.');
+        }
+        
+        $sql = "UPDATE `interpresense_service_provider_invoices`
+                   SET `admin_viewed` = 0, `admin_last_viewed_on` = NULL, `admin_last_viewed_by` = NULL, `updated_on` = NOW()
+                 WHERE `invoice_id` = :invoice_id
+                   AND `is_confirmed` = 1;";
+        
+        $data = array(
+            'invoice_id' => $invoiceID
+        );
+        
+        $types = array(
+            'invoice_id' => \PDO::PARAM_INT
+        );
+        
+        parent::$db->query($sql, $data, $types);
+    }
+    
+    /**
      * Fetches if, who and when an invoice was last viewed
      * @param int $invoiceID The invoice ID
      */

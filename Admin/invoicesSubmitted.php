@@ -199,8 +199,8 @@ if (!isset($_GET['page'])) {
     $invoicesModel->updateOrgInvoiceId($_POST['invoice_id'], (empty($_POST['invoice_id_for_org']) ? null : $_POST['invoice_id_for_org']));
     
 } else if ($_GET['page'] === "mark-invoice-as-unread") {
-    
-    //@todo: add model function
+
+    $invoicesModel->markInvoiceAsUnread($_POST['invoice_id']);
     
 } else if ($_GET['page'] === "export") {
     

@@ -25,7 +25,7 @@ $('[data-action="view-items"]').click(function(){
     $('#admin-invoice-items-loader').show();
     
     $('#admin-invoice-items-table tbody, #admin-invoice-grand-total, #admin-invoice-last-viewed').html('');
-    $('#admin-invoice-mark-as-unread').hide();
+    $('#admin-invoice-mark-as-unread').attr('data-invoice-id', $(this).closest('tr').data('invoice-id')).hide();
     var controller = window.location.pathname.replace(/^.*\//, '');
     
     $.ajax({
@@ -180,7 +180,19 @@ $('[data-action="view-sp-details"]').click(function(){
  *User wants to mark an invoice as unread
  */
 $('#admin-invoice-mark-as-unread').click(function(){
-    //@todo
+    
+    console.log($(this).data('invoice-id'));
+    
+    $.ajax({
+        type: 'post',
+        url: 'invoicesSubmitted.php?page=mark-invoice-as-unread',
+        data: {
+            invoice_id: $(this).data('invoice-id') //@todo bug??
+        }
+    }).done(function() {
+        $('#admin-invoice-last-viewed, #admin-invoice-mark-as-unread').hide();
+    });
+    
 });
 
 /**

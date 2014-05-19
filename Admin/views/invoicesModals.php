@@ -15,7 +15,7 @@
                 
                 <p id="admin-invoice-viewed-container">
                     <span id="admin-invoice-last-viewed"></span>
-                    <a id="admin-invoice-mark-as-unread"> Mark as unread</a>
+                    <a id="admin-invoice-mark-as-unread" data-invoice-id=""> Mark as unread</a>
                 </p>
                 
                 <table id="admin-invoice-items-table" class="table table-hover">
