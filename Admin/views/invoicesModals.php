@@ -126,8 +126,9 @@
         <form id="admin-invoice-add-notes-form" action="<?= basename($_SERVER["SCRIPT_FILENAME"]) ?>?page=add-note" method="POST" class="modal-content">
             
             <input type="hidden" name="invoice_id" value="">
-            <input type="hidden" name="date-filter-start" value="">
-            <input type="hidden" name="date-filter-end" value="">
+            <input type="hidden" name="start" value="<?= $_GET['start'] ?>">
+            <input type="hidden" name="end" value="<?= $_GET['end'] ?>">
+            <input type="hidden" name="approved_only" value="<?= $_GET['approved_only'] ?>">
             
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

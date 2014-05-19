@@ -11,8 +11,6 @@ $(document).ready(function(){
         }, 1000);
     }
     
-    //Apend `start` and `end` paramters to add invoice notes form
-    $('#admin-invoice-add-notes-form').attr('action', $('#admin-invoice-add-notes-form').attr('action') + '&start=' + $('.admin-page-filter-input[name="start"]').val() + '&end=' + $('.admin-page-filter-input[name="end"]').val());
 });
 
 /**
