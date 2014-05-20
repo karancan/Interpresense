@@ -1,5 +1,9 @@
 <select class="admin-date-range-quick-picks">
     <option value=''>Pick an option…</option>
+    <optgroup label="Range">
+        <option value="range-forward">Move range forward</option>
+        <option value="range-backward">Move range backward</option>
+    </optgroup>
     <optgroup label="Day">
         <option value="today">Today</option>
         <option value="tomorrow">Tomorrow</option>
