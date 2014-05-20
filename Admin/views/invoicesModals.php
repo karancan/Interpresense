@@ -127,9 +127,9 @@
         <form id="admin-invoice-add-notes-form" action="<?= basename($_SERVER["SCRIPT_FILENAME"]) ?>?page=add-note" method="POST" class="modal-content">
             
             <input type="hidden" name="invoice_id" value="">
-            <input type="hidden" name="start" value="<?= $_GET['start'] ?>">
-            <input type="hidden" name="end" value="<?= $_GET['end'] ?>">
-            <input type="hidden" name="approved_only" value="<?= $_GET['approved_only'] ?>">
+            <input type="hidden" name="start" value="<?= $antiXSS->escape($_GET['start'], $antiXSS::HTML_ATTR) ?>">
+            <input type="hidden" name="end" value="<?= $antiXSS->escape($_GET['end'], $antiXSS::HTML_ATTR) ?>">
+            <input type="hidden" name="approved_only" value="<?= $antiXSS->escape($_GET['approved_only'], $antiXSS::HTML_ATTR) ?>">
             
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
