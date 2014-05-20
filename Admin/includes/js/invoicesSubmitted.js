@@ -21,6 +21,15 @@ $('#admin-invoices-submitted-table').dataTable({
 });
 
 /**
+ * Initialize popover that tells the user when the invoice was approved and by who
+ */
+$(".admin-invoice-approved-details").popover({
+    placement: 'right',
+    container: 'body',
+    trigger: 'hover'
+});
+
+/**
  *User checks/unchecks the option to view approved invoices only
  */
 $('#admin-filter-approved-invoices').change(function(){
@@ -69,7 +78,7 @@ $('[data-action="edit-invoice-id-for-org"]').click(function(){
             invoice_id_for_org: invoice_id_for_org
         }
     }).done(function() {
-        $('#admin-invoice-id-for-org-' + invoice_id).text(invoice_id_for_org);
+        $('#admin-invoice-id-for-org-' + invoice_id).text((invoice_id_for_org === '' ? 'N/A' : invoice_id_for_org));
         global.removeRowHighlighting($('#admin-invoices-submitted-table'));
     });
 });

@@ -152,14 +152,16 @@ class Invoice extends \Interpresense\Includes\BaseModel {
      */
     public function fetchInvoices(\DateTime $startRange, \DateTime $endRange, $status = 'all', $approvedOnly = false) {
         
-        $sql = "SELECT `invoice_id`, `invoice_uid`, `invoice_id_for_sp`, `invoice_id_for_org`, `sp_name`,
-                       `sp_address`, `sp_postal_code`, `sp_city`, `sp_province`, `sp_phone`, `sp_email`,
-                       `sp_hst_number`, `client_id`, `is_final`, `inserted_on`, `updated_on`, `is_approved`,
-                       `approved_on`, `approved_by`, `admin_viewed`, `admin_last_viewed_on`, `admin_last_viewed_by`,
-                       `grand_total`
-                  FROM `interpresense_service_provider_invoices`
-                 WHERE `inserted_on` BETWEEN :start AND :end
-                   AND `is_confirmed` = 1";
+        $sql = "SELECT i.invoice_id, i.invoice_uid, i.invoice_id_for_sp, i.invoice_id_for_org, i.sp_name,
+                       i.sp_address, i.sp_postal_code, i.sp_city, i.sp_province, i.sp_phone, i.sp_email,
+                       i.sp_hst_number, i.client_id, i.is_final, i.inserted_on, i.updated_on, i.is_approved,
+                       i.approved_on, i.approved_by, i.admin_viewed, i.admin_last_viewed_on, i.admin_last_viewed_by,
+                       i.grand_total, u.first_name, u.last_name
+                  FROM `interpresense_service_provider_invoices` i
+             LEFT JOIN `interpresense_users` u
+                    ON i.approved_by = u.user_id
+                 WHERE i.inserted_on BETWEEN :start AND :end
+                   AND i.is_confirmed = 1";
         
         if ($status === 'final') {
             $sql .= ' AND `is_final` = 1';
@@ -392,6 +394,32 @@ class Invoice extends \Interpresense\Includes\BaseModel {
         $types = array(
             'invoice_id' => \PDO::PARAM_INT,
             'user_id' => \PDO::PARAM_INT
+        );
+        
+        parent::$db->query($sql, $data, $types);
+    }
+    
+    /**
+     * Marks an invoice as unread
+     * @param int $invoiceID The invoice ID
+     */
+    public function markInvoiceAsUnread($invoiceID) {
+    
+        if(!$this->validators['invoice_id']->validate($invoiceID)) {
+            throw new \InvalidArgumentException('Invalid invoice ID.');
+        }
+        
+        $sql = "UPDATE `interpresense_service_provider_invoices`
+                   SET `admin_viewed` = 0, `admin_last_viewed_on` = NULL, `admin_last_viewed_by` = NULL, `updated_on` = NOW()
+                 WHERE `invoice_id` = :invoice_id
+                   AND `is_confirmed` = 1;";
+        
+        $data = array(
+            'invoice_id' => $invoiceID
+        );
+        
+        $types = array(
+            'invoice_id' => \PDO::PARAM_INT
         );
         
         parent::$db->query($sql, $data, $types);

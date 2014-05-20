@@ -11,8 +11,6 @@ $(document).ready(function(){
         }, 1000);
     }
     
-    //Apend `start` and `end` paramters to add invoice notes form
-    $('#admin-invoice-add-notes-form').attr('action', $('#admin-invoice-add-notes-form').attr('action') + '&start=' + $('.admin-page-filter-input[name="start"]').val() + '&end=' + $('.admin-page-filter-input[name="end"]').val());
 });
 
 /**
@@ -25,6 +23,7 @@ $('[data-action="view-items"]').click(function(){
     $('#admin-invoice-items-loader').show();
     
     $('#admin-invoice-items-table tbody, #admin-invoice-grand-total, #admin-invoice-last-viewed').html('');
+    $('#admin-invoice-mark-as-unread').data('invoice-id', $(this).closest('tr').data('invoice-id')).hide();
     var controller = window.location.pathname.replace(/^.*\//, '');
     
     $.ajax({
@@ -63,6 +62,7 @@ $('[data-action="view-items"]').click(function(){
         
         if (viewed){
             $('#admin-invoice-last-viewed').html('Last viewed by ' + viewed.name + ' on ' + viewed.admin_last_viewed_on).show();
+            $('#admin-invoice-mark-as-unread').show();
         } else {
             $('#admin-invoice-last-viewed').hide();
         }
@@ -174,6 +174,36 @@ $('[data-action="view-sp-details"]').click(function(){
     $('#invoice_sp_email').html('<a href="mailto:' + $(this).closest('tr').data('sp-email') + '">' + $(this).closest('tr').data('sp-email') + '</a>');
 });
 
+/**
+ *User wants to mark an invoice as unread
+ */
+$('#admin-invoice-mark-as-unread').click(function(){
+    
+    $.ajax({
+        type: 'post',
+        url: 'invoicesSubmitted.php?page=mark-invoice-as-unread',
+        data: {
+            invoice_id: $(this).data('invoice-id')
+        }
+    }).done(function() {
+        $('#admin-invoice-last-viewed, #admin-invoice-mark-as-unread').hide();
+    });
+    
+});
+
+/**
+ *User is in the view notes model and clicks the add a note button within that modal
+ */
+$('#redirect-add-note').click(function(){
+    
+    var highlighted_row = $('.highlighted-row');
+    
+    //Close the view notes modal and open the add a new note modal
+    $('#admin-invoice-notes-modal').modal('hide');
+    highlighted_row.find('[data-action="add-note"]').trigger('click');
+    
+});
+ 
 /**
  *One of the following modals has been closed: {view files, view items, view notes, view SP details}
  */

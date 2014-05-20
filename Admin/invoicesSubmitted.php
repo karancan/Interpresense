@@ -55,8 +55,6 @@ if (!isset($_GET['page'])) {
     
     $unreadInvoiceCount = $invoicesModel->fetchUnreadFinalizedInvoiceCount();
     
-    //@todo: show tooltip if invoice is approved
-
     if (!empty($_GET['start'])) {
         try {
             $filter_start_date = new \DateTime($_GET['start']);
@@ -92,8 +90,6 @@ if (!isset($_GET['page'])) {
     $viewFile = "views/invoicesSubmitted.php";
     
 } else if ($_GET['page'] === "fetch-invoice-items") {
-    
-    //@todo: give the user the ability to mark an invoice as viewed/not viewed
     
     //Was this invoice viewed previously?
     $invoiceViewed = $invoicesModel->fetchInvoiceViewedDetails($_POST['invoice_id']);
@@ -168,7 +164,7 @@ if (!isset($_GET['page'])) {
 } elseif ($_GET['page'] === "add-note"){
     
     $invoicesNotesModel->addNote($_POST);
-    header('Location: invoicesSubmitted.php?start=' . $_GET['start'] . '&end=' . $_GET['end'] . '&focus=' . $_POST['invoice_id']); //@todo: respect approved
+    header('Location: invoicesSubmitted.php?start=' . $_POST['start'] . '&end=' . $_POST['end'] . '&approved_only=' . $_POST['approved_only'] . '&focus=' . $_POST['invoice_id']);
 
 } else if ($_GET['page'] === "mark-invoice-as-draft") {
     
@@ -189,6 +185,11 @@ if (!isset($_GET['page'])) {
     if (!empty($_GET['invoice_id'])) {
         $invoicesModel->markInvoiceAsApproved($_GET['invoice_id']);
         
+        $invoiceDetails = $invoicesModel->fetchInvoice($_GET['invoice_id']);
+        if (!empty($invoiceDetails[0]['invoice_id_for_org'])) {
+            //@todo: an approved invoice may need to have `invoice_id_for_org` automatically assigned
+        }
+        
         //@todo: create an invoice note stating that the invoice was marked approved
         //@todo: send email to service provider telling them the invoice was approved
         
@@ -201,6 +202,10 @@ if (!isset($_GET['page'])) {
 } else if ($_GET['page'] === "update-invoice-id-for-org") {
     
     $invoicesModel->updateOrgInvoiceId($_POST['invoice_id'], (empty($_POST['invoice_id_for_org']) ? null : $_POST['invoice_id_for_org']));
+    
+} else if ($_GET['page'] === "mark-invoice-as-unread") {
+
+    $invoicesModel->markInvoiceAsUnread($_POST['invoice_id']);
     
 } else if ($_GET['page'] === "export") {
     
@@ -245,7 +250,7 @@ if (!isset($_GET['page'])) {
 /**
  * View
  */
-$actions = array('fetch-invoice-items', 'fetch-invoice-files', 'fetch-invoice-notes', 'update-invoice-id-for-org', 'export');
+$actions = array('fetch-invoice-items', 'fetch-invoice-files', 'fetch-invoice-notes', 'update-invoice-id-for-org', 'mark-invoice-as-unread', 'export');
 
 if (!in_array($_GET['page'], $actions, true)) {
     

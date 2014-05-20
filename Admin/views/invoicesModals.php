@@ -13,7 +13,10 @@
                     <img id="admin-invoice-items-loader" src="//<?= URL_IMAGES ?>/loader.gif" class="center-block interpresense-loader">            
                 </div>
                 
-                <p id="admin-invoice-last-viewed"></p>
+                <p id="admin-invoice-viewed-container">
+                    <span id="admin-invoice-last-viewed"></span>
+                    <a id="admin-invoice-mark-as-unread" data-invoice-id=""> Mark as unread</a>
+                </p>
                 
                 <table id="admin-invoice-items-table" class="table table-hover">
                     <thead>
@@ -112,6 +115,7 @@
             </div>
             
             <div class="modal-footer">
+                <button id="redirect-add-note" type="button" class="btn btn-info pull-left"><i class="fa fa-plus"></i> Add a note</button>            
             </div>
             
         </div>
@@ -123,8 +127,9 @@
         <form id="admin-invoice-add-notes-form" action="<?= basename($_SERVER["SCRIPT_FILENAME"]) ?>?page=add-note" method="POST" class="modal-content">
             
             <input type="hidden" name="invoice_id" value="">
-            <input type="hidden" name="date-filter-start" value="">
-            <input type="hidden" name="date-filter-end" value="">
+            <input type="hidden" name="start" value="<?= $antiXSS->escape($_GET['start'], $antiXSS::HTML_ATTR) ?>">
+            <input type="hidden" name="end" value="<?= $antiXSS->escape($_GET['end'], $antiXSS::HTML_ATTR) ?>">
+            <input type="hidden" name="approved_only" value="<?= $antiXSS->escape($_GET['approved_only'], $antiXSS::HTML_ATTR) ?>">
             
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
