@@ -84,6 +84,7 @@ class Emails extends \Interpresense\Includes\BaseModel {
         $data = array('email_id' => $id);
         $types = array('email_id' => \PDO::PARAM_INT);
         
-        return parent::$db->query($sql, $data, $types);
+        $result = parent::$db->query($sql, $data, $types);
+        return reset($result);
     }
 }
