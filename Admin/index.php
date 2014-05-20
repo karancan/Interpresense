@@ -21,6 +21,7 @@ session_start();
  * Models
  */
 $users = new Users($dbo);
+$emails = new Emails($dbo);
 
 /**
  * Localization
@@ -117,15 +118,19 @@ if (!isset($_GET['page'])) {
     
     require_once FS_VENDOR_BACKEND . '/swiftmailer/lib/swift_required.php';
     
-    // @todo get email content and insert the resetHash into it
-    $body = '';
+    $template = $emails->fetchEmailTemplate(3);
+    
+    // Replace the hashtag
+    $link = 'https://' . URL_ADMIN . '/index.php?page=confirm-reset&username=' . $antiXSS->escape($_POST['username'], AntiXss::URL_PARAM) . '&reset_key=' . $antiXSS->escape($resetHash, AntiXss::URL_PARAM);
+    $body = str_replace('#passwordResetLink', $link, $template['content']);
 
     $transport = new \Swift_SmtpTransport(SMTP_SERVER, SMTP_SERVER_PORT);
     $mailer = new \Swift_Mailer($transport);
 
-    $message = new \Swift_Message('Interpresense - Confirm password reset');
+    $message = new \Swift_Message($template['subject']);
     $message->setFrom(EMAIL_ALIAS_NO_REPLY . EMAIL_ORG_STAFF_DOMAIN)
         ->setTo($_POST['username'] . EMAIL_ORG_STAFF_DOMAIN)
+        ->setCc($template['cc'])
         ->setBody($body, 'text/html', 'utf-8');
 
     $mailer->send($message);
