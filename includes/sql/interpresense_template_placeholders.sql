@@ -46,6 +46,8 @@ INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_e
 INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#invoiceIsApproved','This indicates if the invoice has been approved by an administrative user','',1,1);
 INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#invoiceApprovedBy','The name of the administrative user who has approved the invoice','',1,1);
 INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#invoiceApprovedOn','The date an invoice was approved by an administrative user','',1,1);
+INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#passwordResetLink','The link to confirm the password reset action','',1,0);
+INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#accountConfirmationLink','The link to confirm the creation of a new account','',1,0);
 /*!40000 ALTER TABLE `interpresense_template_placeholders` ENABLE KEYS */;
 UNLOCK TABLES;
 

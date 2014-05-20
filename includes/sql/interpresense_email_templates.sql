@@ -18,6 +18,6 @@ CREATE TABLE `interpresense_email_templates` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 -- @todo: add insert statements for emails that are available (invoice added, invoice approved, account creation, account update account password reset, ...?)
-INSERT INTO `interpresense_email_templates` (`name`, `content`, `description`, `subject`) VALUES ('Account creation', 'A fancy email :)', 'This email is sent out when an administrative user creates an account.', 'Account created');
-INSERT INTO `interpresense_email_templates` (`name`, `content`, `description`, `subject`) VALUES ('Account modification', 'A fancy email :)', 'This email is sent out when an administrative user changes user details for an account.', 'Account details changed');
-INSERT INTO `interpresense_email_templates` (`name`, `content`, `description`, `subject`) VALUES ('Password reset', 'A fancy email :)', 'This email is sent out when an user requests a password reset.', 'Password reset');
+INSERT INTO `interpresense_email_templates` (`email_id`, `name`, `content`, `description`, `subject`) VALUES (1, 'Account creation', 'A fancy email :)', 'This email is sent out when an administrative user creates an account.', 'Interpresense - Account created');
+INSERT INTO `interpresense_email_templates` (`email_id`, `name`, `content`, `description`, `subject`) VALUES (2, 'Account modification', 'A fancy email :)', 'This email is sent out when an administrative user changes user details for an account.', 'Interpresense - Account details changed');
+INSERT INTO `interpresense_email_templates` (`email_id`, `name`, `content`, `description`, `subject`) VALUES (3, 'Password reset', '<p>A fancy email :)</p><p>#passwordResetLink</p>', 'This email is sent out when an user requests a password reset.', 'Interpresense - Password reset');
