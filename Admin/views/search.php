@@ -1,4 +1,5 @@
 <style>
+    @import url('//<?= URL_VENDOR_FRONTEND ?>/datatables-bootstrap3/BS3/assets/css/datatables.css');
     @import url('includes/css/admin.css');
 </style>
 <div class="container">
@@ -32,7 +33,7 @@
                 
                 <h4>Finalized invoices for client <code><?= $antiXSS->escape($_GET['q']) ?></code></h4>
                 
-                <table class="table table-hover">           
+                <table class="table table-hover admin-search-table">           
                     <thead>
                         <tr>
                             <th scope='col'>ID</th>
@@ -78,10 +79,9 @@
                 
                 <h4>Draft invoices for client <code><?= $antiXSS->escape($_GET['q']) ?></code></h4>
                 
-                <table class="table table-hover">           
+                <table class="table table-hover admin-search-table">           
                     <thead>
                         <tr>
-                            <th scope='col'>ID</th>
                             <th scope='col'>Client</th>
                             <th scope='col'>Service provider</th>
                             <th scope='col'>Items</th>
@@ -98,7 +98,6 @@
                         foreach($draftInvoicesForClient as $i) {
                             $invoiceDate = date('Y-m-d', strtotime($i['inserted_on']));
                             echo "<tr>" .
-                                 "<td>" . $i['invoice_id_for_org'] . "</td>" .
                                  "<td><strong>" . $i['client_id'] . "</strong></td>" .
                                  "<td>" . $i['sp_name'] . "</td>" .
                                  "<td>" . $numFmt->format($i['item_count'], 'decimal') . "</td>" .
@@ -124,7 +123,7 @@
                 
                 <h4>Finalized invoices for service provider <code><?= $antiXSS->escape($_GET['q']) ?></code></h4>
                 
-                <table class="table table-hover">           
+                <table class="table table-hover admin-search-table">           
                     <thead>
                         <tr>
                             <th scope='col'>ID</th>
@@ -170,10 +169,9 @@
                 
                 <h4>Draft invoices for service provider <code><?= $antiXSS->escape($_GET['q']) ?></code></h4>
                 
-                <table class="table table-hover">           
+                <table class="table table-hover admin-search-table">           
                     <thead>
                         <tr>
-                            <th scope='col'>ID</th>
                             <th scope='col'>Client</th>
                             <th scope='col'>Service provider</th>
                             <th scope='col'>Items</th>
@@ -190,7 +188,6 @@
                         foreach($draftInvoicesForSP as $i) {
                             $invoiceDate = date('Y-m-d', strtotime($i['inserted_on']));
                             echo "<tr>" .
-                                 "<td>" . $i['invoice_id_for_org'] . "</td>" .
                                  "<td>" . $i['client_id'] . "</td>" .
                                  "<td><strong>" . $i['sp_name'] . "</strong></td>" .
                                  "<td>" . $numFmt->format($i['item_count'], 'decimal') . "</td>" .
@@ -218,3 +215,4 @@
     </div>
     
 </div>
+<script charset='utf-8' src='includes/js/search.js'></script>

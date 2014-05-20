@@ -1,0 +1,14 @@
+{
+    "values": {
+        "en-CA": {
+            "invoicesDrafts": "",
+            "invoicesSubmitted": "",
+            "administrativeUsers": ""
+        },
+        "fr-CA": {
+            "invoicesDrafts": "",
+            "invoicesSubmitted": "",
+            "administrativeUsers": ""
+        }
+    }
+}

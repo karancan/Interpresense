@@ -21,6 +21,15 @@ $('#admin-invoices-submitted-table').dataTable({
 });
 
 /**
+ * Initialize popover that tells the user when the invoice was approved and by who
+ */
+$(".admin-invoice-approved-details").popover({
+    placement: 'right',
+    container: 'body',
+    trigger: 'hover'
+});
+
+/**
  *User checks/unchecks the option to view approved invoices only
  */
 $('#admin-filter-approved-invoices').change(function(){
@@ -49,4 +58,27 @@ $('[data-action="approve-invoice"]').click(function(){
         global.removeRowHighlighting($(this).closest('table'));
     }
     
+});
+
+/**
+ *User wants to edit the invoice ID for org
+ */
+$('[data-action="edit-invoice-id-for-org"]').click(function(){
+    
+    global.highlightRow($(this).closest('tr'));
+    
+    var invoice_id = $(this).closest('tr').data('invoice-id');
+    var invoice_id_for_org = prompt("Update organization invoice ID…", $('#admin-invoice-id-for-org-' + invoice_id).text());
+    
+    $.ajax({
+        type: 'post',
+        url: 'invoicesSubmitted.php?page=update-invoice-id-for-org',
+        data: {
+            invoice_id: invoice_id,
+            invoice_id_for_org: invoice_id_for_org
+        }
+    }).done(function() {
+        $('#admin-invoice-id-for-org-' + invoice_id).text((invoice_id_for_org === '' ? 'N/A' : invoice_id_for_org));
+        global.removeRowHighlighting($('#admin-invoices-submitted-table'));
+    });
 });

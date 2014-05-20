@@ -26,9 +26,12 @@
     margin-right: .75em;
     font-size: 0.9em;
 }
-#admin-invoice-last-viewed{
+#admin-invoice-viewed-container{
     color: #949eac;
-    font-style: italic;
+}
+#admin-invoice-viewed-container a{
+    font-weight: bold;
+    cursor: pointer;
 }
 .admin-filter-approved-invoices-container{
     margin: 1em 0;
@@ -36,4 +39,15 @@
 }
 .admin-filter-approved-invoices-container label{
     font-weight: normal;
+}
+[data-action="edit-invoice-id-for-org"]{
+    color: #bfbfbf;
+    margin-right: 1em;
+    cursor: pointer;
+}
+[data-action="edit-invoice-id-for-org"]:hover{
+    color: black;
+}
+.admin-invoice-approved-details{
+    cursor: help;
 }
