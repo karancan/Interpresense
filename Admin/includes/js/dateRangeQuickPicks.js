@@ -32,8 +32,10 @@
         if ($(this).val() === ""){
             return;
         }
-
-        var y_m_d_start, y_m_d_end, date_time_this_week_start, date_time_this_week_end;
+        
+        var current_start_date = new Date($('[name="start"]').val());
+        var current_end_date = new Date($('[name="end"]').val());
+        var y_m_d_start, y_m_d_end, date_time_this_week_start, date_time_this_week_end, date_time_date_range_start, date_time_date_range_end;
 
         var milliseconds_one_day = 86400000;
         var milliseconds_one_week = 604800000;
@@ -46,6 +48,21 @@
         var last_day_of_week = first_day_of_week + 6;
 
         switch ($(this).val()) {
+        
+            case 'range-forward':
+                date_time_date_range_start = new Date(current_end_date.getTime() + milliseconds_one_day);
+                y_m_d_start = buildYMDString(date_time_date_range_start.getFullYear(), date_time_date_range_start.getMonth(), date_time_date_range_start.getDate());
+                date_time_date_range_end = new Date(date_time_date_range_start.getTime() + (current_end_date.getTime() - current_start_date.getTime()));
+                y_m_d_end = buildYMDString(date_time_date_range_end.getFullYear(), date_time_date_range_end.getMonth(), date_time_date_range_end.getDate());
+                break;
+                
+            case 'range-backward':
+                date_time_date_range_end = new Date(current_start_date.getTime() - milliseconds_one_day);
+                y_m_d_end = buildYMDString(date_time_date_range_end.getFullYear(), date_time_date_range_end.getMonth(), date_time_date_range_end.getDate());        
+                date_time_date_range_start = new Date(date_time_date_range_end.getTime() - (current_end_date.getTime() - current_start_date.getTime()));
+                y_m_d_start = buildYMDString(date_time_date_range_start.getFullYear(), date_time_date_range_start.getMonth(), date_time_date_range_start.getDate());
+                break;
+                
             case 'today':
                 y_m_d_start = buildYMDString(date_time_today.getFullYear(), date_time_today.getMonth(), date_time_today.getDate());
                 y_m_d_end = buildYMDString(date_time_today.getFullYear(), date_time_today.getMonth(), date_time_today.getDate());
