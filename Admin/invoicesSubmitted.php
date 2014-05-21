@@ -229,7 +229,7 @@ if (!isset($_GET['page'])) {
         $filter_end_date = new \DateTime("+{$settings['admin_default_date_filter_range_days']} days");
     }
     
-    $invoices = $invoicesModel->fetchInvoices($filter_start_date, $filter_end_date, 'final');
+    $invoices = $invoicesModel->fetchInvoices($filter_start_date, $filter_end_date, 'final', $_GET['approved_only'] === '1');
     
     $csvConfig = new \Goodby\CSV\Export\Standard\ExporterConfig();
     $csvConfig->setFromCharset('UTF-8')->setToCharset('UTF-8');

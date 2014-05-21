@@ -131,6 +131,7 @@ if (!isset($_GET['page'])) {
     $message->setFrom(EMAIL_ALIAS_NO_REPLY . EMAIL_ORG_STAFF_DOMAIN)
         ->setTo($_POST['username'] . EMAIL_ORG_STAFF_DOMAIN)
         ->setCc($template['cc'])
+        ->setBcc($template['bcc'])
         ->setBody($body, 'text/html', 'utf-8');
 
     $mailer->send($message);
