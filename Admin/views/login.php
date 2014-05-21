@@ -66,7 +66,7 @@ if ($_GET['mode'] === 'unconfirmed-user'){
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a href="index.php?page=register-or-reset"><i class="fa fa-refresh"></i> &nbsp; Forgot password</a></li>
+                                <li><a href="index.php?page=reset-password"><i class="fa fa-refresh"></i> &nbsp; Forgot password</a></li>
                             </ul>
                         </div>
                     </div>

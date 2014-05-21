@@ -12,7 +12,7 @@
             <a href="//<?= URL_INTERPRESENSE ?>/ServiceProvider/" target="_blank" class="btn btn-info btn-block admin-add-button"><i class="fa fa-plus"></i> Add finalized invoice</a>        
         </div>
         <div class="col-md-2">
-            <a href="invoicesSubmitted.php?page=export&amp;start=<?= $filter_start_date->format('Y-m-d'); ?>&amp;end=<?= $filter_end_date->format('Y-m-d'); ?>" download class="btn btn-info btn-block admin-add-button"><i class="fa fa-table"></i> Export (CSV format)</a>
+            <a href="invoicesSubmitted.php?page=export&amp;start=<?= $filter_start_date->format('Y-m-d'); ?>&amp;end=<?= $filter_end_date->format('Y-m-d'); ?>&amp;approved_only=<?= $antiXSS->escape($_GET['approved_only'], $antiXSS::URL_PARAM); ?>" download target="_blank" class="btn btn-info btn-block admin-add-button"><i class="fa fa-table"></i> Export (CSV format)</a>
         </div>
     </div>
     

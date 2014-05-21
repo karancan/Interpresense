@@ -229,9 +229,7 @@ if (!isset($_GET['page'])) {
         $filter_end_date = new \DateTime("+{$settings['admin_default_date_filter_range_days']} days");
     }
     
-    //@todo: exported CSV needs title row
-    
-    $invoices = $invoicesModel->fetchInvoices($filter_start_date, $filter_end_date, 'final');
+    $invoices = $invoicesModel->fetchInvoices($filter_start_date, $filter_end_date, 'final', $_GET['approved_only'] === '1');
     
     $csvConfig = new \Goodby\CSV\Export\Standard\ExporterConfig();
     $csvConfig->setFromCharset('UTF-8')->setToCharset('UTF-8');
@@ -242,9 +240,12 @@ if (!isset($_GET['page'])) {
     
     header('Content-Type: text/csv');
     header("Content-Disposition: attachment; filename=$filename");
-    $csvExporter->export('php://output', $invoices);
     
-    die();
+    if (sizeof($invoices) > 0) {
+        array_unshift($invoices, array_keys($invoices[0]));
+    }
+    $csvExporter->export('php://output', $invoices);
+    exit;
 }
 
 /**

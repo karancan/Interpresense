@@ -21,6 +21,7 @@ session_start();
  * Models
  */
 $users = new Users($dbo);
+$emails = new Emails($dbo);
 
 /**
  * Localization
@@ -97,28 +98,64 @@ if (!isset($_GET['page'])) {
         exit;
     }
     
-} else if ($_GET['page'] === "register-or-reset") {
-    $translate->addResource('l10n/registerOrReset.json');
-    $viewFile = "views/registerOrReset.php";
-} elseif ($_GET['page'] === "initiate-reset") {
+} elseif ($_GET['page'] === "confirm-registration") {
     
-    $resetHash = $users->requestPasswordReset($_POST['username'], $_POST['user_password']);
-    if (!empty($resetHash)) {
-        //@todo: send the password reset email
-    } else {
-        //@todo: go back to the view with an error tooltip
-        header('Location: index.php?page=register-or-reset&mode=initiate-reset-fail');
-        exit;
-    }
+    $translate->addResource('l10n/register.json');
+    $viewFile = "views/register.php";
     
 } elseif ($_GET['page'] === "reset-password") {
     
-    if ($users->confirmPasswordReset($_GET['username'], $_GET['reset_key'])) {
-        // @todo reset succeeded
-    } else {
-        // @todo reset failed
+    $translate->addResource('l10n/resetPassword.json');
+    $viewFile = "views/resetPassword.php";
+    
+} elseif ($_GET['page'] === "initiate-reset") {
+    
+    $resetHash = $users->requestPasswordReset($_POST['username'], $_POST['user_password']);
+    if (empty($resetHash)) {
+        header('Location: index.php?page=reset-password&mode=initiate-reset-fail');
+        exit;
     }
-} else if ($_GET['page'] === "logout") {
+    
+    require_once FS_VENDOR_BACKEND . '/swiftmailer/lib/swift_required.php';
+    
+    $template = $emails->fetchEmailTemplate(3);
+    
+    // Replace the hashtag
+    $link = 'https://' . URL_ADMIN . '/index.php?page=confirm-reset&username=' . $antiXSS->escape($_POST['username'], AntiXss::URL_PARAM) . '&reset_key=' . $antiXSS->escape($resetHash, AntiXss::URL_PARAM);
+    $body = str_replace('#passwordResetLink', $link, $template['content']);
+
+    $transport = new \Swift_SmtpTransport(SMTP_SERVER, SMTP_SERVER_PORT);
+    $mailer = new \Swift_Mailer($transport);
+
+    $message = new \Swift_Message($template['subject']);
+    $message->setFrom(EMAIL_ALIAS_NO_REPLY . EMAIL_ORG_STAFF_DOMAIN)
+        ->setTo($_POST['username'] . EMAIL_ORG_STAFF_DOMAIN)
+        ->setCc($template['cc'])
+        ->setBcc($template['bcc'])
+        ->setBody($body, 'text/html', 'utf-8');
+
+    $mailer->send($message);
+    
+    $state = 'pending';
+    $translate->addResource('l10n/confirmReset.json');
+    $viewFile = "views/confirmReset.php";
+    
+} elseif ($_GET['page'] === "confirm-reset") {
+    
+    try {
+        if ($users->confirmPasswordReset($_GET['username'], $_GET['reset_key'])) {
+            $state = 'success';
+        } else {
+            $state = 'fail';
+        }
+    } catch (\Exception $e) {
+        $state = 'fail';
+    }
+    
+    $translate->addResource('l10n/confirmReset.json');
+    $viewFile = "views/confirmReset.php";
+    
+} elseif ($_GET['page'] === "logout") {
     unset($_SESSION['admin']);
     header('Location: https://'  . URL_ADMIN);
     exit;

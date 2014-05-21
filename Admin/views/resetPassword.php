@@ -57,6 +57,7 @@
     $('.admin-login-form').submit(function(e) {
         if($('#admin_password').val() !== $('#admin_password_2').val()) {
             e.preventDefault();
+            alert('Passwords do not match.');
         }
     });
 </script>
