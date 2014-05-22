@@ -69,18 +69,20 @@ class Placeholders extends \Interpresense\Includes\BaseModel {
     public function replaceInstitutionHashtags($content) {
         $settings = \Interpresense\Includes\ApplicationSettings::load(parent::$db);
         
-        $hashmap = array(
-            '#institutionName' => $settings['institution_name'],
-            '#institutionEmail' => $settings['institution_email'],
-            '#institutionPhone' => $settings['institution_phone'],
-            '#institutionDeptName' => $settings['institution_dept_name'],
-            '#institutionDeptContactName' => $settings['institution_dept_recipient_name'],
-            '#institutionDeptContactEmail' => $settings['institution_dept_recipient_email'],
-            '#institutionDeptContactPhone' => $settings['institution_dept_recipient_phone'],
-            '#institutionDeptContactTitle' => $settings['institution_dept_recipient_title']
-        );
-        
-        return $this->replaceHashtags($content, $hashmap);
+        if (!empty($settings)) {
+            $hashmap = array(
+                '#institutionName' => $settings['institution_name'],
+                '#institutionEmail' => $settings['institution_email'],
+                '#institutionPhone' => $settings['institution_phone'],
+                '#institutionDeptName' => $settings['institution_dept_name'],
+                '#institutionDeptContactName' => $settings['institution_dept_recipient_name'],
+                '#institutionDeptContactEmail' => $settings['institution_dept_recipient_email'],
+                '#institutionDeptContactPhone' => $settings['institution_dept_recipient_phone'],
+                '#institutionDeptContactTitle' => $settings['institution_dept_recipient_title']
+            );
+            
+            return $this->replaceHashtags($content, $hashmap);
+        }
     }
     
     /**
@@ -97,16 +99,18 @@ class Placeholders extends \Interpresense\Includes\BaseModel {
         $usersModel = new Users(parent::$db);
         $user = $usersModel->fetchUserDetails($_SESSION['admin']['user_id']);
         
-        $hashmap = array(
-            '#adminUserName' => $user['user_name'],
-            '#adminUserFirstName' => $user['first_name'],
-            '#adminUserLastName' => $user['last_name'],
-            '#adminUserAccountExpiresOn' => $user['expires_on'],
-            '#adminUserAccountCreatedOn' => $user['created_on'],
-            '#adminUserLastLogOn' => $user['last_log_in']
-        );
-        
-        return $this->replaceHashtags($content, $hashmap);
+        if (!empty($user)) {
+            $hashmap = array(
+                '#adminUserName' => $user['user_name'],
+                '#adminUserFirstName' => $user['first_name'],
+                '#adminUserLastName' => $user['last_name'],
+                '#adminUserAccountExpiresOn' => $user['expires_on'],
+                '#adminUserAccountCreatedOn' => $user['created_on'],
+                '#adminUserLastLogOn' => $user['last_log_in']
+            );
+            
+            return $this->replaceHashtags($content, $hashmap);
+        }
     }
     
     /**
@@ -120,17 +124,19 @@ class Placeholders extends \Interpresense\Includes\BaseModel {
         $invoiceModel = new \Interpresense\ServiceProvider\Invoice(parent::$db);
         $invoice = $invoiceModel->fetchInvoice($invoiceID);
         
-        $hashmap = array(
-            '#invoiceSpPhone' => $invoice['sp_phone'],
-            '#invoiceSpEmail' => $invoice['sp_email'],
-            '#invoiceSpHstNum' => $invoice['sp_hst_number'],
-            '#invoiceIsFinal' => $invoice['is_final'],
-            '#invoiceGrandTotal' => $invoice['grand_total'],
-            '#invoiceIsApproved' => $invoice['is_approved'],
-            '#invoiceApprovedBy' => $invoice['approver'],
-            '#invoiceApprovedOn' => $invoice['approved_on']
-        );
-        
-        return $this->replaceHashtags($content, $hashmap);
+        if (!empty($invoice)) {
+            $hashmap = array(
+                '#invoiceSpPhone' => $invoice['sp_phone'],
+                '#invoiceSpEmail' => $invoice['sp_email'],
+                '#invoiceSpHstNum' => $invoice['sp_hst_number'],
+                '#invoiceIsFinal' => $invoice['is_final'],
+                '#invoiceGrandTotal' => $invoice['grand_total'],
+                '#invoiceIsApproved' => $invoice['is_approved'],
+                '#invoiceApprovedBy' => $invoice['approver'],
+                '#invoiceApprovedOn' => $invoice['approved_on']
+            );
+            
+            return $this->replaceHashtags($content, $hashmap);
+        }
     }
 }
