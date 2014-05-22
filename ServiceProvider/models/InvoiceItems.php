@@ -65,6 +65,31 @@ class InvoiceItems extends \Interpresense\Includes\BaseModel {
     }
     
     /**
+     * Fetches an invoice item
+     * @param int $itemID The item ID
+     * @return array
+     */
+    public function fetchItem($itemID) {
+        
+        if(!$this->validators['item_id']->validate($itemID)) {
+            throw new \InvalidArgumentException('Invalid item ID.');
+        }
+        
+        $sql = "SELECT i.description, i.course_code, i.service_date, i.start_time, i.end_time, i.rate, i.inserted_on,
+                       a.activity_name_en, a.activity_name_fr
+                  FROM `interpresense_service_provider_invoice_items` i
+                  JOIN `interpresense_service_provider_activities` a
+                    ON i.activity_id = a.activity_id
+                 WHERE i.item_id = :item_id;";
+        
+        $data = array('item_id' => $itemID);
+        $types = array('item_id' => \PDO::PARAM_INT);
+        
+        $result = parent::$db->query($sql, $data, $types);
+        return reset($result);
+    }
+    
+    /**
      * Fetches the number of items for a given invoice
      * @param int $invoiceID The invoice ID
      * @return int The number of items

@@ -69,6 +69,10 @@ class Placeholders extends \Interpresense\Includes\BaseModel {
     public function replaceInstitutionHashtags($content) {
         $settings = \Interpresense\Includes\ApplicationSettings::load(parent::$db);
         
+        if (empty($settings)) {
+            throw new \UnexpectedValueException('Cannot process template due to missing settings.');
+        }
+        
         $hashmap = array(
             '#institutionName' => $settings['institution_name'],
             '#institutionEmail' => $settings['institution_email'],
@@ -97,6 +101,10 @@ class Placeholders extends \Interpresense\Includes\BaseModel {
         $usersModel = new Users(parent::$db);
         $user = $usersModel->fetchUserDetails($_SESSION['admin']['user_id']);
         
+        if (empty($user)) {
+            throw new \UnexpectedValueException('Cannot process template due to missing user details.');
+        }
+        
         $hashmap = array(
             '#adminUserName' => $user['user_name'],
             '#adminUserFirstName' => $user['first_name'],
@@ -120,6 +128,10 @@ class Placeholders extends \Interpresense\Includes\BaseModel {
         $invoiceModel = new \Interpresense\ServiceProvider\Invoice(parent::$db);
         $invoice = $invoiceModel->fetchInvoice($invoiceID);
         
+        if (empty($invoice)) {
+            throw new \UnexpectedValueException('Cannot process template due to missing invoice details.');
+        }
+
         $hashmap = array(
             '#invoiceSpPhone' => $invoice['sp_phone'],
             '#invoiceSpEmail' => $invoice['sp_email'],
@@ -129,6 +141,53 @@ class Placeholders extends \Interpresense\Includes\BaseModel {
             '#invoiceIsApproved' => $invoice['is_approved'],
             '#invoiceApprovedBy' => $invoice['approver'],
             '#invoiceApprovedOn' => $invoice['approved_on']
+        );
+        
+        return $this->replaceHashtags($content, $hashmap);
+    }
+    
+    /**
+     * Replaces invoice file hashtags
+     * @param string $content The content to replace (haystack)
+     * @param int $fileID The file ID
+     * @return string
+     */
+    public function replaceInvoiceFileHashtags($content, $fileID) {
+        
+        $invoicesFilesModel = new \Interpresense\ServiceProvider\InvoiceFiles(parent::$db);
+        $file = $invoicesFilesModel->fetchFile($fileID);
+        
+        if (empty($file)) {
+            throw new \UnexpectedValueException('Cannot process template due to missing file details.');
+        }
+
+        $hashmap = array(
+            '#invoiceFileName' => $file[0]['file_name'],
+            '#invoiceFileInsertedOn' => $file[0]['inserted_on']
+        );
+        
+        return $this->replaceHashtags($content, $hashmap);
+    }
+    
+    /**
+     * Replaces invoice note hashtags
+     * @param string $content The content to replace (haystack)
+     * @param int $noteID The note ID
+     * @return string
+     */
+    public function replaceInvoiceNoteHashtags($content, $noteID) {
+        
+        $invoicesNotesModel = new InvoiceNotes(parent::$db);
+        $note = $invoicesNotesModel->fetchNote($noteID);
+        
+        if (empty($note)) {
+            throw new \UnexpectedValueException('Cannot process template due to missing note details.');
+        }
+        
+        $hashmap = array(
+            '#invoiceNoteContent' => $note['note'],
+            '#invoiceNoteInsertedOn' => $note['inserted_on'],
+            '#invoiceNoteInsertedBy' => $note['emp_name']
         );
         
         return $this->replaceHashtags($content, $hashmap);

@@ -46,11 +46,17 @@ INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_e
 INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#invoiceIsApproved','This indicates if the invoice has been approved by an administrative user','',1,1);
 INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#invoiceApprovedBy','The name of the administrative user who has approved the invoice','',1,1);
 INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#invoiceApprovedOn','The date an invoice was approved by an administrative user','',1,1);
+INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#invoiceFileName','The name of a file tied to an invoice','',1,1);
+INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#invoiceFileInsertedOn','The datetime at which a file tied to an invoice was added','',1,1);
+INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#invoiceNoteContent','The content of a note associated with an invoice','',1,1);
+INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#invoiceNoteInsertedOn','The datetime at which a note tied to an invoice was added','',1,1);
+INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#invoiceNoteInsertedBy','The name of the administrative employee who added the note tied to an invoice','',1,1);
 INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#passwordResetLink','The link to confirm the password reset action','',1,0);
 INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#accountConfirmationLink','The link to confirm the creation of a new account','',1,0);
 /*!40000 ALTER TABLE `interpresense_template_placeholders` ENABLE KEYS */;
 UNLOCK TABLES;
 
 -- @todo: review ministry report and add placeholders based on values used on the report
+-- @todo: add invoice item hash tags (beware bilingual activity names)
 -- @todo: add Francais descriptions
 -- @todo: update Wiki
