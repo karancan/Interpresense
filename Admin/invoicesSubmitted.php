@@ -186,7 +186,7 @@ if (!isset($_GET['page'])) {
         $invoicesModel->markInvoiceAsApproved($_GET['invoice_id']);
         
         $invoiceDetails = $invoicesModel->fetchInvoice($_GET['invoice_id']);
-        if (!empty($invoiceDetails[0]['invoice_id_for_org'])) {
+        if (!empty($invoiceDetails['invoice_id_for_org'])) {
             //@todo: an approved invoice may need to have `invoice_id_for_org` automatically assigned
         }
         
