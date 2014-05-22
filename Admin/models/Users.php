@@ -206,6 +206,23 @@ class Users extends \Interpresense\Includes\BaseModel {
     }
     
     /**
+     * Retrieves a user details
+     * @param int $userID The user ID
+     * @return array
+     */
+    public function fetchUserDetails($userID) {
+        $sql = "SELECT `user_name`, `first_name`, `last_name`, `created_on`, `expires_on`, `last_log_in`
+                  FROM `interpresense_users`
+                 WHERE `user_id` = :user_id;";
+        
+        $data = array('user_id' => $userID);
+        $types = array('user_id' => \PDO::PARAM_INT);
+        
+        $result = parent::$db->query($sql, $data, $types);
+        return reset($result);
+    }
+    
+    /**
      * Update user details
      * @param array $data The POST data
      */
