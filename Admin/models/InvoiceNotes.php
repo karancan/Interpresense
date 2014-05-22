@@ -80,6 +80,30 @@ class InvoiceNotes extends \Interpresense\Includes\BaseModel {
     }
     
     /**
+     * Fetches a note
+     * @param int $noteID The note ID
+     * @return array
+     */
+    public function fetchNote($noteID) {
+        if(!$this->validators['note_id']->validate($noteID)) {
+            throw new \InvalidArgumentException('Invalid note ID.');
+        }
+        
+        $sql = "SELECT n.note_id, n.note, n.inserted_on, CONCAT(u.first_name, ' ', u.last_name) AS emp_name
+                  FROM `interpresense_service_provider_invoices_notes` n
+                  JOIN `interpresense_users` u
+                    ON n.user_id = u.user_id
+                 WHERE n.note_id = :note_id
+                   AND n.is_deleted = 0;";
+        
+        $data = array('note_id' => $noteID);
+        $types = array('note_id' => \PDO::PARAM_INT);
+        
+        $result = parent::$db->query($sql, $data, $types);
+        return reset($result);
+    }
+    
+    /**
      * Fetches the number of notes associated with an invoice
      * @param int $invoiceID The invoice ID
      * @return int The number of notes

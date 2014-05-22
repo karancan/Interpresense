@@ -160,4 +160,26 @@ class Placeholders extends \Interpresense\Includes\BaseModel {
             return $this->replaceHashtags($content, $hashmap);
         }
     }
+    
+    /**
+     * Replaces invoice note hashtags
+     * @param string $content The content to replace (haystack)
+     * @param int $noteID The note ID
+     * @return string
+     */
+    public function replaceInvoiceNoteHashtags($content, $noteID) {
+        
+        $invoicesNotesModel = new InvoiceNotes(parent::$db);
+        $note = $invoicesNotesModel->fetchNote($noteID);
+        
+        if (!empty($note)) {
+            $hashmap = array(
+                '#invoiceNoteContent' => $note['note'],
+                '#invoiceNoteInsertedOn' => $note['inserted_on'],
+                '#invoiceNoteInsertedBy' => $note['emp_name']
+            );
+            
+            return $this->replaceHashtags($content, $hashmap);
+        }
+    }
 }
