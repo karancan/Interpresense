@@ -57,6 +57,6 @@ INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_e
 UNLOCK TABLES;
 
 -- @todo: review ministry report and add placeholders based on values used on the report
--- @todo: add invoice item hash tags
+-- @todo: add invoice item hash tags (beware bilingual activity names)
 -- @todo: add Francais descriptions
 -- @todo: update Wiki
