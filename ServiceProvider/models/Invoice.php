@@ -128,19 +128,26 @@ class Invoice extends \Interpresense\Includes\BaseModel {
      */
     public function fetchInvoice($invoiceID) {
         
+        if (!$this->validators['invoice_id']->validate($invoiceID)) {
+            throw new \InvalidArgumentException('Invalid invoice ID');
+        }
+        
         $sql = "SELECT `invoice_id`, `invoice_uid`, `invoice_id_for_sp`, `invoice_id_for_org`, `sp_name`,
                        `sp_address`, `sp_postal_code`, `sp_city`, `sp_province`, `sp_phone`, `sp_email`,
                        `sp_hst_number`, `client_id`, `is_final`, `inserted_on`, `updated_on`, `is_approved`,
-                       `approved_on`, `approved_by`, `admin_viewed`, `admin_last_viewed_on`, `admin_last_viewed_by`,
+                       `approved_on`, `approved_by`, `user_name` AS approver, `admin_viewed`, `admin_last_viewed_on`, `admin_last_viewed_by`,
                        `grand_total`
-                  FROM `interpresense_service_provider_invoices`
+                  FROM `interpresense_service_provider_invoices` i
+             LEFT JOIN `interpresense_users` u
+                    ON i.approved_by = u.user_id
                  WHERE `invoice_id` = :invoice_id
                    AND `is_confirmed` = 1;";
         
         $data = array('invoice_id' => $invoiceID);
         $types = array('invoice_id' => \PDO::PARAM_INT);
         
-        return parent::$db->query($sql, $data, $types);
+        $result = parent::$db->query($sql, $data, $types);
+        return reset($result);
     }
     
     /**
