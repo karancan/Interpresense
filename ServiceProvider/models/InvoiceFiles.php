@@ -127,7 +127,7 @@ class InvoiceFiles extends \Interpresense\Includes\BaseModel {
             throw new \InvalidArgumentException('Invalid file ID.');
         }
         
-        $sql .= "SELECT `file_name`, `file_type`, `file_size`, `file_content`
+        $sql .= "SELECT `file_name`, `file_type`, `file_size`, `file_content`, `inserted_on`
                    FROM `interpresense_service_provider_invoice_files`
                   WHERE `file_id` = :file_id;";
         

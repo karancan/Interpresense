@@ -139,4 +139,25 @@ class Placeholders extends \Interpresense\Includes\BaseModel {
             return $this->replaceHashtags($content, $hashmap);
         }
     }
+    
+    /**
+     * Replaces invoice file hashtags
+     * @param string $content The content to replace (haystack)
+     * @param int $fileID The file ID
+     * @return string
+     */
+    public function replaceInvoiceFileHashtags($content, $fileID) {
+        
+        $invoicesFilesModel = new \Interpresense\ServiceProvider\InvoiceFiles(parent::$db);
+        $file = $invoicesFilesModel->fetchFile($fileID);
+        
+        if (!empty($file)) {
+            $hashmap = array(
+                '#invoiceFileName' => $file[0]['file_name'],
+                '#invoiceFileInsertedOn' => $file[0]['inserted_on']
+            );
+            
+            return $this->replaceHashtags($content, $hashmap);
+        }
+    }
 }
