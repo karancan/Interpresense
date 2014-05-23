@@ -192,4 +192,33 @@ class Placeholders extends \Interpresense\Includes\BaseModel {
         
         return $this->replaceHashtags($content, $hashmap);
     }
+    
+    /**
+     * Replaces invoice item hashtags
+     * @param string $content The content to replace (haystack)
+     * @param int $itemID The item ID
+     * @return string
+     */
+    public function replaceInvoiceNoteHashtags($content, $itemID) {
+        
+        $invoicesItemsModel = new \Interpresense\ServiceProvider\InvoiceItems(parent::$db);
+        $item = $invoicesItemsModel->fetchItem($itemID);
+        
+        if (empty($item)) {
+            throw new \UnexpectedValueException('Cannot process template due to missing item details.');
+        }
+        
+        $hashmap = array(
+            '#invoiceItemDescription' => $item['description'],
+            '#invoiceItemCourse' => $item['course_code'],
+            '#invoiceItemActivity' => $item[''], //@todo: `activity_name_en` and `activity_name_fr` are options...
+            '#invoiceItemDate' => $item['service_date'],
+            '#invoiceItemStartTime' => $item['start_time'],
+            '#invoiceItemEndTime' => $item['end_time'],
+            '#invoiceItemRate' => $item['rate'],
+            '#invoiceItemInsertedOn' => $item['inserted_on']
+        );
+        
+        return $this->replaceHashtags($content, $hashmap);
+    }
 }
