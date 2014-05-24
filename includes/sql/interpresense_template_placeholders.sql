@@ -51,12 +51,19 @@ INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_e
 INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#invoiceNoteContent','The content of a note associated with an invoice','',1,1);
 INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#invoiceNoteInsertedOn','The datetime at which a note tied to an invoice was added','',1,1);
 INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#invoiceNoteInsertedBy','The name of the administrative employee who added the note tied to an invoice','',1,1);
+INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#invoiceItemDescription','The description of an individual item tied to an invoice','',1,1);
+INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#invoiceItemCourse','The course of an individual item tied to an invoice','',1,1);
+INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#invoiceItemActivity','The activity type of an individual item tied to an invoice','',1,1);
+INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#invoiceItemDate','The date of an individual item tied to an invoice','',1,1);
+INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#invoiceItemStartTime','The start time of an individual item tied to an invoice','',1,1);
+INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#invoiceItemEndTime','The end time of an individual item tied to an invoice','',1,1);
+INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#invoiceItemRate','The hourly rate of an individual item tied to an invoice','',1,1);
+INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#invoiceItemInsertedOn','The date/time an individual invoice item was added to an invoice','',1,1);
 INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#passwordResetLink','The link to confirm the password reset action','',1,0);
 INSERT INTO `interpresense_template_placeholders` (`placeholder`, `description_en`, `description_fr`, `for_emails`, `for_reports`) VALUES ('#accountConfirmationLink','The link to confirm the creation of a new account','',1,0);
 /*!40000 ALTER TABLE `interpresense_template_placeholders` ENABLE KEYS */;
 UNLOCK TABLES;
 
 -- @todo: review ministry report and add placeholders based on values used on the report
--- @todo: add invoice item hash tags (beware bilingual activity names)
 -- @todo: add Francais descriptions
 -- @todo: update Wiki
