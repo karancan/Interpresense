@@ -75,6 +75,7 @@
                                  "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
                                  '<td class="table-option-cell">' .
                                      (!$i['is_approved'] ? '<button type="button" class="btn btn-success" data-action="approve-invoice"><i class="fa fa-check-square-o"></i> Approve</button>' : null) .
+                                     (!$i['is_approved'] ? '<button type="button" class="btn btn-warning" data-toggle="modal" href="#admin-invoice-mark-as-draft-modal" data-action="mark-as-draft"><i class="fa fa-thumbs-down"></i> Mark as draft</button>' : null) .
                                      '<button type="button" class="btn btn-info" data-toggle="modal" href="#admin-invoice-add-notes-modal" data-action="add-note"><i class="fa fa-plus"></i> Add note</button>
                                   </td>' .
                                  '</tr>';
@@ -88,6 +89,36 @@
         
     </div>
     
+</div>
+<div class="modal" id="admin-invoice-mark-as-draft-modal" tabindex="-1" role="dialog" aria-labelledby="admin-invoice-mark-as-draft-modal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-vertical-center">
+        <form id="admin-invoice-mark-as-draft-form" action="invoicesSubmitted.php?page=mark-invoice-as-draft" method="POST" class="modal-content">
+            
+            <input type="hidden" name="invoice_id" value="">
+            <input type="hidden" name="start" value="<?= $antiXSS->escape($_GET['start'], $antiXSS::HTML_ATTR) ?>">
+            <input type="hidden" name="end" value="<?= $antiXSS->escape($_GET['end'], $antiXSS::HTML_ATTR) ?>">
+            <input type="hidden" name="approved_only" value="<?= $antiXSS->escape($_GET['approved_only'], $antiXSS::HTML_ATTR) ?>">
+            
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Change invoice to draft status</h4>
+            </div>
+            
+            <div class="modal-body">
+                
+                <p>Why is this invoice being changed to draft status?</p>
+                <p><small>(This note will be shown to the service provider)</small></p>
+                
+                <textarea class="form-control" id="invoice_note_mark_as_draft" name="note" rows="10" required></textarea>
+                
+            </div>
+            
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Confirm</button>
+            </div>
+            
+        </form>
+    </div>
 </div>
 <?php require FS_ADMIN . '/views/invoicesModals.php'; ?>
 <script charset='utf-8' src='//<?= URL_VENDOR_FRONTEND ?>/datatables-bootstrap3/BS3/assets/js/datatables.js'></script>

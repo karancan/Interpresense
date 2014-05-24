@@ -198,6 +198,11 @@ class Invoice extends \Interpresense\Includes\BaseModel {
      * @param int $invoiceID The invoice ID
      */
     public function markInvoiceAsDraft($invoiceID) {
+        
+        if (!$this->validators['invoice_id']->validate($invoiceID)) {
+            throw new \InvalidArgumentException('Invalid invoice ID.');
+        }
+        
         $sql = "UPDATE `interpresense_service_provider_invoices`
                    SET `is_final` = 0, `updated_on` = NOW()
                  WHERE `invoice_id` = :invoice_id

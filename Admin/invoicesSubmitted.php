@@ -168,13 +168,13 @@ if (!isset($_GET['page'])) {
 
 } else if ($_GET['page'] === "mark-invoice-as-draft") {
     
-    if (!empty($_GET['invoice_id'])) {
-        $invoicesModel->markInvoiceAsDraft($_GET['invoice_id']);
+    if (!empty($_POST['invoice_id'])) {
+        $invoicesModel->markInvoiceAsDraft($_POST['invoice_id']);
+        $invoicesNotesModel->addNote($_POST);
         
-        //@todo: create an invoice note stating that the invoice was changed to draft status
         //@todo: send email to service provider telling them the invoice was marked as a draft with the note attached
     
-        header('Location: invoicesSubmitted.php?focus=' . $_GET['invoice_id']); //@todo: respect start, end, approved
+        header('Location: invoicesSubmitted.php?start=' . $_POST['start'] . '&end=' . $_POST['end'] . '&approved_only=' . $_POST['approved_only']);
         exit;
     } else {
         $viewFile = ''; //Show error page
