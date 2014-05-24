@@ -174,9 +174,10 @@ class Reports extends \Interpresense\Includes\BaseModel {
      * Generates a new report
      * @param int $templateID The template to use
      * @param string $name The name of the report
-     * @todo
      */
     public function generateReport($templateID, $name) {
+        
+        require FS_VENDOR_BACKEND . '/tcpdf/tcpdf.php';
         
         if (!$this->validators['template_id']->validate($templateID) || !$this->validators['report_name']->validate($name)) {
             throw new \InvalidArgumentException('Template ID or report name invalid.');
@@ -189,8 +190,15 @@ class Reports extends \Interpresense\Includes\BaseModel {
         // Fetch template content
         $template = $this->fetchReportTemplate($templateID);
         
-        // @todo a bunch of string replacing
-        // @todo convert to PDF
+        // Replace content
+        $template = $placeholdersModel->replaceInstitutionHashtags($template);
+        $template = $placeholdersModel->replaceUserHashtags($template);
+        
+        // Create PDF
+        $pdf = new \TCPDF();
+        $pdf->AddPage();
+        $pdf->writeHTML($template);
+        $pdf = $pdf->Output('', 'S');
         
         $sql = "INSERT INTO `interpresense_admin_reports` (`template_id`, `generated_by`, `report_name`, `report_content`, `report_file_type`, `report_file_size`, `inserted_on`, `updated_on`)
                      VALUES (:template_id, :generated_by, :report_name, :report_content, :report_file_type, :report_file_size, NOW(), NOW());";
@@ -199,9 +207,9 @@ class Reports extends \Interpresense\Includes\BaseModel {
             'template_id' => $templateID,
             'generated_by' => $_SESSION['admin']['user_id'],
             'report_name' => $name,
-            'report_content' => $template,
+            'report_content' => $pdf,
             'report_file_type' => 'application/pdf',
-            'report_file_size' => '' // @todo...use filesize($report)
+            'report_file_size' => mb_strlen($pdf)
         );
         
         $types = array(
