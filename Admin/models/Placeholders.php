@@ -211,7 +211,8 @@ class Placeholders extends \Interpresense\Includes\BaseModel {
         $hashmap = array(
             '#invoiceItemDescription' => $item['description'],
             '#invoiceItemCourse' => $item['course_code'],
-            '#invoiceItemActivity' => $item[''], //@todo: `activity_name_en` and `activity_name_fr` are options...
+            '#invoiceItemActivityEn' => $item['activity_name_en'],
+            '#invoiceItemActivityFr' => $item['activity_name_fr'],
             '#invoiceItemDate' => $item['service_date'],
             '#invoiceItemStartTime' => $item['start_time'],
             '#invoiceItemEndTime' => $item['end_time'],
