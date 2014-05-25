@@ -172,7 +172,29 @@ if (!isset($_GET['page'])) {
         $invoicesModel->markInvoiceAsDraft($_POST['invoice_id']);
         $invoicesNotesModel->addNote($_POST);
         
-        //@todo: send email to service provider telling them the invoice was marked as a draft with the note attached
+        $invoice = $invoicesModel->fetchInvoice($_POST['invoice_id']);
+        
+        if (!empty($invoice)) {
+        
+            $template = $emails->fetchEmailTemplate(6);
+            
+            require_once FS_VENDOR_BACKEND . '/swiftmailer/lib/swift_required.php';
+            
+            //@todo: replace hashtags and add note content
+
+            $transport = new \Swift_SmtpTransport(SMTP_SERVER, SMTP_SERVER_PORT);
+            $mailer = new \Swift_Mailer($transport);
+
+            $message = new \Swift_Message($template['subject']);
+            $message->setFrom(EMAIL_ALIAS_NO_REPLY . EMAIL_ORG_STAFF_DOMAIN)
+                ->setTo($invoice['sp_email'])
+                ->setCc($template['cc'])
+                ->setBcc($template['bcc'])
+                ->setBody($body, 'text/html', 'utf-8');
+
+            $mailer->send($message);
+        
+        }
     
         header('Location: invoicesSubmitted.php?start=' . $_POST['start'] . '&end=' . $_POST['end'] . '&approved_only=' . $_POST['approved_only']);
         exit;
