@@ -172,7 +172,29 @@ if (!isset($_GET['page'])) {
         $invoicesModel->markInvoiceAsDraft($_POST['invoice_id']);
         $invoicesNotesModel->addNote($_POST);
         
-        //@todo: send email to service provider telling them the invoice was marked as a draft with the note attached
+        $invoiceDetails = $invoicesModel->fetchInvoice($_POST['invoice_id']);
+        
+        if (!empty($invoiceDetails)) {
+        
+            $template = $emails->fetchEmailTemplate(6);
+            
+            require_once FS_VENDOR_BACKEND . '/swiftmailer/lib/swift_required.php';
+            
+            //@todo: replace $template hashtags and add note content
+
+            $transport = new \Swift_SmtpTransport(SMTP_SERVER, SMTP_SERVER_PORT);
+            $mailer = new \Swift_Mailer($transport);
+
+            $message = new \Swift_Message($template['subject']);
+            $message->setFrom(EMAIL_ALIAS_NO_REPLY . EMAIL_ORG_STAFF_DOMAIN)
+                ->setTo($invoiceDetails['sp_email'])
+                ->setCc($template['cc'])
+                ->setBcc($template['bcc'])
+                ->setBody($body, 'text/html', 'utf-8');
+
+            $mailer->send($message);
+        
+        }
     
         header('Location: invoicesSubmitted.php?start=' . $_POST['start'] . '&end=' . $_POST['end'] . '&approved_only=' . $_POST['approved_only']);
         exit;
@@ -186,12 +208,29 @@ if (!isset($_GET['page'])) {
         $invoicesModel->markInvoiceAsApproved($_GET['invoice_id']);
         
         $invoiceDetails = $invoicesModel->fetchInvoice($_GET['invoice_id']);
-        if (!empty($invoiceDetails['invoice_id_for_org'])) {
-            //@todo: an approved invoice may need to have `invoice_id_for_org` automatically assigned
-        }
         
-        //@todo: create an invoice note stating that the invoice was marked approved
-        //@todo: send email to service provider telling them the invoice was approved
+        if (!empty($invoiceDetails)) {
+            //@todo: an approved invoice may need to have `invoice_id_for_org` automatically assigned
+        
+            $template = $emails->fetchEmailTemplate(5);
+            
+            require_once FS_VENDOR_BACKEND . '/swiftmailer/lib/swift_required.php';
+            
+            //@todo: replace $template hashtags
+
+            $transport = new \Swift_SmtpTransport(SMTP_SERVER, SMTP_SERVER_PORT);
+            $mailer = new \Swift_Mailer($transport);
+
+            $message = new \Swift_Message($template['subject']);
+            $message->setFrom(EMAIL_ALIAS_NO_REPLY . EMAIL_ORG_STAFF_DOMAIN)
+                ->setTo($invoiceDetails['sp_email'])
+                ->setCc($template['cc'])
+                ->setBcc($template['bcc'])
+                ->setBody($body, 'text/html', 'utf-8');
+
+            $mailer->send($message);
+            
+        }
         
         header('Location: invoicesSubmitted.php?focus=' . $_GET['invoice_id'] . '&start=' . $_GET['start'] . '&end=' . $_GET['end'] . '&approved_only=' . $_GET['approved_only']);
         exit;
