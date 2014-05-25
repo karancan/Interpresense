@@ -82,3 +82,19 @@ $('[data-action="edit-invoice-id-for-org"]').click(function(){
         global.removeRowHighlighting($('#admin-invoices-submitted-table'));
     });
 });
+
+/**
+ *User wants to mark the invoice as a draft
+ */
+$('[data-action="mark-as-draft"]').click(function(){
+    global.highlightRow($(this).closest('tr'));
+    $('#admin-invoice-mark-as-draft-form [name="invoice_id"]').val($(this).closest('tr').data('invoice-id'));
+});
+
+/**
+ *The mark invoice as draft dialog has been closed
+ */
+$('#admin-invoice-mark-as-draft-modal').on('hidden.bs.modal', function () {
+    $('#admin-invoice-mark-as-draft-form [name="invoice_id"]').val('');
+    global.removeRowHighlighting($('#admin-invoices-submitted-table'));
+});

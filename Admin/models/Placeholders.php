@@ -199,7 +199,7 @@ class Placeholders extends \Interpresense\Includes\BaseModel {
      * @param int $itemID The item ID
      * @return string
      */
-    public function replaceInvoiceNoteHashtags($content, $itemID) {
+    public function replaceInvoiceItemHashtags($content, $itemID) {
         
         $invoicesItemsModel = new \Interpresense\ServiceProvider\InvoiceItems(parent::$db);
         $item = $invoicesItemsModel->fetchItem($itemID);
