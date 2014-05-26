@@ -50,7 +50,5 @@ INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `descripti
 /*!40000 ALTER TABLE `interpresense_settings` ENABLE KEYS */;
 UNLOCK TABLES;
 
--- @todo: invoice note when invoice is marked as draft
--- @todo: invoice note when invoice is approved
 -- @todo: put settings to use in code base
 -- @todo: complete `description_fr`
