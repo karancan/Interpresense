@@ -181,7 +181,7 @@ if (!isset($_GET['page'])) {
             
             require_once FS_VENDOR_BACKEND . '/swiftmailer/lib/swift_required.php';
             
-            $body = $placeholdersModel->replaceInstitutionHashtags($template);
+            $body = $placeholdersModel->replaceInstitutionHashtags($template['content']);
             $body = $placeholdersModel->replaceUserHashtags($body);
             $body = $placeholdersModel->replaceInvoiceHashtags($body, $_POST['invoice_id']);
             $body = $placeholdersModel->replaceInvoiceNoteHashtags($body, $_POST['invoice_id']);
@@ -221,7 +221,7 @@ if (!isset($_GET['page'])) {
             
             require_once FS_VENDOR_BACKEND . '/swiftmailer/lib/swift_required.php';
             
-            $body = $placeholdersModel->replaceInstitutionHashtags($template);
+            $body = $placeholdersModel->replaceInstitutionHashtags($template['content']);
             $body = $placeholdersModel->replaceUserHashtags($body);
             $body = $placeholdersModel->replaceInvoiceHashtags($body, $_GET['invoice_id']);
 

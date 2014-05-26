@@ -27,6 +27,7 @@ if (!isset($_SESSION['admin']['user_id'])) {
 $usersModel = new Users($dbo);
 $emailTemplatesModel = new Emails($dbo);
 $invoicesModel = new \Interpresense\ServiceProvider\Invoice($dbo);
+$placeholdersModel = new Placeholders($dbo);
 
 /**
  * Localization
@@ -67,23 +68,28 @@ if (!isset($_GET['page'])) {
         try {
             $emailData = $emailTemplatesModel->fetchEmailTemplate(1);
             
-            $transport = \Swift_SmtpTransport::newInstance(SMTP_SERVER, SMTP_SERVER_PORT);
-
-            $email = \Swift_Message::newInstance()
-                ->setSubject("Interpresense - {$emailData['subject']}")
-                ->setFrom(EMAIL_ALIAS_NO_REPLY . EMAIL_ORG_STAFF_DOMAIN)
+            require_once FS_VENDOR_BACKEND . '/swiftmailer/lib/swift_required.php';
+            
+            $body = $placeholdersModel->replaceInstitutionHashtags($emailData['content']);
+            $body = $placeholdersModel->replaceUserHashtags($body, $updated);
+            
+            $transport = new \Swift_SmtpTransport(SMTP_SERVER, SMTP_SERVER_PORT);
+            $mailer = new \Swift_Mailer($transport);
+            
+            $message = new \Swift_Message("Interpresense - {$emailData['subject']}");
+            $message->setFrom(EMAIL_ALIAS_NO_REPLY . EMAIL_ORG_STAFF_DOMAIN)
                 ->setTo($_POST['user_name'] . EMAIL_ORG_STAFF_DOMAIN)
-                ->setBody($emailData['content']);
-                
+                ->setBody($body, 'text/html', 'utf-8');
+            
             if (!empty($emailData['cc'])) {
-                $email->setCc($emailData['cc']);
+                $message->setCc($emailData['cc']);
             }
             
             if (!empty($emailData['bcc'])) {
-                $email->setBcc($emailData['bcc']);
+                $message->setBcc($emailData['bcc']);
             }
 
-            $transport->send($email);
+            $mailer->send($message);
         } catch (\Exception $e) {
             // Email failed
         }
@@ -94,23 +100,28 @@ if (!isset($_GET['page'])) {
         try {
             $emailData = $emailTemplatesModel->fetchEmailTemplate(2);
             
-            $transport = \Swift_SmtpTransport::newInstance(SMTP_SERVER, SMTP_SERVER_PORT);
-
-            $email = \Swift_Message::newInstance()
-                ->setSubject("Interpresense - {$emailData['subject']}")
-                ->setFrom(EMAIL_ALIAS_NO_REPLY . EMAIL_ORG_STAFF_DOMAIN)
+            require_once FS_VENDOR_BACKEND . '/swiftmailer/lib/swift_required.php';
+            
+            $body = $placeholdersModel->replaceInstitutionHashtags($emailData['content']);
+            $body = $placeholdersModel->replaceUserHashtags($body, $updated);
+            
+            $transport = new \Swift_SmtpTransport(SMTP_SERVER, SMTP_SERVER_PORT);
+            $mailer = new \Swift_Mailer($transport);
+            
+            $message = new \Swift_Message("Interpresense - {$emailData['subject']}");
+            $message->setFrom(EMAIL_ALIAS_NO_REPLY . EMAIL_ORG_STAFF_DOMAIN)
                 ->setTo($_POST['user_name'] . EMAIL_ORG_STAFF_DOMAIN)
-                ->setBody($emailData['content']);
-                
+                ->setBody($body, 'text/html', 'utf-8');
+            
             if (!empty($emailData['cc'])) {
-                $email->setCc($emailData['cc']);
+                $message->setCc($emailData['cc']);
             }
             
             if (!empty($emailData['bcc'])) {
-                $email->setBcc($emailData['bcc']);
+                $message->setBcc($emailData['bcc']);
             }
 
-            $transport->send($email);
+            $mailer->send($message);
         } catch (\Exception $e) {
             // Email failed
         }
