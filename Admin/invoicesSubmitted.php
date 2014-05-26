@@ -181,7 +181,7 @@ if (!isset($_GET['page'])) {
             
             require_once FS_VENDOR_BACKEND . '/swiftmailer/lib/swift_required.php';
             
-            $body = $placeholdersModel->replaceInstitutionHashtags($body);
+            $body = $placeholdersModel->replaceInstitutionHashtags($template);
             $body = $placeholdersModel->replaceUserHashtags($body);
             $body = $placeholdersModel->replaceInvoiceHashtags($body, $_POST['invoice_id']);
             $body = $placeholdersModel->replaceInvoiceNoteHashtags($body, $_POST['invoice_id']);
@@ -214,13 +214,16 @@ if (!isset($_GET['page'])) {
         $invoiceDetails = $invoicesModel->fetchInvoice($_GET['invoice_id']);
         
         if (!empty($invoiceDetails)) {
+        
             //@todo: an approved invoice may need to have `invoice_id_for_org` automatically assigned
         
             $template = $emails->fetchEmailTemplate(5);
             
             require_once FS_VENDOR_BACKEND . '/swiftmailer/lib/swift_required.php';
             
-            //@todo: replace $template hashtags
+            $body = $placeholdersModel->replaceInstitutionHashtags($template);
+            $body = $placeholdersModel->replaceUserHashtags($body);
+            $body = $placeholdersModel->replaceInvoiceHashtags($body, $_GET['invoice_id']);
 
             $transport = new \Swift_SmtpTransport(SMTP_SERVER, SMTP_SERVER_PORT);
             $mailer = new \Swift_Mailer($transport);
