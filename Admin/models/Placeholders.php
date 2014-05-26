@@ -74,10 +74,14 @@ class Placeholders extends \Interpresense\Includes\BaseModel {
         }
         
         $hashmap = array(
-            '#institutionName' => $settings['institution_name'],
+            '#institutionNameEn' => $settings['institution_name_en'],
+            '#institutionNameFr' => $settings['institution_name_fr'],
+            '#institutionAddressEn' => $settings['institution_address_en'],
+            '#institutionAddressFr' => $settings['institution_address_fr'],
             '#institutionEmail' => $settings['institution_email'],
             '#institutionPhone' => $settings['institution_phone'],
-            '#institutionDeptName' => $settings['institution_dept_name'],
+            '#institutionDeptNameEn' => $settings['institution_dept_name_en'],
+            '#institutionDeptNameFr' => $settings['institution_dept_name_fr'],
             '#institutionDeptContactName' => $settings['institution_dept_recipient_name'],
             '#institutionDeptContactEmail' => $settings['institution_dept_recipient_email'],
             '#institutionDeptContactPhone' => $settings['institution_dept_recipient_phone'],
