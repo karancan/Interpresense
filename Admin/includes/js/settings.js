@@ -16,6 +16,7 @@ $(document).ready(function(){
 $('[data-action="add-setting"]').click(function(){
     $('#setting_description_container').hide();
     $('#admin-add-setting-modal .modal-title').text('Add setting');
+    $('#setting_name').prop('readOnly', false);
     $('#setting_name, #setting_value').val('');
 });
 
@@ -34,11 +35,8 @@ $('#admin-settings-table [data-action="edit"]').click(function(){
     
     $('#setting_description_container').show();
     $('#admin-add-setting-modal .modal-title').text('Edit setting');
+    $('#setting_name').prop('readOnly', true);
     $('#setting_name').val($(this).closest('tr').data('setting-key'));
-    var setting_value = $(this).closest('tr').data('setting-value');
-    if (typeof setting_value === 'object') {
-        //@todo: handling of JSON values which typically apply to multi-language values
-    }
     $('#setting_value').val($(this).closest('tr').data('setting-value'));
     $('#setting_description').html($(this).closest('tr').data('setting-description'));
     
