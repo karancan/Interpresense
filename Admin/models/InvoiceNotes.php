@@ -53,6 +53,7 @@ class InvoiceNotes extends \Interpresense\Includes\BaseModel {
         $data['user_id'] = $_SESSION['admin']['user_id'];
         
         parent::$db->query($sql, $data, $types);
+        return parent::$db->db->lastInsertId();
     }
     
     /**

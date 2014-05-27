@@ -28,6 +28,7 @@ $invoicesModel = new \Interpresense\ServiceProvider\Invoice($dbo);
 $invoicesItemsModel = new \Interpresense\ServiceProvider\InvoiceItems($dbo);
 $invoicesFilesModel = new \Interpresense\ServiceProvider\InvoiceFiles($dbo);
 $invoicesNotesModel = new InvoiceNotes($dbo);
+$placeholdersModel = new Placeholders($dbo);
 
 /**
  * Localization
@@ -170,7 +171,7 @@ if (!isset($_GET['page'])) {
     
     if (!empty($_POST['invoice_id'])) {
         $invoicesModel->markInvoiceAsDraft($_POST['invoice_id']);
-        $invoicesNotesModel->addNote($_POST);
+        $invoiceNoteId = $invoicesNotesModel->addNote($_POST);
         
         $invoiceDetails = $invoicesModel->fetchInvoice($_POST['invoice_id']);
         
@@ -180,7 +181,10 @@ if (!isset($_GET['page'])) {
             
             require_once FS_VENDOR_BACKEND . '/swiftmailer/lib/swift_required.php';
             
-            //@todo: replace $template hashtags and add note content
+            $body = $placeholdersModel->replaceInstitutionHashtags($template['content']);
+            $body = $placeholdersModel->replaceUserHashtags($body);
+            $body = $placeholdersModel->replaceInvoiceHashtags($body, $_POST['invoice_id']);
+            $body = $placeholdersModel->replaceInvoiceNoteHashtags($body, $_POST['invoice_id']);
 
             $transport = new \Swift_SmtpTransport(SMTP_SERVER, SMTP_SERVER_PORT);
             $mailer = new \Swift_Mailer($transport);
@@ -210,13 +214,16 @@ if (!isset($_GET['page'])) {
         $invoiceDetails = $invoicesModel->fetchInvoice($_GET['invoice_id']);
         
         if (!empty($invoiceDetails)) {
+        
             //@todo: an approved invoice may need to have `invoice_id_for_org` automatically assigned
         
             $template = $emails->fetchEmailTemplate(5);
             
             require_once FS_VENDOR_BACKEND . '/swiftmailer/lib/swift_required.php';
             
-            //@todo: replace $template hashtags
+            $body = $placeholdersModel->replaceInstitutionHashtags($template['content']);
+            $body = $placeholdersModel->replaceUserHashtags($body);
+            $body = $placeholdersModel->replaceInvoiceHashtags($body, $_GET['invoice_id']);
 
             $transport = new \Swift_SmtpTransport(SMTP_SERVER, SMTP_SERVER_PORT);
             $mailer = new \Swift_Mailer($transport);

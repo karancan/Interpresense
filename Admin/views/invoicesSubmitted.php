@@ -71,7 +71,7 @@
                                  "<td>" . "<a href='#admin-invoice-files-modal' data-toggle='modal' data-action='view-files' class='admin-modal-links'>" . $numFmt->format($i['file_count'], 'decimal') . "</a>" . "</td>" .
                                  "<td>" . "<a href='#admin-invoice-notes-modal' data-toggle='modal' data-action='view-notes' class='admin-modal-links'>" . $numFmt->format($i['note_count'], 'decimal') . "</a>" . "</td>" .
                                  "<td>" . $numFmt->format($i['grand_total'], 'currency') . "</td>" .
-                                 "<td>" . ($i['is_approved'] ? '<span class="admin-invoice-approved-details" data-content="Approved on ' . $dateFmt->format($i['approved_on'], 'date_time') . ' by ' . $i['first_name'] . ' ' . $i['last_name'] . '">Yes</span>' : 'No') . "</td>" .
+                                 "<td>" . ($i['is_approved'] ? '<span class="admin-invoice-approved-details" data-content="Approved on ' . $dateFmt->format($i['approved_on'], 'date_time') . ' by ' . $i['first_name'] . ' ' . $i['last_name'] . '">Yes <i class="fa fa-info-circle"></i></span>' : 'No') . "</td>" .
                                  "<td>" . $dateFmt->format($i['inserted_on'], 'date_time') . "</td>" .
                                  '<td class="table-option-cell">' .
                                      (!$i['is_approved'] ? '<button type="button" class="btn btn-success" data-action="approve-invoice"><i class="fa fa-check-square-o"></i> Approve</button>' : null) .

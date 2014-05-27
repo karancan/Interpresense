@@ -27,9 +27,12 @@ LOCK TABLES `interpresense_settings` WRITE;
 /*!40000 ALTER TABLE `interpresense_settings` DISABLE KEYS */;
 INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `description_en`, `description_fr`, `internal_use`,`inserted_on`, `updated_on`) VALUES ('installation_complete','0','A value of <code>0</code> indicates installation is incomplete. A value of <code>1</code> indicates installation is complete.','','1',NOW(),NOW());
 INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `description_en`, `description_fr`, `internal_use`,`inserted_on`, `updated_on`) VALUES ('installation_accepted_eula','0','A value of <code>0</code> indicates the client has not accepted the product license. A value of <code>1</code> indicates the client has accepted the product license.','','1',NOW(),NOW());
-INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `description_en`, `description_fr`, `internal_use`,`inserted_on`, `updated_on`) VALUES ('institution_name','{"en-CA": "University of Westeros", "fr-CA": "same thing in Francais"}','The name of the organization using this product.','','0',NOW(),NOW());
-INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `description_en`, `description_fr`, `internal_use`,`inserted_on`, `updated_on`) VALUES ('institution_dept_name','{"en-CA": "Disability Services Office", "fr-CA": "same thing in Francais"}','The name of the department within the organization using this product.','','0',NOW(),NOW());
-INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `description_en`, `description_fr`, `internal_use`,`inserted_on`, `updated_on`) VALUES ('institution_address','{"en": "DSO 120", "fr": "same thing in Francais"}','The address of the organization using this product','','0',NOW(),NOW());
+INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `description_en`, `description_fr`, `internal_use`,`inserted_on`, `updated_on`) VALUES ('institution_name_en','University of Westeros','The name of the organization using this product (in English)','','0',NOW(),NOW());
+INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `description_en`, `description_fr`, `internal_use`,`inserted_on`, `updated_on`) VALUES ('institution_name_fr','','','','0',NOW(),NOW());
+INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `description_en`, `description_fr`, `internal_use`,`inserted_on`, `updated_on`) VALUES ('institution_dept_name_en','Disability Services Office','The name of the department within the organization using this product (in English)','','0',NOW(),NOW());
+INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `description_en`, `description_fr`, `internal_use`,`inserted_on`, `updated_on`) VALUES ('institution_dept_name_fr','','','','0',NOW(),NOW());
+INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `description_en`, `description_fr`, `internal_use`,`inserted_on`, `updated_on`) VALUES ('institution_address_en','789 Kings Landing','The address of the organization using this product (in English(','','0',NOW(),NOW());
+INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `description_en`, `description_fr`, `internal_use`,`inserted_on`, `updated_on`) VALUES ('institution_address_fr','','','','0',NOW(),NOW());
 INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `description_en`, `description_fr`, `internal_use`,`inserted_on`, `updated_on`) VALUES ('institution_email','dso@institution.ca','The email address shown to service providers submitting invoices.','','0',NOW(),NOW());
 INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `description_en`, `description_fr`, `internal_use`,`inserted_on`, `updated_on`) VALUES ('institution_phone','613-123-1234','The phone number shown to service providers submitting invoices.','','0',NOW(),NOW());
 INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `description_en`, `description_fr`, `internal_use`,`inserted_on`, `updated_on`) VALUES ('institution_default_lang','en-CA','The fallback language for users at the organization. Possible values are <code>en-CA</code> and <code>fr-CA</code>','','0',NOW(),NOW());
@@ -47,7 +50,5 @@ INSERT INTO `interpresense_settings` (`setting_key`, `setting_value`, `descripti
 /*!40000 ALTER TABLE `interpresense_settings` ENABLE KEYS */;
 UNLOCK TABLES;
 
--- @todo: invoice note when invoice is marked as draft
--- @todo: invoice note when invoice is approved
 -- @todo: put settings to use in code base
 -- @todo: complete `description_fr`
