@@ -20,7 +20,7 @@
                 <thead>
                     <tr>
                         <th scope='col'>Name</th>
-                        <th scope='col'>Description</th>
+                        <th scope='col' style='width: 25%;'>Description</th>
                         <th scope='col'>Subject</td>
                         <th scope='col'>CC</th>
                         <th scope='col'>BCC</th>
@@ -41,8 +41,8 @@
                                  "<td>{$e['name']}</td>" .
                                  "<td>{$e['description']}</td>" .
                                  "<td>{$antiXSS->escape($e['subject'])}</td>" .
-                                 "<td>{$antiXSS->escape($e['cc'])}</td>" .
-                                 "<td>{$antiXSS->escape($e['bcc'])}</td>" .
+                                 "<td>" . (empty($c['cc']) ? 'N/A' : $antiXSS->escape($e['cc'])) . "</td>" .
+                                 "<td>" . (empty($c['bcc']) ? 'N/A' : $antiXSS->escape($e['bcc'])) . "</td>" .
                                  '<td class="table-option-cell">
                                       <button type="button" class="btn btn-info" data-toggle="modal" href="#admin-view-email-modal" data-action="view"><i class="fa fa-eye"></i> View content</button>
                                       <button type="button" class="btn btn-warning" data-toggle="modal" href="#admin-edit-email-modal" data-action="edit"><i class="fa fa-edit"></i> Edit template</button>
