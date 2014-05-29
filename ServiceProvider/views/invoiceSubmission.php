@@ -10,7 +10,10 @@
     </div>
     
     <div class="row">
-        <!-- @todo: add next steps here -->
+        <?php
+        // @todo: distinguish between submission and update
+        echo $settings['invoicing_post_submission_message_en'];
+        ?>
     </div>
 
 </div>
