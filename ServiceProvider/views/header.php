@@ -16,8 +16,8 @@
                 <div class="col-md-9">
                     
                     <div class="row">
-                        <h4 class="org-parent-name">University of Ottawa</h4>
-                        <h2 class="org-name">Access Service</h2>
+                        <h4 class="org-parent-name"><?php echo $settings['institution_name']; ?></h4>
+                        <h2 class="org-name"><?php echo $settings['institution_dept_name']; ?></h2>
                     </div>
                     
                 </div>
