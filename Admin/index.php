@@ -5,17 +5,17 @@ namespace Interpresense\Admin;
 use Interpresense\Includes\AntiXss;
 
 /**
+ * Session
+ */
+session_start();
+
+/**
  * Configuration file, database object, settings and Anti XSS
  */
 require '../includes/php/config.php';
 $dbo = new \Interpresense\Includes\DatabaseObject();
 $settings = \Interpresense\Includes\ApplicationSettings::load($dbo);
 $antiXSS = new AntiXss();
-
-/**
- * Session
- */
-session_start();
 
 /**
  * Models

@@ -5,6 +5,11 @@ namespace Interpresense\Setup;
 use Interpresense\Includes\AntiXss;
 
 /**
+ * Session
+ */
+session_start();
+
+/**
  * Configuration file, database object, settings and Anti XSS
  */
 require '../includes/php/config.php';
@@ -15,11 +20,6 @@ if ($_GET['page'] !== '' && $_GET['page'] !== 'go-to-step-1'){
     $settings = \Interpresense\Includes\ApplicationSettings::load($dbo);
     $antiXSS = new AntiXss();
 }
-
-/**
- * Session
- */
-session_start();
 
 /**
  * Models
@@ -33,9 +33,6 @@ if ($_GET['page'] !== '' && $_GET['page'] !== 'go-to-step-1'){
 /**
  * Localization
  */
-if(!isset($_SESSION['lang'])) {
-    $_SESSION['lang'] = $settings['institution_default_lang'];
-}
 \Locale::setDefault($_SESSION['lang']);
 
 // Translation
