@@ -1,10 +1,14 @@
 {
     "values": {
         "en-CA": {
-            "foo": "bar"
+            "optionsBtnLabel": "Options",
+            "dropdownBtnLabel": "Toggle dropdown",
+            "helpItem": "Get help"
         },
         "fr-CA": {
-            "foo": "bar"
+            "optionsBtnLabel": "Paramètres",
+            "dropdownBtnLabel": "@todo Toggle dropdown",
+            "helpItem": "Aide"
         }
     }
 }
