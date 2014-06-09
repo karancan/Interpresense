@@ -49,7 +49,7 @@ header("Content-Language: {$_SESSION['lang']}");
             try {
                 $translate->_e('documentTitleTag');
             } catch (\OutOfBoundsException $e) {
-                echo 'Error';
+                $translate->_e('error');
             }
         ?>
     </title>

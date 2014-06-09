@@ -1,0 +1,16 @@
+{
+    "values": {
+        "en-CA": {
+            "poweredBy": "Powered by Interpresense",
+            "contactUs": "Get in touch",
+            "reportIssue": "Report an issue",
+            "error": "Error"
+        },
+        "fr-CA": {
+            "poweredBy": "Propulsé avec Interpresense",
+            "contactUs": "Nous joindre",
+            "reportIssue": "Signaler un problème",
+            "error": "Erreur"
+        }
+    }
+}
