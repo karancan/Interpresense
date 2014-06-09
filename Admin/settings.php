@@ -89,6 +89,7 @@ if (!in_array($_GET['page'], $actions, true)) {
     
     $current_view = '';
     
+    $translate->addResource(FS_L10N . '/footer.json');
     require FS_PHP . '/header.php';
     
     $translate->addResource('l10n/header.json');

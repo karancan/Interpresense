@@ -1,10 +1,130 @@
 {
     "values": {
         "en-CA": {
-            "documentTitleTag": "New invoice"
+            "documentTitleTag": "New invoice",
+            
+            "instructionsHeader": "Invoicing instructions",
+            "invoiceFrom": "From",
+            "invoiceTo": "To",
+            "invoice": "Invoice",
+            "invoiceID": "Invoice ID number",
+            "clientID": "Client ID number",
+            
+            "namePlaceholder": "Name",
+            "addressPlaceholder": "Address",
+            "cityPlaceholder": "City",
+            "provincePlaceholder": "Province",
+            "postalCodePlaceholder": "Postal code",
+            "phoneNumberPlaceholder": "Phone number",
+            "emailPlaceholder": "Email",
+            "hstNumberPlaceholder": "HST number",
+            
+            "prov_AB": "Alberta",
+            "prov_BC": "British Columbia",
+            "prov_MB": "Manitoba",
+            "prov_NB": "New Brunswick",
+            "prov_NL": "Newfoundland and Labrador",
+            "prov_NS": "Nova Scotia",
+            "prov_NT": "Northwest Territories",
+            "prov_NU": "Nunavut",
+            "prov_ON": "Ontario",
+            "prov_PQ": "Quebec",
+            "prov_SK": "Saskatchewan",
+            "prov_YT": "Yukon",
+            
+            "timesheetHeader": "Timesheet for adapted measures",
+            "description": "Description",
+            "courseCode": "Course code",
+            "activity": "Activity",
+            "date": "Date",
+            "startTime": "Start time",
+            "endTime": "End time",
+            "hours": "Hours",
+            "hoursTooltip": "= end time - start time",
+            "ratePerHour": "Rate/hour ($)",
+            "amount": "Amount ($)",
+            "amountTooltip": "= rate * hours",
+            "total": "Total",
+            
+            "descriptionPlaceholder": "Description",
+            "courseCodePlaceholder": "Course code",
+            "activityPlaceholder": "Activity…",
+            "datePlaceholder": "Date",
+            "ratePlaceholder": "Rate",
+            
+            "hoursUnit": "hours",
+            "minutesUnit": "minutes",
+            "addItem": "Add another item",
+            
+            "attachmentsHeader": "Attachments",
+            "addAttachment": "Add an attachment",
+            
+            "clearBtn": "Clear form",
+            "saveDraftBtn": "Save draft",
+            "submitBtn": "Submit invoice"
         },
         "fr-CA": {
-            "documentTitleTag": "Nouvelle facture"
+            "documentTitleTag": "Nouvelle facture",
+            
+            "instructionsHeader": "@todo Invoicing instructions",
+            "invoiceFrom": "De",
+            "invoiceTo": "À",
+            "invoice": "Facture",
+            "invoiceID": "Numéro de facture",
+            "clientID": "Numéro de client",
+            
+            "namePlaceholder": "Nom",
+            "addressPlaceholder": "Adress",
+            "cityPlaceholder": "Ville",
+            "provincePlaceholder": "Province",
+            "postalCodePlaceholder": "Code postal",
+            "phoneNumberPlaceholder": "Numéro de téléphone",
+            "emailPlaceholder": "Courriel",
+            "hstNumberPlaceholder": "Numéro de TVH",
+            
+            "prov_AB": "Alberta",
+            "prov_BC": "Colombie-Britannique",
+            "prov_MB": "Manitoba",
+            "prov_NB": "Nouveau-Brunswick",
+            "prov_NL": "Terre-Neuve-et-Labrador",
+            "prov_NS": "Nouvelle-Écosse",
+            "prov_NT": "Territoires du Nord-Ouest",
+            "prov_NU": "Nunavut",
+            "prov_ON": "Ontario",
+            "prov_PQ": "Québec",
+            "prov_SK": "Saskatchewan",
+            "prov_YT": "Yukon",
+            
+            "timesheetHeader": "Feuille de temps pour les mesures adaptées",
+            "description": "Description",
+            "courseCode": "Cote du cours",
+            "activity": "Activité",
+            "date": "Date",
+            "startTime": "Heure début",
+            "endTime": "Heure fin",
+            "hours": "Temps",
+            "hoursTooltip": "= heure fin - heure début",
+            "ratePerHour": "@todo Rate/heure ($)",
+            "amount": "Montant ($)",
+            "amountTooltip": "@todo = rate * heures",
+            "total": "Total",
+            
+            "descriptionPlaceholder": "Description",
+            "courseCodePlaceholder": "Cote du cours",
+            "activityPlaceholder": "Activité…",
+            "datePlaceholder": "Date",
+            "ratePlaceholder": "Tarif",
+            
+            "hoursUnit": "heures",
+            "minutesUnit": "minutes",
+            "addItem": "Ajouter un autre @todo:élément",
+            
+            "attachmentsHeader": "Pièces jointes",
+            "addAttachment": "Ajouter un pièce jointe",
+            
+            "clearBtn": "Réinitialiser",
+            "saveDraftBtn": "Sauvegarder le brouillon",
+            "submitBtn": "Soumettre le facture"
         }
     }
 }

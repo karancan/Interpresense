@@ -8,15 +8,15 @@
                 
                     <div class="col-md-8">
                         <img class="dev-logo" src="//<?= URL_IMAGES ?>/logo_icon_379_379.png">
-                        Powered by Interpresense
+                        <?php $translate->_e('poweredBy'); ?>
                     </div>
                     
                     <div class="col-md-2">
-                        <a href="mailto:<?= EMAIL_INTERPRESENSE_REPORTING ?>?subject=Interpresense%20query" class="btn btn-block btn-info"><i class="fa fa-phone"></i> Get in touch</a>
+                        <a href="mailto:<?= EMAIL_INTERPRESENSE_REPORTING ?>?subject=Interpresense%20query" class="btn btn-block btn-info"><i class="fa fa-phone"></i> <?php $translate->_e('contactUs'); ?></a>
                     </div>
                 
                     <div class="col-md-2">
-                        <a href="mailto:<?= EMAIL_INTERPRESENSE_REPORTING ?>?subject=Interpresense%20bug%20report" class="btn btn-block btn-warning"><i class="fa fa-bug"></i> Report an issue</a>
+                        <a href="mailto:<?= EMAIL_INTERPRESENSE_REPORTING ?>?subject=Interpresense%20bug%20report" class="btn btn-block btn-warning"><i class="fa fa-bug"></i> <?php $translate->_e('reportIssue'); ?></a>
                     </div>
                 
                 </div>
