@@ -43,7 +43,7 @@
             "hoursTooltip": "= end time - start time",
             "ratePerHour": "Rate/hour ($)",
             "amount": "Amount ($)",
-            "amountTooltip": "@todo = rate * heures",
+            "amountTooltip": "= rate * hours",
             "total": "Total",
             
             "descriptionPlaceholder": "Description",
