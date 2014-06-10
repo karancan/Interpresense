@@ -1,3 +1,8 @@
+;(function() {
+    'use strict';
+    
+    var i18nStrings;
+    
 /**
  *If a row needs to be focussed on, we highlight it
  */
@@ -8,6 +13,12 @@ $(document).ready(function(){
             scrollTop: $('[data-focus="' + focus + '"]').offset().top
         }, 1000);
     }
+    
+    $.ajax({
+        url: 'l10n/settings.json'
+    }).done(function(data) {
+        i18nStrings = data;
+    });
 });
 
 /**
@@ -15,7 +26,7 @@ $(document).ready(function(){
  */
 $('[data-action="add-setting"]').click(function(){
     $('#setting_description_container').hide();
-    $('#admin-add-setting-modal .modal-title').text('Add setting');
+    $('#admin-add-setting-modal .modal-title').text(i18nStrings.values[document.documentElement.lang].settingModalTitleAdd);
     $('#setting_name').prop('readOnly', false);
     $('#setting_name, #setting_value').val('');
 });
@@ -24,7 +35,7 @@ $('[data-action="add-setting"]').click(function(){
  *User wants to add an activity
  */
 $('[data-action="add-activity"]').click(function(){
-    $('#admin-add-activity-modal .modal-title').text('Add an activity');
+    $('#admin-add-activity-modal .modal-title').text(i18nStrings.values[document.documentElement.lang].activityModalTitleAdd);
     $('input[name="activity_id"], #name_en, #name_fr').val('');
 });
 
@@ -34,7 +45,7 @@ $('[data-action="add-activity"]').click(function(){
 $('#admin-settings-table [data-action="edit"]').click(function(){
     
     $('#setting_description_container').show();
-    $('#admin-add-setting-modal .modal-title').text('Edit setting');
+    $('#admin-add-setting-modal .modal-title').text(i18nStrings.values[document.documentElement.lang].settingModalTitleEdit);
     $('#setting_name').prop('readOnly', true);
     $('#setting_name').val($(this).closest('tr').data('setting-key'));
     $('#setting_value').val($(this).closest('tr').data('setting-value'));
@@ -48,7 +59,7 @@ $('#admin-settings-table [data-action="edit"]').click(function(){
  *User wants to edit an activity
  */
 $('#admin-activities-table [data-action="edit"]').click(function(){ 
-    $('#admin-add-activity-modal .modal-title').text('Edit an activity');
+    $('#admin-add-activity-modal .modal-title').text(i18nStrings.values[document.documentElement.lang].activityModalTitleEdit);
     $('input[name="activity_id"]').val($(this).closest('tr').data('focus'));
     $('#name_en').val($(this).closest('tr').data('activity-name-en'));
     $('#name_fr').val($(this).closest('tr').data('activity-name-fr'));
@@ -62,7 +73,7 @@ $('#admin-settings-table [data-action="delete"]').click(function(){
     
     global.highlightRow($(this).closest('tr'));
     
-    if(confirm("Are you sure you want to delete this setting? This action is not reversible and could cause the application to malfunction.")){
+    if(confirm(i18nStrings.values[document.documentElement.lang].deleteSettingPrompt)){
         $.ajax({
             type: 'post',
             url: 'settings.php?page=delete-setting',
@@ -84,7 +95,7 @@ $('#admin-activities-table [data-action="delete"]').click(function(){
     
     global.highlightRow($(this).closest('tr'));
     
-    if(confirm("Are you sure you want to delete this activity? This action is not reversible.")){
+    if(confirm(i18nStrings.values[document.documentElement.lang].deleteActivityPrompt)){
         $.ajax({
             type: 'post',
             url: 'settings.php?page=delete-activity',
@@ -112,3 +123,5 @@ $('#admin-add-setting-modal').on('hidden.bs.modal', function () {
 $('#admin-add-activity-modal').on('hidden.bs.modal', function () {
     global.removeRowHighlighting($('#admin-activities-table'));
 });
+
+}());
