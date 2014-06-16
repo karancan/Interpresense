@@ -6,7 +6,7 @@
     
     <div class="row">
         <div class="col-md-8">
-            <h3 class="admin-page-title"><i class="fa fa-envelope"></i> Email templates</h3>
+            <h3 class="admin-page-title"><i class="fa fa-envelope"></i> <?php $translate->_e('title'); ?></h3>
         </div>
     </div>
     
@@ -14,23 +14,23 @@
         
         <div class="col-md-12">
         
-            <h4>All email templates</h4>
+            <h4><?php $translate->_e('allEmailTemplates'); ?></h4>
             
             <table id="admin-email-templates-table" class="table table-hover invoice-table">           
                 <thead>
                     <tr>
-                        <th scope='col'>Name</th>
-                        <th scope='col' style='width: 25%;'>Description</th>
-                        <th scope='col'>Subject</td>
-                        <th scope='col'>CC</th>
-                        <th scope='col'>BCC</th>
+                        <th scope='col'><?php $translate->_e('name'); ?></th>
+                        <th scope='col' style='width: 25%;'><?php $translate->_e('description'); ?></th>
+                        <th scope='col'><?php $translate->_e('subject'); ?></td>
+                        <th scope='col'><?php $translate->_e('cc'); ?></th>
+                        <th scope='col'><?php $translate->_e('bcc'); ?></th>
                         <th scope='col' style='width: 25%;'></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     if (empty($emailTemplates)){
-                        echo "<tr><td colspan='6' class='empty-table-placeholder'>No email templates at this time…</td></tr>";
+                        echo "<tr><td colspan='6' class='empty-table-placeholder'>" . $translate->_e('noTemplatesPlaceholder') . "</td></tr>";
                     } else {
                         foreach($emailTemplates as $e) {
                             echo "<tr data-email-id='{$antiXSS->escape($e['email_id'], $antiXSS::HTML_ATTR)}'
@@ -44,8 +44,8 @@
                                  "<td>" . (empty($c['cc']) ? 'N/A' : $antiXSS->escape($e['cc'])) . "</td>" .
                                  "<td>" . (empty($c['bcc']) ? 'N/A' : $antiXSS->escape($e['bcc'])) . "</td>" .
                                  '<td class="table-option-cell">
-                                      <button type="button" class="btn btn-info" data-toggle="modal" href="#admin-view-email-modal" data-action="view"><i class="fa fa-eye"></i> View content</button>
-                                      <button type="button" class="btn btn-warning" data-toggle="modal" href="#admin-edit-email-modal" data-action="edit"><i class="fa fa-edit"></i> Edit template</button>
+                                      <button type="button" class="btn btn-info" data-toggle="modal" href="#admin-view-email-modal" data-action="view"><i class="fa fa-eye"></i> ' . $translate->__('viewContentBtn') . '</button>
+                                      <button type="button" class="btn btn-warning" data-toggle="modal" href="#admin-edit-email-modal" data-action="edit"><i class="fa fa-edit"></i> ' . $translate->__('editTemplateBtn') . '</button>
                                   </td>' .
                                  '</tr>';
                         }
@@ -68,47 +68,48 @@
             
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Edit email template</h4>
+                <h4 class="modal-title"><?php $translate->_e('editTemplateTitle'); ?></h4>
             </div>
             
             <div class="modal-body">
                 
                <div class="form-group">
-                    <label class="control-label" for="email_subject">Subject</label>
+                    <label class="control-label" for="email_subject"><?php $translate->_e('subjectLabel'); ?></label>
                     <input type="text" class="form-control" id="email_subject" name='subject' required>
                 </div>
                 
                 <div class="form-group">
-                    <label class="control-label" for="email_cc">Who gets CC'd</label>
+                    <label class="control-label" for="email_cc"><?php $translate->_e('ccLabel'); ?></label>
                     <input type="email" class="form-control" id="email_cc" name='cc' required>
                 </div>
                 
                 <div class="form-group">
-                    <label class="control-label" for="email_bcc">Who gets BCC'd</label>
+                    <label class="control-label" for="email_bcc"><?php $translate->_e('bccLabel'); ?></label>
                     <input type="email" class="form-control" id="email_bcc" name='bcc' required>
                 </div>
                 
                 <div class="form-group">
-                    <label class="control-label" for="email_placeholders">Available placeholders</label>
+                    <label class="control-label" for="email_placeholders"><?php $translate->_e('placeholdersLabel'); ?></label>
                     <select class="form-control" id="email_placeholders" <?= (empty($emailPlaceholders) ? 'disabled' : null) ?> >
-                        <option value="" selected>Pick a placeholder to insert it in to this template. Placeholders are dynamically replaced when an email is sent out…</option>
+                        <option value="" selected><?php $translate->_e('placeholdersPlaceholder'); ?></option>
                         <?php
+                            $translate->localizeArray($emailPlaceholders, 'description');
                             foreach ($emailPlaceholders as $r){
-                                echo '<option value="' . $r['placeholder'] . '">' . $r['placeholder'] . ' - ' . $r['description_en'] . '</option>'; 
+                                echo '<option value="' . $r['placeholder'] . '">' . $r['placeholder'] . ' - ' . $r['description'] . '</option>'; 
                             }
                         ?>
                     </select>
                 </div>
                 
                 <div class="form-group">
-                    <label class="control-label" for="email_content">Email content</label>
+                    <label class="control-label" for="email_content"><?php $translate->_e('emailContentLabel'); ?></label>
                     <textarea class="form-control summernote" id="email_content" name='content'></textarea>
                 </div>
             
             </div>
             
             <div class="modal-footer">
-                <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Confirm</button>
+                <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> <?php $translate->_e('confirmBtn'); ?></button>
             </div>
             
         </form>
@@ -121,12 +122,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">View email content</h4>
+                <h4 class="modal-title"><?php $translate->_e('viewContentTitle'); ?></h4>
             </div>
             
             <div class="modal-body">
                 <div class="form-group">
-                    <label class="control-label" for="email_content_view">Email content</label>
+                    <label class="control-label" for="email_content_view"><?php $translate->_e('contentLabel'); ?></label>
                     <textarea class="form-control summernote-readonly" id="email_content_view"></textarea>
                 </div>
             </div>

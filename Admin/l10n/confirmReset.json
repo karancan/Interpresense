@@ -1,10 +1,20 @@
 {
     "values": {
         "en-CA": {
-            "documentTitleTag": "Reset your password"
+            "documentTitleTag": "Reset your password",
+            
+            "pendingMsg": "An email has been sent containing a link to set up your new password.",
+            "failMsg": "Fail.",
+            "successMsg": "Your new password is now in effect.",
+            "returnToLogin": "Return to login"
         },
         "fr-CA": {
-            "documentTitleTag": "Réinitialiser votre mot de passe"
+            "documentTitleTag": "Réinitialiser votre mot de passe",
+            
+            "pendingMsg": "@todo Un courriel a été envoyé avec un lien pour créer un nouveau mot de passe.",
+            "failMsg": "Échoué.",
+            "successMsg": "@todo Votre nouveau mot de pass est maintenant en vigueur.",
+            "returnToLogin": "@todo Return to login"
         }
     }
 }
