@@ -1,10 +1,64 @@
 {
+    "arrayGroups": {
+        "description": {
+            "en-CA": "description_en",
+            "fr-CA": "description_fr"
+        }
+    },
     "values": {
         "en-CA": {
-            "documentTitleTag": "Email templates"
+            "documentTitleTag": "Email templates",
+            
+            "title": "Email templates",
+            "allEmailTemplates": "All email templates",
+            "name": "Name",
+            "description": "Description",
+            "subject": "Subject",
+            "cc": "CC",
+            "bcc": "BCC",
+            "noTemplatesPlaceholder": "No email templates at this time…",
+            
+            "viewContentBtn": "View contents",
+            "editTemplateBtn": "Edit template",
+            
+            "editTemplateTitle": "Edit email template",
+            "subjectLabel": "Subject",
+            "ccLabel": "Who gets CC'd",
+            "bccLabel": "Who gets BCC'd",
+            "placeholdersLabel": "Available placeholders",
+            "placeholdersPlaceholder": "Pick a placeholder to insert it in to this template. Placeholders are dynamically replaced when an email is sent out…",
+            "emailContentLabel": "Email content",
+            "confirmBtn": "Confirm",
+            
+            "viewContentTitle": "View email contents",
+            "contentLabel": "Email content"
         },
         "fr-CA": {
-            "documentTitleTag": "Modèles de courriels"
+            "documentTitleTag": "Modèles de courriels",
+            
+            "title": "Modèles de courriels",
+            "allEmailTemplates": "Tous les modèles de courriels",
+            "name": "Nom",
+            "description": "Description",
+            "subject": "Sujet",
+            "cc": "CC",
+            "bcc": "CCI",
+            "noTemplatesPlaceholder": "Aucun modèle de courriel à afficher en ce moment…",
+            
+            "viewContentBtn": "Afficher le contenu",
+            "editTemplateBtn": "Modifier le modèle",
+            
+            "editTemplateTitle": "Modifier le modèle de courriel",
+            "subjectLabel": "Sujet",
+            "ccLabel": "@todo Qui reçoit une copie (CC)",
+            "bccLabel": "@todo Qui reçoit une copie invisible (CCI)",
+            "placeholdersLabel": "@todo Placeholders disponibles",
+            "placeholdersPlaceholder": "@todo Selectionner un placeholder pour insérer dans ce modèle. Les placeholders seront remplacées lorsque un courriel est envoyer…",
+            "emailContentLabel": "Le contenu du courriel",
+            "confirmBtn": "Confirmer",
+            
+            "viewContentTitle": "@todo Afficher le contenu du courriel",
+            "contentLabel": "@todo Contenu du courriel"
         }
     }
 }

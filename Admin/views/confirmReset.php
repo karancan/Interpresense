@@ -8,19 +8,19 @@
 
         <?php if ($state === 'pending') { ?>
         
-        <p>An email has been sent containing a link to set up your new password.</p>
+        <p><?php $translate->_e('pendingMsg'); ?></p>
         
         <?php } elseif ($state === 'success') { ?>
         
-        <p>Your new password is now in effect.</p>
+        <p><?php $translate->_e('successMsg'); ?></p>
         
         <p>
-            <a href="index.php" class="btn btn-warning"><i class="fa fa-angle-double-left"></i> Return to log in</a>
+            <a href="index.php" class="btn btn-warning"><i class="fa fa-angle-double-left"></i> <?php $translate->_e('returnToLogin'); ?></a>
         </p>
         
         <?php } elseif ($state === 'fail') { ?>
         
-        <p>Fail.</p>
+        <p><?php $translate->_e('failMsg'); ?></p>
         
         <?php } ?>
 

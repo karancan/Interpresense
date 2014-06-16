@@ -9,7 +9,7 @@
             <h3 class="admin-page-title"><i class="fa fa-folder-open"></i> Invoice Drafts</h3>
         </div>
         <div class="col-md-2">
-            <a href="//<?= URL_INTERPRESENSE ?>/ServiceProvider/" target="_blank" class="btn btn-info btn-block admin-add-button"><i class="fa fa-plus"></i> Add draft invoice</a>        
+            <a href="//<?= URL_SERVICE_PROVIDER ?>/" target="_blank" class="btn btn-info btn-block admin-add-button"><i class="fa fa-plus"></i> Add draft invoice</a>        
         </div>
         <div class="col-md-2">
             <a href="invoicesDrafts.php?page=export&amp;start=<?= $filter_start_date->format('Y-m-d'); ?>&amp;end=<?= $filter_end_date->format('Y-m-d'); ?>" download target="_blank" class="btn btn-info btn-block admin-add-button"><i class="fa fa-file-excel-o"></i> Export (CSV format)</a>

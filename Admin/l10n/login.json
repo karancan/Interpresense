@@ -1,10 +1,40 @@
 {
     "values": {
         "en-CA": {
-            "documentTitleTag": "Login"
+            "documentTitleTag": "Login",
+            
+            "title": "Please log in to continue…",
+            
+            "usernamePlaceholder": "Username",
+            "passwordPlaceholder": "Password",
+            "optionsBtn": "Options",
+            "addNewUserItem": "Add new user",
+            "forgotUsernameItem": "Forgot username",
+            "forgotPasswordItem": "Forgot password",
+            "submitBtn": "Log me in",
+            
+            "fail": "Unsuccessful!",
+            "errorExpired": "Your account has been expired…",
+            "errorUnconfirmed": "Your account has not been activated yet…",
+            "errorFail": "That user name and password combination is invalid…"
         },
         "fr-CA": {
-            "documentTitleTag": "Se connecter"
+            "documentTitleTag": "Se connecter",
+            
+            "title": "Veuillez vous connecter pour continuer…",
+            
+            "usernamePlaceholder": "Nom d'utilasateur",
+            "passwordPlaceholder": "Mot de passe",
+            "optionsBtn": "@todo Aide",
+            "addNewUserItem": "Ajouter un nouveau utilasateur",
+            "forgotUsernameItem": "Nom d'utilasateur oublié?",
+            "forgotPasswordItem": "Mot de passe oublié?",
+            "submitBtn": "Connexion",
+            
+            "fail": "@todo Unsuccessful!",
+            "errorExpired": "Votre compte a été expiré…",
+            "errorUnconfirmed": "Votre compte n'a pas été activé…",
+            "errorFail": "Cette combinaison de nom d'utilitaseur et mot de passe est invalide…"
         }
     }
 }
